@@ -1,0 +1,29 @@
+### General
+quiet="1"
+nolirc="1"
+nomouseinput="1"
+nojoystick="1"
+
+### Video
+double="yes"
+ontop="1"
+vo=xv
+
+### Audio
+softvol="yes"
+softvol-max=800
+volume=10
+#a52drc=1
+
+## Appearance
+heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
+#stop-xscreensaver="yes"
+
+### Subtitles
+
+#Fonts
+#font=
+sub-bg-alpha="0"
+sub-bg-color="0"
+subfont-text-scale="2"
+subfont-blur="1"

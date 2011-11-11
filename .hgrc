@@ -1,0 +1,16 @@
+[ui]
+username = Rohan Jain <crodjer@gmail.com>
+verbose = True
+
+[http_proxy]
+#host = http://10.3.100.211:8080/
+
+[extensions]
+#hgext.bookmarks =
+#hggit =
+prompt = /home/rohan/workspace/src/hg-prompt/prompt.py
+color =
+pager =
+
+[pager]
+pager = LESS ='FSRX' less
