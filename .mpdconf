@@ -1,0 +1,13 @@
+port                "6600"
+music_directory     "~/music/library"
+playlist_directory      "~/music/playlists"
+db_file                 "~/.mpd/mpd.db"
+log_file                "~/.mpd/mpd.log"
+pid_file                "~/.mpd/mpd.pid"
+
+audio_output {
+        type            "alsa"
+        name            "MPD Audo Device"
+        format          "48000:16:2"
+        mixer_type      "software"
+}
