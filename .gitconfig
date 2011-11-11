@@ -1,20 +1,33 @@
+[core]
+	whitespace = trailing-space,space-before-tab
+[apply]
+	whitespace = fix
 [user]
 	name = Rohan Jain
 	email = crodjer@gmail.com
-
-[http]
-	;proxy = 10.3.100.211:8080
-	;proxy = 10.3.100.209:8080
-	;proxy = 144.16.192.247:8080
-	;proxy = 144.16.192.213:8080
-	;proxy = localhost:8080
-
+[github]
+	user = crodjer
+[format]
+	signoff = true
+[sendemail]
+	smtpuser = crodjer@gmail.com
+	suppresscc = all
+	smtpserver = smtp.gmail.com
+	smtpserverport = 587
+	smtpencryption = tls
+	chainreplyto = false
 [core]
 	editor = vim
-[branch "master"]
-	remote = origin
-	merge = refs/heads/master
 [grep]
 	lineNumber = true
 [color]
-	ui = always
+	ui = auto
+[imap]
+        folder = "[Gmail]/Drafts"
+        host = imaps://imap.gmail.com
+        user = crodjer@gmail.com
+        port = 993
+        sslverify = false
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
