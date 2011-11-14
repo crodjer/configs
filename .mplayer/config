@@ -11,8 +11,8 @@ vo=xv
 
 ### Audio
 softvol="yes"
-softvol-max=800
-volume=10
+softvol-max=200
+volume=5
 #a52drc=1
 
 ## Appearance
@@ -20,7 +20,6 @@ heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
 #stop-xscreensaver="yes"
 
 ### Subtitles
-
 #Fonts
 #font=
 sub-bg-alpha="0"

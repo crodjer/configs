@@ -83,10 +83,10 @@ mytextclock = awful.widget.textclock({ align = "right"}, "%a, %d %b, %I:%M %p")
 mpdwidget = widget({ type = "textbox" })
 vicious.register(mpdwidget, vicious.widgets.mpd,
     function (widget, args)
-        if args["{state}"] == "Stop" then
-            return ""
-        else
+        if args["{state}"] == "Play" then
             return args["{Artist}"]..' - '.. args["{Title}"] .. " (" .. args["{Album}"] .. ") "
+        else
+            return ""
         end
     end, 10)
 
