@@ -77,7 +77,7 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right"}, "%a, %d %b, %I:%M %p")
+mytextclock = awful.widget.textclock({ align = "right"}, "%a, %d %b, %I:%M %p ")
 
 -- Create an mpd widget
 mpdwidget = widget({ type = "textbox" })
@@ -329,6 +329,8 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
+    { rule = { class = "mupdf" },
+      properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
@@ -374,13 +376,13 @@ function run_once(prg)
     if not prg then
         do return nil end
     end
-    awful.util.spawn_with_shell("pgrep -f -u $USER -x " .. prg .. " || (" .. prg .. ")")
+    awful.util.spawn_with_shell("pgrep -f -x " .. prg .. " || (" .. prg .. ")")
 end
 
 
 --Usefull Applets
 run_once("nm-applet")
-run_once("bluetooth-applet")
+--run_once("bluetooth-applet")
 --run_once("gnome-sound-applet")
 
 --Disks hot plug manager
