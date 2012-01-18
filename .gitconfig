@@ -23,11 +23,11 @@
 [color]
 	ui = auto
 [imap]
-        folder = "[Gmail]/Drafts"
-        host = imaps://imap.gmail.com
-        user = crodjer@gmail.com
-        port = 993
-        sslverify = false
+	folder = "[Gmail]/Drafts"
+	host = imaps://imap.gmail.com
+	user = crodjer@gmail.com
+	port = 993
+	sslverify = false
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
