@@ -1,7 +1,8 @@
 ! ---[ URxvt config ]--------------------------------------------------
 
 !URxvt*font: xft:Inconsolata:pixelsize=12:antialias=true
-URxvt*font: xft:Monospace:pixelsize=13:antialias=true:hinting=true
+URxvt*font: xft:Monospace:pixelsize=12:antialias=true:hinting=true
+URxvt*boldFont: xft:Monospace:pixelsize=12:bold:antialias=true:hinting=true
 URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 2
@@ -11,7 +12,7 @@ URxvt*cursorColor: rgba:ffff/ffff/ffff/ffff
 URxvt*cursorColor2: #000000
 URxvt*cursorBlink: false
 URxvt*inheritPixmap: false
-URxvt*termName: rxvt-256color
+URxvt*termName: rxvt-unicode
 URxvt*saveLines: 5000
 URxvt*scrollTtyOutput: false
 URxvt*scrollTtyKeypress: true
@@ -22,6 +23,8 @@ URxvt*keysym.C-Delete: perl:matcher
 URxvt*matcher.button: 1
 URxvt*urlLauncher: x-www-browser
 URxvt*underlineURLs: true
+URxvt*urgentOnBell: true
+URxvt*visualBell: false
 
 !!Color scheme
 !URxvt*background: rgba:0000/0000/0000/dddd
