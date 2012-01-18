@@ -3,6 +3,7 @@ quiet="1"
 nolirc="1"
 nomouseinput="1"
 nojoystick="1"
+fstype=none
 
 ### Video
 double="yes"
@@ -12,7 +13,7 @@ vo=xv
 ### Audio
 softvol="yes"
 softvol-max=200
-volume=5
+volume=15
 #a52drc=1
 
 ## Appearance
