@@ -1,6 +1,7 @@
+set reverse_name
 set from = "crodjer@gmail.com"
 set realname = "Rohan Jain"
-alternates "mail.rohanjain@gmail.com"
+alternates "mail.rohanjain@gmail.com|rohan@interviewstreet.com"
 
 # IMAP and SMTP settings
 set imap_user = "crodjer@gmail.com"
@@ -18,6 +19,11 @@ set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
 set mail_check = 10
 set timeout = 15
+
+set alias_file = ~/.mutt/aliases
+set sort_alias= alias
+set reverse_alias= yes
+source $alias_file
 
 # Some keybindings
 macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
@@ -87,9 +93,9 @@ set copy = yes
 #set record = "=Recent"
 unset record
 set delete = yes
-set edit_headers = no
+set edit_headers = yes
 set autoedit = no
-set beep = no
+set beep = yes
 set check_new = no
 set include = yes
 set attribution = "%n writes:"
