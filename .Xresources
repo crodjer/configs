@@ -12,7 +12,7 @@ URxvt*cursorColor: rgba:ffff/ffff/ffff/ffff
 URxvt*cursorColor2: #000000
 URxvt*cursorBlink: false
 URxvt*inheritPixmap: false
-URxvt*termName: rxvt-unicode
+URxvt*termName: rxvt-unicode-256color
 URxvt*saveLines: 5000
 URxvt*scrollTtyOutput: false
 URxvt*scrollTtyKeypress: true
