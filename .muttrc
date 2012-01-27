@@ -45,13 +45,13 @@ bind editor \Ct complete
 #Saving/Archiving
 macro index y "<save-message>=Recent<enter><enter>" "Archive message"
 macro index Y "<tag-thread><tag-prefix><save-message>=Recent<enter><enter>" "Archive thread"
-macro index s "<copy-message>~/tmp/incoming.mbox<enter>" "Save message"
-macro index S "<tag-thread><tag-prefix><copy-message>~/tmp/incoming.mbox<enter>" "Save thread"
+macro index s "<copy-message>/tmp/incoming.mbox<enter>" "Save message"
+macro index S "<tag-thread><tag-prefix><copy-message>/tmp/incoming.mbox<enter>" "Save thread"
 
 macro pager y "<exit><save-message>=Recent<enter><enter>" "Archive message"
 macro pager Y "<exit><tag-thread><tag-prefix><save-message>=Recent<enter><enter>" "Archive thread"
-macro pager s "<exit><copy-message>~/tmp/incoming.mbox<enter>" "Save message"
-macro pager S "<exit><tag-thread><tag-prefix><copy-message>~/tmp/incoming.mbox<enter>" "Save thread"
+macro pager s "<exit><copy-message>/tmp/incoming.mbox<enter>" "Save message"
+macro pager S "<exit><tag-thread><tag-prefix><copy-message>/tmp/incoming.mbox<enter>" "Save thread"
 
 #Deleting
 macro index d "<save-message>=[Gmail]/All Mail<enter><enter>" "Remove label for message"
