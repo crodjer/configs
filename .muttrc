@@ -38,6 +38,10 @@ bind index o display-message
 bind index - collapse-thread
 bind index \# noop
 
+bind editor <space> noop
+bind editor <TAB> complete-query
+bind editor \Ct complete
+
 #Saving/Archiving
 macro index y "<save-message>=Recent<enter><enter>" "Archive message"
 macro index Y "<tag-thread><tag-prefix><save-message>=Recent<enter><enter>" "Archive thread"
@@ -104,7 +108,7 @@ set query_command = "goobook query %s"
 set query_format = "%4c %t %-40.40a %-40.40n %?e?(%e)?"
 
 # Theme
-source "~/.mutt/mutt-colors-solarized/mutt-colors-solarized-light-256.muttrc"
+source "~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc"
 
 # SMIME
 
