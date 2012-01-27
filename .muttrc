@@ -1,7 +1,7 @@
 set reverse_name
 set from = "crodjer@gmail.com"
 set realname = "Rohan Jain"
-alternates "mail.rohanjain@gmail.com|rohan@interviewstreet.com"
+alternates "mail.rohanjain@gmail.com|rohan@interviewstreet.com|rohan@policyinnovations.in"
 
 # IMAP and SMTP settings
 set imap_user = "crodjer@gmail.com"
@@ -17,7 +17,7 @@ set trash = "=[Gmail]/Trash"
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
-set mail_check = 10
+set mail_check = 20
 set timeout = 15
 
 set alias_file = ~/.mutt/aliases
@@ -95,7 +95,8 @@ unset record
 set delete = yes
 set edit_headers = yes
 set autoedit = no
-set beep = yes
+set beep = no
+set beep_new = yes
 set check_new = no
 set include = yes
 set attribution = "%n writes:"
