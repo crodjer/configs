@@ -32,65 +32,59 @@ macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to All Mail"
 macro index,pager gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to Sent Mail"
 macro index,pager gt "<change-folder>=[Gmail]/Starred<enter>" "Go to Starred Mail"
 macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
-macro index,pager D delete-message
 bind index,pager I flag-message
 bind index,pager a group-reply
 bind index o display-message
+bind index - collapse-thread
 bind index \# noop
+
+#Saving/Archiving
 macro index y "<save-message>=Recent<enter><enter>" "Archive message"
 macro index Y "<tag-thread><tag-prefix><save-message>=Recent<enter><enter>" "Archive thread"
 macro index s "<copy-message>~/tmp/incoming.mbox<enter>" "Save message"
 macro index S "<tag-thread><tag-prefix><copy-message>~/tmp/incoming.mbox<enter>" "Save thread"
-macro index d "<save-message>=[Gmail]/All Mail<enter><enter>" "Remove label for message"
-macro index D "<tag-thread><tag-prefix><save-message>=[Gmail]/All Mail<enter><enter>" "Remove label for thread"
-macro index P "<tag-thread><tag-prefix><save-message>=[Gmail]/Trash<enter>" "Purge thread"
+
 macro pager y "<exit><save-message>=Recent<enter><enter>" "Archive message"
 macro pager Y "<exit><tag-thread><tag-prefix><save-message>=Recent<enter><enter>" "Archive thread"
 macro pager s "<exit><copy-message>~/tmp/incoming.mbox<enter>" "Save message"
 macro pager S "<exit><tag-thread><tag-prefix><copy-message>~/tmp/incoming.mbox<enter>" "Save thread"
+
+#Deleting
+macro index d "<save-message>=[Gmail]/All Mail<enter><enter>" "Remove label for message"
+macro index D "<tag-thread><tag-prefix><save-message>=[Gmail]/All Mail<enter><enter>" "Remove label for thread"
+macro index P "<tag-thread><tag-prefix><save-message>=[Gmail]/Trash<enter>" "Delete thread"
+
 macro pager d "<exit><save-message>=[Gmail]/All Mail<enter><enter>" "Remove label for message"
 macro pager D "<exit><tag-thread><tag-prefix><save-message>=[Gmail]/All Mail<enter><enter>" "Remove label for thread"
+
+#Sending
 macro compose y "<send-message>" "Send message"
 
+#Pipes
 macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro index,pager \ca "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
 
-## More keybindings
-#bind generic,index <esc>< first-entry
-#bind generic,index <esc>> last-entry
-#bind pager <esc>< top
-#bind pager <esc>> bottom
-
-bind generic,index,pager \Cs search
-bind generic,index,pager \Cr search-reverse
-
-#bind index \Cn next-undeleted
-#bind index \Cp previous-undeleted
-#bind pager \Cn next-line
-#bind pager \Cp previous-line
-
-bind editor <space> noop
-bind editor <TAB> complete-query
-bind editor \Ct complete
-
-bind generic 1G first-entry
-bind generic 1g first-entry
-bind generic G last-entry
+# Moving around like vim
+bind generic,index gg first-entry
+bind generic,index G last-entry
+bind pager gg top
+bind pager G bottom
 bind pager j next-line
 bind pager k previous-line
 
 # For better looks
-set markers = no
+set markers = yes
 set pager_index_lines = 5
 set sort = "threads"
 set sort_aux = "reverse-last-date-received"
+unset collapse_unread
+folder-hook . "push <collapse-all>\n"
 set editor = "vim"
 
 # Configure some variables
 set imap_keepalive = 500
 set move = no
 set copy = yes
-#set record = "=Recent"
 unset record
 set delete = yes
 set edit_headers = yes
@@ -99,8 +93,8 @@ set beep = no
 set beep_new = yes
 set check_new = no
 set include = yes
-set attribution = "%n writes:"
-set index_format = "%Z | %D | %-20.20F %s"
+set attribution = "On %d, %n wrote:"
+set index_format = "%Z %M | %D | %-20.20F %s"
 set date_format = "%H:%M / %e %b"
 set followup_to = no
 set honor_followup_to = no
@@ -109,23 +103,8 @@ set honor_followup_to = no
 set query_command = "goobook query %s"
 set query_format = "%4c %t %-40.40a %-40.40n %?e?(%e)?"
 
-# Default color definitions
-#color normal     default        default
-#color hdrdefault green          default
-#color quoted	 green          default
-#color quoted1    yellow         default
-#color quoted2    red            default
-#color signature  cyan           default
-#color indicator  brightyellow   red
-#color error      brightred      default
-#color status	 brightwhite    cyan
-#color tree	 brightmagenta  default
-#color tilde	 blue           default
-#color attachment brightyellow   default
-#color markers	 brightred      default
-#color message    brightwhite    default
-#color search     brightwhite    magenta
-#color bold       brightyellow   default
+# Theme
+source "~/.mutt/mutt-colors-solarized/mutt-colors-solarized-light-256.muttrc"
 
 # SMIME
 
