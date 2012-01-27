@@ -99,7 +99,7 @@ set check_new = no
 set include = yes
 set attribution = "On %d, %n wrote:"
 set index_format = "%Z %M | %D | %-20.20F %s"
-set date_format = "%H:%M / %e %b"
+set date_format = "%H:%M %Z / %e %b"
 set followup_to = no
 set honor_followup_to = no
 
