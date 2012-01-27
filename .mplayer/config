@@ -11,6 +11,7 @@ ontop="1"
 vo=xv
 
 ### Audio
+ao="alsa"
 softvol="yes"
 softvol-max=200
 volume=15
