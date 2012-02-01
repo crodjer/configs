@@ -1,0 +1,26 @@
+Config { font = "xft:Bitstream Vera Sans Mono:size=8:bold:antialias=true"
+       , bgColor = "black"
+       , fgColor = "white"
+       , position = Top
+       , lowerOnStart = True
+       , commands = [ Run Weather "VIJP" ["-t","<tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 600
+                    , Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red", "-t", "E:<rx>/<tx>"] 10
+                    , Run Wireless "wlan0" ["-L","0","-H","32","--normal","green","--high","red", "-t", "W:<essid>"] 10
+                    , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red", "-t", "Cpu:<total>%"] 10
+                    , Run Uptime ["-t", "Up: <days>d <hours>h"] 600
+                    , Run Memory ["-t","M:<usedratio>%"] 10
+                    , Run Swap ["-t","S:<usedratio>%"] 10
+                    , Run BatteryP ["BAT0"] ["-t", "B:<left>% <acstatus>",
+                        "-L", "10", "-H", "80", "-p", "3",
+                        "--", "-O", "<fc=green>On</fc>", "-o", "",
+                        "-L", "-12", "-H", "-5",
+                        "-l", "red", "-m", "blue", "-h", "green",
+                        "-c", "charge_full_design"] 600
+                    , Run Date "%d %a %I:%M" "date" 10
+                    , Run StdinReader
+                    , Run ThermalZone 0 ["-t", "T:<temp>C"] 30
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{| %uptime% %thermal0% %multicpu% %memory% %battery% %wlan0wi% | <fc=#ee9a00>%date%</fc> | %VIJP% |      "
+       }
