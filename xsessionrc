@@ -1,0 +1,27 @@
+## Touchpad settings
+synclient TapButton1=1, VertEdgeScroll=0, VertTwoFingerScroll=1, HorizTwoFingerScroll=1, HorizScrollDelta=104, 
+synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=100
+syndaemon -dKi 0.5
+
+## Configure Xsession
+xrdb -merge ~/.Xresources
+xset b 100 300 75
+
+# Looks
+xsetroot -solid black -cursor_name left_ptr
+xsetbg -border black ~/pictures/misc/debian-blue.png
+
+# Map menu key to Super_R (Useful for laptop keyboard)
+xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
+
+## Start some useful programms
+~/bin/mytrayer &
+xscreensaver &
+udisks-glue &
+mpd &
+mpdscribble &
+nm-applet &
+mpc volume 60 &> /dev/null
+mpc random &> /dev/null
+
+# vim:set ft=shell
