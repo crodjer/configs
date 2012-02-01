@@ -22,5 +22,5 @@ Config { font = "xft:Bitstream Vera Sans Mono:size=8:bold:antialias=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{| %uptime% %thermal0% %multicpu% %memory% %battery% %wlan0wi% | <fc=#ee9a00>%date%</fc> | %VIJP% |      "
+       , template = "%StdinReader% }{| %uptime% %thermal0% %multicpu% %memory% %battery% | <fc=#ee9a00>%date%</fc> | %VIJP% |      "
        }
