@@ -11,6 +11,3 @@ verbose = True
 prompt = /home/rohan/workspace/src/hg-prompt/prompt.py
 color =
 pager =
-
-[pager]
-pager = LESS ='FSRX' less
