@@ -12,10 +12,11 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import System.Exit
 import Graphics.X11.Xlib
-import IO (Handle, hPutStrLn)
+import System.IO (Handle, hPutStrLn)
 import XMonad.Actions.CycleWS
 import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.UpdatePointer
+import XMonad.Actions.NoBorders
 
 -- utils
 import XMonad.Util.Run (spawnPipe)
@@ -25,6 +26,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ManageHelpers
 
 -- layouts
 import XMonad.Layout.NoBorders
@@ -54,13 +56,16 @@ main = do
 -- Hooks --
 
 manageHook' :: ManageHook
-manageHook' = manageHook defaultConfig <+> manageDocks
+manageHook' = manageHook defaultConfig <+> manageDocks <+> composeOne
+    [ isFullscreen              -?> doFullFloat
+    , className =? "MPlayer"    -?> doIgnore
+    ]
 
 logHook' :: Handle ->  X ()
 logHook' h = dynamicLogWithPP (customPP { ppOutput = hPutStrLn h })
              >> updatePointer (Relative 0 0)
 
-layoutHook' = layoutHints customLayout
+layoutHook' = layoutHintsToCenter customLayout
 
 -------------------------------------------------------------------------------
 -- Looks --
@@ -122,6 +127,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- floating layer stuff
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
+    , ((modMask,               xK_g     ), withFocused $ toggleBorder)
 
     -- refresh
     , ((modMask,               xK_n     ), refresh)
