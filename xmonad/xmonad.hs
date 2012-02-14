@@ -31,7 +31,9 @@ import XMonad.Hooks.ManageHelpers
 -- layouts
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.Tabbed
 import XMonad.Layout.LayoutHints
+import XMonad.Layout.PerWorkspace
 
 -------------------------------------------------------------------------------
 -- Main --
@@ -47,7 +49,7 @@ main = do
               , keys = keys'
               , logHook = logHook' h
               , layoutHook = layoutHook'
-              , manageHook = manageHook'
+              , manageHook = manageHook' <+> manageHook defaultConfig
               , handleEventHook = fullscreenEventHook
               , focusFollowsMouse  = myFocusFollowsMouse
               }
@@ -56,9 +58,10 @@ main = do
 -- Hooks --
 
 manageHook' :: ManageHook
-manageHook' = manageHook defaultConfig <+> manageDocks <+> composeOne
-    [ isFullscreen              -?> doFullFloat
-    , className =? "MPlayer"    -?> doIgnore
+manageHook' = composeAll
+    [ isFullscreen                  --> doFloat
+    , className    =? "MPlayer"     --> doShift "9"
+    , manageDocks
     ]
 
 logHook' :: Handle ->  X ()
@@ -93,12 +96,22 @@ focusedBorderColor' = "#cccccc"
 
 -- workspaces
 workspaces' :: [WorkspaceId]
-workspaces' = ["1-M", "2-B", "3-C", "4-P", "5-S", "6-T", "7-V", "8-D", "9-E"]
+workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- layouts
-customLayout = avoidStruts $ smartBorders tiled ||| noBorders Full
+customLayout = avoidStruts $
+               onWorkspaces ["4", "5", "6"] workLayout $
+               onWorkspaces ["2", "7"] fullLayout $
+               normalLayout
   where
-    tiled = ResizableTall 1 (2/100) (1/2) []
+    myTiled = smartBorders $ ResizableTall 1 (3/100) (1/2) []
+    myFull = noBorders Full
+    myTabbed = noBorders $ tabbed shrinkText defaultTheme
+    normalLayout = myTiled ||| myFull ||| myTabbed
+    workLayout = myTiled ||| myFull
+    fullLayout = myFull ||| myTabbed
+
+
 
 -------------------------------------------------------------------------------
 -- Terminal --
@@ -116,8 +129,8 @@ keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_Return), spawn $ XMonad.terminal conf)
-    , ((modMask,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
-    , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
+    , ((modMask,               xK_p     ), spawn "gmrun")
+    , ((modMask .|. shiftMask, xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
     , ((modMask .|. shiftMask, xK_c     ), kill)
 
     -- layouts
@@ -139,7 +152,6 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,                 xK_o   ),  shiftNextScreen)
 
     -- focus
-    , ((modMask,               xK_Tab   ), windows W.focusDown)
     , ((modMask,               xK_j     ), windows W.focusDown)
     , ((modMask,               xK_k     ), windows W.focusUp)
     , ((modMask,               xK_m     ), windows W.focusMaster)
