@@ -24,4 +24,4 @@ nm-applet &
 mpc volume 60 &> /dev/null
 mpc random &> /dev/null
 
-# vim:set ft=shell
+# vim:set ft=sh:
