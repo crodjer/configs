@@ -7,7 +7,7 @@
 -------------------------------------------------------------------------------
 -- Imports --
 -- stuff
-import XMonad
+import XMonad hiding ( (|||) )
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import System.Exit
@@ -34,6 +34,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
 import XMonad.Layout.LayoutHints
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.LayoutCombinators
 
 -------------------------------------------------------------------------------
 -- Main --
@@ -59,8 +60,10 @@ main = do
 
 manageHook' :: ManageHook
 manageHook' = composeAll
-    [ isFullscreen                  --> doFloat
-    , className    =? "MPlayer"     --> doShift "9"
+    [ isFullscreen                  --> doFullFloat
+    , isDialog                      --> doFloat
+    , className     =? "Xmessage"   --> doFloat
+    , className     =? "MPlayer"    --> ask >>= doF . W.sink
     , manageDocks
     ]
 
@@ -68,7 +71,7 @@ logHook' :: Handle ->  X ()
 logHook' h = dynamicLogWithPP (customPP { ppOutput = hPutStrLn h })
              >> updatePointer (Relative 0 0)
 
-layoutHook' = layoutHintsToCenter customLayout
+layoutHook' = customLayout
 
 -------------------------------------------------------------------------------
 -- Looks --
@@ -99,14 +102,18 @@ workspaces' :: [WorkspaceId]
 workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- layouts
+
+myTiled = layoutHintsToCenter $ smartBorders $ ResizableTall 1 (3/100) (1/2) []
+myFull = noBorders Full
+myTabbed = noBorders $ tabbed shrinkText defaultTheme
+
+
 customLayout = avoidStruts $
                onWorkspaces ["4", "5", "6"] workLayout $
                onWorkspaces ["2", "7"] fullLayout $
                normalLayout
+
   where
-    myTiled = smartBorders $ ResizableTall 1 (3/100) (1/2) []
-    myFull = noBorders Full
-    myTabbed = noBorders $ tabbed shrinkText defaultTheme
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
     fullLayout = myFull ||| myTabbed
@@ -137,6 +144,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_space ), sendMessage NextLayout)
     , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     , ((modMask              , xK_b     ), sendMessage ToggleStruts)
+    , ((modMask              , xK_f     ), sendMessage $ JumpToLayout "Full")
+    , ((modMask              , xK_r     ), sendMessage $ JumpToLayout "ResizableTall")
 
     -- floating layer stuff
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
@@ -192,7 +201,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++
     -- mod-[1..9] %! Switch to workspace N
     -- mod-shift-[1..9] %! Move client to workspace N
+    -- mod-control-[1..9] %! Switch to workspace N greedily
     [((m .|. modMask, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask), (W.greedyView, controlMask)]]
