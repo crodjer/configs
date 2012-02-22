@@ -15,13 +15,12 @@ xsetbg -border black ~/pictures/misc/debian-blue.png
 xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
 
 ## Start some useful programms
-~/bin/mytrayer &
-xscreensaver &
-udisks-glue &
+pkill trayer; ~/bin/mytrayer &
+pkill udisks-glue; udisks-glue &
+pkill nm-applet;nm-applet &
 mpd &
-mpdscribble &
-nm-applet &
-mpc volume 60 &> /dev/null
-mpc random &> /dev/null
+xscreensaver &
+pkill mpdscribble;mpdscribble &
+/usr/lib/notification-daemon/notification-daemon &
 
 # vim:set ft=sh:
