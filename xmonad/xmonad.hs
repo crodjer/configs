@@ -35,6 +35,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.LayoutHints
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.LayoutCombinators
+import XMonad.Layout.ShowWName
 
 -------------------------------------------------------------------------------
 -- Main --
@@ -94,8 +95,8 @@ borderWidth' :: Dimension
 borderWidth' = 1
 
 normalBorderColor', focusedBorderColor' :: String
-normalBorderColor'  = "#444444"
-focusedBorderColor' = "#cccccc"
+normalBorderColor'  = "#555555"
+focusedBorderColor' = "#00FF00"
 
 -- workspaces
 workspaces' :: [WorkspaceId]
@@ -108,7 +109,7 @@ myFull = noBorders Full
 myTabbed = noBorders $ tabbed shrinkText defaultTheme
 
 
-customLayout = avoidStruts $
+customLayout =  myShowWName $ avoidStruts $
                onWorkspaces ["4", "5", "6"] workLayout $
                onWorkspaces ["2", "7"] fullLayout $
                normalLayout
@@ -117,8 +118,7 @@ customLayout = avoidStruts $
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
     fullLayout = myFull ||| myTabbed
-
-
+    myShowWName = showWName
 
 -------------------------------------------------------------------------------
 -- Terminal --
