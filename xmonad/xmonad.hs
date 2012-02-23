@@ -111,7 +111,7 @@ myTabbed = noBorders $ tabbed shrinkText defaultTheme
 
 customLayout =  myShowWName $ avoidStruts $
                onWorkspaces ["4", "5", "6"] workLayout $
-               onWorkspaces ["2", "7"] fullLayout $
+               onWorkspaces ["2", "7"] fullLayout
                normalLayout
 
   where
@@ -149,7 +149,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- floating layer stuff
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
-    , ((modMask,               xK_g     ), withFocused $ toggleBorder)
+    , ((modMask,               xK_g     ), withFocused toggleBorder)
 
     -- refresh
     , ((modMask,               xK_n     ), refresh)
@@ -195,7 +195,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0 , 0x1008ff14), spawn "mpc toggle")
 
     -- quit, or restart
-    , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modMask .|. shiftMask, xK_q     ), io exitSuccess)
     , ((modMask              , xK_q     ), restart "xmonad" True)
     ]
     ++
