@@ -19,7 +19,7 @@ pkill trayer; ~/bin/mytrayer &
 pkill udisks-glue; udisks-glue &
 pkill nm-applet;nm-applet &
 mpd &
-xscreensaver &
+#xscreensaver &
 pkill mpdscribble;mpdscribble &
 /usr/lib/notification-daemon/notification-daemon &
 
