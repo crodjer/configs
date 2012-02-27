@@ -149,9 +149,24 @@ couchenv(){
     source $HOME/workspace/src/build-couchdb/build/env.sh
     export COUCH='http://admin:admin@localhost:5984'
 
-    ccurl(){
-        curl "-vX ${2:-GET} $COUCH/$1"
+    cguid(){
+        echo $(curl -X GET $COUCH/_uuids 2> /dev/null G -o '\w\{32\}')
     }
+
+    ccurl(){
+        UUID=$(cguid)
+        ABS_PATH=$(echo $1 | sed "s/UUID/$UUID/g")
+        METHOD=${2:-GET}
+        curl -X  $METHOD $COUCH/$ABS_PATH ${@:3}
+    }
+
+    ccurlv(){
+        UUID=$(cguid)
+        ABS_PATH=$(echo $1 | sed "s/UUID/$UUID/g")
+        METHOD=${2:-GET}
+        curl -vX  $METHOD $COUCH/$ABS_PATH ${@:3}
+    }
+
 }
 
 s() { find . -iname "*$@*" }
