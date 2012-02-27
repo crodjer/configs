@@ -110,14 +110,14 @@ myTabbed = noBorders $ tabbed shrinkText defaultTheme
 
 
 customLayout =  myShowWName $ avoidStruts $
-               onWorkspaces ["4", "5", "6"] workLayout $
-               onWorkspaces ["2", "7"] fullLayout
+               onWorkspaces ["4", "5", "6", "7"] workLayout $
+               onWorkspaces ["2"] fullLayout
                normalLayout
 
   where
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
-    fullLayout = myFull ||| myTabbed
+    fullLayout = myTabbed ||| myFull
     myShowWName = showWName
 
 -------------------------------------------------------------------------------
