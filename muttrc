@@ -109,6 +109,7 @@ set query_format = "%4c %t %-40.40a %-40.40n %?e?(%e)?"
 
 # Mailing list
 subscribe django-developers@googlegroups.com
+subscribe xmonad@haskell.org
 subscribe overnite-2012@googlegroups.com
 subscribe agfe08@googlegroups.com
 
