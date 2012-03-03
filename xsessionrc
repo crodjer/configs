@@ -9,7 +9,7 @@ xset b 100 300 75
 
 # Looks
 xsetroot -solid black -cursor_name left_ptr
-xsetbg -border black ~/pictures/misc/debian-blue.png
+feh --bg-fill ~/pictures/misc/dont-touch-my-laptop.jpg
 
 # Map menu key to Super_R (Useful for laptop keyboard)
 xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
