@@ -17,8 +17,8 @@ URxvt*scrollTtyKeypress: true
 URxvt*mouseWheelScrollPage: false
 URxvt*cutchars: `'",;@&*=|/?()<>[]{}'
 URxvt*perl-ext: default,matcher
-URxvt*keysym.C-o: perl:matcher:last
-URxvt*keysym.A-o: perl:matcher:list
+URxvt*keysym.C-Delete: perl:matcher:last
+URxvt*keysym.A-Delete: perl:matcher:list
 URxvt*matcher.button: 1
 URxvt*urlLauncher: x-www-browser
 URxvt*underlineURLs: true
@@ -27,7 +27,7 @@ URxvt*visualBell: false
 
 !!Looks and Colors
 URxvt*transparent: true
-URxvt*shading: 200
+URxvt*shading: 10
 URxvt*background: #000000
 URxvt*foreground: #ffffff
 URxvt*cursorColor: #ffffff
