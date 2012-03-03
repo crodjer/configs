@@ -109,7 +109,7 @@ myFull = noBorders Full
 myTabbed = noBorders $ tabbed shrinkText defaultTheme
 
 
-customLayout =  myShowWName $ avoidStruts $
+customLayout =  showWName' mySWNConfig $ avoidStruts $
                onWorkspaces ["4", "5", "6", "7"] workLayout $
                onWorkspaces ["2"] fullLayout
                normalLayout
@@ -118,7 +118,9 @@ customLayout =  myShowWName $ avoidStruts $
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
     fullLayout = myTabbed ||| myFull
-    myShowWName = showWName
+    mySWNConfig = defaultSWNConfig { swn_font = "xft:Monospace:pixelsize=45:bold:antialias=true:hinting=true"
+                                   , swn_fade = 1
+                                   }
 
 -------------------------------------------------------------------------------
 -- Terminal --
