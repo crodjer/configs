@@ -1,17 +1,15 @@
 ! ---[ URxvt config ]--------------------------------------------------
 
 !URxvt*font: xft:Inconsolata:pixelsize=12:antialias=true
-URxvt*font: xft:Monospace:pixelsize=12:antialias=true:hinting=true
-URxvt*boldFont: xft:Monospace:pixelsize=12:bold:antialias=true:hinting=true
+URxvt*font: xft:Monospace:pixelsize=12
+URxvt*boldFont: xft:Monospace:bold:pixelsize=12
 URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 2
 URxvt*scrollBar: false
 URxvt*depth: 32
-URxvt*cursorColor: rgba:ffff/ffff/ffff/ffff
-URxvt*cursorColor2: #000000
 URxvt*cursorBlink: false
-URxvt*inheritPixmap: false
+URxvt*inheritPixmap: true
 URxvt*termName: rxvt-unicode-256color
 URxvt*saveLines: 5000
 URxvt*scrollTtyOutput: false
@@ -19,17 +17,21 @@ URxvt*scrollTtyKeypress: true
 URxvt*mouseWheelScrollPage: false
 URxvt*cutchars: `'",;@&*=|/?()<>[]{}'
 URxvt*perl-ext: default,matcher
-URxvt*keysym.C-Delete: perl:matcher
+URxvt*keysym.C-o: perl:matcher:last
+URxvt*keysym.A-o: perl:matcher:list
 URxvt*matcher.button: 1
 URxvt*urlLauncher: x-www-browser
 URxvt*underlineURLs: true
 URxvt*urgentOnBell: true
 URxvt*visualBell: false
 
-!!Color scheme
-!URxvt*background: rgba:0000/0000/0000/dddd
-URxvt*background: #000
-URxvt*foreground: white
+!!Looks and Colors
+URxvt*transparent: true
+URxvt*shading: 200
+URxvt*background: #000000
+URxvt*foreground: #ffffff
+URxvt*cursorColor: #ffffff
+URxvt*cursorColor2: #000000
 
 URxvt*color0: black
 URxvt*color1: red3
@@ -47,3 +49,12 @@ URxvt*color12: rgb:5c/5c/ff
 URxvt*color13: magenta
 URxvt*color14: cyan
 URxvt*color15: white
+
+! ---[ Fonts config ]--------------------------------------------------
+Xft.dpi: 96
+Xft.antialias: true
+Xft.rgba: rgba
+Xft.hinting: true
+Xft.autohint: true
+Xft.render: true
+Xft.hintstyle: hintslight
