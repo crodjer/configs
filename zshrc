@@ -71,7 +71,8 @@ alias unmute='amixer set Master on'
 alias mnt='udisks --mount'
 alias umnt='udisks --unmount'
 
-alias e='gvim --remote-silent'
+alias e='vim --servername default --remote-silent'
+alias vnew='vim --servername default'
 alias t='python ~/workspace/src/t/t.py --task-dir ~/ --list .tasks --delete-if-empty'
 
 alias -g ack='ack-grep'
