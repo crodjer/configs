@@ -118,8 +118,10 @@ customLayout =  showWName' mySWNConfig $ avoidStruts $
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
     fullLayout = myTabbed ||| myFull
-    mySWNConfig = defaultSWNConfig { swn_font = "xft:Monospace:pixelsize=45:bold:antialias=true:hinting=true"
+    mySWNConfig = defaultSWNConfig { swn_font = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
                                    , swn_fade = 1
+                                   , swn_bgcolor = "#dddddd"
+                                   , swn_color = "#000000"
                                    }
 
 -------------------------------------------------------------------------------
