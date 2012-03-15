@@ -131,7 +131,7 @@ export LESS='-r'
 
 export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
-export http_proxy=http://10.3.100.211:8080/
+export http_proxy=http://144.16.192.218:8080/
 ##export http_proxy=http://144.16.192.213:8080/
 export https_proxy=$http_proxy
 
@@ -168,6 +168,14 @@ couchenv(){
         curl -vX  $METHOD $COUCH/$ABS_PATH ${@:3}
     }
 
+}
+
+es(){
+    vim --servername $VI_SERVER --remote-silent $*
+}
+
+es_set(){
+    export VI_SERVER=$1
 }
 
 s() { find . -iname "*$@*" }
