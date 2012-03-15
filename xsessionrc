@@ -1,23 +1,21 @@
-## Touchpad settings
-synclient TapButton1=1, VertEdgeScroll=0, VertTwoFingerScroll=1, HorizTwoFingerScroll=1, HorizScrollDelta=104, 
-synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=100
-syndaemon -dKi 0.5
-
 ## Configure Xsession
 xrdb -merge ~/.Xresources
 xset b 100 300 75
 
+## Touchpad settings
+synclient TapButton1=1, VertEdgeScroll=0, VertTwoFingerScroll=1, HorizTwoFingerScroll=1, HorizScrollDelta=104,
+synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=100
+syndaemon -dKi 0.5
+
 # Looks
 xsetroot -solid black -cursor_name left_ptr
-feh --bg-fill ~/pictures/misc/dont-touch-my-laptop.jpg
+feh --bg-scale ~/pictures/misc/debian-computer-wallpaper-1920x1080-1124.jpg
 
 # Map menu key to Super_R (Useful for laptop keyboard)
 xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
 
 ## Start some useful programms
-pkill trayer; ~/bin/mytrayer &
 pkill udisks-glue; udisks-glue &
-pkill nm-applet;nm-applet &
 mpd &
 #xscreensaver &
 pkill mpdscribble;mpdscribble &
