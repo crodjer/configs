@@ -62,8 +62,7 @@ alias psh='aptitude show'
 alias halt='sudo shutdown -h now'
 alias reboot='sudo reboot'
 #Save session to disk and bind caps as escape on resume
-alias s2disk='sudo s2disk'
-alias s2both='sudo s2both'
+alias s2disk='sudo pm-hibernate'
 
 alias mute='amixer set Master off'
 alias unmute='amixer set Master on'
@@ -220,15 +219,6 @@ preexec () {
             export LD_PRELOAD=/usr/lib/libproxychains.so.3
             ;;
     esac
-
-
-    # Set the window title for screen
-    if [[ $TERM == "screen"* ]]; then
-        local -a cmd; cmd=(${(z)1}) # the command string
-        eval "tab_title=$TAB_TITLE_PREFIX$TAB_TITLE_EXEC"
-        eval "tab_hardstatus=$TAB_HARDSTATUS_PREFIX$TAB_HARDSTATUS_EXEC"
-        screen_set $tab_title $tab_hardstatus
-    fi
 
 }
 
