@@ -29,7 +29,8 @@ plugins=(git django history-substring-search )
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/home/rohan/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/src/go/bin:/home/rohan/.cabal/bin
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/src/go/bin:$HOME/.cabal/bin:$HOME/.local/bin
+
 
 # vim bindings
 bindkey -v
@@ -130,8 +131,8 @@ export LESS='-r'
 
 export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
-export http_proxy=http://144.16.192.218:8080/
-##export http_proxy=http://144.16.192.213:8080/
+#export http_proxy=http://144.16.192.218:8080/
+export http_proxy=http://10.3.100.212:8080/
 export https_proxy=$http_proxy
 
 #unset http_proxy
@@ -167,6 +168,11 @@ couchenv(){
         curl -vX  $METHOD $COUCH/$ABS_PATH ${@:3}
     }
 
+}
+
+vs(){
+    export VI_SERVER=$1
+    vim --servername $VI_SERVER
 }
 
 es(){
