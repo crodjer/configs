@@ -31,3 +31,9 @@
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
+[instaweb]
+	httpd = apache2
+	browser = google-chrome
+	port = 4321
+[web]
+	browser = google-chrome
