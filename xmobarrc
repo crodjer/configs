@@ -12,15 +12,16 @@ Config { font = "xft:Monospace:size=8:bold"
                     , Run Swap ["-t","S:<usedratio>%"] 10
                     , Run BatteryP ["BAT0"] ["-t", "B:<left>% <acstatus>",
                         "-L", "10", "-H", "80", "-p", "3",
-                        "--", "-O", "<fc=green>On</fc>", "-o", "",
+                        "--", "-O", "<fc=green>On</fc>", "-o", "<fc=red>Off</fc>",
                         "-L", "-12", "-H", "-5",
-                        "-l", "red", "-m", "blue", "-h", "green",
-                        "-c", "charge_full_design"] 600
+                        "-l", "red", "-m", "blue", "-h", "green"] 30
                     , Run Date "%d %a %I:%M" "date" 10
                     , Run StdinReader
                     , Run ThermalZone 0 ["-t", "T:<temp>C"] 30
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{| %uptime% %thermal0% %multicpu% %memory% %battery% %eth0% | <fc=#ee9a00>%date%</fc>       "
+       , template = "%StdinReader% }{| %uptime% %thermal0% %multicpu% %memory% %battery% %eth0% %wlan0wi% | <fc=#ee9a00>%date%</fc>"
        }
+
+-- vim: ft=haskell:
