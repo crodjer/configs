@@ -13,7 +13,7 @@ vo=xv
 ### Audio
 ao="alsa"
 softvol="yes"
-softvol-max=200
+softvol-max=400
 volume=10
 #a52drc=1
 
