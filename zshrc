@@ -143,6 +143,7 @@ export no_proxy='localhost'
 export PIDGIN_DB=~/workspace/src/trash/pidgin.mtn
 export PIDGIN_DIR=~/workspace/src/pidgin/
 export EC2=ecc.rohanjain.in
+export NODE_PATH=/home/rohan/.local/lib/node_modules
 
 source /usr/local/bin/virtualenvwrapper.sh
 
