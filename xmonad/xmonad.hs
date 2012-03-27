@@ -100,7 +100,7 @@ focusedBorderColor' = "#00FF00"
 
 -- workspaces
 workspaces' :: [WorkspaceId]
-workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 -- layouts
 
@@ -207,5 +207,5 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- mod-shift-[1..9] %! Move client to workspace N
     -- mod-control-[1..9] %! Switch to workspace N greedily
     [((m .|. modMask, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+        | (i, k) <- zip (XMonad.workspaces conf) $ [xK_1 .. xK_9] ++ [xK_0]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask), (W.greedyView, controlMask)]]
