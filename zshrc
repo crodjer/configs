@@ -122,7 +122,7 @@ alias entertain='mplayer "$(find "." -type f -regextype posix-egrep -regex ".*\.
 alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"'
 
 ### Exports
-export EDITOR=vim
+export EDITOR=e
 export JAVA_HOME=/usr
 #export PKG_CONFIG_PATH=/home/yeban/opt/lib/pkgconfig/:${PKG_CONFIG_PATH}
 #export GOROOT=:/opt/src/go
@@ -214,15 +214,14 @@ preexec () {
     # automatically use tsocks for some programs
     case $first in
         #alpine)
-        ncmpcpp|mutt)
+        irssi|twitter|ncmpcpp|mutt)
             export LD_PRELOAD=/usr/lib/libtsocks.so
             ;;
     esac
 
     # automatically use proxychains for some programs
     case $first in
-        #alpine)
-        twitter)
+        alpine)
             export LD_PRELOAD=/usr/lib/libproxychains.so.3
             ;;
     esac
