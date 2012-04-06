@@ -107,9 +107,15 @@ workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 myTiled = layoutHintsToCenter $ smartBorders $ ResizableTall 1 (3/100) (1/2) []
 myFull = noBorders Full
 myTabbed = noBorders $ tabbed shrinkText defaultTheme
+mySWNConfig = defaultSWNConfig { swn_font = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
+                               , swn_fade = 1
+                               , swn_bgcolor = "#dddddd"
+                               , swn_color = "#000000"
+                               }
+myShowWName = showWName' mySWNConfig
 
 
-customLayout =  showWName' mySWNConfig $ avoidStruts $
+customLayout = myShowWName $ avoidStruts $
                onWorkspaces ["4", "5", "6", "7"] workLayout $
                onWorkspaces ["2"] fullLayout
                normalLayout
@@ -118,11 +124,6 @@ customLayout =  showWName' mySWNConfig $ avoidStruts $
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
     fullLayout = myTabbed ||| myFull
-    mySWNConfig = defaultSWNConfig { swn_font = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
-                                   , swn_fade = 1
-                                   , swn_bgcolor = "#dddddd"
-                                   , swn_color = "#000000"
-                                   }
 
 -------------------------------------------------------------------------------
 -- Terminal --
