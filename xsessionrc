@@ -8,9 +8,9 @@ synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=100
 syndaemon -dKi 0.5
 
 # Looks
-~/workspace/scripts/display.sh
-xsetroot -solid black -cursor_name left_ptr
-feh --bg-scale ~/pictures/misc/debian-computer-wallpaper-1920x1080-1124.jpg
+xsetroot -cursor_name left_ptr
+$HOME/workspace/scripts/display.sh
+$HOME/.fehbg &
 
 # Map menu key to Super_R (Useful for laptop keyboard)
 xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
