@@ -10,7 +10,7 @@ syndaemon -dKi 0.5
 # Looks
 xsetroot -cursor_name left_ptr
 $HOME/workspace/scripts/display.sh
-$HOME/.fehbg &
+bash $HOME/.fehbg
 
 # Map menu key to Super_R (Useful for laptop keyboard)
 xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
