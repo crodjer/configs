@@ -29,8 +29,7 @@ plugins=(git django history-substring-search )
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/opt/src/go/bin:$HOME/.cabal/bin:$HOME/.local/bin
-
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/workspace/src/google_appengine:$HOME/workspace/src/golang/bin
 
 # vim bindings
 bindkey -v
@@ -64,6 +63,8 @@ alias halt='sudo shutdown -h now'
 alias reboot='sudo reboot'
 #Save session to disk and bind caps as escape on resume
 alias s2disk='sudo pm-hibernate'
+alias s2both='sudo s2both'
+alias s2ram='sudo pm-suspend'
 
 alias mute='amixer set Master off'
 alias unmute='amixer set Master on'
@@ -124,13 +125,10 @@ alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock 
 ### Exports
 export EDITOR=e
 export JAVA_HOME=/usr
-#export PKG_CONFIG_PATH=/home/yeban/opt/lib/pkgconfig/:${PKG_CONFIG_PATH}
-#export GOROOT=:/opt/src/go
-
-export LESS='-r'
-
 export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+export LESS='-r'
 #export http_proxy=http://144.16.192.218:8080/
 export http_proxy=http://10.3.100.212:8080/
 export https_proxy=$http_proxy
@@ -180,9 +178,13 @@ es(){
     vim --servername $VI_SERVER --remote-silent $*
 }
 
-es_set(){
+compdef _vim es
+
+eset(){
     export VI_SERVER=$1
 }
+
+eset default
 
 s() { find . -iname "*$@*" }
 
