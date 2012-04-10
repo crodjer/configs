@@ -8,6 +8,7 @@ synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=100
 syndaemon -dKi 0.5
 
 # Looks
+~/workspace/scripts/xrandr_config.sh
 xsetroot -solid black -cursor_name left_ptr
 feh --bg-scale ~/pictures/misc/debian-computer-wallpaper-1920x1080-1124.jpg
 
