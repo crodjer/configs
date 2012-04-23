@@ -1,6 +1,6 @@
 ## Configure Xsession
 xrdb -merge ~/.Xresources
-xset b 100 300 75
+xset b 100 350 75
 
 ## Touchpad settings
 synclient TapButton1=1, VertEdgeScroll=0, VertTwoFingerScroll=1, HorizTwoFingerScroll=1, HorizScrollDelta=104,
