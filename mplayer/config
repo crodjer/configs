@@ -14,7 +14,7 @@ vo=xv
 ao="alsa"
 softvol="yes"
 softvol-max=400
-volume=10
+volume=40
 #a52drc=1
 
 ## Appearance

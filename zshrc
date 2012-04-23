@@ -29,7 +29,7 @@ plugins=(git django history-substring-search )
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/workspace/src/google_appengine:$HOME/workspace/src/golang/bin
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/workspace/src/golang/bin:$HOME/workspace/src/google_appengine
 
 # vim bindings
 bindkey -v
@@ -74,7 +74,6 @@ alias umnt='udisks --unmount'
 
 alias e='vim --servername default --remote-silent'
 alias vnew='vim --servername default'
-alias t='python ~/workspace/src/t/t.py --task-dir ~/ --list .tasks --delete-if-empty'
 
 alias -g ack='ack-grep'
 alias -g G='| grep'
@@ -129,8 +128,8 @@ export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export LESS='-r'
-export http_proxy=http://144.16.192.218:8080/
-#export http_proxy=http://10.3.100.212:8080/
+#export http_proxy=http://144.16.192.218:8080/
+export http_proxy=http://10.3.100.212:8080/
 export https_proxy=$http_proxy
 
 #unset http_proxy
