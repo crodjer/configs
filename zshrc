@@ -128,8 +128,8 @@ export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export LESS='-r'
-#export http_proxy=http://144.16.192.218:8080/
-export http_proxy=http://10.3.100.212:8080/
+export http_proxy=http://144.16.192.247:8080/
+#export http_proxy=http://10.3.100.212:8080/
 export https_proxy=$http_proxy
 
 #unset http_proxy

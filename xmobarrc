@@ -21,7 +21,5 @@ Config { font = "xft:Monospace:size=8:bold"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{| %uptime% %thermal0% %multicpu% %memory% %battery% %eth0% %wlan0wi% | <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{| %uptime% %thermal0% %multicpu% %memory% %battery% %eth0% %wlan0wi% | <fc=#ee9a00>%date%</fc> |      "
        }
-
--- vim: ft=haskell:
