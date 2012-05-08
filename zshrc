@@ -112,7 +112,7 @@ function mdw(){
 #Launch ec2 account
 alias ec2='ssh $EC2'
 
-alias pip='pip $@ --proxy="$http_proxy"'
+#alias pip='pip $@ --proxy="$http_proxy"'
 alias hi='ghci 2>&1 | HsColour'
 
 alias clock='tty-clock -ctC 7'
@@ -128,14 +128,14 @@ export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export LESS='-r'
-export http_proxy=http://144.16.192.247:8080/
+#export http_proxy=http://144.16.192.247:8080/
 #export http_proxy=http://10.3.100.212:8080/
-export https_proxy=$http_proxy
+#export https_proxy=$http_proxy
 
 #unset http_proxy
 #unset https_proxy
 
-export no_proxy='localhost'
+#export no_proxy='localhost'
 
 export PIDGIN_DB=~/workspace/src/trash/pidgin.mtn
 export PIDGIN_DIR=~/workspace/src/pidgin/
@@ -212,8 +212,8 @@ preexec () {
 
     # automatically use tsocks for some programs
     case $first in
-        #alpine)
-        irssi|twitter|ncmpcpp|mutt)
+        alpine)
+        #irssi|twitter|ncmpcpp|mutt)
             export LD_PRELOAD=/usr/lib/libtsocks.so
             ;;
     esac
