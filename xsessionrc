@@ -1,10 +1,11 @@
 ## Configure Xsession
 xrdb -merge ~/.Xresources
 xset b 100 350 75
+export PATH=$PATH:$HOME/bin
 
 ## Touchpad settings
 synclient TapButton1=1, VertEdgeScroll=0, VertTwoFingerScroll=1, HorizTwoFingerScroll=1, HorizScrollDelta=104,
-synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=100
+synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=50
 syndaemon -dKi 0.5
 
 # Looks
@@ -18,6 +19,8 @@ xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
 ## Start some useful programms
 pkill udisks-glue; udisks-glue &
 mpd &
+#nm-applet &
+#mytrayer
 #xscreensaver &
 pkill mpdscribble;mpdscribble &
 /usr/lib/notification-daemon/notification-daemon &

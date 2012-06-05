@@ -116,7 +116,8 @@ myShowWName = showWName' mySWNConfig
 
 
 customLayout = myShowWName $ avoidStruts $
-               onWorkspaces ["4", "5", "6", "7"] workLayout $
+               onWorkspaces ["4", "5", "6"] workLayout $
+               onWorkspaces ["8", "9", "0"] (noBorders normalLayout) $
                onWorkspaces ["2"] fullLayout
                normalLayout
 
