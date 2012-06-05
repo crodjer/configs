@@ -36,3 +36,7 @@
 	port = 4321
 [web]
 	browser = google-chrome
+[cola]
+	tabwidth = 4
+[gui]
+	editor = vi

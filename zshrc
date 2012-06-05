@@ -66,6 +66,18 @@ alias s2disk='sudo pm-hibernate'
 alias s2both='sudo s2both'
 alias s2ram='sudo pm-suspend'
 
+alias ifup='sudo ifup'
+alias ifdown='sudo ifdown'
+alias ifconfig='sudo ifconfig'
+alias ifscheme='sudo ifscheme'
+
+function ifre(){
+    ifdown $1
+    ifup $1
+}
+
+compdef ifre=ifdown
+
 alias mute='amixer set Master off'
 alias unmute='amixer set Master on'
 
