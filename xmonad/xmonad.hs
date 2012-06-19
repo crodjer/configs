@@ -32,10 +32,11 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Tabbed
-import XMonad.Layout.LayoutHints
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.ShowWName
+import XMonad.Layout.LayoutScreens
+import XMonad.Layout.TwoPane
 
 -------------------------------------------------------------------------------
 -- Main --
@@ -104,7 +105,7 @@ workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 -- layouts
 
-myTiled = layoutHintsToCenter $ smartBorders $ ResizableTall 1 (3/100) (1/2) []
+myTiled = smartBorders $ ResizableTall 1 (3/100) (1/2) []
 myFull = noBorders Full
 myTabbed = noBorders $ tabbed shrinkText defaultTheme
 mySWNConfig = defaultSWNConfig { swn_font = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
@@ -117,7 +118,7 @@ myShowWName = showWName' mySWNConfig
 
 customLayout = myShowWName $ avoidStruts $
                onWorkspaces ["4", "5", "6"] workLayout $
-               onWorkspaces ["8", "9", "0"] (noBorders normalLayout) $
+               onWorkspaces ["8", "9"] (noBorders normalLayout) $
                onWorkspaces ["2"] fullLayout
                normalLayout
 
@@ -152,6 +153,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask              , xK_b     ), sendMessage ToggleStruts)
     , ((modMask              , xK_f     ), sendMessage $ JumpToLayout "Full")
     , ((modMask              , xK_r     ), sendMessage $ JumpToLayout "ResizableTall")
+    , ((modMask .|. controlMask, xK_l   ), layoutSplitScreen 2 (TwoPane 0.5 0.5))
+    , ((modMask .|. controlMask, xK_r   ), rescreen)
 
     -- floating layer stuff
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
