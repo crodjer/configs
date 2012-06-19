@@ -135,7 +135,7 @@ alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock 
 
 ### Exports
 export EDITOR=vi
-export JAVA_HOME=/usr
+export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/jre
 export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -243,3 +243,5 @@ precmd () {
     # reset LD_PRELOAD khat might have been set in preexec()
     export LD_PRELOAD=''
 }
+
+[[ -s "/home/rohan/.rvm/scripts/rvm" ]] && source "/home/rohan/.rvm/scripts/rvm"
