@@ -27,7 +27,7 @@ URxvt*visualBell: false
 
 !!Looks and Colors
 URxvt*transparent: true
-URxvt*shading: 10
+URxvt*shading: 20
 URxvt*background: #000000
 URxvt*foreground: #ffffff
 URxvt*cursorColor: #ffffff
