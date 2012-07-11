@@ -62,9 +62,10 @@ alias psh='aptitude show'
 alias halt='sudo shutdown -h now'
 alias reboot='sudo reboot'
 #Save session to disk and bind caps as escape on resume
-alias s2disk='sudo pm-hibernate'
-alias s2both='sudo s2both'
-alias s2ram='sudo pm-suspend'
+alias s2disk='sudo pm-hibernate && display'
+alias s2both='sudo s2both && display'
+alias s2ram='sudo pm-suspend && display'
+alias xsc='xscreensaver-command'
 
 alias ifup='sudo ifup'
 alias ifdown='sudo ifdown'
@@ -153,6 +154,14 @@ export PIDGIN_DB=~/workspace/src/trash/pidgin.mtn
 export PIDGIN_DIR=~/workspace/src/pidgin/
 export EC2=ecc.rohanjain.in
 export NODE_PATH=/home/rohan/.local/lib/node_modules
+
+# EC2
+export EC2_HOME=$HOME/.local/opt/ec2-api-tools
+export EC2_PRIVATE_KEY=~/.ec2/pk-S6B7OSNB5J45TR4S6Q2KHWW4KPJGGM3L.pem
+export EC2_CERT=~/.ec2/cert-S6B7OSNB5J45TR4S6Q2KHWW4KPJGGM3L.pem
+export PATH=$PATH:$EC2_HOME/bin
+
+export HR_SERVERS='cssh `ec2-describe-instances -F "tag:Name=webserver" | grep INSTANCE | awk "{print $4}"`'
 
 source /usr/local/bin/virtualenvwrapper.sh
 

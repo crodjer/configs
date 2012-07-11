@@ -89,7 +89,7 @@ customPP = defaultPP { ppCurrent = xmobarColor "#FFEE00" "" . wrap "[" "]"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 -- borders
 borderWidth' :: Dimension
@@ -125,7 +125,7 @@ customLayout = myShowWName $ avoidStruts $
   where
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
-    fullLayout = myTabbed ||| myFull
+    fullLayout = myTabbed ||| myFull ||| (noBorders myTiled)
 
 -------------------------------------------------------------------------------
 -- Terminal --
@@ -153,8 +153,9 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask              , xK_b     ), sendMessage ToggleStruts)
     , ((modMask              , xK_f     ), sendMessage $ JumpToLayout "Full")
     , ((modMask              , xK_r     ), sendMessage $ JumpToLayout "ResizableTall")
-    , ((modMask .|. controlMask, xK_l   ), layoutSplitScreen 2 (TwoPane 0.5 0.5))
-    , ((modMask .|. controlMask, xK_r   ), rescreen)
+    -- Don't need split screens right now :)
+    {-, ((modMask .|. controlMask, xK_l   ), layoutSplitScreen 2 (TwoPane 0.5 0.5))-}
+    {-, ((modMask .|. controlMask, xK_r   ), rescreen)-}
 
     -- floating layer stuff
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
@@ -164,8 +165,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_n     ), refresh)
 
     -- move focus between screens
-    , ((modMask .|. controlMask, xK_j   ),  prevScreen)
-    , ((modMask .|. controlMask, xK_k   ),  nextScreen)
+    , ((modMask .|. controlMask, xK_j   ),  nextScreen)
+    , ((modMask .|. controlMask, xK_k   ),  prevScreen)
     , ((modMask,                 xK_z   ),  toggleWS)
     , ((modMask,                 xK_o   ),  shiftNextScreen)
 
