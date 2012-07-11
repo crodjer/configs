@@ -9,5 +9,4 @@ audio_output {
         type            "alsa"
         name            "MPD Audo Device"
         format          "48000:16:2"
-        mixer_type      "software"
 }
