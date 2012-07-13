@@ -1,8 +1,9 @@
 ! ---[ URxvt config ]--------------------------------------------------
 
 !URxvt*font: xft:Inconsolata:pixelsize=12:antialias=true
-URxvt*font: xft:Monospace:pixelsize=12
-URxvt*boldFont: xft:Monospace:bold:pixelsize=12
+URxvt*font: xft:Monospace:pixelsize=11
+URxvt*boldFont: xft:Monospace:bold:pixelsize=11
+URxvt*letterSpace: -1
 URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 2
@@ -27,7 +28,7 @@ URxvt*visualBell: false
 
 !!Looks and Colors
 URxvt*transparent: true
-URxvt*shading: 20
+URxvt*shading: 10
 URxvt*background: #000000
 URxvt*foreground: #ffffff
 URxvt*cursorColor: #ffffff
