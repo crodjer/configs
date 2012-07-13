@@ -18,11 +18,11 @@ xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
 
 ## Start some useful programms
 pkill udisks-glue; udisks-glue &
-mpd &
+pkill mpd; mpd &
+pkill xscreensaver; xscreensaver &
+pkill mpdscribble;mpdscribble &
+pkill notification-dae; /usr/lib/notification-daemon/notification-daemon &
 #nm-applet &
 #mytrayer
-#xscreensaver &
-pkill mpdscribble;mpdscribble &
-/usr/lib/notification-daemon/notification-daemon &
 
 # vim:set ft=sh:

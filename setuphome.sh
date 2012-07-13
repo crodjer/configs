@@ -164,6 +164,7 @@ setUp(){
     link xsession
     link screenlayout
     link zshrc
+    link irbrc
 
     link vim/vimrc vimrc
     link vim/gvimrc gvimrc
