@@ -11,10 +11,10 @@ ontop="1"
 vo=xv
 
 ### Audio
-ao="alsa"
+ao="pulse"
 softvol="yes"
 softvol-max=400
-volume=25
+volume=20
 #a52drc=1
 
 ## Appearance

@@ -18,6 +18,7 @@
 	chainreplyto = false
 [core]
 	editor = vim
+	excludesfile = /home/rohan/.gitignore
 [grep]
 	lineNumber = true
 [color]
