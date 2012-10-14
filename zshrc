@@ -100,6 +100,9 @@ alias ev='e ~/.vimrc'
 #A pad to dump arbit data
 alias ed='e /home/rohan/workspace/trash/dumppad.md'
 
+alias ssh='TERM=xterm;ssh'
+alias cssh='TERM=xterm;cssh'
+
 #Music player shortcuts
 alias m="mpc"
 alias mstatus="mpc -f '%artist% - %title%\n%album%' status"
@@ -134,9 +137,11 @@ alias pqiv='pqiv -iwP left,top'
 alias entertain='mplayer "$(find "." -type f -regextype posix-egrep -regex ".*\.(avi|mkv|flv|mpg|mpeg|mp4|wmv|3gp|mov|divx)" | shuf -n1)"'
 alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"'
 
+alias h='history'
+
 ### Exports
 export EDITOR=vi
-export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/jre
+export JAVA_HOME=/usr/lib/jvm/default-java
 export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -189,8 +194,21 @@ couchenv(){
 
 }
 
+dj(){
+    eset django && cd ~/workspace/src/django && workon django
+}
+
+hr(){
+    eset hrank && cd ~/workspace/is/ruby/hackerrank
+    alias gpr='gl --rebase && gp'
+}
+
 vs(){
     export VI_SERVER=$1
+    vim --servername $VI_SERVER
+}
+
+vo() {
     vim --servername $VI_SERVER
 }
 
@@ -254,3 +272,4 @@ precmd () {
 }
 
 [[ -s "/home/rohan/.rvm/scripts/rvm" ]] && source "/home/rohan/.rvm/scripts/rvm"
+export XAUTHORITY=/home/rohan/.Xauthority
