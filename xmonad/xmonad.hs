@@ -11,10 +11,8 @@ import XMonad hiding ( (|||) )
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import System.Exit
-import Graphics.X11.Xlib
 import System.IO (Handle, hPutStrLn)
 import XMonad.Actions.CycleWS
-import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.NoBorders
 
@@ -35,11 +33,10 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.LayoutCombinators
 import XMonad.Layout.ShowWName
-import XMonad.Layout.LayoutScreens
-import XMonad.Layout.TwoPane
 
 -------------------------------------------------------------------------------
 -- Main --
+{-main :: IO()-}
 main = do
        h <- spawnPipe "xmobar"
        xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
@@ -74,6 +71,7 @@ logHook' h = dynamicLogWithPP (customPP { ppOutput = hPutStrLn h })
              >> updatePointer (Relative 0 0)
 
 layoutHook' = customLayout
+-- Top-level binding with no type signature:           layoutHook' :: XMonad.Layout.LayoutModifier.ModifiedLayout
 
 -------------------------------------------------------------------------------
 -- Looks --
@@ -125,7 +123,7 @@ customLayout = myShowWName $ avoidStruts $
   where
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
-    fullLayout = myTabbed ||| myFull ||| (noBorders myTiled)
+    fullLayout = myTabbed ||| myFull ||| noBorders myTiled
 
 -------------------------------------------------------------------------------
 -- Terminal --
@@ -154,9 +152,9 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask              , xK_f     ), sendMessage $ JumpToLayout "Full")
     , ((modMask              , xK_r     ), sendMessage $ JumpToLayout "ResizableTall")
     -- Don't need split screens right now :)
-    {-, ((modMask .|. controlMask, xK_l   ), layoutSplitScreen 2 (TwoPane 0.5 0.5))-}
-    {-, ((modMask .|. controlMask, xK_r   ), rescreen)-}
-
+    --, ((modMask .|. controlMask, xK_l   ), layoutSplitScreen 2 (TwoPane 0.5 0.5))
+    --, ((modMask .|. controlMask, xK_r   ), rescreen)
+      
     -- floating layer stuff
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
     , ((modMask,               xK_g     ), withFocused toggleBorder)

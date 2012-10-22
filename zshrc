@@ -32,7 +32,9 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/workspace/src/golang/bin:$HOME/workspace/src/google_appengine
 
 # vim bindings
-bindkey -v
+bindkey -e
+
+bindkey '^R' history-incremental-search-backward
 
 #No annoying beeps
 unsetopt beep
@@ -85,7 +87,8 @@ alias unmute='amixer set Master on'
 alias mnt='udisks --mount'
 alias umnt='udisks --unmount'
 
-alias e='vim --servername default --remote-silent'
+#alias e='vim --servername default --remote-silent'
+alias e='emacsclient -n'
 alias vnew='vim --servername default'
 
 alias -g ack='ack-grep'
