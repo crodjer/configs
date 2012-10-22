@@ -14,7 +14,7 @@ vo=xv
 ao="pulse"
 softvol="yes"
 softvol-max=400
-volume=20
+volume=10
 #a52drc=1
 
 ## Appearance

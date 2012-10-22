@@ -44,6 +44,7 @@ setExecute(){
 cloneRepo(){
     # Clone a repository
     # Allowes for two levels of submodule updates
+    # TODO: Utilize submodule recursive
     if [ -d "$1" ]; then
         echo "Directory for $2: $1 exists"
         echo "Updating $2: $1"
@@ -165,7 +166,6 @@ setUp(){
     link screenlayout
     link zshrc
     link irbrc
-
     link vim/vimrc vimrc
     link vim/gvimrc gvimrc
 
@@ -176,6 +176,10 @@ setUp(){
     # $HOME/.xmonad directroy for xmonad configs
     mkHomeConfDir xmonad
     link xmonad/xmonad.hs
+
+    # $HOME/.ncmpcpp for ncmpcpp client configs
+    mkHomeConfDir ncmpcpp
+    link ncmpcpp/config
 }
 
 # Execute setUp
