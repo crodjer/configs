@@ -103,7 +103,7 @@ link(){
     # directory prepended to argument 2 or 1(if arg 2 is not supplied)
 
     SOURCE=$CONFIG_DIR/$1
-    DEST="$DEST_HOME/.${2:-$1}"
+    DEST="$DEST_HOME/${2:-$1}"
     echo "Linking $SOURCE to $DEST"
 
     if [ $EXECUTE ]; then
@@ -141,45 +141,47 @@ setUp(){
     fi
 
     # Fetch updated scripts
-    cloneScripts
+    # cloneScripts
 
     # Fetch update configuration files
-    cloneConfigs
+    # cloneConfigs
 
-    # Link configuration files to $HOME/.file
-    link asoundrc
-    link gitconfig
-    link goobookrc
-    link hgrc
-    link inputrc
-    link mpdconf
-    link mplayer
-    link muttrc
-    link oh-my-zsh
-    link screenrc
-    link udisks-glue.conf
-    link vim
-    link xmobarrc
-    link Xresources
-    link xsessionrc
-    link xsession
-    link screenlayout
-    link zshrc
-    link irbrc
-    link vim/vimrc vimrc
-    link vim/gvimrc gvimrc
+    # Link configuration files to $HOME/file
+    link .asoundrc
+    link .gitconfig
+    link .goobookrc
+    link .hgrc
+    link .inputrc
+    link .mpdconf
+    link .mplayer
+    link .muttrc
+    link oh-my-zsh .oh-my-zsh
+    link .screenrc
+    link .udisks-glue.conf
+    link vim .vim
+    link .xmobarrc
+    link .Xresources
+    link .xsessionrc
+    link .xsession
+    link .screenlayout
+    link .zshrc
+    link .irbrc
+    link vim/vimrc .vimrc
+    link vim/gvimrc .gvimrc
+    link .emacs
+    link .elisp
 
     # $HOME/.config directroy for programs which store conf here
     mkHomeConfDir config
-    link config/awesome
+    link config/awesome .config/awesome
 
     # $HOME/.xmonad directroy for xmonad configs
     mkHomeConfDir xmonad
-    link xmonad/xmonad.hs
+    link xmonad/xmonad.hs .xmonad/xmonad.hs
 
     # $HOME/.ncmpcpp for ncmpcpp client configs
     mkHomeConfDir ncmpcpp
-    link ncmpcpp/config
+    link ncmpcpp/config .ncmpcpp/config
 }
 
 # Execute setUp
