@@ -43,6 +43,8 @@ unsetopt beep
 unsetopt correct_all
 setopt correct
 
+unalias sl
+
 alias df='df -h'
 alias du='du -hs'
 alias less='less'
@@ -89,6 +91,9 @@ alias umnt='udisks --unmount'
 
 #alias e='vim --servername default --remote-silent'
 alias e='emacsclient -n'
+alias ec='emacsclient -c'
+alias ef='emacsclient -n -c'
+alias sec='sudo emacsclient -c'
 alias vnew='vim --servername default'
 
 alias -g ack='ack-grep'
@@ -100,6 +105,7 @@ alias pc='proxychains'
 alias sz='source ~/.zshrc'
 alias ez='e ~/.zshrc'
 alias ev='e ~/.vimrc'
+alias ee='e ~/.emacs'
 #A pad to dump arbit data
 alias ed='e /home/rohan/workspace/trash/dumppad.md'
 
@@ -127,6 +133,8 @@ function mup(){
 function mdw(){
     _alter_mpd_vol "-" $1
 }
+
+alias st='/usr/bin/gst'
 
 #Launch ec2 account
 alias ec2='ssh $EC2'
@@ -238,7 +246,7 @@ sg() {
 
 . /usr/share/autojump/autojump.sh
 # Rooter; https://github.com/yeban/rooter.sh
-. $HOME/workspace/scripts/rooter.sh/rooter.sh
+# . $HOME/workspace/scripts/rooter.sh/rooter.sh
 
 preexec () {
     local command=${(V)1//\%\%\%}
@@ -276,3 +284,6 @@ precmd () {
 
 [[ -s "/home/rohan/.rvm/scripts/rvm" ]] && source "/home/rohan/.rvm/scripts/rvm"
 export XAUTHORITY=/home/rohan/.Xauthority
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

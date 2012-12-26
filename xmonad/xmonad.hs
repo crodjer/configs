@@ -94,7 +94,7 @@ borderWidth' :: Dimension
 borderWidth' = 1
 
 normalBorderColor', focusedBorderColor' :: String
-normalBorderColor'  = "#555555"
+normalBorderColor'  = "#444444"
 focusedBorderColor' = "#00FF00"
 
 -- workspaces

@@ -1,3 +1,5 @@
+-- -*-Haskell-*-
+
 Config { font = "xft:Monospace:size=8:bold"
        , bgColor = "black"
        , fgColor = "white"

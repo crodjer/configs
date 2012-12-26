@@ -1,4 +1,3 @@
-
 (server-start)
 
 ;; ----------
@@ -14,6 +13,8 @@
 (add-to-list 'load-path "~/.elisp/git-commit-mode")
 (add-to-list 'load-path "~/.elisp/ess/lisp")
 (add-to-list 'load-path "~/.elisp/coffee-mode")
+(add-to-list 'load-path "~/.elisp/twittering-mode")
+(add-to-list 'load-path "~/.elisp/solarized")
 
 ;; ---------
 ;; Autoloads
@@ -48,6 +49,9 @@
 (require 'winner)
 (require 'uniquify)
 (require 'nnmairix)
+(require 'dpaste)
+(require 'twittering-mode)
+(require 'color-theme-solarized)
 
 ;; ----------------
 ;; auto-mode-alists
@@ -56,6 +60,7 @@
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("\\.mkd$\\|.md$\\|.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("mutt-.*-" . mail-mode))
 
 ;; ----------------------
@@ -72,24 +77,32 @@
               next-line-add-newlines nil
               blink-matching-paren t
               quack-pretty-lambda-p t
-              blink-matching-delay .25
+              blink-matching-delay 0.25
               vc-follow-symlinks t
-              indent-tabs-mode t
-              tab-width 8
-              c-basic-offset 8
+              indent-tabs-mode nil
+              tab-width 4
+              c-basic-offset 4
               edebug-trace t
               fill-adapt-mode t
               winner-mode t
               uniquify-buffer-name-style 'forward)
 
+
 (set-face-attribute 'default nil :height 85)
 (global-font-lock-mode 1)
 (global-auto-revert-mode 1)
-(color-theme-hober2)
 (windmove-default-keybindings)
 (setq framemove-hook-into-windmove t)
-(setq linum-format "%d")
+
+(setq linum-format "%4d")
 (global-linum-mode 1)
+
+(setq x-select-enable-clipboard t)
+
+;; (color-theme-hober2)
+(load-theme 'solarized-dark t)
+(setq whitespace-style '(face empty tabs trailing))
+(global-whitespace-mode t)
 
 ;; Remove toolbar, menubar, scrollbar and tooltips
 (tool-bar-mode -1)
@@ -97,7 +110,8 @@
 (tooltip-mode -1)
 (set-scroll-bar-mode 'nil)
 
-;; Set the default browser to Conkeror
+;; Set the default browser to Conkeror (setq
+;; browse-url-browser-function 'w3m-browse-url)
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
 
@@ -137,8 +151,8 @@
 ;; ------------------
 ;; Custom Keybindings
 ;; ------------------
-(global-set-key [(meta \])] 'forward-paragraph)
-(global-set-key [(meta \[)] 'backward-paragraph)
+(global-set-key [(meta n)] 'forward-paragraph)
+(global-set-key [(meta p)] 'backward-paragraph)
 (global-set-key "\C-\M-w" 'kill-ring-save-whole-line)
 (global-set-key [C-M-backspace] #'(lambda () (interactive) (zap-to-char -1 32)))
 (global-set-key "\C-z" 'jump-to-char)
@@ -146,47 +160,49 @@
 (global-set-key "\C-xv" 'magit-status)
 (global-set-key (kbd "<f5>") 'th-save-frame-configuration)
 (global-set-key (kbd "<f6>") 'th-jump-to-register)
+(global-set-key "\M-z" 'eval-last-sexp)
+(global-set-key "\M-\C-z" 'eval-last-sexp)
 
 ;; ---------------------
 ;; Style and indentation
 ;; ---------------------
-(defmacro define-new-c-style (name derived-from style-alists tabs-p path-list)
-  `(progn
-     (add-hook 'c-mode-common-hook
-               (lambda ()
-                 (c-add-style ,name
-                              '(,derived-from (c-offsets-alist
-                                                ,style-alists)))))
-     (add-hook 'c-mode-hook
-               (lambda ()
-                 (let ((filename (buffer-file-name)))
-                   (when (and filename
-                              (delq nil
-                                    (mapcar (lambda (path)
-                                              (string-match (expand-file-name path)
-                                                            filename))
-                                            ',path-list)))
-                     (setq indent-tabs-mode ,tabs-p)
-                     (c-set-style ,name)))))))
+;; (defmacro define-new-c-style (name derived-from style-alists tabs-p path-list)
+;;   `(progn
+;;      (add-hook 'c-mode-common-hook
+;;                (lambda ()
+;;                  (c-add-style ,name
+;;                               '(,derived-from (c-offsets-alist
+;;                                                ,style-alists)))))
+;;      (add-hook 'c-mode-hook
+;;                (lambda ()
+;;                  (let ((filename (buffer-file-name)))
+;;                    (when (and filename
+;;                               (delq nil
+;;                                     (mapcar (lambda (path)
+;;                                               (string-match (expand-file-name path)
+;;                                                             filename))
+;;                                             ',path-list)))
+;;                      (setq indent-tabs-mode ,tabs-p)
+;;                      (c-set-style ,name)))))))
 
-(defun c-lineup-arglist-tabs-only (ignored)
-  "Line up argument lists with tabs, not spaces"
-  (let* ((anchor (c-langelem-pos c-syntactic-element))
-         (column (c-langelem-2nd-pos c-syntactic-element))
-         (offset (- (1+ column) anchor))
-         (steps (floor offset c-basic-offset)))
-    (* (max steps 1)
-       c-basic-offset)))
+;; (defun c-lineup-arglist-tabs-only (ignored)
+;;   "Line up argument lists with tabs, not spaces"
+;;   (let* ((anchor (c-langelem-pos c-syntactic-element))
+;;          (column (c-langelem-2nd-pos c-syntactic-element))
+;;          (offset (- (1+ column) anchor))
+;;          (steps (floor offset c-basic-offset)))
+;;     (* (max steps 1)
+;;        c-basic-offset)))
 
-;; Syntax for define-new-c-style:
-;; <style name> <derived from> <style alist> <tabs-p> <list of paths to apply to>
+;; ;; Syntax for define-new-c-style:
+;; ;; <style name> <derived from> <style alist> <tabs-p> <list of paths to apply to>
 
-(define-new-c-style "linux-tabs-only" "linux" (arglist-cont-nonempty
-                                                c-lineup-gcc-asm-reg
-                                                c-lineup-arglist-tabs-only) t
-                    ("~/"))
+;; (define-new-c-style "linux-tabs-only" "linux" (arglist-cont-nonempty
+;;                                                c-lineup-gcc-asm-reg
+;;                                                c-lineup-arglist-tabs-only) t
+;;                                                ("~/"))
 
-(define-new-c-style "subversion" "gnu" (inextern-lang 0) nil ("~/svn"))
+;; (define-new-c-style "subversion" "gnu" (inextern-lang 0) nil ("~/svn"))
 
 ;; --------------------------
 ;; Autofill and Adaptive fill
@@ -197,16 +213,16 @@
 ;; ---
 ;; ido
 ;; ---
-(setq 
-  ido-ignore-buffers                 ; ignore these guys
-  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido")
-  ido-case-fold  t                   ; be case-insensitive
-  ido-use-filename-at-point nil      ; don't use filename at point (annoying)
-  ido-use-url-at-point nil           ; don't use url at point (annoying)
-  ido-enable-flex-matching t         ; be flexible
-  ido-max-prospects 6                ; don't spam my minibuffer
-  ido-confirm-unique-completion nil  ; don't wait for RET with unique completion
-  ido-max-directory-size 100000)
+(setq
+ ido-ignore-buffers                 ; ignore these guys
+ '("\\` " "^\*Back" ".*Completion" "^\*Ido")
+ ido-case-fold  t                   ; be case-insensitive
+ ido-use-filename-at-point nil      ; don't use filename at point (annoying)
+ ido-use-url-at-point nil           ; don't use url at point (annoying)
+ ido-enable-flex-matching t         ; be flexible
+ ido-max-prospects 6                ; don't spam my minibuffer
+ ido-confirm-unique-completion nil  ; don't wait for RET with unique completion
+ ido-max-directory-size 100000)
 
 ;; -----
 ;; Dired
@@ -214,9 +230,9 @@
 (add-hook 'dired-mode-hook
           (lambda ()
             (define-key dired-mode-map (kbd "<return>")
-                        'dired-find-alternate-file) ; was dired-advertised-find-file
+              'dired-find-alternate-file) ; was dired-advertised-find-file
             (define-key dired-mode-map (kbd "^")
-                        (lambda () (interactive) (find-alternate-file "..")))))
+              (lambda () (interactive) (find-alternate-file "..")))))
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -249,7 +265,7 @@
 ;; Wrap long lines according to the width of the window
 (add-hook 'window-configuration-change-hook
           '(lambda ()
-             (setq rcirc-fill-column (- (window-width) 2))))
+            (setq rcirc-fill-column (- (window-width) 2))))
 
 (defun rcirc-kill-all-buffers ()
   (interactive)
@@ -266,8 +282,8 @@
               (rassq-delete-all buffer rcirc-buffer-alist)))
       (rcirc-update-short-buffer-names)
       (if (rcirc-channel-p rcirc-target)
-        (rcirc-send-string (rcirc-buffer-process)
-                           (concat "DETACH " rcirc-target))))
+          (rcirc-send-string (rcirc-buffer-process)
+                             (concat "DETACH " rcirc-target))))
     (setq rcirc-target nil)
     (kill-buffer buffer)))
 
@@ -285,6 +301,12 @@
       gnus-cachable-groups "^nnimap"
       gnus-save-newsrc-file nil
       gnus-read-newsrc-file nil)
+
+;; ----------------
+;; twittering-mode
+;; ----------------
+(setq twittering-use-master-password t)
+;; (setq twittering-browse-url-function 'w3m-browse-url)
 
 ;; agent
 (setq gnus-agent-directory "~/.gnus/agent"
@@ -307,20 +329,20 @@
 ;; Display tweaks
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; topics in groups
 
-(defvar *ram-mails* "artagnon@gmail\\.com")
+(defvar *ram-mails* "crodjer@gmail\\.com")
 (setq gnus-extra-headers '(To Cc)
       nnmail-extra-headers gnus-extra-headers)
 
 (defun gnus-user-format-function-j (headers)
   (let ((to (gnus-extra-header 'To headers)))
     (if (string-match *ram-mails* to)
-      (if (string-match "," to) "›" "»")
-      (if (or (string-match *ram-mails*
-                            (gnus-extra-header 'Cc headers))
-              (string-match *ram-mails*
-                            (gnus-extra-header 'BCc headers)))
-        "~"
-        " "))))
+        (if (string-match "," to) "›" "»")
+        (if (or (string-match *ram-mails*
+                              (gnus-extra-header 'Cc headers))
+                (string-match *ram-mails*
+                              (gnus-extra-header 'BCc headers)))
+            "~"
+            " "))))
 
 (setq gnus-summary-line-format "%U%uj%z %(%[%15&user-date;%]  %-15,15f  %B%s%)\n"
       ;;gnus-summary-line-format "%U%R %~(pad-right 2)t%* %uj %B%~(max-right 30)~(pad-right 30)n  %~(max-right 90)~(pad-right 90)s %-135=%&user-date;\n"
@@ -356,14 +378,14 @@
       gnus-select-method '(nntp "news.gmane.org")
       gnus-secondary-select-methods
       '((nnimap "dovecot"
-                (nnimap-stream shell)
-                (imap-shell-program "/usr/lib/dovecot/imap 2>/dev/null")
-                (nnimap-need-unselect-to-notice-new-mail nil))))
+         (nnimap-stream shell)
+         (imap-shell-program "/usr/lib/dovecot/imap 2>/dev/null")
+         (nnimap-need-unselect-to-notice-new-mail nil))))
 
-; (nnimap "gmail"
-;	 (nnimap-address "imap.gmail.com")
-;	 (nnimap-server-port 993)
-;	 (nnimap-stream ssl))
+                                        ; (nnimap "gmail"
+                                        ;    (nnimap-address "imap.gmail.com")
+                                        ;    (nnimap-server-port 993)
+                                        ;    (nnimap-stream ssl))
 
 (setq gnus-parameters
       '(("nnimap\\+dovecot:INBOX"
@@ -387,16 +409,16 @@
       (gnus-summary-show-thread)
       ;; Mark all the articles.
       (while articles
-             (gnus-summary-goto-subject (car articles))
-             (cond ((null unmark)
-                    (gnus-summary-mark-article-as-read gnus-killed-mark))
-                   ((> unmark 0)
-                    (gnus-summary-mark-article-as-unread gnus-unread-mark))
-                   ((= unmark 0)
-                    (gnus-summary-mark-article nil gnus-expirable-mark))
-                   (t
-                     (gnus-summary-mark-article-as-unread gnus-ticked-mark)))
-             (setq articles (cdr articles))))
+        (gnus-summary-goto-subject (car articles))
+        (cond ((null unmark)
+               (gnus-summary-mark-article-as-read gnus-killed-mark))
+              ((> unmark 0)
+               (gnus-summary-mark-article-as-unread gnus-unread-mark))
+              ((= unmark 0)
+               (gnus-summary-mark-article nil gnus-expirable-mark))
+              (t
+               (gnus-summary-mark-article-as-unread gnus-ticked-mark)))
+        (setq articles (cdr articles))))
     ;; Hide killed subtrees when hide is true.
     (and hide
          gnus-thread-hide-killed
@@ -420,7 +442,7 @@
 
 ;; Mairix
 (define-key gnus-summary-mode-map
-            (kbd "$ /") 'nnmairix-search)
+    (kbd "$ /") 'nnmairix-search)
 
 ;; ----------
 ;; Mode hooks
@@ -469,24 +491,24 @@
 ;; ---------
 ;; mail-mode
 ;; ---------
-(setq user-mail-address "artagnon@gmail.com"
-      user-full-name "Ramkumar Ramachandra")
+(setq user-mail-address "crodjer@gmail.com"
+      user-full-name "Rohan Jain")
 
 (add-hook 'mail-mode-hook
           (lambda ()
             (define-key mail-mode-map [(control c) (control c)]
-                        (lambda ()
-                          (interactive)
-                          (save-buffer)
-                          (server-edit)))))
+              (lambda ()
+                (interactive)
+                (save-buffer)
+                (server-edit)))))
 
 (add-hook 'mail-mode-hook
           (lambda ()
             (define-key mail-mode-map [(control c) (control k)]
-                        (lambda ()
-                          (interactive)
-                          (revert-buffer t t nil)
-                          (server-edit)))))
+              (lambda ()
+                (interactive)
+                (revert-buffer t t nil)
+                (server-edit)))))
 ;; --------
 ;; org-mode
 ;; --------
@@ -546,15 +568,59 @@
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 
-;; ----------/
+;; ----------
 ;; Python mode
 ;; ----------
+(setq python-indent 4)
+(defadvice python-calculate-indentation (around outdent-closing-brackets)
+  "Handle lines beginning with a closing bracket and indent them so that
+they line up with the line containing the corresponding opening bracket."
+  (save-excursion
+    (beginning-of-line)
+    (let ((syntax (syntax-ppss)))
+      (if (and (not (eq 'string (syntax-ppss-context syntax)))
+               (python-continuation-line-p)
+               (cadr syntax)
+               (skip-syntax-forward "-")
+               (looking-at "\\s)"))
+          (progn
+            (forward-char 1)
+            (ignore-errors (backward-sexp))
+            (setq ad-return-value (current-indentation)))
+        ad-do-it))))
 
+(ad-activate 'python-calculate-indentation)
 
 ;; ----------
 ;; Ruby mode
 ;; ----------
 (setq ruby-indent-level 4)
+
+;; ----------
+;; Coffee mode
+;; ----------
+(setq coffee-tab-width 2)
+
+;; --------
+;; Pastebin
+;; --------
+(global-set-key (kbd "C-c C-p") 'dpaste-buffer)
+(setq dpaste-poster "crodjer")
+
+;; ---
+;; PHP
+;; ---
+(add-hook 'php-mode-hook (lambda ()
+    (defun ywb-php-lineup-arglist-intro (langelem)
+      (save-excursion
+        (goto-char (cdr langelem))
+        (vector (+ (current-column) c-basic-offset))))
+    (defun ywb-php-lineup-arglist-close (langelem)
+      (save-excursion
+        (goto-char (cdr langelem))
+        (vector (current-column))))
+    (c-set-offset 'arglist-intro 'ywb-php-lineup-arglist-intro)
+    (c-set-offset 'arglist-close 'ywb-php-lineup-arglist-close)))
 
 ;; ------------------------
 ;; Useful utility functions
@@ -565,15 +631,15 @@
   (let* ((list (buffer-list))
          (buffer (car list)))
     (while buffer
-           (if (string-match "\\*" (buffer-name buffer)) 
-             (progn
-               (setq list (cdr list))
-               (setq buffer (car list)))
-             (progn
-               (set-buffer buffer)
-               (revert-buffer t t t)
-               (setq list (cdr list))
-               (setq buffer (car list))))))
+      (if (string-match "\\*" (buffer-name buffer))
+          (progn
+            (setq list (cdr list))
+            (setq buffer (car list)))
+          (progn
+            (set-buffer buffer)
+            (revert-buffer t t t)
+            (setq list (cdr list))
+            (setq buffer (car list))))))
   (message "Refreshing open files"))
 
 (defun rename-file-and-buffer (new-name)
@@ -582,13 +648,13 @@
   (let ((name (buffer-name))
         (filename (buffer-file-name)))
     (if (not filename)
-      (message "Buffer '%s' is not visiting a file!" name)
-      (if (get-buffer new-name)
-        (message "A buffer named '%s' already exists!" new-name)
-        (progn (rename-file name new-name 1)
-               (rename-buffer new-name)
-               (set-visited-file-name new-name)
-               (set-buffer-modified-p nil))))))
+        (message "Buffer '%s' is not visiting a file!" name)
+        (if (get-buffer new-name)
+            (message "A buffer named '%s' already exists!" new-name)
+            (progn (rename-file name new-name 1)
+                   (rename-buffer new-name)
+                   (set-visited-file-name new-name)
+                   (set-buffer-modified-p nil))))))
 
 (defun move-buffer-file (dir)
   "Moves both current buffer and file it's visiting to DIR."
@@ -596,16 +662,16 @@
   (let* ((name (buffer-name))
          (filename (buffer-file-name))
          (dir
-           (if (string-match dir "\\(?:/\\|\\\\)$")
-             (substring dir 0 -1) dir))
+          (if (string-match dir "\\(?:/\\|\\\\)$")
+              (substring dir 0 -1) dir))
          (newname (concat dir "/" name)))
     (if (not filename)
-      (message "Buffer '%s' is not visiting a file!" name)
-      (progn (copy-file filename newname 1)
-             (delete-file filename)
-             (set-visited-file-name newname)
-             (set-buffer-modified-p nil)
-             t))))
+        (message "Buffer '%s' is not visiting a file!" name)
+        (progn (copy-file filename newname 1)
+               (delete-file filename)
+               (set-visited-file-name newname)
+               (set-buffer-modified-p nil)
+               t))))
 
 (defun reformat-hard-wrap (beg end)
   (interactive "r")
@@ -615,7 +681,7 @@
   `(progn
      (goto-char (point-min))
      (while (search-forward ,from-string nil t)
-            (replace-match ,to-string nil t))))
+       (replace-match ,to-string nil t))))
 
 (defun cleanup-fancy-quotes ()
   (interactive)
