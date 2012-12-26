@@ -56,11 +56,6 @@ cloneRepo(){
             git submodule init
             # Update submodules
             git submodule update
-
-            # Init new submodules of submodules if any
-            git submodule foreach git submodule init
-            # Update submodules of submodules
-            git submodule foreach git submodule update
         fi
     else
         echo "Making $2 directory: $1 and cloning $2 repo"
@@ -71,8 +66,6 @@ cloneRepo(){
             echo "Updating submodules for $2"
             git submodule init
             git submodule update
-            git submodule foreach git submodule init
-            git submodule foreach git submodule update
         fi
 
     fi
@@ -141,10 +134,10 @@ setUp(){
     fi
 
     # Fetch updated scripts
-    # cloneScripts
+    cloneScripts
 
     # Fetch update configuration files
-    # cloneConfigs
+    cloneConfigs
 
     # Link configuration files to $HOME/file
     link .asoundrc
