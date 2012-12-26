@@ -83,7 +83,7 @@ set sort = "threads"
 set sort_aux = "reverse-last-date-received"
 unset collapse_unread
 folder-hook . "push <collapse-all>\n"
-set editor = "vim"
+set editor = "emacsclient -ct"
 
 # Configure some variables
 set imap_keepalive = 500

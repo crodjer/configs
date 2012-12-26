@@ -17,7 +17,7 @@
 	smtpencryption = tls
 	chainreplyto = false
 [core]
-	editor = vim
+	editor = emacsclient -ct
 	excludesfile = /home/rohan/.gitignore
 [grep]
 	lineNumber = true
