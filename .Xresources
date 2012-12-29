@@ -106,42 +106,42 @@ Xft.hintstyle: hintslight
 #define S_green         #859900
 #define S_grey		#999999
 
-*background:            S_base03
-*foreground:            S_base0
-*fading:                30
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
+URxvt*background:            S_base03
+URxvt*foreground:            S_base0
+URxvt*fading:                30
+URxvt*fadeColor:             S_base03
+URxvt*cursorColor:           S_base1
+URxvt*pointerColorBackground:S_base01
+URxvt*pointerColorForeground:S_base1
 
 !! black dark/light
-*color0:                S_base02
-*color8:                S_grey
+URxvt*color0:                S_base02
+URxvt*color8:                S_grey
 
 !! red dark/light
-*color1:                S_red
-*color9:                S_orange
+URxvt*color1:                S_red
+URxvt*color9:                S_orange
 
 !! green dark/light
-*color2:                S_green
-*color10:               S_base01
+URxvt*color2:                S_green
+URxvt*color10:               S_base01
 
 !! yellow dark/light
-*color3:                S_yellow
-*color11:               S_base00
+URxvt*color3:                S_yellow
+URxvt*color11:               S_base00
 
 !! blue dark/light
-*color4:                S_blue
-*color12:               S_base0
+URxvt*color4:                S_blue
+URxvt*color12:               S_base0
 
 !! magenta dark/light
-*color5:                S_magenta
-*color13:               S_violet
+URxvt*color5:                S_magenta
+URxvt*color13:               S_violet
 
 !! cyan dark/light
-*color6:                S_cyan
-*color14:               S_base1
+URxvt*color6:                S_cyan
+URxvt*color14:               S_base1
 
 !! white dark/light
-*color7:                S_base2
-*color15:               S_base3
+URxvt*color7:                S_base2
+URxvt*color15:               S_base3
