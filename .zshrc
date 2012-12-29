@@ -246,7 +246,7 @@ sg() {
 
 . /usr/share/autojump/autojump.sh
 # Rooter; https://github.com/yeban/rooter.sh
-# . $HOME/workspace/scripts/rooter.sh/rooter.sh
+. $HOME/workspace/scripts/rooter.sh/rooter.sh
 
 preexec () {
     local command=${(V)1//\%\%\%}
