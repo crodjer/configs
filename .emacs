@@ -15,6 +15,7 @@
 (add-to-list 'load-path "~/.elisp/coffee-mode")
 (add-to-list 'load-path "~/.elisp/twittering-mode")
 (add-to-list 'load-path "~/.elisp/solarized")
+(add-to-list 'load-path "~/.elisp/go")
 
 ;; ---------
 ;; Autoloads
@@ -52,6 +53,7 @@
 (require 'dpaste)
 (require 'twittering-mode)
 (require 'color-theme-solarized)
+(require 'go-mode-load)
 
 ;; ----------------
 ;; auto-mode-alists
@@ -62,6 +64,7 @@
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("\\.mkd$\\|.md$\\|.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("mutt-.*-" . mail-mode))
+(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 
 ;; ----------------------
 ;; General Customizations
@@ -595,6 +598,20 @@ they line up with the line containing the corresponding opening bracket."
 ;; Ruby mode
 ;; ----------
 (setq ruby-indent-level 4)
+(defadvice ruby-indent-line (after unindent-closing-paren activate)
+  (let ((column (current-column))
+        indent offset)
+    (save-excursion
+      (back-to-indentation)
+      (let ((state (syntax-ppss)))
+        (setq offset (- column (current-column)))
+        (when (and (eq (char-after) ?\))
+                   (not (zerop (car state))))
+          (goto-char (cadr state))
+          (setq indent (current-indentation)))))
+    (when indent
+      (indent-line-to indent)
+      (when (> offset 0) (forward-char offset)))))
 
 ;; ----------
 ;; Coffee mode
