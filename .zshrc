@@ -29,7 +29,7 @@ plugins=(git django history-substring-search )
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/workspace/src/golang/bin:$HOME/workspace/src/google_appengine
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/workspace/src/golang/bin
 
 # vim bindings
 bindkey -e
@@ -142,7 +142,7 @@ alias ec2='ssh $EC2'
 #alias pip='pip $@ --proxy="$http_proxy"'
 alias hi='ghci 2>&1 | HsColour'
 
-alias clock='tty-clock -ctC 7'
+alias clock='tty-clock -ctC 0'
 
 alias pqiv='pqiv -iwP left,top'
 alias entertain='mplayer "$(find "." -type f -regextype posix-egrep -regex ".*\.(avi|mkv|flv|mpg|mpeg|mp4|wmv|3gp|mov|divx)" | shuf -n1)"'
@@ -152,6 +152,7 @@ alias h='history'
 
 ### Exports
 export EDITOR=vi
+export GOROOT=$HOME/workspace/src/golang
 export JAVA_HOME=/usr/lib/jvm/default-java
 export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
