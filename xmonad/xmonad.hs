@@ -141,9 +141,10 @@ keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_Return), spawn $ XMonad.terminal conf)
-    , ((modMask,               xK_p     ), spawn "gmrun")
-    , ((modMask .|. shiftMask, xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    , ((modMask,               xK_p     ), spawn "dmenu_run")
     , ((modMask .|. shiftMask, xK_c     ), kill)
+    , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
+    , ((modMask,               xK_d     ), spawn "/home/rohan/bin/lock")
 
     -- layouts
     , ((modMask,               xK_space ), sendMessage NextLayout)
@@ -154,7 +155,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Don't need split screens right now :)
     --, ((modMask .|. controlMask, xK_l   ), layoutSplitScreen 2 (TwoPane 0.5 0.5))
     --, ((modMask .|. controlMask, xK_r   ), rescreen)
-      
+
     -- floating layer stuff
     , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
     , ((modMask,               xK_g     ), withFocused toggleBorder)
