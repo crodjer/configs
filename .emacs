@@ -64,7 +64,7 @@
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("\\.mkd$\\|.md$\\|.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("mutt-.*-" . mail-mode))
-(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake$\\|Gemfile$" . ruby-mode))
 
 ;; ----------------------
 ;; General Customizations
@@ -522,7 +522,11 @@
 (setq org-fast-tag-selection-include-todo t
       org-log-done 'note
       org-hide-leading-stars t
-      org-agenda-files '("~/notes/diary"))
+      org-agenda-files '("~/notes/diary")
+      org-export-with-toc nil
+      org-export-with-section-numbers nil
+      org-export-author-info nil
+      org-export-html-with-timestamp nil)
 
 ;; let windmove work in org-mode
 (add-hook 'org-shiftup-final-hook 'windmove-up)
@@ -534,29 +538,6 @@
 (org-remember-insinuate)
 (setq org-default-notes-file "~/.notes")
 (define-key global-map "\C-cr" 'org-remember)
-
-;; org-mode and LaTeX Beamer
-
-;; allow for export=>beamer by placing
-;; #+LaTeX_CLASS: beamer in org files
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
-             '("beamer"
-               "\\documentclass[8pt]{beamer}
-               \\beamertemplateballitem
-               \\usepackage{hyperref}
-               \\usepackage{color}
-               \\usepackage{listings}
-               \\usepackage{natbib}
-               \\usepackage{upquote}
-               \\usepackage{amsfonts}
-               \\lstset{frame=single, basicstyle=\\ttfamily\\small, upquote=false, columns=fixed, breaklines=true, keywordstyle=\\color{blue}\\bfseries, commentstyle=\\color{red}, numbers=left, xleftmargin=2em}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\begin{frame}[fragile]\\frametitle{%s}"
-                "\\end{frame}"
-                "\\begin{frame}[fragile]\\frametitle{%s}"
-                "\\end{frame}")))
 
 ;; ----------
 ;; LaTeX mode
@@ -612,6 +593,11 @@ they line up with the line containing the corresponding opening bracket."
     (when indent
       (indent-line-to indent)
       (when (> offset 0) (forward-char offset)))))
+
+;; ----------
+;; Javascript mode
+;; ----------
+(setq js-indent-level 2)
 
 ;; ----------
 ;; Coffee mode
