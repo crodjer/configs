@@ -66,9 +66,11 @@ alias psh='aptitude show'
 alias halt='sudo shutdown -h now'
 alias reboot='sudo reboot'
 #Save session to disk and bind caps as escape on resume
+# alias s2disk='dbus-send --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Hibernate && display'
+# alias s2ram='dbus-send --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend && display'
 alias s2disk='sudo pm-hibernate && display'
-alias s2both='sudo s2both && display'
 alias s2ram='sudo pm-suspend && display'
+alias s2both='sudo s2both && display'
 alias xsc='xscreensaver-command'
 
 alias ifup='sudo ifup'
@@ -92,6 +94,7 @@ alias umnt='udisks --unmount'
 #alias e='vim --servername default --remote-silent'
 alias e='emacsclient -n'
 alias ec='emacsclient -c'
+alias et='emacsclient -ct'
 alias ef='emacsclient -n -c'
 alias sec='sudo emacsclient -c'
 alias vnew='vim --servername default'
@@ -143,15 +146,17 @@ alias ec2='ssh $EC2'
 alias hi='ghci 2>&1 | HsColour'
 
 alias clock='tty-clock -ctC 0'
+alias rez='exec zsh'
 
 alias pqiv='pqiv -iwP left,top'
 alias entertain='mplayer "$(find "." -type f -regextype posix-egrep -regex ".*\.(avi|mkv|flv|mpg|mpeg|mp4|wmv|3gp|mov|divx)" | shuf -n1)"'
 alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"'
 
 alias h='history'
+alias clojurex='java -Xmx64m -cp /usr/share/java/clojure-1.4.0.jar:.'
 
 ### Exports
-export EDITOR=vi
+export EDITOR=et
 export GOROOT=$HOME/workspace/src/golang
 export JAVA_HOME=/usr/lib/jvm/default-java
 export PYTHONSTARTUP=$HOME/.pythonrc
@@ -288,3 +293,8 @@ export XAUTHORITY=/home/rohan/.Xauthority
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export RUBY_HEAP_MIN_SLOTS=800000
+export RUBY_HEAP_FREE_MIN=100000
+export RUBY_HEAP_SLOTS_INCREMENT=300000
+export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+export RUBY_GC_MALLOC_LIMIT=79000000
