@@ -11,7 +11,7 @@ ontop="1"
 vo=xv
 
 ### Audio
-ao="pulse"
+# ao="pulse"
 softvol="yes"
 softvol-max=200
 volume=5
