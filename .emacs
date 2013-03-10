@@ -11,7 +11,7 @@
 (add-to-list 'load-path "~/.elisp/org-mode-contrib")
 (add-to-list 'load-path "~/.elisp/magit")
 (add-to-list 'load-path "~/.elisp/git-commit-mode")
-(add-to-list 'load-path "~/.elisp/ess/lisp")
+;; (add-to-list 'load-path "~/.elisp/ess/lisp")
 (add-to-list 'load-path "~/.elisp/coffee-mode")
 (add-to-list 'load-path "~/.elisp/solarized")
 (add-to-list 'load-path "~/.elisp/go")
@@ -20,7 +20,7 @@
 ;; Autoloads
 ;; ---------
 (require 'coffee-mode)
-(require 'whitespace)
+(require 'whitespacez)
 (require 'filladapt)
 (require 'tramp)
 (require 'slime)
@@ -41,7 +41,6 @@
 (require 'php-mode)
 (require 'cscope)
 (require 'csharp-mode)
-(require 'ess)
 (require 'rcirc-controls)
 (require 'windmove)
 (require 'framemove)
@@ -49,7 +48,6 @@
 (require 'uniquify)
 (require 'nnmairix)
 (require 'dpaste)
-(require 'twittering-mode)
 (require 'color-theme-solarized)
 (require 'go-mode-load)
 
@@ -303,11 +301,6 @@
       gnus-save-newsrc-file nil
       gnus-read-newsrc-file nil)
 
-;; ----------------
-;; twittering-mode
-;; ----------------
-(setq twittering-use-master-password t)
-;; (setq twittering-browse-url-function 'w3m-browse-url)
 
 ;; agent
 (setq gnus-agent-directory "~/.gnus/agent"
