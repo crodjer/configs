@@ -25,3 +25,6 @@
 [submodule ".elisp/solarized"]
 	path = .elisp/solarized
 	url = git@github.com:sellout/emacs-color-theme-solarized.git
+[submodule ".elisp/scss-mode"]
+	path = .elisp/scss-mode
+	url = git@github.com:antonj/scss-mode.git

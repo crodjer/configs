@@ -15,6 +15,7 @@
 (add-to-list 'load-path "~/.elisp/coffee-mode")
 (add-to-list 'load-path "~/.elisp/solarized")
 (add-to-list 'load-path "~/.elisp/go")
+(add-to-list 'load-path "~/.elisp/scss-mode")
 
 ;; ---------
 ;; Autoloads
@@ -50,6 +51,7 @@
 (require 'dpaste)
 (require 'color-theme-solarized)
 (require 'go-mode-load)
+(require 'scss-mode)
 
 ;; ----------------
 ;; auto-mode-alists
@@ -61,6 +63,7 @@
 (add-to-list 'auto-mode-alist '("\\.mkd$\\|.md$\\|.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("mutt-.*-" . mail-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$\\|Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
 ;; ----------------------
 ;; General Customizations
@@ -594,6 +597,12 @@ they line up with the line containing the corresponding opening bracket."
 ;; Coffee mode
 ;; ----------
 (setq coffee-tab-width 2)
+
+
+;; ----------
+;; CSS/SCSS mode
+;; ----------
+(setq css-indent-offset 2)
 
 ;; --------
 ;; Pastebin
