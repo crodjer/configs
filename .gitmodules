@@ -4,3 +4,24 @@
 [submodule "vim"]
 	path = vim
 	url = git://github.com/crodjer/vimfiles.git
+[submodule ".elisp/haskell-mode"]
+	path = .elisp/haskell-mode
+	url = git@github.com:haskell/haskell-mode.git
+[submodule ".elisp/git-commit-mode"]
+	path = .elisp/git-commit-mode
+	url = git@github.com:rafl/git-commit-mode.git
+[submodule ".elisp/magit"]
+	path = .elisp/magit
+	url = git@github.com:magit/magit.git
+[submodule ".elisp/coffee-mode"]
+	path = .elisp/coffee-mode
+	url = git@github.com:defunkt/coffee-mode.git
+[submodule ".elisp/php-mode"]
+	path = .elisp/php-mode
+	url = git@github.com:ejmr/php-mode.git
+[submodule ".elisp/slime"]
+	path = .elisp/slime
+	url = git@github.com:nablaone/slime.git
+[submodule ".elisp/solarized"]
+	path = .elisp/solarized
+	url = git@github.com:sellout/emacs-color-theme-solarized.git
