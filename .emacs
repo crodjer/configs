@@ -20,7 +20,7 @@
 ;; Autoloads
 ;; ---------
 (require 'coffee-mode)
-(require 'whitespacez)
+(require 'whitespace)
 (require 'filladapt)
 (require 'tramp)
 (require 'slime)
