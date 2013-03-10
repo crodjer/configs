@@ -13,7 +13,6 @@
 (add-to-list 'load-path "~/.elisp/git-commit-mode")
 (add-to-list 'load-path "~/.elisp/ess/lisp")
 (add-to-list 'load-path "~/.elisp/coffee-mode")
-(add-to-list 'load-path "~/.elisp/twittering-mode")
 (add-to-list 'load-path "~/.elisp/solarized")
 (add-to-list 'load-path "~/.elisp/go")
 
@@ -32,7 +31,6 @@
 (require 'rebase-mode)
 (require 'paredit)
 (require 'color-theme)
-(require 'color-theme-hober2)
 (require 'clojure-mode)
 (require 'org-install)
 (require 'quack)
