@@ -28,3 +28,6 @@
 [submodule ".elisp/scss-mode"]
 	path = .elisp/scss-mode
 	url = git@github.com:antonj/scss-mode.git
+[submodule ".elisp/jshint-mode"]
+	path = .elisp/jshint-mode
+	url = git@github.com:daleharvey/jshint-mode.git

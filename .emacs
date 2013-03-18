@@ -16,6 +16,7 @@
 (add-to-list 'load-path "~/.elisp/solarized")
 (add-to-list 'load-path "~/.elisp/go")
 (add-to-list 'load-path "~/.elisp/scss-mode")
+(add-to-list 'load-path "~/.elisp/jshint-mode")
 
 ;; ---------
 ;; Autoloads
@@ -52,6 +53,9 @@
 (require 'color-theme-solarized)
 (require 'go-mode-load)
 (require 'scss-mode)
+(require 'flymake)
+(require 'flymake-cursor)
+(require 'flymake-jshint)
 
 ;; ----------------
 ;; auto-mode-alists
@@ -64,6 +68,7 @@
 (add-to-list 'auto-mode-alist '("mutt-.*-" . mail-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$\\|Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.jshintrc\\'" . javascript-mode))
 
 ;; ----------------------
 ;; General Customizations
@@ -89,6 +94,13 @@
               winner-mode t
               uniquify-buffer-name-style 'forward)
 
+(setq exec-path
+      '(
+        "/usr/local/bin"
+        "/usr/bin"
+        "~/bin"
+        "~/.local/bin"
+        ))
 
 (set-face-attribute 'default nil :height 85)
 (global-font-lock-mode 1)
@@ -451,7 +463,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (defalias 'perl-mode 'cperl-mode)
 
+;; -------
 ;; Paredit
+;; -------
 (mapc (lambda (mode)
         (let ((hook (intern (concat (symbol-name mode)
                                     "-mode-hook"))))
@@ -546,6 +560,11 @@
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 
+;; -------
+;; Flymake
+;; -------
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+
 ;; ----------
 ;; Python mode
 ;; ----------
@@ -568,6 +587,17 @@ they line up with the line containing the corresponding opening bracket."
         ad-do-it))))
 
 (ad-activate 'python-calculate-indentation)
+
+(when (load "flymake" t)
+  (defun flymake-pyflakes-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "pyflakes" (list local-file))))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pyflakes-init)))
 
 ;; ----------
 ;; Ruby mode
@@ -592,6 +622,13 @@ they line up with the line containing the corresponding opening bracket."
 ;; Javascript mode
 ;; ----------
 (setq js-indent-level 2)
+
+;; -----------
+;; jshint mode
+;; -----------
+(add-hook 'javascript-mode-hook
+     (lambda () (flymake-mode t)))
+(setq jshint-mode-jshintrc "~/.jshintrc")
 
 ;; ----------
 ;; Coffee mode
