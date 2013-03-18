@@ -17,6 +17,8 @@
 (add-to-list 'load-path "~/.elisp/go")
 (add-to-list 'load-path "~/.elisp/scss-mode")
 (add-to-list 'load-path "~/.elisp/jshint-mode")
+(add-to-list 'load-path "~/.elisp/popup")
+(add-to-list 'load-path "~/.elisp/auto-complete")
 
 ;; ---------
 ;; Autoloads
@@ -56,6 +58,8 @@
 (require 'flymake)
 (require 'flymake-cursor)
 (require 'flymake-jshint)
+(require 'popup)
+(require 'auto-complete-config)
 
 ;; ----------------
 ;; auto-mode-alists
@@ -564,6 +568,11 @@
 ;; Flymake
 ;; -------
 ;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+
+;; ------------
+;; Autocomplete
+;; ------------
+(ac-config-default)
 
 ;; ----------
 ;; Python mode
