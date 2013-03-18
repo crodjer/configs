@@ -31,3 +31,9 @@
 [submodule ".elisp/jshint-mode"]
 	path = .elisp/jshint-mode
 	url = git@github.com:daleharvey/jshint-mode.git
+[submodule ".elisp/popup"]
+	path = .elisp/popup
+	url = git@github.com:auto-complete/popup-el.git
+[submodule ".elisp/auto-complete"]
+	path = .elisp/auto-complete
+	url = git@github.com:auto-complete/auto-complete.git
