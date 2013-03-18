@@ -156,7 +156,7 @@ alias h='history'
 alias clojurex='java -Xmx64m -cp /usr/share/java/clojure-1.4.0.jar:.'
 
 ### Exports
-export EDITOR=et
+export EDITOR='emacsclient -ct'
 export GOROOT=$HOME/workspace/src/golang
 export JAVA_HOME=/usr/lib/jvm/default-java
 export PYTHONSTARTUP=$HOME/.pythonrc
