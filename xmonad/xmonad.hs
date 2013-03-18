@@ -18,6 +18,8 @@ import XMonad.Actions.NoBorders
 
 -- utils
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Prompt
+import XMonad.Prompt.Shell
 
 -- hooks
 import XMonad.Hooks.ManageDocks
@@ -96,23 +98,23 @@ borderWidth' = 1
 normalBorderColor', focusedBorderColor' :: String
 normalBorderColor'  = "#444444"
 focusedBorderColor' = "#00FF00"
+myFont = "xft:Monospace:pixelsize=12:bold:antialias=true:hinting=true"
+myFontLarge = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
 
 -- workspaces
 workspaces' :: [WorkspaceId]
 workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 -- layouts
-
 myTiled = smartBorders $ ResizableTall 1 (3/100) (1/2) []
 myFull = noBorders Full
 myTabbed = noBorders $ tabbed shrinkText defaultTheme
-mySWNConfig = defaultSWNConfig { swn_font = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
+mySWNConfig = defaultSWNConfig { swn_font = myFontLarge
                                , swn_fade = 1
                                , swn_bgcolor = "#dddddd"
                                , swn_color = "#000000"
                                }
 myShowWName = showWName' mySWNConfig
-
 
 customLayout = myShowWName $ avoidStruts $
                onWorkspaces ["4", "5", "6"] workLayout $
@@ -130,6 +132,13 @@ customLayout = myShowWName $ avoidStruts $
 terminal' :: String
 terminal' = "urxvt"
 
+myXPConfig = defaultXPConfig { promptKeymap = emacsLikeXPKeymap
+                             , position = Top
+                             , promptBorderWidth = 1
+                             , borderColor = "#000000"
+                             , font = myFont
+                             }
+
 -------------------------------------------------------------------------------
 -- Keys/Button bindings --
 -- modmask
@@ -141,7 +150,7 @@ keys' :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- launching and killing programs
     [ ((modMask,               xK_Return), spawn $ XMonad.terminal conf)
-    , ((modMask,               xK_p     ), spawn "dmenu_run")
+    , ((modMask,               xK_p     ), shellPrompt myXPConfig)
     , ((modMask .|. shiftMask, xK_c     ), kill)
     , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
     , ((modMask,               xK_d     ), spawn "/home/rohan/bin/lock")
