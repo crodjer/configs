@@ -85,8 +85,13 @@ function ifre(){
 
 compdef ifre=ifdown
 
+
 alias mute='amixer set Master off'
 alias unmute='amixer set Master on'
+
+# alias accounts='e ~
+alias acc='e $LEDGER_FILE'
+alias bal='ledger balance'
 
 alias mnt='udisks --mount'
 alias umnt='udisks --unmount'
@@ -121,6 +126,10 @@ alias mstatus="mpc -f '%artist% - %title%\n%album%' status"
 alias mtog="mpc toggle"
 #Search song from playlist and also get the song #
 alias sose="mpc playlist | grep -in"
+
+function serve(){
+    python -m SimpleHTTPServer ${1:-8000}
+}
 
 # Alters the mpd volume according to the sign and factor of 5
 function _alter_mpd_vol(){
@@ -161,6 +170,7 @@ export GOROOT=$HOME/workspace/src/golang
 export JAVA_HOME=/usr/lib/jvm/default-java
 export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
+export LEDGER_FILE=$HOME/documents/accounts/personal.dat
 
 export LESS='-r'
 #export http_proxy=http://144.16.192.247:8080/
