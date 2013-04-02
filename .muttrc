@@ -69,12 +69,12 @@ macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro index,pager \ca "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
 
 # Moving around like vim
-bind generic,index gg first-entry
-bind generic,index G last-entry
-bind pager gg top
-bind pager G bottom
-bind pager j next-line
-bind pager k previous-line
+# bind generic,index gg first-entry
+# bind generic,index G last-entry
+# bind pager gg top
+# bind pager G bottom
+# bind pager j next-line
+# bind pager k previous-line
 
 # For better looks
 set markers = yes
