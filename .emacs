@@ -99,12 +99,11 @@
               uniquify-buffer-name-style 'forward)
 
 (setq exec-path
-      '(
-        "/usr/local/bin"
-        "/usr/bin"
-        "~/bin"
-        "~/.local/bin"
-        ))
+      (append exec-path
+              '("/usr/local/bin"
+                "/usr/bin"
+                "~/bin"
+                "~/.local/bin")))
 
 (set-face-attribute 'default nil :height 85)
 (global-font-lock-mode 1)
@@ -119,7 +118,7 @@
 
 ;; (color-theme-hober2)
 (load-theme 'solarized-dark t)
-(setq whitespace-style '(face empty tabs trailing))
+(setq whitespace-style '(face tabs trailing))
 (global-whitespace-mode t)
 
 ;; Remove toolbar, menubar, scrollbar and tooltips
@@ -328,6 +327,14 @@
       gnus-agent-consider-all-articles t
       gnus-agent-queue-mail t)
 
+;; Subscriptions
+(setq gnus-default-subscribed-newsgroups t
+      gnus-select-method  '(nnimap "gmail"
+                            (nnimap-address "imap.gmail.com")
+                            (nnimap-server-port 993)
+                            (nnimap-authinfo-file "~/.authinfo")
+                            (nnimap-stream ssl)))
+
 ;; smtpmail for sending mail
 (setq starttls-use-gnutls t
       message-send-mail-function 'smtpmail-send-it
@@ -338,6 +345,30 @@
       smtpmail-smtp-service 587
       stmpmail-debug-info t
       smtpmail-debug-verb t)
+
+(setq main-email "crodjer@gmail.com")
+(setq proffessional-email "mail.rohanjain@gmail.com")
+(setq hr-email "rohan@hackerrank.com")
+(setq is-email "rohan@interviewstreet.com")
+
+;; TODO: DRY this list
+(setq gnus-posting-styles
+      '(((header "to" "crodjer@gmail.com")
+         (address main-email))
+        ((header "cc" "crodjer@gmail.com")
+         (address main-email))
+        ((header "to" "mail.rohanjain@gmail.com")
+         (address proffessional-email))
+        ((header "cc" "mail.rohanjain@gmail.com")
+         (address proffessional-email))
+        ((header "to" "*.interviewstreet.com")
+         (address is-email))
+        ((header "cc" "*.interviewstreet.com")
+         (address is-email))
+        ((header "to" "*.hackerrank.com")
+         (address hr-email))
+        ((header "cc" "*.hackerrank.com")
+         (address hr-email))))
 
 ;; Display tweaks
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;; topics in groups
@@ -386,25 +417,11 @@
         ((gnus-seconds-year) . "%b %e")
         (t . "%b %e, %y")))
 
-;; Subscriptions
-(setq gnus-default-subscribed-newsgroups t
-      gnus-select-method '(nntp "news.gmane.org")
-      gnus-secondary-select-methods
-      '((nnimap "dovecot"
-         (nnimap-stream shell)
-         (imap-shell-program "/usr/lib/dovecot/imap 2>/dev/null")
-         (nnimap-need-unselect-to-notice-new-mail nil))))
-
-                                        ; (nnimap "gmail"
-                                        ;    (nnimap-address "imap.gmail.com")
-                                        ;    (nnimap-server-port 993)
-                                        ;    (nnimap-stream ssl))
-
-(setq gnus-parameters
-      '(("nnimap\\+dovecot:INBOX"
-         (display . all)
-         (expiry-target . delete)
-         (expiry-wait . immediate))))
+;; (setq gnus-parameters
+;;       '(("nnimap\\+dovecot:INBOX"
+;;          (display . all)
+;;          (expiry-target . delete)
+;;          (expiry-wait . immediate))))
 
 ;; Bugfix: thread expire
 (defun gnus-summary-kill-thread (&optional unmark)
@@ -531,6 +548,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key "\C-ct" 'org-todo)
+
 (setq org-fast-tag-selection-include-todo t
       org-log-done 'note
       org-hide-leading-stars t
@@ -550,6 +568,25 @@
 (org-remember-insinuate)
 (setq org-default-notes-file "~/.notes")
 (define-key global-map "\C-cr" 'org-remember)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (ditaa . t)
+   (dot . t)
+   (emacs-lisp . t)
+   (gnuplot . t)
+   (haskell . nil)
+   (latex . t)
+   (ledger . t)         ;this is the important one for this tutorial
+   (ocaml . nil)
+   (octave . t)
+   (python . t)
+   (ruby . t)
+   (screen . nil)
+   (sh . t)
+   (sql . nil)
+   (sqlite . t)))
 
 ;; ----------
 ;; LaTeX mode
@@ -649,6 +686,7 @@ they line up with the line containing the corresponding opening bracket."
 ;; CSS/SCSS mode
 ;; ----------
 (setq css-indent-offset 2)
+(setq scss-compile-at-save nil)
 
 ;; --------
 ;; Pastebin
@@ -739,3 +777,9 @@ they line up with the line containing the corresponding opening bracket."
     (replace-in-file "“" "\"")
     (replace-in-file "”" "\"")
     (replace-in-file "" "")))
+
+(defun file-string (file)
+  "Read the contents of a file and return as a string"
+  (with-temp-buffer
+    (insert-file-contents file)
+    (buffer-string)))
