@@ -96,7 +96,8 @@
               edebug-trace t
               fill-adapt-mode t
               winner-mode t
-              uniquify-buffer-name-style 'forward)
+              uniquify-buffer-name-style 'forward
+              sgml-basic-offset 4)
 
 (setq exec-path
       (append exec-path
