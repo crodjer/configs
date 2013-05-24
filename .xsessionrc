@@ -9,7 +9,7 @@ synclient TapButton1=1
 synclient VertEdgeScroll=0, VertTwoFingerScroll=1, HorizTwoFingerScroll=1
 synclient HorizScrollDelta=104, EmulateTwoFingerMinW=5
 synclient VertHysteresis=25, HorizHysteresis=25
-synclient FingerLow=10, FingerHigh=25
+synclient FingerLow=5, FingerHigh=25
 synclient PalmDetect=1, PalmMinWidth=4, PalmMinZ=10
 synclient TouchpadOff=0, EmulateTwoFingerMinZ=80, VertScrollDelta=32
 syndaemon -dKi 0.5
@@ -24,7 +24,7 @@ xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
 
 pulseaudio &
 ## Start some useful programms
-#pkill udisks-glue; udisks-glue &
+pkill udisks-glue; udisks-glue &
 pkill mpd; mpd &
 xautolock -exit; xautolock -time 10 -locker "$HOME/bin/lock" &
 pkill mpdscribble;mpdscribble &
