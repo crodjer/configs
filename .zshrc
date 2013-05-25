@@ -29,7 +29,7 @@ plugins=(git django history-substring-search )
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.local/sbin:$HOME/workspace/src/golang/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/games:$HOME/bin:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.local/sbin:$HOME/workspace/src/golang/bin
 
 # vim bindings
 bindkey -e
@@ -66,11 +66,11 @@ alias psh='aptitude show'
 alias halt='sudo shutdown -h now'
 alias reboot='sudo reboot'
 #Save session to disk and bind caps as escape on resume
-# alias s2disk='dbus-send --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Hibernate && display'
-# alias s2ram='dbus-send --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend && display'
-alias s2disk='sudo pm-hibernate && display'
-alias s2ram='sudo pm-suspend && display'
-alias s2both='sudo s2both && display'
+# alias s2disk='dbus-send --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Hibernate && displays'
+# alias s2ram='dbus-send --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend && displays'
+alias s2disk='sudo pm-hibernate && displays'
+alias s2ram='sudo pm-suspend && displays'
+alias s2both='sudo s2both && displays'
 alias xsc='xscreensaver-command'
 
 alias ifup='sudo ifup'
@@ -302,7 +302,7 @@ precmd () {
 export XAUTHORITY=/home/rohan/.Xauthority
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="$PATH:/usr/local/heroku/bin"
 export RUBY_HEAP_MIN_SLOTS=800000
 export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
