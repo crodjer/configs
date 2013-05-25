@@ -195,7 +195,7 @@ export PATH=$PATH:$EC2_HOME/bin
 
 export HR_SERVERS='cssh `ec2-describe-instances -F "tag:Name=webserver" | grep INSTANCE | awk "{print $4}"`'
 
-source /usr/local/bin/virtualenvwrapper.sh
+source `which virtualenvwrapper.sh`
 
 couchenv(){
     source $HOME/workspace/src/build-couchdb/build/env.sh
@@ -260,9 +260,9 @@ sg() {
     fi
 }
 
-. /usr/share/autojump/autojump.sh
+. `autojump`
 # Rooter; https://github.com/yeban/rooter.sh
-. $HOME/workspace/scripts/rooter.sh/rooter.sh
+# . $HOME/workspace/scripts/rooter.sh/rooter.sh
 
 preexec () {
     local command=${(V)1//\%\%\%}

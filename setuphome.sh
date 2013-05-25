@@ -156,6 +156,7 @@ setUp(){
     link .Xresources
     link .xsessionrc
     link .xsession
+    link .xinitrc
     link .screenlayout
     link .zshrc
     link .irbrc
@@ -175,6 +176,8 @@ setUp(){
     # $HOME/.ncmpcpp for ncmpcpp client configs
     mkHomeConfDir ncmpcpp
     link ncmpcpp/config .ncmpcpp/config
+
+    chmod +x ~/.xsession*
 }
 
 # Execute setUp
