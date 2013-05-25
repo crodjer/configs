@@ -1,1 +1,1 @@
-exec ck-launch-session dbus-launch xmonad
+dbus-launch xmonad
