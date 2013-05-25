@@ -565,11 +565,6 @@
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-;; org-remember
-(org-remember-insinuate)
-(setq org-default-notes-file "~/.notes")
-(define-key global-map "\C-cr" 'org-remember)
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((R . t)
