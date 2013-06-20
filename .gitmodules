@@ -34,3 +34,6 @@
 [submodule ".elisp/auto-complete"]
 	path = .elisp/auto-complete
 	url = git@github.com:auto-complete/auto-complete.git
+[submodule ".elisp/git-modes"]
+	path = .elisp/git-modes
+	url = https://github.com/lunaryorn/git-modes.git

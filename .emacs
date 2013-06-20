@@ -19,6 +19,7 @@
 (add-to-list 'load-path "~/.elisp/jshint-mode")
 (add-to-list 'load-path "~/.elisp/popup")
 (add-to-list 'load-path "~/.elisp/auto-complete")
+(add-to-list 'load-path "~/.elisp/git-modes")
 
 ;; ---------
 ;; Autoloads
@@ -60,6 +61,9 @@
 (require 'auto-complete-config)
 (require 'markdown-mode)
 (require 'fill-column-indicator)
+(require 'git-commit-mode)
+(require 'gitignore-mode)
+(require 'gitconfig-mode)
 
 ;; ----------------
 ;; auto-mode-alists
