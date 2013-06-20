@@ -60,6 +60,8 @@
 (require 'flymake-jshint)
 (require 'popup)
 (require 'auto-complete-config)
+(require 'markdown-mode)
+(require 'fill-column-indicator)
 
 ;; ----------------
 ;; auto-mode-alists
@@ -114,6 +116,7 @@
 
 (setq linum-format "%4d")
 (global-linum-mode 1)
+(global-visual-line-mode t)
 
 (setq x-select-enable-clipboard t)
 
@@ -242,6 +245,14 @@
  ido-confirm-unique-completion nil  ; don't wait for RET with unique completion
  ido-max-directory-size 100000)
 
+;; --------
+;; Wrapping
+;; --------
+(setq fci-rule-width 1)
+(define-globalized-minor-mode global-fci-mode fci-mode
+  (lambda () (fci-mode 1)))
+(global-fci-mode 1)
+
 ;; -----
 ;; Dired
 ;; -----
@@ -312,14 +323,15 @@
 ;; ----
 
 (setq gnus-directory "~/.gnus"
+      message-directory "~/.gnus"
       gnus-cache-directory "~/.gnus/cache"
       gnus-cache-active-file "~/.gnus/cache/active"
       gnus-message-directory "~/.gnus/mail"
       gnus-use-cache t
       gnus-cachable-groups "^nnimap"
       gnus-save-newsrc-file nil
-      gnus-read-newsrc-file nil)
-
+      gnus-read-newsrc-file nil
+      gnus-default-subscribed-newsgroups t)
 
 ;; agent
 (setq gnus-agent-directory "~/.gnus/agent"
@@ -328,9 +340,7 @@
       gnus-agent-consider-all-articles t
       gnus-agent-queue-mail t)
 
-;; Subscriptions
-(setq gnus-default-subscribed-newsgroups t
-      gnus-select-method  '(nnimap "gmail"
+(setq gnus-select-method  '(nnimap "gmail"
                             (nnimap-address "imap.gmail.com")
                             (nnimap-server-port 993)
                             (nnimap-authinfo-file "~/.authinfo")
@@ -644,7 +654,7 @@ they line up with the line containing the corresponding opening bracket."
 ;; ----------
 ;; Ruby mode
 ;; ----------
-(setq ruby-indent-level 4)
+(setq ruby-indent-level 2)
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
   (let ((column (current-column))
         indent offset)
