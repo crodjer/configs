@@ -52,16 +52,22 @@ alias free='free -m'
 
 alias info='info --vi-keys'
 
-alias pi='sudo aptitude install'
-alias pif='sudo apt-metalink install'
-alias pr='sudo aptitude remove'
-alias pp='sudo aptitude purge'
-alias pud='sudo aptitude update'
-alias pug='sudo aptitude upgrade'
-alias pugf='sudo aptitude dist-upgrade'
-alias pugff='sudo apt-metalink dist-upgrade'
-alias pse='aptitude search'
-alias psh='aptitude show'
+alias pi='sudo pacman -S'
+alias pud='sudo pacman -Sy'
+alias pug='sudo pacman -Syu'
+alias pugf='pug'
+alias pse='pacman -Ss'
+alias pr='sudo pacman -R'
+# alias pi='sudo aptitude install'
+# alias pif='sudo apt-metalink install'
+# alias pr='sudo aptitude remove'
+# alias pp='sudo aptitude purge'
+# alias pud='sudo aptitude update'
+# alias pug='sudo aptitude upgrade'
+# alias pugf='sudo aptitude dist-upgrade'
+# alias pugff='sudo apt-metalink dist-upgrade'
+# alias pse='aptitude search'
+# alias psh='aptitude show'
 
 alias halt='sudo shutdown -h now'
 alias reboot='sudo reboot'
@@ -72,6 +78,7 @@ alias s2disk='sudo pm-hibernate && displays'
 alias s2ram='sudo pm-suspend && displays'
 alias s2both='sudo s2both && displays'
 alias xsc='xscreensaver-command'
+alias j='autojump'
 
 alias ifup='sudo ifup'
 alias ifdown='sudo ifdown'
@@ -93,8 +100,8 @@ alias unmute='amixer set Master on'
 alias acc='e $LEDGER_FILE'
 alias bal='ledger balance'
 
-alias mnt='udisks --mount'
-alias umnt='udisks --unmount'
+alias mnt='udisksctl mount -b'
+alias umnt='udisksctl unmount -b'
 
 #alias e='vim --servername default --remote-silent'
 alias e='emacsclient -n'
@@ -163,6 +170,7 @@ alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock 
 
 alias h='history'
 alias clojurex='java -Xmx64m -cp /usr/share/java/clojure-1.4.0.jar:.'
+alias kvm='qemu-system-x86_64 -enable-kvm'
 
 ### Exports
 export EDITOR='emacsclient -ct'
@@ -196,6 +204,32 @@ export PATH=$PATH:$EC2_HOME/bin
 export HR_SERVERS='cssh `ec2-describe-instances -F "tag:Name=webserver" | grep INSTANCE | awk "{print $4}"`'
 
 source `which virtualenvwrapper.sh`
+
+batteryGeneric() {
+    TPACPI_BAT=1
+
+    if [[ ! -z "$2" ]]; then
+        sudo tpacpi-bat -s $1 $TPACPI_BAT $2
+    fi
+
+    sudo tpacpi-bat -v -g $1 $TPACPI_BAT
+    PERCENT=$(echo "$(sudo tpacpi-bat -g $1 $TPACPI_BAT  | cut -d ' ' -f 1) - 128" | bc)
+    if [[ $PERCENT = 0 ]]; then
+        echo "Threshold set to default"
+    else
+        echo "Threshold set on $PERCENT%"
+    fi
+}
+
+thinkPadBatteryStartThreshold() {
+    batteryGeneric "ST" $1
+}
+alias tpBatST='thinkPadBatteryStartThreshold'
+
+thinkPadBatteryStopThreshold() {
+    batteryGeneric "SP" $1
+}
+alias tpBatSP='thinkPadBatteryStopThreshold'
 
 couchenv(){
     source $HOME/workspace/src/build-couchdb/build/env.sh
@@ -308,3 +342,5 @@ export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=79000000
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
