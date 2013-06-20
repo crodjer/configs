@@ -7,9 +7,6 @@
 [submodule ".elisp/haskell-mode"]
 	path = .elisp/haskell-mode
 	url = git@github.com:haskell/haskell-mode.git
-[submodule ".elisp/git-commit-mode"]
-	path = .elisp/git-commit-mode
-	url = git@github.com:rafl/git-commit-mode.git
 [submodule ".elisp/magit"]
 	path = .elisp/magit
 	url = git@github.com:magit/magit.git
