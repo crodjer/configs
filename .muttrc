@@ -13,7 +13,7 @@ set smtp_pass = $imap_pass
 set folder = "imaps://imap.gmail.com:993/"
 set spoolfile = "=INBOX"
 set postponed ="=[Gmail]/Drafts"
-set trash = "=[Gmail]/Trash"
+# set trash = "=[Gmail]/Trash"
 set header_cache = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates

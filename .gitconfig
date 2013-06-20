@@ -47,3 +47,5 @@
     lg = !"git lg1"
 [heroku]
 	account = personal
+[push]
+	default = simple
