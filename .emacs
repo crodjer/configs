@@ -10,8 +10,7 @@
 (add-to-list 'load-path "~/.elisp/haskell-mode")
 (add-to-list 'load-path "~/.elisp/org-mode-contrib")
 (add-to-list 'load-path "~/.elisp/magit")
-(add-to-list 'load-path "~/.elisp/magit/contrib") 
-(add-to-list 'load-path "~/.elisp/git-commit-mode")
+(add-to-list 'load-path "~/.elisp/magit/contrib")
 ;; (add-to-list 'load-path "~/.elisp/ess/lisp")
 (add-to-list 'load-path "~/.elisp/coffee-mode")
 (add-to-list 'load-path "~/.elisp/solarized")
@@ -32,7 +31,6 @@
 (require 'magit)
 (require 'magit-bisect)
 (require 'magit-simple-keys)
-(require 'git-commit)
 (require 'rebase-mode)
 (require 'paredit)
 (require 'color-theme)
@@ -274,7 +272,6 @@
       process-connection-type nil)
 
 (add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
-(add-hook 'git-commit-mode-hook 'flyspell-mode)
 
 ;; -----
 ;; rcirc
