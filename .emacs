@@ -124,6 +124,7 @@
 
 ;; (color-theme-hober2)
 (load-theme 'solarized-dark t)
+(setq solarized-termcolor 256)
 (setq whitespace-style '(face tabs trailing))
 (global-whitespace-mode t)
 
@@ -136,7 +137,7 @@
 ;; Set the default browser to Conkeror (setq
 ;; browse-url-browser-function 'w3m-browse-url)
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
+      browse-url-generic-program "conkeror")
 
 ;; General mode loading
 (show-paren-mode t)

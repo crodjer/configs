@@ -13,7 +13,7 @@ vo=xv
 ### Audio
 # ao="pulse"
 softvol="yes"
-softvol-max=800
+softvol-max=400
 volume=5
 #a52drc=1
 
