@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh configuration.
+
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -78,7 +78,6 @@ alias s2disk='sudo pm-hibernate && displays'
 alias s2ram='sudo pm-suspend && displays'
 alias s2both='sudo s2both && displays'
 alias xsc='xscreensaver-command'
-alias j='autojump'
 
 alias ifup='sudo ifup'
 alias ifdown='sudo ifdown'
@@ -294,7 +293,35 @@ sg() {
     fi
 }
 
-. `autojump`
+bs() {
+    case $1 in
+        dump)
+            echo "Fetching a ${2:-wtf2} dump"
+            ssh wtf 'cd /tmp; mysqldump -u staging -pc0stac0ff33 ${2:-wtf2} > wtf-dump-rohan.sql; gzip wtf-dump-rohan.sql'
+            scp wtf:/tmp/wtf-dump-rohan.sql.gz .
+            ssh wtf 'rm /tmp/wtf-dump-rohan.sql.gz'
+            gunzip wtf-dump-rohan.sql.gz
+            mysql -uroot cbtwtf < wtf-dump-rohan.sql
+            rm wtf-dump-rohan.sql
+            ;;
+        cd)
+            cd ~/workspace/bs/railsApp
+            ;;
+        c)
+            bs cd
+            rails c
+            ;;
+        s)
+            bs cd
+            rails s
+            ;;
+        *)
+            rvm use ree
+            bs cd
+            ;;
+    esac
+}
+
 # Rooter; https://github.com/yeban/rooter.sh
 # . $HOME/workspace/scripts/rooter.sh/rooter.sh
 
