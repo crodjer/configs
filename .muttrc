@@ -75,6 +75,8 @@ bind pager gg top
 bind pager G bottom
 bind pager j next-line
 bind pager k previous-line
+bind pager \cn next-line
+bind pager \cp previous-line
 
 # For better looks
 set markers = yes
