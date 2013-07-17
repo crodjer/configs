@@ -86,6 +86,8 @@ set sort_aux = "reverse-last-date-received"
 unset collapse_unread
 folder-hook . "push <collapse-all>\n"
 set editor = "emacsclient -ct"
+set mailcap_path = ~/.mailcap
+auto_view text/html
 
 # Configure some variables
 set imap_keepalive = 500

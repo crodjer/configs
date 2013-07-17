@@ -148,6 +148,7 @@ setUp(){
     link .mpdconf
     link .mplayer
     link .muttrc
+    link .mailcap
     link oh-my-zsh .oh-my-zsh
     link .screenrc
     link .udisks-glue.conf
