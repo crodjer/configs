@@ -717,9 +717,30 @@ they line up with the line containing the corresponding opening bracket."
     (c-set-offset 'arglist-intro 'ywb-php-lineup-arglist-intro)
     (c-set-offset 'arglist-close 'ywb-php-lineup-arglist-close)))
 
-;; ------------------------
-;; Useful utility functions
-;; ------------------------
+;; ---
+;; PHP
+;; ---
+(add-hook 'php-mode-hook (lambda ()
+    (defun ywb-php-lineup-arglist-intro (langelem)
+      (save-excursion
+        (goto-char (cdr langelem))
+        (vector (+ (current-column) c-basic-offset))))
+    (defun ywb-php-lineup-arglist-close (langelem)
+      (save-excursion
+        (goto-char (cdr langelem))
+        (vector (current-column))))
+    (c-set-offset 'arglist-intro 'ywb-php-lineup-arglist-intro)
+    (c-set-offset 'arglist-close 'ywb-php-lineup-arglist-close)))
+
+;; ------
+;; Erlang
+;; ------
+(setq load-path (cons "/usr/lib/erlang/lib/tools-2.6.11/emacs"
+                      load-path))
+(setq erlang-root-dir "/usr/lib/erlang")
+(setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
+(require 'erlang-start)
+
 (defun revert-all-buffers ()
   "Refreshs all open buffers from their respective files"
   (interactive)
