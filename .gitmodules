@@ -40,3 +40,6 @@
 [submodule ".elisp/emacs-for-python"]
 	path = .elisp/emacs-for-python
 	url = git@github.com:gabrielelanaro/emacs-for-python.git
+[submodule ".elisp/twittering-mode"]
+	path = .elisp/twittering-mode
+	url = git@github.com:hayamiz/twittering-mode.git
