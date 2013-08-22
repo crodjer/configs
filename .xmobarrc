@@ -7,22 +7,30 @@ Config { font = "xft:Monospace:size=8:bold"
        , lowerOnStart = True
        , commands = [ Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red", "-t", "E:<rx>/<tx>"] 10
                     , Run Wireless "wlan0" ["-L","0","-H","32","--normal","green","--high","red", "-t", "<essid>"] 10
-                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red", "-t", "P:<total>%"] 10
+                    , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red", "-t", "P:<total>%"] 10
                     , Run Uptime ["-t", "<days>d <hours>h"] 6000
                     , Run Memory ["-t","M:<usedratio>%"] 10
                     , Run Swap ["-t","S:<usedratio>%"] 10
                     , Run BatteryP ["BAT0"]
                       ["-t", "<acstatus><left>%",
-                       "-L", "10", "-H", "80", "-p", "3",
-                       "--", "-O", "", "-o", "<fc=red>B</fc>",
-                       "-l", "red", "-m", "blue", "-h", "green"]
+                       "-L", "10", "-H", "80", "-p", "3", "--",
+                       "-O", "", "-o", "<fc=red>B:</fc>",
+                       "-i", "", "-l", "red", "-m", "blue",
+                       "-h", "green"]
                       10
                     , Run Date "%d %a %I:%M" "date" 10
                     , Run StdinReader
-                    -- , Run ThermalZone 0 ["-t", "T:<temp>C"] 30
-                    -- , Run MPD ["-t", "<title> (<statei>) <remaining>"] 10
+                    , Run ThermalZone 0 ["-t", "T:<temp>C"] 30
+                    , Run MPD ["-t", "<title> <statei> <volume>"] 10
+                    , Run CoreTemp ["-t", "T:<core0>|<core1>",
+                                    "-L", "30", "-H", "50",
+                                    "-l", "lightblue", "-n", "gray90",
+                                    "-h", "red"] 60
+                    , Run Volume "default" "Master"
+                      ["-t", "<status>", "--",
+                       "-O", "", "-o", "x"] 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %uptime% %cpu% %memory% %battery% %wlan0wi% | <fc=#ee9a00>%date%</fc> |      "
+       , template = "%StdinReader% }{ %mpd%%default:Master% | %multicpu% %memory% %coretemp% %battery% %wlan0wi% | <fc=#ee9a00>%date%</fc> |     "
        }
