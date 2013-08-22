@@ -21,6 +21,7 @@
 (add-to-list 'load-path "~/.elisp/auto-complete")
 (add-to-list 'load-path "~/.elisp/git-modes")
 (add-to-list 'load-path "~/.elisp/emacs-for-python")
+(add-to-list 'load-path "~/.elisp/twittering-mode")
 
 ;; ---------
 ;; Autoloads
@@ -65,6 +66,7 @@
 (require 'git-commit-mode)
 (require 'gitignore-mode)
 (require 'gitconfig-mode)
+(require 'twittering-mode)
 
 ;; Emacs for python
 (require 'epy-setup)
@@ -283,7 +285,15 @@
       magit-process-connection-type nil
       process-connection-type nil)
 
-(add-hook 'magit-log-edit-mode-hook 'flyspell-mode)
+;; -------------
+;; flyspell mode
+;; -------------
+(dolist (hook '(text-mode-hook
+                org-mode-hook
+                LaTeX-mode-hook
+                magit-log-edit-mode-hook
+                git-commit-mode-hook))
+      (add-hook hook (lambda () (flyspell-mode 1))))
 
 ;; -----
 ;; rcirc
@@ -609,8 +619,6 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
@@ -749,6 +757,12 @@ they line up with the line containing the corresponding opening bracket."
 (setq erlang-root-dir "/usr/lib/erlang")
 (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
 (require 'erlang-start)
+
+;; ---------------
+;; Twittering mode
+;; ---------------
+(setq twittering-icon-mode nil)
+(setq twittering-convert-fix-size 24)
 
 (defun revert-all-buffers ()
   "Refreshs all open buffers from their respective files"
