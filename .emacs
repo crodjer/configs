@@ -20,6 +20,7 @@
 (add-to-list 'load-path "~/.elisp/popup")
 (add-to-list 'load-path "~/.elisp/auto-complete")
 (add-to-list 'load-path "~/.elisp/git-modes")
+(add-to-list 'load-path "~/.elisp/emacs-for-python")
 
 ;; ---------
 ;; Autoloads
@@ -64,6 +65,12 @@
 (require 'git-commit-mode)
 (require 'gitignore-mode)
 (require 'gitconfig-mode)
+
+;; Emacs for python
+(require 'epy-setup)
+(require 'epy-python)
+;; (require 'epy-completion) It is seriously stupid
+(require 'virtualenv)
 
 ;; ----------------
 ;; auto-mode-alists
@@ -642,16 +649,18 @@ they line up with the line containing the corresponding opening bracket."
 
 (ad-activate 'python-calculate-indentation)
 
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pyflakes-init)))
+(epy-setup-ipython)
+(epy-setup-checker "pyflakes %f")
+;; (when (load "flymake" t)
+;;   (defun flymake-pyflakes-init ()
+;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;;                        'flymake-create-temp-inplace))
+;;            (local-file (file-relative-name
+;;                         temp-file
+;;                         (file-name-directory buffer-file-name))))
+;;       (list "pyflakes" (list local-file))))
+;;   (add-to-list 'flymake-allowed-file-name-masks
+;;                '("\\.py\\'" flymake-pyflakes-init)))
 
 ;; ----------
 ;; Ruby mode
@@ -812,3 +821,16 @@ they line up with the line containing the corresponding opening bracket."
   (with-temp-buffer
     (insert-file-contents file)
     (buffer-string)))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values (quote ((virtualenv-workon . "zlemma") (virtualenv-activate . "~/.virtualenvs/zlemma")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
