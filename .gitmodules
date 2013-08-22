@@ -37,3 +37,6 @@
 [submodule ".elisp/git-modes"]
 	path = .elisp/git-modes
 	url = https://github.com/lunaryorn/git-modes.git
+[submodule ".elisp/emacs-for-python"]
+	path = .elisp/emacs-for-python
+	url = git@github.com:gabrielelanaro/emacs-for-python.git
