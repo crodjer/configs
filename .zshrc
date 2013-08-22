@@ -110,7 +110,7 @@ alias ef='emacsclient -n -c'
 alias sec='sudo emacsclient -c'
 alias vnew='vim --servername default'
 
-alias -g ack='ack-grep'
+alias -g ack='perl /bin/vendor_perl/ack'
 alias -g G='| grep'
 alias -g L='| less'
 
@@ -338,19 +338,19 @@ preexec () {
     esac
 
     # automatically use tsocks for some programs
-    case $first in
-        alpine)
-        #irssi|twitter|ncmpcpp|mutt)
-            export LD_PRELOAD=/usr/lib/libtsocks.so
-            ;;
-    esac
+    # case $first in
+    #     alpine)
+    #     #irssi|twitter|ncmpcpp|mutt)
+    #         export LD_PRELOAD=/usr/lib/libtsocks.so
+    #         ;;
+    # esac
 
     # automatically use proxychains for some programs
-    case $first in
-        alpine)
-            export LD_PRELOAD=/usr/lib/libproxychains.so.3
-            ;;
-    esac
+    # case $first in
+    #     alpine)
+    #         export LD_PRELOAD=/usr/lib/libproxychains.so.3
+    #         ;;
+    # esac
 
 }
 
