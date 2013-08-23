@@ -4,42 +4,45 @@
 [submodule "vim"]
 	path = vim
 	url = git://github.com/crodjer/vimfiles.git
-[submodule ".elisp/haskell-mode"]
-	path = .elisp/haskell-mode
-	url = git@github.com:haskell/haskell-mode.git
-[submodule ".elisp/magit"]
-	path = .elisp/magit
-	url = git@github.com:magit/magit.git
-[submodule ".elisp/coffee-mode"]
-	path = .elisp/coffee-mode
-	url = git@github.com:defunkt/coffee-mode.git
-[submodule ".elisp/php-mode"]
-	path = .elisp/php-mode
-	url = git@github.com:ejmr/php-mode.git
-[submodule ".elisp/slime"]
-	path = .elisp/slime
-	url = git@github.com:nablaone/slime.git
-[submodule ".elisp/solarized"]
-	path = .elisp/solarized
-	url = git@github.com:sellout/emacs-color-theme-solarized.git
-[submodule ".elisp/scss-mode"]
-	path = .elisp/scss-mode
-	url = git@github.com:antonj/scss-mode.git
-[submodule ".elisp/jshint-mode"]
-	path = .elisp/jshint-mode
-	url = git@github.com:daleharvey/jshint-mode.git
-[submodule ".elisp/popup"]
-	path = .elisp/popup
-	url = git@github.com:auto-complete/popup-el.git
-[submodule ".elisp/auto-complete"]
-	path = .elisp/auto-complete
-	url = git@github.com:auto-complete/auto-complete.git
-[submodule ".elisp/git-modes"]
-	path = .elisp/git-modes
-	url = https://github.com/lunaryorn/git-modes.git
-[submodule ".elisp/emacs-for-python"]
-	path = .elisp/emacs-for-python
-	url = git@github.com:gabrielelanaro/emacs-for-python.git
-[submodule ".elisp/twittering-mode"]
-	path = .elisp/twittering-mode
-	url = git@github.com:hayamiz/twittering-mode.git
+[submodule ".elisp.old/haskell-mode"]
+	path = .elisp.old/haskell-mode
+	url = git://github.com/haskell/haskell-mode.git
+[submodule ".elisp.old/magit"]
+	path = .elisp.old/magit
+	url = git://github.com/magit/magit.git
+[submodule ".elisp.old/coffee-mode"]
+	path = .elisp.old/coffee-mode
+	url = git://github.com/defunkt/coffee-mode.git
+[submodule ".elisp.old/php-mode"]
+	path = .elisp.old/php-mode
+	url = git://github.com/ejmr/php-mode.git
+[submodule ".elisp.old/slime"]
+	path = .elisp.old/slime
+	url = git://github.com/nablaone/slime.git
+[submodule ".elisp.old/solarized"]
+	path = .elisp.old/solarized
+	url = git://github.com/sellout/emacs-color-theme-solarized.git
+[submodule ".elisp.old/scss-mode"]
+	path = .elisp.old/scss-mode
+	url = git://github.com/antonj/scss-mode.git
+[submodule ".elisp.old/jshint-mode"]
+	path = .elisp.old/jshint-mode
+	url = git://github.com/daleharvey/jshint-mode.git
+[submodule ".elisp.old/popup"]
+	path = .elisp.old/popup
+	url = git://github.com/auto-complete/popup-el.git
+[submodule ".elisp.old/auto-complete"]
+	path = .elisp.old/auto-complete
+	url = git://github.com/auto-complete/auto-complete.git
+[submodule ".elisp.old/git-modes"]
+	path = .elisp.old/git-modes
+	url = git://github.com/lunaryorn/git-modes.git
+[submodule ".elisp.old/emacs-for-python"]
+	path = .elisp.old/emacs-for-python
+	url = git://github.com/gabrielelanaro/emacs-for-python.git
+[submodule ".elisp.old/twittering-mode"]
+	path = .elisp.old/twittering-mode
+	url = git://github.com/hayamiz/twittering-mode.git
+[submodule ".elisp.old/git-mode"]
+	path = .elisp.old/git-mode
+	url = git://github.com/lunaryorn/git-modes.git

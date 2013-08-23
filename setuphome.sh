@@ -164,7 +164,9 @@ setUp(){
     link vim/vimrc .vimrc
     link vim/gvimrc .gvimrc
     link .emacs
+    link .emacs.old
     link .elisp
+    link .elisp.old
 
     # $HOME/.config directroy for programs which store conf here
     mkHomeConfDir config
