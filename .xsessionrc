@@ -2,7 +2,7 @@
 
 xrdb -merge ~/.Xresources
 xset b 100 400 100
-export PATH=$PATH:$HOME/bin
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # Map menu key to Super_R (Useful for laptop keyboard)
 setxkbmap -model thinkpad -layout us -option caps:escape
@@ -38,7 +38,7 @@ pkill notification-dae; /usr/lib/notification-daemon/notification-daemon &
 #pkill xcompmgr;xcompmgr &
 
 urxvtd &
-wicd -t
+#wicd -t
 #nm-applet &
 #mytrayer
 

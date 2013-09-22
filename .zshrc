@@ -29,7 +29,7 @@ plugins=(git django history-substring-search )
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/games:$HOME/bin:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.local/sbin:$HOME/workspace/src/golang/bin
+export PATH=$HOME/bin:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.local/sbin:$HOME/workspace/src/golang/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/games
 
 # vim bindings
 bindkey -e
@@ -258,6 +258,13 @@ dj(){
     eset django && cd ~/workspace/src/django && workon django
 }
 
+zlemma(){
+    eset zlemma
+    cd ~/workspace/zlemma/zlemma
+    workon zlemma
+    export DJANGO_SETTINGS_MODULE=settings
+}
+
 hr(){
     eset hrank && cd ~/workspace/is/ruby/hackerrank
     alias gpr='gl --rebase && gp'
@@ -315,6 +322,10 @@ bs() {
             bs cd
             rails s
             ;;
+        git)
+            git config user.email rohan@browserstack.com
+            git config remote.origin.url `git config remote.origin.url  | sed s/github.com/github-bs/`
+            ;;
         *)
             rvm use ree
             bs cd
@@ -336,6 +347,7 @@ preexec () {
             print -Pn "\e]2;$command\a"
             ;;
     esac
+
 
     # automatically use tsocks for some programs
     # case $first in
@@ -360,6 +372,7 @@ precmd () {
 }
 
 [[ -s "/home/rohan/.rvm/scripts/rvm" ]] && source "/home/rohan/.rvm/scripts/rvm"
+[[ -s "/etc/profile.d/autojump.zsh" ]] && source "/etc/profile.d/autojump.zsh"
 export XAUTHORITY=/home/rohan/.Xauthority
 
 ### Added by the Heroku Toolbelt

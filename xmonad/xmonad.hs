@@ -13,7 +13,6 @@ import qualified Data.Map as M
 import System.Exit
 import System.IO (Handle, hPutStrLn)
 import XMonad.Actions.CycleWS
-import XMonad.Actions.UpdatePointer
 import XMonad.Actions.NoBorders
 
 -- utils
@@ -31,6 +30,7 @@ import XMonad.Hooks.ManageHelpers
 -- layouts
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.Grid
 import XMonad.Layout.Tabbed
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.LayoutCombinators
@@ -70,7 +70,6 @@ manageHook' = composeAll
 
 logHook' :: Handle ->  X ()
 logHook' h = dynamicLogWithPP (customPP { ppOutput = hPutStrLn h })
-             >> updatePointer (Relative 0 0)
 
 layoutHook' = customLayout
 -- Top-level binding with no type signature:           layoutHook' :: XMonad.Layout.LayoutModifier.ModifiedLayout
@@ -96,8 +95,8 @@ borderWidth' :: Dimension
 borderWidth' = 1
 
 normalBorderColor', focusedBorderColor' :: String
-normalBorderColor'  = "#444444"
-focusedBorderColor' = "#00FF00"
+normalBorderColor'  = "#CCCCCC"
+focusedBorderColor' = "#00DD00"
 myFont = "xft:Monospace:pixelsize=12:bold:antialias=true:hinting=true"
 myFontLarge = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
 
@@ -125,7 +124,7 @@ customLayout = myShowWName $ avoidStruts $
   where
     normalLayout = myTiled ||| myFull ||| myTabbed
     workLayout = myTiled ||| myFull
-    fullLayout = myTabbed ||| myFull ||| noBorders myTiled
+    fullLayout = myTabbed ||| myFull ||| myTiled
 
 -------------------------------------------------------------------------------
 -- Terminal --

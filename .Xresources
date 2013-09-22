@@ -1,12 +1,12 @@
 ! ---[ URxvt config ]--------------------------------------------------
 
-!URxvt*font: xft:Inconsolata:pixelsize=12:antialias=true
+! URxvt*font: xft:Inconsolata:pixelsize=12:antialias=true
 URxvt*font: xft:Monospace:pixelsize=11
 URxvt*boldFont: xft:Monospace:bold:pixelsize=11
 URxvt*letterSpace: -1
 URxvt*borderLess: false
 URxvt*externalBorder: 0
-URxvt*internalBorder: 1
+URxvt*internalBorder: 0
 URxvt*scrollBar: false
 URxvt*depth: 32
 URxvt*cursorBlink: false
@@ -36,19 +36,19 @@ URxvt*cursorColor2: #ffffff
 
 URxvt*color0: black
 URxvt*color1: red3
-URxvt*color2: green3
-URxvt*color3: yellow3
+URxvt*color2: green4
+URxvt*color3: yellow4
 URxvt*color4: blue2
 URxvt*color5: magenta3
-URxvt*color6: cyan3
+URxvt*color6: cyan4
 URxvt*color7: gray90
 URxvt*color8: gray50
 URxvt*color9: red
-URxvt*color10: green
-URxvt*color11: yellow
+URxvt*color10: green2
+URxvt*color11: yellow3
 URxvt*color12: rgb:5c/5c/ff
 URxvt*color13: magenta
-URxvt*color14: cyan
+URxvt*color14: cyan2
 URxvt*color15: white
 
 ! ---[ Fonts config ]--------------------------------------------------
