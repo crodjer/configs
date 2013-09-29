@@ -40,33 +40,33 @@ import XMonad.Layout.ShowWName
 -- Main --
 {-main :: IO()-}
 main = do
-       h <- spawnPipe "xmobar"
-       xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
-              { workspaces = workspaces'
-              , modMask = modMask'
-              , borderWidth = borderWidth'
-              , normalBorderColor = normalBorderColor'
-              , focusedBorderColor = focusedBorderColor'
-              , terminal = terminal'
-              , keys = keys'
-              , logHook = logHook' h
-              , layoutHook = layoutHook'
-              , manageHook = manageHook' <+> manageHook defaultConfig
-              , handleEventHook = fullscreenEventHook
-              , focusFollowsMouse  = myFocusFollowsMouse
-              }
+  h <- spawnPipe "xmobar"
+  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
+             { workspaces = workspaces'
+             , modMask = modMask'
+             , borderWidth = borderWidth'
+             , normalBorderColor = normalBorderColor'
+             , focusedBorderColor = focusedBorderColor'
+             , terminal = terminal'
+             , keys = keys'
+             , logHook = logHook' h
+             , layoutHook = layoutHook'
+             , manageHook = manageHook' <+> manageHook defaultConfig
+             , handleEventHook = fullscreenEventHook
+             , focusFollowsMouse  = myFocusFollowsMouse
+             }
 
 -------------------------------------------------------------------------------
 -- Hooks --
 
 manageHook' :: ManageHook
 manageHook' = composeAll
-    [ isFullscreen                  --> doFullFloat
-    , isDialog                      --> doFloat
-    , className     =? "Xmessage"   --> doFloat
-    , className     =? "MPlayer"    --> ask >>= doF . W.sink
-    , manageDocks
-    ]
+              [ isFullscreen                  --> doFullFloat
+              , isDialog                      --> doFloat
+              , className     =? "Xmessage"   --> doFloat
+              , className     =? "MPlayer"    --> ask >>= doF . W.sink
+              , manageDocks
+              ]
 
 logHook' :: Handle ->  X ()
 logHook' h = dynamicLogWithPP (customPP { ppOutput = hPutStrLn h })
@@ -78,13 +78,14 @@ layoutHook' = customLayout
 -- Looks --
 -- bar
 customPP :: PP
-customPP = defaultPP { ppCurrent = xmobarColor "#FFEE00" "" . wrap "[" "]"
-                     , ppVisible = xmobarColor "#5599FF" "" . wrap "<" ">"
-                     , ppTitle =  shorten 80
-                     , ppSep =  "<fc=#AFAF87>|</fc>"
-                     , ppHiddenNoWindows = xmobarColor "#404040" ""
-                     , ppUrgent = xmobarColor "#ff0000" "" . wrap "!" "!"
-                     }
+customPP = defaultPP
+           { ppCurrent = xmobarColor "#FFEE00" "" . wrap "[" "]"
+           , ppVisible = xmobarColor "#5599FF" "" . wrap "<" ">"
+           , ppTitle =  shorten 80
+           , ppSep =  "<fc=#AFAF87>|</fc>"
+           , ppHiddenNoWindows = xmobarColor "#404040" ""
+           , ppUrgent = xmobarColor "#ff0000" "" . wrap "!" "!"
+           }
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -108,35 +109,37 @@ workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 myTiled = smartBorders $ ResizableTall 1 (3/100) (1/2) []
 myFull = noBorders Full
 myTabbed = noBorders $ tabbed shrinkText defaultTheme
-mySWNConfig = defaultSWNConfig { swn_font = myFontLarge
-                               , swn_fade = 1
-                               , swn_bgcolor = "#dddddd"
-                               , swn_color = "#000000"
-                               }
+mySWNConfig = defaultSWNConfig
+              { swn_font = myFontLarge
+              , swn_fade = 1
+              , swn_bgcolor = "#dddddd"
+              , swn_color = "#000000"
+              }
 myShowWName = showWName' mySWNConfig
 
 customLayout = myShowWName $ avoidStruts $
-               onWorkspaces ["4", "5", "6"] workLayout $
-               {-onWorkspaces ["8", "9"] (noBorders normalLayout) $-}
-               onWorkspaces ["2"] fullLayout
-               normalLayout
+                 onWorkspaces ["4", "5", "6"] workLayout $
+                 {-onWorkspaces ["8", "9"] (noBorders normalLayout) $-}
+                 onWorkspaces ["2"] fullLayout
+                 normalLayout
 
-  where
-    normalLayout = myTiled ||| myFull ||| myTabbed
-    workLayout = myTiled ||| myFull
-    fullLayout = myTabbed ||| myFull ||| myTiled
+    where
+      normalLayout = myTiled ||| myFull ||| myTabbed
+      workLayout = myTiled ||| myFull
+      fullLayout = myTabbed ||| myFull ||| myTiled
 
 -------------------------------------------------------------------------------
 -- Terminal --
 terminal' :: String
 terminal' = "urxvtc"
 
-myXPConfig = defaultXPConfig { promptKeymap = emacsLikeXPKeymap
-                             , position = Top
-                             , promptBorderWidth = 1
-                             , borderColor = "#000000"
-                             , font = myFont
-                             }
+myXPConfig = defaultXPConfig
+             { promptKeymap = emacsLikeXPKeymap
+             , position = Top
+             , promptBorderWidth = 1
+             , borderColor = "#000000"
+             , font = myFont
+             }
 
 -------------------------------------------------------------------------------
 -- Keys/Button bindings --
