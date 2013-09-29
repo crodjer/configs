@@ -43,8 +43,6 @@ unsetopt beep
 unsetopt correct_all
 setopt correct
 
-unalias sl
-
 alias df='df -h'
 alias du='du -hs'
 alias less='less'
@@ -91,6 +89,7 @@ function ifre(){
 
 compdef ifre=ifdown
 
+alias node='env NODE_NO_READLINE=1 rlwrap node'
 
 alias mute='amixer set Master off'
 alias unmute='amixer set Master on'
@@ -371,7 +370,7 @@ precmd () {
     export LD_PRELOAD=''
 }
 
-[[ -s "/home/rohan/.rvm/scripts/rvm" ]] && source "/home/rohan/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 [[ -s "/etc/profile.d/autojump.zsh" ]] && source "/etc/profile.d/autojump.zsh"
 export XAUTHORITY=/home/rohan/.Xauthority
 
