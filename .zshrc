@@ -22,6 +22,8 @@ ZSH_THEME="rohan"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
+REPORTTIME=2
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git django history-substring-search )
@@ -89,7 +91,7 @@ function ifre(){
 
 compdef ifre=ifdown
 
-alias node='env NODE_NO_READLINE=1 rlwrap node'
+# alias node='env NODE_NO_READLINE=1 rlwrap node'
 
 alias mute='amixer set Master off'
 alias unmute='amixer set Master on'
@@ -106,7 +108,6 @@ alias e='emacsclient -n'
 alias ec='emacsclient -c'
 alias et='emacsclient -ct'
 alias ef='emacsclient -n -c'
-alias sec='sudo emacsclient -c'
 alias vnew='vim --servername default'
 
 alias -g ack='perl /bin/vendor_perl/ack'
