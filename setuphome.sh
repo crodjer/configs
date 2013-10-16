@@ -163,10 +163,6 @@ setUp(){
     link .irbrc
     link vim/vimrc .vimrc
     link vim/gvimrc .gvimrc
-    link .emacs
-    link .emacs.old
-    link .elisp
-    link .elisp.old
 
     # $HOME/.config directroy for programs which store conf here
     mkHomeConfDir config
@@ -175,6 +171,11 @@ setUp(){
     # $HOME/.xmonad directroy for xmonad configs
     mkHomeConfDir xmonad
     link xmonad/xmonad.hs .xmonad/xmonad.hs
+
+    mkHomeConfDir emacs.d
+    link .emacs
+    link .emacs.d/el-get/el-get
+    link .emacs.d/el-get/
 
     # $HOME/.ncmpcpp for ncmpcpp client configs
     mkHomeConfDir ncmpcpp
