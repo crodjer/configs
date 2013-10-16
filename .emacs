@@ -5,7 +5,7 @@
 ;; ----------
 ;; Load paths
 ;; ----------
-(add-to-list 'load-path "~/.elisp/")
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/haskell-mode")
 
 ;; ---------
@@ -37,13 +37,11 @@
 (el-get-install 'git-commit-mode)
 (el-get-install 'scala-mode)
 
-
 (el-get 'sync)
 (require 'haskell-mode-autoloads)
 (require 'yasnippet)
 (require 'auto-complete-config)
 (require 'js2-mode)
-(require 'handlebars-mode)
 (require 'whitespace)
 (require 'git-commit)
 (require 'scala-mode)
@@ -57,7 +55,7 @@
  ;; Tabs and indentation
  indent-tabs-mode nil
  tab-width 4
- c-basic-offset 4
+ c-basic-offset 41
  python-indent 4
  js-indent-level 2
  js2-basic-offset 2
@@ -75,6 +73,15 @@
  x-select-enable-clickboard t
  x-select-enable-primary t
  vc-follow-symlinks t
+
+ ;; Backups
+ backup-by-copying t
+ backup-directory-alist '(("." . "~/.saves"))
+ delete-old-versions t
+ kept-new-versions 16
+ kept-old-versions 2
+ version-control t
+ backup-by-copying-when-linked t
 
  ;; Startup
  inhibit-startup-echo-area-message t
@@ -119,19 +126,30 @@
 ;; Flyspell mode
 ;; -------------
 (add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'html-mode-hook
+          (lambda () (flyspell-mode 0)))
 
 ;; ---------------
 ;; Git commit mode
 ;; ---------------
 (add-hook 'git-commit-mode-hook
           (lambda () (fci-mode 0)))
-
+(add-hook 'git-commit-mode-hook 'flyspell-mode)
 
 ;; --------
 ;; FCI mode
 ;; --------
 (add-hook 'prog-mode-hook 'fci-mode)
 (add-hook 'text-mode-hook 'fci-mode)
+
+;; --------
+;; JS2 mode
+;; --------
+(setq-default js2-global-externs '("$" "_")
+              js2-include-browser-externs t
+              js2-include-node-externs t
+              js2-include-jslint-globals t
+              js2-strict-inconsistent-return-warning nil)
 
 ;; UI
 (load-theme 'tango)
@@ -195,7 +213,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((virtualenv-workon . "zlemma")))))
+ '(safe-local-variable-values (quote ((js2-additional-externs (quote ("Ember" "Cockpit"))) (js2-additional-externs quote ("Cockpit" (\, "Ember"))) (virtualenv-workon . "zlemma")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
