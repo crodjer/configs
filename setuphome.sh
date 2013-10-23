@@ -174,8 +174,7 @@ setUp(){
 
     mkHomeConfDir emacs.d
     link .emacs
-    link .emacs.d/el-get/el-get
-    link .emacs.d/el-get/
+    link .emacs.d/el-get-users
 
     # $HOME/.ncmpcpp for ncmpcpp client configs
     mkHomeConfDir ncmpcpp
