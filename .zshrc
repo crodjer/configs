@@ -31,7 +31,7 @@ plugins=(git django history-substring-search )
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$HOME/bin:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.local/sbin:$HOME/workspace/src/golang/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/games
+export PATH=$HOME/bin:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/games
 
 # vim bindings
 bindkey -e
@@ -173,7 +173,6 @@ alias kvm='qemu-system-x86_64 -enable-kvm'
 
 ### Exports
 export EDITOR='emacsclient -ct'
-export GOROOT=$HOME/workspace/src/golang
 export JAVA_HOME=/usr/lib/jvm/default-java
 export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1

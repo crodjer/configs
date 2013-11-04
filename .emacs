@@ -54,7 +54,11 @@
 (require 'scala-mode2)
 (require 'virtualenv)
 (require 'flymake)
-(require 'pylookup)
+(require 'flymake-cursor)
+(require 'python-django)
+(require 'flymake-jshint)
+(require 'paredit)
+(require 'geiser-install)
 
 ;; ----------------------
 ;; General customizations
@@ -115,8 +119,9 @@
 (add-to-list 'auto-mode-alist '("\\.rake$\\|Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.html$\\|hbs$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-(add-to-list 'auto-mode-alist '("\\.jshintrc\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jshintrc\\'" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.rkt$" . scheme-mode))
 
 ;; ------------------
 ;; General mode hooks
@@ -172,10 +177,35 @@
 (setq virtualenv-workon-starts-python nil)
 (add-hook 'python-mode-hook
           (lambda() (require 'virtualenv)))
+;; ----------
+;; Javascript
+;; ----------
+(add-hook 'js2-mode-hook
+     (lambda () (flymake-mode t)))
+
+(defun jshint-mode-restart ()
+  (jshint-mode-stop)
+  (jshint-mode-init))
+;; (jshint-mode-restart)
+
+
 ;; -------
 ;; Flymake
 ;; -------
-(add-hook 'find-file-hook 'flymake-find-file-hook)
+(global-set-key "\C-c\M-s" 'flymake-display-err-menu-for-current-line)
+(global-set-key "\C-c\M-n" 'flymake-goto-next-error)
+(global-set-key "\C-c\M-p" 'flymake-goto-previous-error)
+(setq flymake-cursor-error-display-delay 0.1).
+
+;; ------------
+;; Paradit Mode
+;; ------------
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
 ;; ----
 ;; Gnus

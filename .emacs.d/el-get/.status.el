@@ -18,8 +18,19 @@
     (:name f :website "https://github.com/rejeep/f.el" :description "Modern API for working with files and directories in Emacs" :type github :pkgname "rejeep/f.el"))
  (find-file-in-project status "installed" recipe
                        (:name find-file-in-project :type github :pkgname "technomancy/find-file-in-project" :description "Quick access to project files in Emacs"))
+ (flymake-cursor status "installed" recipe
+                 (:name flymake-cursor :type github :pkgname "illusori/emacs-flymake-cursor" :description "displays flymake error msg in minibuffer after delay (illusori/github)" :website "http://github.com/illusori/emacs-flymake-cursor"))
  (fuzzy status "installed" recipe
         (:name fuzzy :website "https://github.com/auto-complete/fuzzy-el" :description "Fuzzy matching utilities for GNU Emacs" :type github :pkgname "auto-complete/fuzzy-el"))
+ (geiser status "installed" recipe
+         (:name geiser :website "http://www.nongnu.org/geiser/" :description "Geiser is a collection of Emacs major and minor modes that conspire with one or more Scheme interpreters to keep the Lisp Machine Spirit alive. It draws inspiration (and a bit more) from environments such as Common Lisp's Slime, Factor's FUEL, Squeak or Emacs itself, and does its best to make Scheme hacking inside Emacs (even more) fun." :type git :url "git://git.sv.gnu.org/geiser.git" :load-path
+                ("./elisp")
+                :build
+                `("./autogen.sh" "./configure" ,(concat "make EMACS=" el-get-emacs)
+                  ,(concat "make EMACS=" el-get-emacs "info-recursive"))
+                :build/windows-nt
+                `("sh ./autogen.sh" "sh ./configure" "make" ,(concat "cd doc & " el-get-install-info " --dir-file=./dir *.info"))
+                :info "doc" :features geiser-load))
  (git-commit-mode status "installed" recipe
                   (:name git-commit-mode :description "Major mode for editing git commit messages" :type github :pkgname "rafl/git-commit-mode" :features git-commit))
  (haskell-mode status "installed" recipe
@@ -49,12 +60,24 @@
  (js2-mode status "installed" recipe
            (:name js2-mode :website "https://github.com/mooz/js2-mode#readme" :description "An improved JavaScript editing mode" :type github :pkgname "mooz/js2-mode" :prepare
                   (autoload 'js2-mode "js2-mode" nil t)))
+ (jshint-mode status "installed" recipe
+              (:name jshint-mode :website "https://github.com/daleharvey/jshint-mode" :description "Integrate JSHint into Emacs via a node.js server. JSHint (http://www.jshint.com/) is a static code analysis tool for JavaScript." :type github :pkgname "daleharvey/jshint-mode"))
  (nose status "installed" recipe
        (:type github :pkgname "emacsmirror/nose" :name nose :website "https://bitbucket.org/durin42/nosemacs" :description "Emacs extension to provide easy nosetest integration." :type emacsmirror :pkgname nose))
+ (paredit status "installed" recipe
+          (:name paredit :description "Minor mode for editing parentheses" :type http :prepare
+                 (progn
+                   (autoload 'enable-paredit-mode "paredit")
+                   (autoload 'disable-paredit-mode "paredit"))
+                 :url "http://mumble.net/~campbell/emacs/paredit.el"))
  (pkg-info status "installed" recipe
            (:name pkg-info :description "Provide information about Emacs packages." :type github :pkgname "lunaryorn/pkg-info.el" :depends s))
  (popup status "installed" recipe
         (:name popup :website "https://github.com/auto-complete/popup-el" :description "Visual Popup Interface Library for Emacs" :type github :pkgname "auto-complete/popup-el"))
+ (python-django status "installed" recipe
+                (:name python-django :description "An Emacs package for managing Django projects" :type github :pkgname "fgallina/python-django.el"))
+ (rust-mode status "installed" recipe
+            (:name rust-mode :type http :url "https://raw.github.com/mozilla/rust/master/src/etc/emacs/rust-mode.el" :description "Emacs mode for Rust" :features rust-mode))
  (s status "installed" recipe
     (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el" :features s))
  (scala-mode2 status "installed" recipe
