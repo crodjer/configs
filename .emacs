@@ -195,7 +195,7 @@
 (global-set-key "\C-c\M-s" 'flymake-display-err-menu-for-current-line)
 (global-set-key "\C-c\M-n" 'flymake-goto-next-error)
 (global-set-key "\C-c\M-p" 'flymake-goto-previous-error)
-(setq flymake-cursor-error-display-delay 0.1).
+(setq flymake-cursor-error-display-delay 0.1)
 
 ;; ------------
 ;; Paradit Mode
