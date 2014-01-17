@@ -9,6 +9,7 @@ fstype=none
 double="yes"
 ontop="1"
 vo=xv
+fs="yes"
 
 ### Audio
 # ao="pulse"
