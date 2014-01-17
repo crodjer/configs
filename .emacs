@@ -77,12 +77,16 @@
 
  ;; Backups
  backup-by-copying t
- backup-directory-alist '(("." . "~/.saves"))
+ backup-directory-alist '(("." . "~/.emacs.d/backups"))
  delete-old-versions t
  kept-new-versions 16
  kept-old-versions 2
  version-control t
  backup-by-copying-when-linked t
+
+ ;; Autosave
+ auto-save-interval 60
+ auto-save-file-name-transforms '((".*" "~/.emacs.d/saves/\\1" t))
 
  ;; Startup
  inhibit-startup-echo-area-message t
@@ -93,6 +97,7 @@
  user-full-name "Rohan Jain"
 
  ;; Misc
+ fill-column 80
  require-final-newline t
  column-number-mode t
  next-line-add-newlines nil
@@ -105,6 +110,7 @@
  x-select-enable-primary t
  vc-follow-symlinks t
  whitespace-style '(face tabs trailing)
+ create-lockfiles nil
 )
 
 ;; ----------------
@@ -149,8 +155,7 @@
 ;; ---------------
 (add-hook 'git-commit-mode-hook
           (lambda () (fci-mode 0)))
-(add-hook 'git-commit-mode-hook 'flyspell-mode)
-
+(add-hook 'git-commit-mode-hook 'flyspell-mode-on)
 ;; --------
 ;; FCI mode
 ;; --------
@@ -166,6 +171,7 @@
 ;; JS2 mode
 ;; --------
 (setq-default js2-global-externs '("$" "_")
+              js2-additional-externs nil
               js2-include-browser-externs t
               js2-include-node-externs t
               js2-include-jslint-globals t
@@ -180,6 +186,7 @@
 ;; ----------
 ;; Javascript
 ;; ----------
+(setq jshint-mode-jshint-path "jshint")
 (add-hook 'js2-mode-hook
      (lambda () (flymake-mode t)))
 
@@ -187,8 +194,6 @@
   (jshint-mode-stop)
   (jshint-mode-init))
 ;; (jshint-mode-restart)
-
-
 ;; -------
 ;; Flymake
 ;; -------
@@ -275,6 +280,15 @@
   (interactive)
   (shift-region -1))
 
+;;;;;;;
+;; Misc
+;;;;;;;
+(defadvice kill-line (after kill-line-cleanup-whitespace activate compile)
+  "cleanup whitespace on kill-line"
+  (if (not (bolp))
+	  (delete-region (point) (progn (skip-chars-forward " \t") (point)))))
+
+
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Custom keybindings
 ;;;;;;;;;;;;;;;;;;;;;
@@ -284,3 +298,15 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-<") 'shift-left)
 (global-set-key (kbd "C->") 'shift-right)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values (quote ((js2-additional-externs (quote ("Ember" "Cockpit")))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

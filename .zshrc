@@ -31,7 +31,7 @@ plugins=(git django history-substring-search )
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$HOME/bin:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/games
+export PATH=$HOME/bin:/usr/games:$HOME/.cabal/bin:$HOME/.local/bin:$HOME/.local/sbin:$HOME/.gem/ruby/2.0.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/games
 
 # vim bindings
 bindkey -e
@@ -170,6 +170,7 @@ alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock 
 alias h='history'
 alias clojurex='java -Xmx64m -cp /usr/share/java/clojure-1.4.0.jar:.'
 alias kvm='qemu-system-x86_64 -enable-kvm'
+alias signal='wvdial strength 2>&1 | grep +CSQ: | cut -d " " -f 2 | cut -d , -f 1'
 
 ### Exports
 export EDITOR='emacsclient -ct'
@@ -261,7 +262,7 @@ zlemma(){
     eset zlemma
     cd ~/workspace/zlemma/zlemma
     workon zlemma
-    export DJANGO_SETTINGS_MODULE=settings
+    export DJANGO_SETTINGS_MODULE=settings.local
 }
 
 hr(){
@@ -370,7 +371,10 @@ precmd () {
     export LD_PRELOAD=''
 }
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+which rbenv &> /dev/null && eval "$(rbenv init -)"
+
 [[ -s "/etc/profile.d/autojump.zsh" ]] && source "/etc/profile.d/autojump.zsh"
 export XAUTHORITY=/home/rohan/.Xauthority
 
@@ -381,5 +385,3 @@ export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=79000000
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
