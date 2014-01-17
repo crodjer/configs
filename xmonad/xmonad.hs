@@ -65,6 +65,7 @@ manageHook' = composeAll
               , isDialog                      --> doFloat
               , className     =? "Xmessage"   --> doFloat
               , className     =? "MPlayer"    --> ask >>= doF . W.sink
+              , className     =? "MPlayer"    --> doShift "9"
               , manageDocks
               ]
 
