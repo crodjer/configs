@@ -58,6 +58,8 @@ alias pug='sudo pacman -Syu'
 alias pugf='pug'
 alias pse='pacman -Ss'
 alias pr='sudo pacman -R'
+alias psh='pacman -Si'
+alias pshi='pacman -Qi'
 # alias pi='sudo aptitude install'
 # alias pif='sudo apt-metalink install'
 # alias pr='sudo aptitude remove'
@@ -179,6 +181,7 @@ export PYTHONSTARTUP=$HOME/.pythonrc
 export _JAVA_AWT_WM_NONREPARENTING=1
 export LEDGER_FILE=$HOME/documents/accounts/personal.dat
 
+export LESSOPEN="| /usr/bin/source-highlight-esc.sh %s"
 export LESS='-r'
 #export http_proxy=http://144.16.192.247:8080/
 #export http_proxy=http://10.3.100.212:8080/
