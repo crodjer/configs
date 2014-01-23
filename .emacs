@@ -50,7 +50,6 @@
 (require 'auto-complete-config)
 (require 'js2-mode)
 (require 'whitespace)
-(require 'git-commit)
 (require 'scala-mode2)
 (require 'virtualenv)
 (require 'flymake)
@@ -59,6 +58,7 @@
 (require 'flymake-jshint)
 (require 'paredit)
 (require 'geiser-install)
+(require 'erlang)
 
 ;; ----------------------
 ;; General customizations
@@ -150,12 +150,6 @@
 (add-hook 'html-mode-hook
           (lambda () (flyspell-mode 0)))
 
-;; ---------------
-;; Git commit mode
-;; ---------------
-(add-hook 'git-commit-mode-hook
-          (lambda () (fci-mode 0)))
-(add-hook 'git-commit-mode-hook 'flyspell-mode-on)
 ;; --------
 ;; FCI mode
 ;; --------
@@ -303,7 +297,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((js2-additional-externs (quote ("Ember" "Cockpit")))))))
+ '(safe-local-variable-values (quote ((erlang-indent-level . 4) (js2-additional-externs (quote ("Ember" "Cockpit")))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
