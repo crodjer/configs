@@ -14,6 +14,13 @@
  (epc status "installed" recipe
       (:name epc :description "An RPC stack for Emacs Lisp" :type github :pkgname "kiwanami/emacs-epc" :depends
              (deferred ctable)))
+ (epl status "installed" recipe
+      (:name epl :description "EPL provides a convenient high-level API for various package.el versions, and aims to overcome its most striking idiocies." :type github :pkgname "cask/epl"))
+ (erlang-mode status "installed" recipe
+              (:name erlang-mode :description "Major mode for editing and running Erlang" :type http :url "http://www.erlang.org/download/contrib/erlang.el" :post-init
+                     (progn
+                       (add-to-list 'auto-mode-alist
+                                    '("\\.erl$" . erlang-mode)))))
  (f status "installed" recipe
     (:name f :website "https://github.com/rejeep/f.el" :description "Modern API for working with files and directories in Emacs" :type github :pkgname "rejeep/f.el"))
  (find-file-in-project status "installed" recipe
@@ -31,8 +38,8 @@
                 :build/windows-nt
                 `("sh ./autogen.sh" "sh ./configure" "make" ,(concat "cd doc & " el-get-install-info " --dir-file=./dir *.info"))
                 :info "doc" :features geiser-load))
- (git-commit-mode status "installed" recipe
-                  (:name git-commit-mode :description "Major mode for editing git commit messages" :type github :pkgname "rafl/git-commit-mode" :features git-commit))
+ (git-modes status "installed" recipe
+            (:name git-modes :description "GNU Emacs modes for various Git-related files" :type github :pkgname "magit/git-modes"))
  (haskell-mode status "installed" recipe
                (:name haskell-mode :description "A Haskell editing mode" :type github :pkgname "haskell/haskell-mode" :info "." :build
                       `(("make" ,(format "EMACS=%s" el-get-emacs)
