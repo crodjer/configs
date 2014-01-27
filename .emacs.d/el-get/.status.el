@@ -55,15 +55,6 @@
           (:name idomenu :type emacswiki :description "imenu tag selection a la ido" :load-path "."))
  (iedit status "installed" recipe
         (:name iedit :description "Edit multiple regions with the same content simultaneously." :type emacswiki :features iedit))
- (jedi status "installed" recipe
-       (:name jedi :description "An awesome Python auto-completion for Emacs" :type github :pkgname "tkf/emacs-jedi" :build
-              (("make" "requirements"))
-              :build/windows-nt
-              (("make" "requirements" "PYTHON=python.exe" "BINDIR=Scripts"))
-              :build/berkeley-unix
-              (("gmake" "requirements"))
-              :submodule nil :depends
-              (epc auto-complete)))
  (js2-mode status "installed" recipe
            (:name js2-mode :website "https://github.com/mooz/js2-mode#readme" :description "An improved JavaScript editing mode" :type github :pkgname "mooz/js2-mode" :prepare
                   (autoload 'js2-mode "js2-mode" nil t)))
@@ -81,33 +72,9 @@
            (:name pkg-info :description "Provide information about Emacs packages." :type github :pkgname "lunaryorn/pkg-info.el" :depends s))
  (popup status "installed" recipe
         (:name popup :website "https://github.com/auto-complete/popup-el" :description "Visual Popup Interface Library for Emacs" :type github :pkgname "auto-complete/popup-el"))
- (python-django status "installed" recipe
-                (:name python-django :description "An Emacs package for managing Django projects" :type github :pkgname "fgallina/python-django.el"))
  (rust-mode status "installed" recipe
             (:name rust-mode :type http :url "https://raw.github.com/mozilla/rust/master/src/etc/emacs/rust-mode.el" :description "Emacs mode for Rust" :features rust-mode))
  (s status "installed" recipe
     (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el" :features s))
  (scala-mode2 status "installed" recipe
-              (:name scala-mode2 :website "https://github.com/hvesalai/scala-mode2" :description "A new scala-mode for Emacs 24" :type github :pkgname "hvesalai/scala-mode2" :load-path "." :features scala-mode2))
- (virtualenv status "installed" recipe
-             (:name virtualenv :description "Virtualenv for Python" :type github :pkgname "aculich/virtualenv.el"))
- (yasnippet status "installed" recipe
-            (:name yasnippet :website "https://github.com/capitaomorte/yasnippet.git" :description "YASnippet is a template system for Emacs." :type github :pkgname "capitaomorte/yasnippet" :features "yasnippet" :pre-init
-                   (unless
-                       (or
-                        (boundp 'yas/snippet-dirs)
-                        (get 'yas/snippet-dirs 'customized-value))
-                     (setq yas/snippet-dirs
-                           (list
-                            (concat el-get-dir
-                                    (file-name-as-directory "yasnippet")
-                                    "snippets"))))
-                   :post-init
-                   (put 'yas/snippet-dirs 'standard-value
-                        (list
-                         (list 'quote
-                               (list
-                                (concat el-get-dir
-                                        (file-name-as-directory "yasnippet")
-                                        "snippets")))))
-                   :compile nil :submodule nil)))
+              (:name scala-mode2 :website "https://github.com/hvesalai/scala-mode2" :description "A new scala-mode for Emacs 24" :type github :pkgname "hvesalai/scala-mode2" :load-path "." :features scala-mode2)))
