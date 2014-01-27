@@ -337,7 +337,7 @@ bs() {
 }
 
 # Rooter; https://github.com/yeban/rooter.sh
-# . $HOME/workspace/scripts/rooter.sh/rooter.sh
+. $HOME/workspace/configs/scripts/rooter.sh
 
 preexec () {
     local command=${(V)1//\%\%\%}
