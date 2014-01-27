@@ -46,15 +46,12 @@
 (el-get 'sync)
 
 (require 'haskell-mode-autoloads)
-(require 'yasnippet)
 (require 'auto-complete-config)
 (require 'js2-mode)
 (require 'whitespace)
 (require 'scala-mode2)
-(require 'virtualenv)
 (require 'flymake)
 (require 'flymake-cursor)
-(require 'python-django)
 (require 'flymake-jshint)
 (require 'paredit)
 (require 'geiser-install)
@@ -169,14 +166,34 @@
               js2-include-browser-externs t
               js2-include-node-externs t
               js2-include-jslint-globals t
-              js2-strict-inconsistent-return-warning nil)
+              js2-strict-inconsistent-return-warning nil
+              js2-skip-preprocessor-directives t)
 
 ;; -----------
 ;; Python Mode
 ;; -----------
+(when (load "flymake" t)
+  (defun flymake-pylint-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (if python-shell-virtualenv-path
+          (list
+           (format "virtualenv-exec.sh" )
+           (list python-shell-virtualenv-path "epylint" local-file))
+        (list "epylint" (list local-file)))))
+  (add-to-list 'flymake-allowed-file-name-masks
+             '("\\.py\\'" flymake-pylint-init)))
+
+(defun flymake-mode-hook-function ()
+  (when (derived-mode-p 'python-mode)
+    (flymake-mode t)))
+(add-hook 'hack-local-variables-hook #'flymake-mode-hook-function)
+
 (setq virtualenv-workon-starts-python nil)
-(add-hook 'python-mode-hook
-          (lambda() (require 'virtualenv)))
+
 ;; ----------
 ;; Javascript
 ;; ----------
@@ -191,9 +208,9 @@
 ;; -------
 ;; Flymake
 ;; -------
-(global-set-key "\C-c\M-s" 'flymake-display-err-menu-for-current-line)
-(global-set-key "\C-c\M-n" 'flymake-goto-next-error)
-(global-set-key "\C-c\M-p" 'flymake-goto-previous-error)
+(global-set-key "\C-cs" 'flymake-display-err-menu-for-current-line)
+(global-set-key "\C-cn" 'flymake-goto-next-error)
+(global-set-key "\C-cp" 'flymake-goto-previous-error)
 (setq flymake-cursor-error-display-delay 0.1)
 
 ;; ------------
