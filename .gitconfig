@@ -33,10 +33,10 @@
 	remote = origin
 	merge = refs/heads/master
 [instaweb]
-	browser = google-chrome
+	browser = firefox
 	port = 4321
 [web]
-	browser = google-chrome
+	browser = firefox
 [cola]
 	tabwidth = 4
 [gui]
