@@ -173,7 +173,10 @@ setUp(){
     link xmonad/xmonad.hs .xmonad/xmonad.hs
 
     mkHomeConfDir emacs.d
+    mkHomeConfDir emacs.d/el-get
     link .emacs
+    link .emacs.d/scripts
+    link .emacs.d/el-get/status.el
     link .emacs.d/el-get-users
 
     # $HOME/.ncmpcpp for ncmpcpp client configs
@@ -181,6 +184,10 @@ setUp(){
     link ncmpcpp/config .ncmpcpp/config
 
     chmod +x ~/.xsession*
+
+    mkHomeConfDir local/bin
+    link scripts/display.sh .local/bin/display.sh
+    link scripts/lock .local/bin/lock
 }
 
 # Execute setUp
