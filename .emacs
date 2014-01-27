@@ -172,6 +172,17 @@
 ;; -----------
 ;; Python Mode
 ;; -----------
+(defun join-list (list delimiter)
+  (mapconcat 'identity list delimiter))
+(defun python-calculate-env ()
+  (format "%s"
+          ;; (join-list (python-shell-calculate-process-environment) " ")
+          (format "PATH=%s"
+                  (join-list (python-shell-calculate-exec-path) ":"))
+          ))
+(defun python-virtualenv-exec (command args)
+  (list "env" (append (list (python-calculate-env) command) args)))
+
 (when (load "flymake" t)
   (defun flymake-pylint-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -179,11 +190,7 @@
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-      (if python-shell-virtualenv-path
-          (list
-           (format "virtualenv-exec.sh" )
-           (list python-shell-virtualenv-path "epylint" local-file))
-        (list "epylint" (list local-file)))))
+      (python-virtualenv-exec "epylint" (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
              '("\\.py\\'" flymake-pylint-init)))
 
