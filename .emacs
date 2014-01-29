@@ -175,8 +175,12 @@
 (defun join-list (list delimiter)
   "Join a list of strings by a delimiter string."
   (mapconcat 'identity list delimiter))
+(defun python-calculate-path-string ()
+  "Calculate path string for current python virtualenv."
+  (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":")))
 (defun python-calculate-env ()
   "Calculate env variables for current python virtualenv."
+  (python-calculate-path-string)
   (join-list
    (cons
     (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":"))
@@ -195,7 +199,13 @@ commands."
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-      (python-virtualenv-exec "pyflakes" (list local-file))))
+      (python-virtualenv-exec
+       "pylint"
+       (list
+        ;; Pylint args. Will depend on the checker being used.
+        "-r" "n"
+        "--msg-template='{path}:{line}:{category} [{msg_id} {obj}] {msg}'"
+        local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
              '("\\.py\\'" flymake-python-init)))
 
@@ -205,7 +215,6 @@ commands."
 ;; Run flymake mode hook function after the local variables are set (eg: through
 ;; .dir-locals.el
 (add-hook 'hack-local-variables-hook #'flymake-mode-hook-function)
-
 (setq virtualenv-workon-starts-python nil)
 
 ;; ----------
@@ -225,7 +234,13 @@ commands."
 (global-set-key "\C-cs" 'flymake-display-err-menu-for-current-line)
 (global-set-key "\C-cn" 'flymake-goto-next-error)
 (global-set-key "\C-cp" 'flymake-goto-prev-error)
-(setq flymake-cursor-error-display-delay 0.1)
+(setq
+ flymake-cursor-error-display-delay 0.1
+ flymake-log-level -1
+)
+(custom-set-faces
+ '(flymake-errline ((t (:underline "red"))))
+ '(flymake-warnline ((t))))
 
 ;; ------------
 ;; Paradit Mode
@@ -334,10 +349,3 @@ commands."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values (quote ((python-shell-extra-pythonpaths . "/home/rohan/workspace/zlemma/zlemma") (erlang-indent-level . 4) (js2-additional-externs (quote ("Ember" "Cockpit")))))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(flymake-errline ((t (:underline "red"))))
- '(flymake-warnline ((t (:underline t)))))
