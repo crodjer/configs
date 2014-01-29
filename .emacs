@@ -202,6 +202,8 @@ commands."
 (defun flymake-mode-hook-function ()
   (when (derived-mode-p 'python-mode)
     (flymake-mode t)))
+;; Run flymake mode hook function after the local variables are set (eg: through
+;; .dir-locals.el
 (add-hook 'hack-local-variables-hook #'flymake-mode-hook-function)
 
 (setq virtualenv-workon-starts-python nil)
