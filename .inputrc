@@ -1,2 +1,4 @@
 # set keymap vi
 # set editing-mode vi
+set bell-style none
+set show-all-if-ambiguous on
