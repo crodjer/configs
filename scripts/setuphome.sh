@@ -154,12 +154,15 @@ setUp(){
     link .udisks-glue.conf
     link vim .vim
     link .xmobarrc
+    link .profile
     link .Xresources
     link .xsessionrc
     link .xsession
     link .xinitrc
     link .screenlayout
     link .zshrc
+    link .bash_profile
+    link .bashrc
     link .irbrc
     link vim/vimrc .vimrc
     link vim/gvimrc .gvimrc
