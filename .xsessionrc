@@ -32,7 +32,7 @@ pulseaudio &
 ## Start some useful programms
 pkill udisks-glue; udisks-glue &
 pkill mpd; mpd &
-xautolock -exit; xautolock -time 10 -locker "$HOME/bin/lock" &
+xautolock -exit; xautolock -time 10 -locker "lock" &
 pkill mpdscribble;mpdscribble &
 pkill notification-dae; /usr/lib/notification-daemon/notification-daemon &
 #pkill wicd-client;wicd-client -t &
