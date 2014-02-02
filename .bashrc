@@ -35,10 +35,10 @@ alias pi='p -S'
 alias pud='p -Sy'
 alias pug='p -Syu'
 alias pugf='pug'
-alias pse='p -Ss'
-alias pr='p -R'
-alias psh='p -Si'
-alias pshi='p -Qi'
+alias pse='pacman -Ss'
+alias pr='pacman -R'
+alias psh='pacman -Si'
+alias pshi='pacman -Qi'
 
 alias halt='sudo shutdown -h now'
 alias reboot='sudo reboot'
@@ -139,17 +139,18 @@ function serve(){
 # Completion
 #-------------------------#
 
-if [ -d /usr/share/bash-completion ]; then
+[[ -e /usr/share/bash-completion/completions/git ]] && {
     source /usr/share/bash-completion/completions/git
-    source /usr/share/bash-completion/completions/mpc
-    source /usr/share/bash-completion/completions/pacman
-
     complete -F _git g
+}
+[[ -e /usr/share/bash-completion/completions/mpc ]] && {
+    source /usr/share/bash-completion/completions/mpc
     complete -F _mpc m
+}
+[[ -e /usr/share/bash-completion/completions/pacman ]] && {
+    source /usr/share/bash-completion/completions/pacman
     complete -F _pacman p
-    complete -F _pacman_pkg pi
-fi
-
+}
 
 #-------------------------#
 # Prompt
@@ -179,7 +180,7 @@ prompt() {
         else
             VC_STATUS="*"
         fi
-        VC_INFO="$(_col 32 b) $VC_CHAR ($(_col 36)$VC_REF$VC_STATUS)$(_col 34)"
+        VC_INFO="$(_col 32 b) $VC_CHAR $(_col 36)($VC_REF$VC_STATUS)$(_col 34)"
     else
         VC_INFO=""
     fi
@@ -199,7 +200,7 @@ prompt() {
 
     _PUSER="$(_col $_PUSER_COLOR b)\u$(_col 30)@$(_col 36)\h$(_col 34)"
     _PTIME="$(_col 33)\@$(_col 34)"
-    _PDIR="$(_col 30)\W$(_col 34)"
+    _PDIR="$(_col 32)\W$(_col 34)"
 
     _L1="┌─[$_PUSER]-[$_PTIME]$VC_INFO$_PVENV"
     _L2="└─($_PDIR)->"
