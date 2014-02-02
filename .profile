@@ -29,9 +29,13 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "/opt/local" ]  && MANPATH="$MANPATH:/opt/local/share/man:/opt/local/man"
                         MANPATH="$MANPATH:/usr/share/man:/usr/man"
 
+
 #-------------------------#
-# BASE - APPLICATIONS     #
+# BASE - Environment
 #-------------------------#
+[[ -e /usr/share/zoneinfo/Asia/Kolkata ]] && {
+    export TZ="/usr/share/zoneinfo/Asia/Kolkata"
+}
 export EDITOR='vi'
 exists emacsclient && EDITOR='emacsclient -ct' || {
     exists zile && EDITOR=zile;
