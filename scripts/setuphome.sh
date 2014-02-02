@@ -97,6 +97,11 @@ link(){
 
     SOURCE=$CONFIG_DIR/$1
     DEST="$DEST_HOME/${2:-$1}"
+
+    if [[ "$3" == "_parent" ]]; then
+        DEST=$(dirname $DEST)/
+    fi
+
     echo "Linking $SOURCE to $DEST"
 
     if [ $EXECUTE ]; then
@@ -133,9 +138,6 @@ setUp(){
         fi
     fi
 
-    # Fetch updated scripts
-    cloneScripts
-
     # Fetch update configuration files
     cloneConfigs
 
@@ -146,7 +148,6 @@ setUp(){
     link .hgrc
     link .inputrc
     link .mpdconf
-    link .mplayer
     link .muttrc
     link .mailcap
     link oh-my-zsh .oh-my-zsh
@@ -169,7 +170,8 @@ setUp(){
 
     # $HOME/.config directroy for programs which store conf here
     mkHomeConfDir config
-    link config/awesome .config/awesome
+    link config/awesome .config/awesome _parent
+    link .mplayer .mplayer _parent
 
     # $HOME/.xmonad directroy for xmonad configs
     mkHomeConfDir xmonad
