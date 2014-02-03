@@ -83,6 +83,7 @@ alias lla='ls -al'
 alias reb='exec bash'
 alias ssh='TERM=linux;ssh'
 alias cssh='TERM=linux;cssh'
+alias screen='screen -U'
 
 # Git aliases
 git_branch () {
