@@ -5,5 +5,5 @@ set mark-symlinked-directories on
 set bell-style none
 set show-all-if-ambiguous on
 
-Tab: menu-complete
-"\e[Z": menu-complete-backward
+# Tab: menu-complete
+# "\e[Z": menu-complete-backward
