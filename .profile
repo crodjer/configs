@@ -22,6 +22,7 @@ export                       PATH="$HOME/.bin:/usr/local/sbin:/usr/local/bin"
 [ -d "/opt/local" ]       && PATH="$PATH:/opt/local/sbin:/opt/local/bin"
 [ -d "/bin/vendor_perl" ] && PATH="$PATH:/bin/vendor_perl"
                              PATH="$PATH:$HOME/.cabal/bin"
+                             PATH="$PATH:$HOME/.gem/ruby/2.1.0/bin"
                              PATH="$PATH:/usr/sbin:/usr/bin:/sbin:/bin"
 
 export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
