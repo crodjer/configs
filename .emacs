@@ -125,6 +125,7 @@
 (add-to-list 'auto-mode-alist '("\\.jshintrc\\'" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.rkt$" . scheme-mode))
+(add-to-list 'auto-mode-alist '("\\.pyx$" . python-mode))
 
 ;; ------------------
 ;; General mode hooks
@@ -175,16 +176,13 @@
 (defun join-list (list delimiter)
   "Join a list of strings by a delimiter string."
   (mapconcat 'identity list delimiter))
-(defun python-calculate-path-string ()
-  "Calculate path string for current python virtualenv."
-  (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":")))
 (defun python-calculate-env ()
   "Calculate env variables for current python virtualenv."
-  (python-calculate-path-string)
   (join-list
    (cons
     (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":"))
-    (python-shell-calculate-process-environment))
+    (python-shell-calculate-process-environment)
+    )
    " "))
 
 (defun python-virtualenv-exec (command args)
