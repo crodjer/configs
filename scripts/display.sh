@@ -50,4 +50,4 @@ esac
 bash $HOME/.fehbg
 
 # Rest trayer location
-$HOME/bin/mytrayer
+mytrayer
