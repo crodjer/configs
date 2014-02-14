@@ -19,6 +19,10 @@ exists() {
     test -x "$(command -v "$1")"
 }
 
+# Enabled blocked forward incrmental search
+# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=383760
+stty -ixon
+
 #-------------------------#
 # Aliases
 #-------------------------#
@@ -28,7 +32,8 @@ alias less='less'
 alias free='free -m'
 
 alias ..='cd ..'
-alias ...='cd ...'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 alias p='sudo pacman'
 alias pi='p -S'
@@ -133,7 +138,7 @@ alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock 
 alias h='history'
 
 function serve(){
-    python -m http.server ${1:-8000}
+    python3 -m http.server ${1:-8000}
 }
 
 #-------------------------#
@@ -247,9 +252,28 @@ dj(){
 }
 
 zlemma(){
-    cd ~/workspace/zlemma/zlemma
-    workon zlemma
+    zlemma_parent=/home/rohan/workspace/zlemma
+
     export DJANGO_SETTINGS_MODULE=settings.local
+
+    case $1 in
+        re*)
+            env='inscoring'
+            project='recruiterservice'
+            ;;
+        sc*)
+            env='inscoring'
+            project='scoringservice'
+            ;;
+        *)
+            env='zlemma'
+            project='zlemma'
+            ;;
+    esac
+
+    cd $zlemma_parent/$project
+    export PYTHONPATH=$PWD:$PYTHONPATH
+    workon $env
 }
 
 hr(){
