@@ -176,13 +176,20 @@
 (defun join-list (list delimiter)
   "Join a list of strings by a delimiter string."
   (mapconcat 'identity list delimiter))
+
 (defun python-calculate-env ()
   "Calculate env variables for current python virtualenv."
   (join-list
    (cons
+    ;; This should be not neeeded eventually
     (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":"))
-    (python-shell-calculate-process-environment)
-    )
+    ;; after the issue with the following env is figured out
+    (remove-if
+     (lambda (x)
+       (or
+        (string-match " " x)
+        (not (string-match "=" x))))
+     (python-shell-calculate-process-environment)))
    " "))
 
 (defun python-virtualenv-exec (command args)
@@ -234,7 +241,7 @@ commands."
 (global-set-key "\C-cp" 'flymake-goto-prev-error)
 (setq
  flymake-cursor-error-display-delay 0.1
- flymake-log-level -1
+ flymake-log-level 0
 )
 (custom-set-faces
  '(flymake-errline ((t (:underline "red"))))
