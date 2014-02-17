@@ -173,29 +173,28 @@
 ;; -----------
 ;; Python Mode
 ;; -----------
-(defun join-list (list delimiter)
-  "Join a list of strings by a delimiter string."
-  (mapconcat 'identity list delimiter))
-
 (defun python-calculate-env ()
   "Calculate env variables for current python virtualenv."
-  (join-list
-   (cons
-    ;; This should be not neeeded eventually
-    (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":"))
-    ;; after the issue with the following env is figured out
-    (remove-if
-     (lambda (x)
-       (or
-        (string-match " " x)
-        (not (string-match "=" x))))
-     (python-shell-calculate-process-environment)))
-   " "))
+  ;; ;; This also overrides PYTHONHOME to "", which breaks the process
+  ;; ;; environment. Otherwise, a neat idea.
+  ;; (mapcar
+  ;;  (lambda (string)
+  ;;    (let ((splitted-string (split-string string "=")))
+  ;;      (format "%s=\"%s\"" (car splitted-string) (or (cadr splitted-string)
+  ;;                                                    ""))))
+  ;; (python-shell-calculate-process-environment)))
+  (remove-if
+   (lambda (x)
+     (or
+      ;; If environment
+      (string-match " " x)
+      (not (string-match "=" x))))
+   (python-shell-calculate-process-environment)))
 
 (defun python-virtualenv-exec (command args)
   "Generate a flymake friendly list executable in virtualenv, for provided
 commands."
-  (list "env" (append (list (python-calculate-env) command) args)))
+  (list "env" (append (python-calculate-env) (list command) args)))
 
 (when (load "flymake" t)
   (defun flymake-python-init ()
