@@ -19,14 +19,15 @@ exists() {
 #-------------------------#
 export                       PATH="$HOME/.bin:/usr/local/sbin:/usr/local/bin"
 [ -d "$HOME/.local" ]     && PATH="$PATH:$HOME/.local/sbin:$HOME/.local/bin"
+[ -d "$HOME/.cabal" ]     && PATH="$PATH:$HOME/.cabal/bin"
 [ -d "/opt/local" ]       && PATH="$PATH:/opt/local/sbin:/opt/local/bin"
 [ -d "/bin/vendor_perl" ] && PATH="$PATH:/bin/vendor_perl"
-                             PATH="$PATH:$HOME/.cabal/bin"
                              PATH="$PATH:$HOME/.gem/ruby/2.1.0/bin"
                              PATH="$PATH:/usr/sbin:/usr/bin:/sbin:/bin"
 
 export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
-[ -d "$HOME/.local" ]&& MANPATH="$PATH:$HOME/.local/share/man:$HOME/.local/man"
+[ -d "$HOME/.local" ]&& MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
+[ -d "$HOME/.cabal" ]&& MANPATH="$MANPATH:$HOME/.cabal/share/man"
 [ -d "/opt/local" ]  && MANPATH="$MANPATH:/opt/local/share/man:/opt/local/man"
                         MANPATH="$MANPATH:/usr/share/man:/usr/man"
 
