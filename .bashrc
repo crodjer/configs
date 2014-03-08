@@ -8,7 +8,7 @@
 #-------------------------#
 # Bash configuration
 #-------------------------#
-shopt -s histappend
+shopt -s histappend autocd
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 export HISTSIZE=10000
@@ -39,9 +39,9 @@ alias p='sudo pacman'
 alias pi='p -S'
 alias pud='p -Sy'
 alias pug='p -Syu'
+alias pr='p -R'
 alias pugf='pug'
 alias pse='pacman -Ss'
-alias pr='pacman -R'
 alias psh='pacman -Si'
 alias pshi='pacman -Qi'
 
@@ -55,9 +55,11 @@ alias s2ram='sudo pm-suspend && display.sh'
 alias s2both='sudo s2both && display.sh'
 
 alias node='env NODE_NO_READLINE=1 rlwrap node'
+alias npm='PREFIX=/home/rohan/.local npm'
 
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
+
 
 exists emacsclient && {
     alias e='emacsclient -n'
@@ -96,8 +98,8 @@ git_branch () {
 }
 alias g="git"
 alias ga="git add"
-alias gc="git commit"
-alias gca="git commit -a"
+alias gc="git commit -v"
+alias gca="git commit -va"
 alias gst="git status"
 alias gco="git checkout"
 alias gl="git pull"
