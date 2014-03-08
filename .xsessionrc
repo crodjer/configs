@@ -5,8 +5,8 @@ xset b 100 400 100
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # Map menu key to Super_R (Useful for laptop keyboard)
-setxkbmap -model thinkpad -layout us
-setxkbmap -option caps:escape
+# setxkbmap -model thinkpad -layout us
+# setxkbmap -option caps:escape
 xmodmap -e "keycode 107 = Super_R NoSymbol Super_R"
 
 ## Touchpad settings

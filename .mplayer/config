@@ -12,7 +12,7 @@ vo=xv
 fs="yes"
 
 ### Audio
-# ao="pulse"
+ao="alsa,oss"
 softvol="yes"
 softvol-max=400
 volume=5
