@@ -180,8 +180,11 @@
   ;; (mapcar
   ;;  (lambda (string)
   ;;    (let ((splitted-string (split-string string "=")))
-  ;;      (format "%s=\"%s\"" (car splitted-string) (or (cadr splitted-string)
-  ;;                                                    ""))))
+  ;;      (format
+  ;;       "%s=\"%s\""
+  ;;       (car splitted-string)
+  ;;       (or (cadr splitted-string)
+  ;;           ""))))
   ;; (python-shell-calculate-process-environment)))
   (remove-if
    (lambda (x)

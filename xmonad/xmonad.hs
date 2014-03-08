@@ -214,6 +214,8 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0 , 0x1008ff16), spawn "mpc prev")
     -- XF86AudioPlay
     , ((0 , 0x1008ff14), spawn "mpc toggle")
+    -- XF86Display
+    , ((0 , 0x1008ff59), spawn "xset dpms force off")
 
     -- quit, or restart
     , ((modMask .|. shiftMask, xK_q     ), io exitSuccess)
