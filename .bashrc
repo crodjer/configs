@@ -134,6 +134,10 @@ function mdw(){
     _alter_mpd_vol "-" $1
 }
 
+function b() {
+    xbacklight -set $(($1 + 1))
+}
+
 alias entertain='mplayer "$(find "." -type f -regextype posix-egrep -regex ".*\.(avi|mkv|flv|mpg|mpeg|mp4|wmv|3gp|mov|divx)" | shuf -n1)"'
 alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"'
 
