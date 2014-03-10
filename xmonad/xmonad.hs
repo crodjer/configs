@@ -1,8 +1,9 @@
 {- xmonad.hs
- - Author: �yvind 'Mr.Elendig' Heggstad <mrelendig AT har-ikkje DOT net>
- - Version: 0.0.9
- - Modified version
+ - Author: Rohan Jain <crodjer AT gmail DOT com>
  -}
+
+-- Borrowed from the xmonad.hs by �yvind 'Mr.Elendig' Heggstad <mrelendig AT
+-- har-ikkje DOT net>
 
 -------------------------------------------------------------------------------
 -- Imports --
@@ -216,6 +217,12 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0 , 0x1008ff14), spawn "mpc toggle")
     -- XF86Display
     , ((0 , 0x1008ff59), spawn "xset dpms force off")
+    -- XF86Display
+    , ((0 , 0x1008ff59), spawn "xset dpms force off")
+    -- XF86MonBrightnessDown
+    , ((0 , 0x1008ff03), spawn "xbacklight -dec 2")
+    -- XF86MonBrightnessUp
+    , ((0 , 0x1008ff02), spawn "xbacklight -inc 2")
 
     -- quit, or restart
     , ((modMask .|. shiftMask, xK_q     ), io exitSuccess)
