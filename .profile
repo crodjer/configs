@@ -57,6 +57,7 @@ export LESS='-r'
 export GREP_COLOR=31
 export PAGER=less
 export MANPAGER=$PAGER
+export NODE_PATH=/home/rohan/.local/lib/node_modules:/usr/lib/node_modules
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
