@@ -11,8 +11,8 @@
 shopt -s histappend autocd
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL=ignoredups:ignorespace:erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTSIZE=-1
+export HISTFILESIZE=-1
 export HISTIGNORE="ls:la:l:ll:lla:[bf]g:clear:exit"
 PS1='[\u@\h \W]\$ '
 exists() {
@@ -79,7 +79,7 @@ alias ee='e ~/.emacs'
 #A pad to dump arbit data
 alias ed='e /home/rohan/workspace/trash/dumppad.md'
 
-alias ls='ls --color=yes'
+alias ls='ls --color=auto'
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
@@ -91,6 +91,7 @@ alias reb='exec bash'
 alias ssh='TERM=linux;ssh'
 alias cssh='TERM=linux;cssh'
 alias screen='screen -U'
+alias t='task'
 
 # Git aliases
 git_branch () {
@@ -150,19 +151,16 @@ function serve(){
 #-------------------------#
 # Completion
 #-------------------------#
-
-[[ -e /usr/share/bash-completion/completions/git ]] && {
-    source /usr/share/bash-completion/completions/git
-    complete -F _git g
+re_comp() {
+    [[ -e /usr/share/bash-completion/completions/$1 ]] && {
+        source /usr/share/bash-completion/completions/$1
+        complete -F _$1 $2
+    }
 }
-[[ -e /usr/share/bash-completion/completions/mpc ]] && {
-    source /usr/share/bash-completion/completions/mpc
-    complete -F _mpc m
-}
-[[ -e /usr/share/bash-completion/completions/pacman ]] && {
-    source /usr/share/bash-completion/completions/pacman
-    complete -F _pacman p
-}
+re_comp git g
+re_comp mpc m
+re_comp pacman p
+re_comp task t
 
 #-------------------------#
 # Prompt
