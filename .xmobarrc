@@ -1,6 +1,6 @@
 -- -*-Haskell-*-
 
-Config { font = "xft:Monospace:size=8:bold"
+Config { font = "xft:Monospace:size=9:bold"
        , bgColor = "black"
        , fgColor = "white"
        , position = Top

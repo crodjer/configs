@@ -108,7 +108,7 @@ workspaces' :: [WorkspaceId]
 workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 -- layouts
-myTiled = smartBorders $ ResizableTall 1 (3/100) (1/2) []
+myTiled = smartBorders $ ResizableTall 1 (3/100) (52/100) []
 myFull = noBorders Full
 myTabbed = noBorders $ tabbed shrinkText defaultTheme
 mySWNConfig = defaultSWNConfig
