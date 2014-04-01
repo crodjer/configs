@@ -292,7 +292,7 @@ commands."
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-(set-face-attribute 'default nil :height 90)
+(set-face-attribute 'default nil :height 96)
 
 (setq linum-format "%4d")
 (global-linum-mode 1)
