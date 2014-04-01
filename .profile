@@ -42,6 +42,7 @@ export EDITOR='vi'
 exists emacsclient && EDITOR='emacsclient -ct' || {
     exists zile && EDITOR=zile;
 }
+export HOSTALIASES=~/.hosts
 
 #-------------------------#
 # SHELL - CHECK TYPE      #
