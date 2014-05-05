@@ -5,10 +5,6 @@
 
 ;;; Code:
 
-;; Start emacs server
-;; ------------------
-(server-start)
-
 ;; ----------
 ;; Load paths
 ;; ----------
@@ -24,6 +20,7 @@
 (require 'uniquify)
 (require 'saveplace)
 (require 'gnus)
+(require 'tramp)
 
 ;; Installed in ~/.elisp
 (require 'fill-column-indicator)
@@ -108,7 +105,12 @@
  vc-follow-symlinks t
  whitespace-style '(face tabs trailing)
  create-lockfiles nil
+ tramp-default-method "ssh"
 )
+
+;; Server
+;; ------------------
+(server-start)
 
 ;; ----------------
 ;; auto-mode-alists
@@ -157,18 +159,13 @@
 ;; ------------
 ;; Haskell mode
 ;; ------------
+(autoload 'ghc-init "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-
-;; --------
-;; JS2 mode
-;; --------
-(setq-default js2-global-externs '("$" "_")
-              js2-additional-externs nil
-              js2-include-browser-externs t
-              js2-include-node-externs t
-              js2-include-jslint-globals t
-              js2-strict-inconsistent-return-warning nil
-              js2-skip-preprocessor-directives t)
+(defadvice ghc-display
+  (after ghc-display-auto-pop-advice ())
+  (pop-to-buffer ghc-error-buffer-name))
+; (ad-activate 'ghc-display)
 
 ;; -----------
 ;; Python Mode
@@ -235,6 +232,21 @@ commands."
   (jshint-mode-stop)
   (jshint-mode-init))
 ;; (jshint-mode-restart)
+
+(setq-default js2-global-externs '("$" "_")
+              js2-additional-externs nil
+              js2-include-browser-externs t
+              js2-include-node-externs t
+              js2-include-jslint-globals t
+              js2-strict-inconsistent-return-warning nil
+              js2-skip-preprocessor-directives t
+              js2-strict-trailing-comma-warning nil
+              js2-strict-missing-semi-warning nil)
+
+;; Override the function which highlights undeclared vars. I'll let jshint take
+;; care of this.
+(defun js2-highlight-undeclared-vars ())
+
 ;; -------
 ;; Flymake
 ;; -------
@@ -247,7 +259,7 @@ commands."
  ;; Match Convention/Refactor apart from warnings (from pylint)
  ;; flymake-warning-re "^\\([wW]arning\\|[cC]onvention\\|[rR]efactor\\)"
  flymake-warning-re (rx (or "warning" "Warning" "convention" "Convention"
-                            "refactor" "Refactor"))
+                            "refactor" "Refactor" "info" "Info"))
  )
 ;; ------------
 ;; Paradit Mode
@@ -355,10 +367,11 @@ commands."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(flymake-errline ((t (:underline "red")))))
+ '(flymake-errline ((t ("red"))))
+ '(flymake-warnline ((t nil))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((python-shell-extra-pythonpaths . "/home/rohan/workspace/zlemma/zlemma") (erlang-indent-level . 4) (js2-additional-externs (quote ("Ember" "Cockpit")))))))
+ '(safe-local-variable-values (quote (python-shell-extra-pythonpaths . "/home/rohan/workspace/zlemma/zlemma") (erlang-indent-level . 4))))

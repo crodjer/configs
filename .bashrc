@@ -113,6 +113,14 @@ alias ggpush='gp origin $(git_branch)'
 alias ggprnp='gl origin $(git_branch) --rebase && ggpush'
 alias gglr='gl origin $(git_branch) --rebase'
 
+# GHC aliases
+CABAL_SANDBOX_PKG_CONF=".cabal-sandbox/*-packages.conf.d"
+CABAL_SANDBOX_ARGS="-no-user-package-db -package-db $CABAL_SANDBOX_PKG_CONF"
+alias ghc-sandbox="ghc $CABAL_SANDBOX_ARGS"
+alias ghci-sandbox="ghci $CABAL_SANDBOX_ARGS"
+alias runhaskell-sandbox="runhaskell $CABAL_SANDBOX_ARGS"
+alias ghc-pkg-sandbox="ghc-pkg --no-user-package-db --package-db $CABAL_SANDBOX_PKG_CONF"
+
 # MPC aliases
 alias m="mpc"
 alias mstatus="mpc -f '%artist% - %title%\n%album%' status"
@@ -138,6 +146,32 @@ function mdw(){
 function b() {
     xbacklight -set $(($1 + 1))
 }
+
+batteryGeneric() {
+    TPACPI_BAT=1
+
+    if [[ ! -z "$2" ]]; then
+        sudo tpacpi-bat -s $1 $TPACPI_BAT $2
+    fi
+
+    sudo tpacpi-bat -v -g $1 $TPACPI_BAT
+    PERCENT=$(echo "$(sudo tpacpi-bat -g $1 $TPACPI_BAT  | cut -d ' ' -f 1)" | bc)
+    if [[ $PERCENT = 0 ]]; then
+        echo "Threshold set to default"
+    else
+        echo "Threshold set on $PERCENT%"
+    fi
+}
+
+thinkPadBatteryStartThreshold() {
+    batteryGeneric "ST" $1
+}
+alias tpBatST='thinkPadBatteryStartThreshold'
+
+thinkPadBatteryStopThreshold() {
+    batteryGeneric "SP" $1
+}
+alias tpBatSP='thinkPadBatteryStopThreshold'
 
 alias entertain='mplayer "$(find "." -type f -regextype posix-egrep -regex ".*\.(avi|mkv|flv|mpg|mpeg|mp4|wmv|3gp|mov|divx)" | shuf -n1)"'
 alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"'
@@ -258,9 +292,13 @@ dj(){
 zlemma(){
     zlemma_parent=/home/rohan/workspace/zlemma
 
-    export DJANGO_SETTINGS_MODULE=settings.local
+    export DJANGO_SETTINGS_MODULE=settings.personal
 
     case $1 in
+        em)
+            env='em'
+            project='entity-match'
+            ;;
         re*)
             env='inscoring'
             project='recruiterservice'
