@@ -39,8 +39,8 @@ pkill notification-dae; /usr/lib/notification-daemon/notification-daemon &
 #pkill xcompmgr;xcompmgr &
 
 urxvtd &
-#wicd -t
-#nm-applet &
-#mytrayer
+# wicd -t
+# nm-applet &
+mytrayer
 
 # vim:set ft=sh:

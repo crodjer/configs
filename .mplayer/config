@@ -1,5 +1,5 @@
 ### General
-quiet="1"
+# quiet="1"
 nolirc="1"
 nomouseinput="1"
 nojoystick="1"
@@ -14,13 +14,13 @@ fs="yes"
 ### Audio
 ao="alsa,oss"
 softvol="yes"
-softvol-max=400
+softvol-max=800
 volume=5
 #a52drc=1
 
 ## Appearance
 heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
-#stop-xscreensaver="yes"
+# stop-xscreensaver="yes"
 
 ### Subtitles
 #Fonts

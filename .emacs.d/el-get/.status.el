@@ -38,6 +38,8 @@
                 :build/windows-nt
                 `("sh ./autogen.sh" "sh ./configure" "make" ,(concat "cd doc & " el-get-install-info " --dir-file=./dir *.info"))
                 :info "doc" :features geiser-load))
+ (ghc-mod status "installed" recipe
+          (:name ghc-mod :description "Happy Haskell programming" :type github :pkgname "kazu-yamamoto/ghc-mod" :load-path "elisp"))
  (git-modes status "installed" recipe
             (:name git-modes :description "GNU Emacs modes for various Git-related files" :type github :pkgname "magit/git-modes"))
  (haskell-mode status "installed" recipe
