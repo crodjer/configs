@@ -261,6 +261,7 @@ commands."
  flymake-warning-re (rx (or "warning" "Warning" "convention" "Convention"
                             "refactor" "Refactor" "info" "Info"))
  )
+
 ;; ------------
 ;; Paradit Mode
 ;; ------------
@@ -271,23 +272,11 @@ commands."
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
-;; ----
-;; Gnus
-;; ----
-(setq gnus-asynchronous t
-      gnus-select-method
-      '(nnimap "gmail"
-               (nnimap-address "imap.gmail.com")
-               (nnimap-server-port 993)
-               (nnimap-stream ssl)))
-(setq message-send-mail-function 'smtpmail-send-it
-      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-      smtpmail-auth-credentials '(("smtp.gmail.com" 587
-                                   "crodjer@gmail.com" nil))
-      smtpmail-default-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587
-      gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+;; ---------
+;; Mail mode
+;; ---------
+(add-hook 'mail-mode-hook
+     (lambda () (setq-local fill-column 70)))
 
 ;; UI
 (load-theme 'tango)
