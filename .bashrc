@@ -72,7 +72,7 @@ exists vim && {
     alias vnew='vim --servername default'
 }
 
-alias eb='e ~/.bash_profile'
+alias eb='e ~/.bashrc'
 alias ez='e ~/.zshrc'
 alias ev='e ~/.vimrc'
 alias ee='e ~/.emacs'
@@ -216,9 +216,11 @@ prompt() {
     if git branch >/dev/null 2>/dev/null; then
         # This is a git repo
         VC_CHAR='±'
-        VC_REF=$(git symbolic-ref HEAD | cut -d "/" -f 3-10) || {
-            $(git rev-list --max-count=1 HEAD | cut -c 1-8)
-        }
+        VC_REF=$(
+            git symbolic-ref --short HEAD 2> /dev/null || {
+                git rev-list --max-count=1 1 HEAD 2>/dev/null | cut -c 1-8
+            }
+        )
         if [[ -z "$(git status --porcelain)" ]]; then
             VC_STATUS=""
         else
