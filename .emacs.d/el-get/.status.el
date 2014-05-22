@@ -1,6 +1,11 @@
 ((auto-complete status "installed" recipe
                 (:name auto-complete :website "https://github.com/auto-complete/auto-complete" :description "The most intelligent auto-completion extension." :type github :pkgname "auto-complete/auto-complete" :depends
-                       (popup fuzzy)))
+                       (popup fuzzy)
+                       :features auto-complete-config :post-init
+                       (progn
+                         (add-to-list 'ac-dictionary-directories
+                                      (expand-file-name "dict" default-directory))
+                         (ac-config-default))))
  (cl-lib status "installed" recipe
          (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
  (ctable status "installed" recipe
@@ -8,7 +13,7 @@
  (dash status "installed" recipe
        (:name dash :description "A modern list api for Emacs. No 'cl required." :type github :pkgname "magnars/dash.el"))
  (deferred status "installed" recipe
-   (:name deferred :description "Simple asynchronous functions for emacs lisp" :website "https://github.com/kiwanami/emacs-deferred" :type github :pkgname "kiwanami/emacs-deferred" :features "deferred"))
+   (:name deferred :description "Simple asynchronous functions for emacs lisp." :type github :pkgname "kiwanami/emacs-deferred"))
  (el-get status "installed" recipe
          (:name el-get :website "https://github.com/dimitri/el-get#readme" :description "Manage the external elisp bits and pieces you depend upon." :type github :branch "4.stable" :pkgname "dimitri/el-get" :info "." :load "el-get.el"))
  (epc status "installed" recipe
@@ -42,6 +47,8 @@
           (:name ghc-mod :description "Happy Haskell programming" :type github :pkgname "kazu-yamamoto/ghc-mod" :load-path "elisp"))
  (git-modes status "installed" recipe
             (:name git-modes :description "GNU Emacs modes for various Git-related files" :type github :pkgname "magit/git-modes"))
+ (handlebars-mode status "installed" recipe
+                  (:name handlebars-mode :website "https://github.com/danielevans/handlebars-mode" :description "Emacs Major Mode for Handlebars" :type git :url "git@github.com:danielevans/handlebars-mode.git"))
  (haskell-mode status "installed" recipe
                (:name haskell-mode :description "A Haskell editing mode" :type github :pkgname "haskell/haskell-mode" :info "." :build
                       `(("make" ,(format "EMACS=%s" el-get-emacs)
@@ -62,10 +69,36 @@
                   (autoload 'js2-mode "js2-mode" nil t)))
  (jshint-mode status "installed" recipe
               (:name jshint-mode :website "https://github.com/daleharvey/jshint-mode" :description "Integrate JSHint into Emacs via a node.js server. JSHint (http://www.jshint.com/) is a static code analysis tool for JavaScript." :type github :pkgname "daleharvey/jshint-mode"))
+ (less-css-mode status "installed" recipe
+                (:name less-css-mode :auto-generated t :type elpa :description "Major mode for editing LESS CSS files (lesscss.org)" :repo
+                       ("marmalade" . "http://marmalade-repo.org/packages/")))
  (lua-mode status "installed" recipe
            (:name lua-mode :description "A major-mode for editing Lua scripts" :website "https://github.com/immerrr/lua-mode" :type git :url "https://github.com/immerrr/lua-mode"))
  (nose status "installed" recipe
        (:type github :pkgname "emacsmirror/nose" :name nose :website "https://bitbucket.org/durin42/nosemacs" :description "Emacs extension to provide easy nosetest integration." :type emacsmirror :pkgname nose))
+ (package status "installed" recipe
+          (:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el" :shallow nil :features package :post-init
+                 (progn
+                   (let
+                       ((old-package-user-dir
+                         (expand-file-name
+                          (convert-standard-filename
+                           (concat
+                            (file-name-as-directory default-directory)
+                            "elpa")))))
+                     (when
+                         (file-directory-p old-package-user-dir)
+                       (add-to-list 'package-directory-list old-package-user-dir)))
+                   (setq package-archives
+                         (bound-and-true-p package-archives))
+                   (mapc
+                    (lambda
+                      (pa)
+                      (add-to-list 'package-archives pa 'append))
+                    '(("ELPA" . "http://tromey.com/elpa/")
+                      ("gnu" . "http://elpa.gnu.org/packages/")
+                      ("marmalade" . "http://marmalade-repo.org/packages/")
+                      ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))))
  (paredit status "installed" recipe
           (:name paredit :description "Minor mode for editing parentheses" :type http :prepare
                  (progn
@@ -79,6 +112,6 @@
  (rust-mode status "installed" recipe
             (:name rust-mode :type http :url "https://raw.github.com/mozilla/rust/master/src/etc/emacs/rust-mode.el" :description "Emacs mode for Rust" :features rust-mode))
  (s status "installed" recipe
-    (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el" :features s))
+    (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el"))
  (scala-mode2 status "installed" recipe
-              (:name scala-mode2 :website "https://github.com/hvesalai/scala-mode2" :description "A new scala-mode for Emacs 24" :type github :pkgname "hvesalai/scala-mode2" :load-path "." :features scala-mode2)))
+              (:name scala-mode2 :description "A new scala-mode for Emacs 24." :type github :pkgname "hvesalai/scala-mode2")))
