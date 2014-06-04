@@ -11,8 +11,8 @@
 shopt -s histappend autocd
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL=ignoredups:ignorespace:erasedups
-export HISTSIZE=-1
-export HISTFILESIZE=-1
+export HISTSIZE=
+export HISTFILESIZE=
 export HISTIGNORE="ls:la:l:ll:lla:[bf]g:clear:exit"
 PS1='[\u@\h \W]\$ '
 exists() {
