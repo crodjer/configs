@@ -136,6 +136,19 @@ alias ghci-sandbox="ghci $CABAL_SANDBOX_ARGS"
 alias runhaskell-sandbox="runhaskell $CABAL_SANDBOX_ARGS"
 alias ghc-pkg-sandbox="ghc-pkg --no-user-package-db --package-db $CABAL_SANDBOX_PKG_CONF"
 
+function ghc-pkg-reset() {
+    read -p 'Erasing all your user ghc and cabal packages. Are you sure (y/n)? ' ans
+    test "$ans" == "y" && {
+        echo 'Erasing directories under ~/.ghc'
+        rm -rf `find ~/.ghc -maxdepth 1 -type d`
+
+        echo 'Erasing ~/.cabal/lib'
+        rm -rf ~/.cabal/lib
+        # echo 'erasing ~/.cabal/packages'; rm -rf ~/.cabal/packages; \
+        # echo 'erasing ~/.cabal/share'; rm -rf ~/.cabal/share; \
+    }
+}
+
 # MPC aliases
 alias m="mpc"
 alias mstatus="mpc -f '%artist% - %title%\n%album%' status"
@@ -193,7 +206,7 @@ alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock 
 
 alias h='history'
 
-function serve(){
+function serve() {
     python3 -m http.server ${1:-8000}
 }
 
@@ -309,7 +322,7 @@ dj(){
 zlemma(){
     zlemma_parent=/home/rohan/workspace/zlemma
 
-    export DJANGO_SETTINGS_MODULE=settings.personal
+    export DJANGO_SETTINGS_MODULE=zdb_common.settings.local
 
     case $1 in
         em)
@@ -327,9 +340,11 @@ zlemma(){
         *)
             env='zlemma'
             project='zlemma'
+            export DJANGO_SETTINGS_MODULE=settings.local
             ;;
     esac
 
+    deactivate 2> /dev/null
     cd $zlemma_parent/$project
     export PYTHONPATH=$PWD:$PYTHONPATH
     workon $env

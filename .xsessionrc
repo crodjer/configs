@@ -1,10 +1,10 @@
+## -*-Shell-*-
 ## Configure Xsession
 
 xrdb -merge ~/.Xresources
 xset b 100 400 100
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
-# Map menu key to Super_R (Useful for laptop keyboard)
 # setxkbmap -model thinkpad -layout us
 # setxkbmap -option caps:escape
 xmodmap -e "keycode 107 = Super_R NoSymbol Super_R"
@@ -25,22 +25,15 @@ synclient TouchpadOff=1
 
 # Looks
 xsetroot -cursor_name left_ptr
-$HOME/workspace/scripts/display.sh
+$HOME/workspace/configs/scripts/display.sh
 bash $HOME/.fehbg
 
-pulseaudio &
 ## Start some useful programms
-pkill udisks-glue; udisks-glue &
 pkill mpd; mpd &
-xautolock -exit; xautolock -time 10 -locker "lock" &
 pkill mpdscribble;mpdscribble &
-pkill notification-dae; /usr/lib/notification-daemon/notification-daemon &
-#pkill wicd-client;wicd-client -t &
-#pkill xcompmgr;xcompmgr &
+# pkill notification-da; /usr/lib/notification-daemon-1.0/notification-daemon &
+pkill urxvtd; urxvtd &
+pkill trayer; trayer --edge top --SetDockType true --align right --height 14 \
+      --widthtype request --tint 0x000000 --transparent true --alpha 0 &
 
-urxvtd &
-# wicd -t
-# nm-applet &
-mytrayer
-
-# vim:set ft=sh:
+xautolock -exit; xautolock -time 10 -locker "lock" &
