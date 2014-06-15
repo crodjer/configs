@@ -220,9 +220,9 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- XF86Display
     , ((0 , 0x1008ff59), spawn "xset dpms force off")
     -- XF86MonBrightnessDown
-    , ((0 , 0x1008ff03), spawn "xbacklight -dec 2")
+    -- , ((0 , 0x1008ff03), spawn "xbacklight -dec 2")
     -- XF86MonBrightnessUp
-    , ((0 , 0x1008ff02), spawn "xbacklight -inc 2")
+    -- , ((0 , 0x1008ff02), spawn "xbacklight -inc 2")
 
     -- quit, or restart
     , ((modMask .|. shiftMask, xK_q     ), io exitSuccess)
