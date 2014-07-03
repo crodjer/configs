@@ -8,7 +8,6 @@ verbose = True
 [extensions]
 #hgext.bookmarks =
 #hggit =
-prompt = /home/rohan/workspace/src/hg-prompt/prompt.py
 color =
 pager =
 purge =
