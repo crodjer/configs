@@ -122,7 +122,7 @@
 (add-to-list 'auto-mode-alist '("\\.mkd$\\|.md$\\|.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("mutt-.*-" . mail-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$\\|Gemfile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.html$\\|hbs$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.html$\\$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 (add-to-list 'auto-mode-alist '("\\.jshintrc\\'" . javascript-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -142,6 +142,7 @@
 ;; Ido mode
 ;; ---------
 (ido-mode t)
+(setq ido-ignore-extensions t)
 
 ;; -------------
 ;; Flyspell mode
@@ -160,13 +161,25 @@
 ;; Haskell mode
 ;; ------------
 (autoload 'ghc-init "ghc" nil t)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
 (defadvice ghc-display
   (after ghc-display-auto-pop-advice ())
   (pop-to-buffer ghc-error-buffer-name))
 ; (ad-activate 'ghc-display)
 
+(eval-after-load "haskell-mode"
+  '(progn
+    (define-key haskell-mode-map (kbd "C-x C-d") nil)
+    (define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
+    (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+    (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
+    (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-interactive-switch)
+    (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
+    (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+    (define-key haskell-mode-map (kbd "C-c M-.") nil)
+    (define-key haskell-mode-map (kbd "C-c C-d") nil)))
 ;; -----------
 ;; Python Mode
 ;; -----------
@@ -306,7 +319,12 @@ makes)."
 (add-hook 'mail-mode-hook
      (lambda () (setq-local fill-column 70)))
 
+
+;; --
 ;; UI
+;; --
+
+
 (load-theme 'tango)
 ;; Options:
 ;; adwaita 	deeper-blue 	dichromacy 	light-blue 	manoj-dark 	misterioso
@@ -334,6 +352,12 @@ makes)."
 ;;;;;;;;;;;;;;;;;;;
 ;; Custom functions
 ;;;;;;;;;;;;;;;;;;;
+
+(defun halve-other-window-height ()
+  "Expand current window to use half of the other window's lines."
+  (interactive)
+  (enlarge-window (/ (window-height (next-window)) 2)))
+(global-set-key (kbd "C-x v") 'halve-other-window-height)
 
 ;; Shift region (http://www.emacswiki.org/emacs/IndentingText)
 (defun shift-region (distance)
@@ -385,10 +409,12 @@ makes)."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(flymake-errline ((t ("red"))))
- '(flymake-warnline ((t nil))))
+ '(flymake-warnline ((t nil)))
+ '(whitespace-trailing ((t (:background "gainsboro")))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(completion-ignored-extensions (quote (".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".hi")))
  '(safe-local-variable-values (quote (python-shell-extra-pythonpaths . "/home/rohan/workspace/zlemma/zlemma") (erlang-indent-level . 4))))
