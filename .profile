@@ -17,14 +17,16 @@ exists() {
 #-------------------------#
 # BASE - PATH             #
 #-------------------------#
-export                       PATH="$HOME/.bin:/usr/local/sbin:/usr/local/bin"
-[ -d "$HOME/.local" ]     && PATH="$PATH:$HOME/.local/sbin:$HOME/.local/bin"
+export                       PATH="$HOME/.bin"
+[ -d "$HOME/.local" ]     && PATH="$HOME/.local/bin"
 [ -d "$HOME/.cabal" ]     && PATH="$PATH:$HOME/.cabal/bin"
-[ -d "/opt/local" ]       && PATH="$PATH:/opt/local/sbin:/opt/local/bin"
+[ -d "/opt/local" ]       && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
 [ -d "/bin/vendor_perl" ] && PATH="$PATH:/bin/vendor_perl"
                              PATH="$PATH:$HOME/.gem/ruby/2.1.0/bin"
                              PATH="$PATH:$HOME/workspace/configs/scripts/"
-                             PATH="$PATH:/usr/sbin:/usr/bin:/sbin:/bin"
+                             PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
+[ "$(id -u)" == "0" ]  && PATH="$PATH:/usr/local/sbin/:/usr/sbin"
+
 
 export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "$HOME/.local" ]&& MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
@@ -60,12 +62,12 @@ export GREP_COLOR=31
 export PAGER=less
 export MANPAGER=$PAGER
 export NODE_PATH=/home/rohan/.local/lib/node_modules:/usr/lib/node_modules
-export GOPATH=/home/rohan/workspace/go
-export PATH=$PATH:$GOPATH/bin
+# export GOPATH=/home/rohan/workspace/go
+# export PATH=$PATH:$GOPATH/bin
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
 #-----------------------------#
-[ -r "$HOME/.profile.local" ] && \
-    . "$HOME/.profile.local"
-[ "$BASH_VERSION" -a -z "$POSIXLY_CORRECT" ] && . "$HOME/.bashrc"
+# [ -r "$HOME/.profile.local" ] && \
+#     . "$HOME/.profile.local"
+# [ "$BASH_VERSION" -a -z "$POSIXLY_CORRECT" ] && . "$HOME/.bashrc"
