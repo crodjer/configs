@@ -70,8 +70,7 @@
  (jshint-mode status "installed" recipe
               (:name jshint-mode :website "https://github.com/daleharvey/jshint-mode" :description "Integrate JSHint into Emacs via a node.js server. JSHint (http://www.jshint.com/) is a static code analysis tool for JavaScript." :type github :pkgname "daleharvey/jshint-mode"))
  (less-css-mode status "installed" recipe
-                (:name less-css-mode :auto-generated t :type elpa :description "Major mode for editing LESS CSS files (lesscss.org)" :repo
-                       ("marmalade" . "http://marmalade-repo.org/packages/")))
+                (:name less-css-mode :description "Emacs mode for LESS CSS (lesscss.org), with support for compile-on-save" :type github :pkgname "purcell/less-css-mode"))
  (lua-mode status "installed" recipe
            (:name lua-mode :description "A major-mode for editing Lua scripts" :website "https://github.com/immerrr/lua-mode" :type git :url "https://github.com/immerrr/lua-mode"))
  (nose status "installed" recipe
@@ -96,6 +95,7 @@
                       (pa)
                       (add-to-list 'package-archives pa 'append))
                     '(("ELPA" . "http://tromey.com/elpa/")
+                      ("melpa" . "http://melpa.milkbox.net/packages/")
                       ("gnu" . "http://elpa.gnu.org/packages/")
                       ("marmalade" . "http://marmalade-repo.org/packages/")
                       ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))))
