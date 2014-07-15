@@ -129,8 +129,8 @@ alias ggprnp='gl origin $(git_branch) --rebase && ggpush'
 alias gglr='gl origin $(git_branch) --rebase'
 
 # GHC aliases
-CABAL_SANDBOX_PKG_CONF=".cabal-sandbox/*-packages.conf.d"
-CABAL_SANDBOX_ARGS="-no-user-package-db -package-db $CABAL_SANDBOX_PKG_CONF"
+CABAL_SANDBOX_PKG_CONF='`ls -d .cabal-sandbox/*-packages.conf.d`'
+CABAL_SANDBOX_ARGS="-no-user-package-db -package-db=$CABAL_SANDBOX_PKG_CONF"
 alias ghc-sandbox="ghc $CABAL_SANDBOX_ARGS"
 alias ghci-sandbox="ghci $CABAL_SANDBOX_ARGS"
 alias runhaskell-sandbox="runhaskell $CABAL_SANDBOX_ARGS"
