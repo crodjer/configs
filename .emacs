@@ -129,9 +129,10 @@
 (add-to-list 'auto-mode-alist '("\\.rkt$" . scheme-mode))
 (add-to-list 'auto-mode-alist '("\\.pyx$" . python-mode))
 
-;; ------------------
-;; General mode hooks
-;; ------------------
+;; -------------
+;; General modes
+;; -------------
+(electric-pair-mode t)
 
 ;; ------------
 ;; Autocomplete
