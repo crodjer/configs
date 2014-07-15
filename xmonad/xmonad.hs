@@ -31,7 +31,6 @@ import XMonad.Hooks.ManageHelpers
 -- layouts
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.Grid
 import XMonad.Layout.Tabbed
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.LayoutCombinators
@@ -39,10 +38,10 @@ import XMonad.Layout.ShowWName
 
 -------------------------------------------------------------------------------
 -- Main --
-{-main :: IO()-}
+main :: IO()
 main = do
   h <- spawnPipe "xmobar"
-  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
+  xmonad $ withUrgencyHook NoUrgencyHook $ def
              { workspaces = workspaces'
              , modMask = modMask'
              , borderWidth = borderWidth'
@@ -52,7 +51,7 @@ main = do
              , keys = keys'
              , logHook = logHook' h
              , layoutHook = layoutHook'
-             , manageHook = manageHook' <+> manageHook defaultConfig
+             , manageHook = manageHook' <+> manageHook def
              , handleEventHook = fullscreenEventHook
              , focusFollowsMouse  = myFocusFollowsMouse
              }
@@ -80,7 +79,7 @@ layoutHook' = customLayout
 -- Looks --
 -- bar
 customPP :: PP
-customPP = defaultPP
+customPP = def
            { ppCurrent = xmobarColor "#FFEE00" "" . wrap "[" "]"
            , ppVisible = xmobarColor "#5599FF" "" . wrap "<" ">"
            , ppTitle =  shorten 80
@@ -110,7 +109,7 @@ workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 -- layouts
 myTiled = smartBorders $ ResizableTall 1 (3/100) (52/100) []
 myFull = noBorders Full
-myTabbed = noBorders $ tabbed shrinkText defaultTheme
+myTabbed = noBorders $ tabbed shrinkText def
 mySWNConfig = defaultSWNConfig
               { swn_font = myFontLarge
               , swn_fade = 1
