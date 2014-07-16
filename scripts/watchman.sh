@@ -16,7 +16,7 @@ can watch multiple files, a you can use {file} as a placeholder in your
 command. It will automatically be replaced by the file which was modified.
 
 Note:
-In case you only want to watch a single file, the delimter '--' can be
+In case you only have a single file as watch target, the delimter '--' can be
 skipped.
 EOF
 `
