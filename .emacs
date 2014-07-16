@@ -132,7 +132,6 @@
 ;; -------------
 ;; General modes
 ;; -------------
-(electric-pair-mode t)
 
 ;; ------------
 ;; Autocomplete
