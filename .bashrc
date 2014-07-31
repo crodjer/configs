@@ -8,7 +8,7 @@
 #-------------------------#
 # Bash configuration
 #-------------------------#
-shopt -s histappend autocd
+shopt -s histappend autocd globstar
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 export HISTSIZE=
@@ -336,6 +336,10 @@ zlemma(){
         sc*)
             env='inscoring'
             project='scoringservice'
+            ;;
+        ex*)
+            env='zlemma'
+            project='browserextensions'
             ;;
         *)
             env='zlemma'
