@@ -61,8 +61,7 @@ main = do
 
 manageHook' :: ManageHook
 manageHook' = composeAll
-              [ isFullscreen                  --> doFullFloat
-              , isDialog                      --> doFloat
+              [ isDialog                      --> doFloat
               , className     =? "Xmessage"   --> doFloat
               , className     =? "MPlayer"    --> ask >>= doF . W.sink
               , className     =? "MPlayer"    --> doShift "9"
@@ -108,8 +107,8 @@ workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 -- layouts
 myTiled = smartBorders $ ResizableTall 1 (3/100) (52/100) []
-myFull = noBorders Full
-myTabbed = noBorders $ tabbed shrinkText def
+myFull = smartBorders $ Full
+myTabbed = smartBorders $ tabbed shrinkText def
 mySWNConfig = defaultSWNConfig
               { swn_font = myFontLarge
               , swn_fade = 1
