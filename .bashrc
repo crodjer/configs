@@ -286,33 +286,33 @@ PROMPT_DIRTRIM=2
 PROMPT_COMMAND=prompt
 
 preexec () {
-    _title=$1
-    excluded_commands=(
+    local title=$1
+    local excluded_commands=(
         source ls clear echo exec cat printf
         $PROMPT_COMMAND
     )
-    exclude_re=$(printf '%s\n' "${excluded_commands[@]}" | paste -sd '|')
-    _short_title=$(echo "$_title" | cut -d " " -f 1)
+    local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" | paste -sd '|')
+    local short_title=$(echo "$title" | cut -d " " -f 1)
 
-    if [[ $_short_title =~ $exclude_re ]]; then
+    if [[ $short_title =~ $exclude_re ]]; then
         # Matches the excluded title. We don't want to set as shell title.
-        unset _title
+        unset title
     fi
 
-    if [ -z "$_title" ]; then
+    if [ -z "$title" ]; then
         # No title available, build it based on user, host and pwd
         _pwd=$PWD
         [[ "$_pwd" =~ ^"$HOME"(/|$) ]] && _pwd="~${_pwd#$HOME}"
-        _title="$USER@$(hostname):$_pwd"
-        _short_title=$(basename $PWD)
+        title="$USER@$(hostname):$_pwd"
+        short_title=$(basename $PWD)
     fi
 
     if [[ "$STY" ]]; then
         # I am in a screen session, set the short title
-        printf "\033k$_short_title\033\\"
+        printf "\033k$short_title\033\\"
     fi
 
-    printf "\e]0;%s\007" "$_title"
+    printf "\e]0;%s\007" "$title"
 }
 
 # Inspired by http://superuser.com/a/175802/57412
