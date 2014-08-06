@@ -285,6 +285,42 @@ prompt() {
 PROMPT_DIRTRIM=2
 PROMPT_COMMAND=prompt
 
+preexec () {
+    title=$1
+    excluded_commands=(
+        source ls clear echo exec cat printf
+        $PROMPT_COMMAND
+    )
+    exclude_re=$(printf '%s\n' "${excluded_commands[@]}" | paste -sd '|')
+    short_title=$(echo "$title" | cut -d " " -f 1)
+
+    if [[ $short_title =~ $exclude_re ]]; then
+        # Matches the excluded title. We don't want to set as shell title.
+        unset title
+    fi
+
+    if [ -z "$title" ]; then
+        # No title available, build it based on user, host and pwd
+        _pwd=$PWD
+        [[ "$_pwd" =~ ^"$HOME"(/|$) ]] && _pwd="~${_pwd#$HOME}"
+        title="$USER@$(hostname):$_pwd"
+        short_title=$(basename $PWD)
+    fi
+
+    if [[ "$STY" ]]; then
+        # I am in a screen session, set the short title
+        printf "\033k$short_title\033\\"
+    fi
+    printf "\e]0;$title\007"
+}
+
+# Inspired by http://superuser.com/a/175802/57412
+preexec_invoke_exec () {
+    [ -n "$COMP_LINE" ] && return  # do nothing if completing
+    preexec "$BASH_COMMAND"
+}
+trap 'preexec_invoke_exec' DEBUG
+
 exists virtualenvwrapper.sh && source `which virtualenvwrapper.sh`
 # [[ -s "/etc/profile.d/autojump.sh" ]] && source "/etc/profile.d/autojump.sh"
 
