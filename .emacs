@@ -150,6 +150,8 @@
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'html-mode-hook
           (lambda () (flyspell-mode 0)))
+(add-hook 'html-mode-hook 'flyspell-prog-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;; --------
 ;; FCI mode
@@ -319,12 +321,9 @@ makes)."
 (add-hook 'mail-mode-hook
      (lambda () (setq-local fill-column 70)))
 
-
 ;; --
 ;; UI
 ;; --
-
-
 (load-theme 'tango)
 ;; Options:
 ;; adwaita 	deeper-blue 	dichromacy 	light-blue 	manoj-dark 	misterioso
