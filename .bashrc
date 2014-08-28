@@ -103,8 +103,8 @@ alias lla='ls -al'
 # alias -g L='| less'
 
 alias reb='exec bash'
-alias ssh='TERM=linux;ssh'
-alias cssh='TERM=linux;cssh'
+alias ssh='TERM=linux ssh'
+alias cssh='TERM=linux cssh'
 alias screen='screen -U'
 alias t='task'
 
@@ -129,7 +129,7 @@ alias ggprnp='gl origin $(git_branch) --rebase && ggpush'
 alias gglr='gl origin $(git_branch) --rebase'
 
 # GHC aliases
-CABAL_SANDBOX_PKG_CONF='`ls -d .cabal-sandbox/*-packages.conf.d`'
+CABAL_SANDBOX_PKG_CONF='`ls -d .cabal-sandbox/*-packages.conf.d | tail -1`'
 CABAL_SANDBOX_ARGS="-no-user-package-db -package-db=$CABAL_SANDBOX_PKG_CONF"
 alias ghc-sandbox="ghc $CABAL_SANDBOX_ARGS"
 alias ghci-sandbox="ghci $CABAL_SANDBOX_ARGS"
@@ -223,6 +223,7 @@ re_comp git g
 re_comp mpc m
 re_comp pacman p
 re_comp task t
+complete -F _t tw
 
 #-------------------------#
 # Prompt
@@ -288,7 +289,7 @@ PROMPT_COMMAND=prompt
 preexec () {
     local title=$1
     local excluded_commands=(
-        source ls clear echo exec cat printf
+        source ls clear echo exec cat printf cd
         $PROMPT_COMMAND
     )
     local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" | paste -sd '|')
@@ -304,21 +305,34 @@ preexec () {
         _pwd=$PWD
         [[ "$_pwd" =~ ^"$HOME"(/|$) ]] && _pwd="~${_pwd#$HOME}"
         title="$USER@$(hostname):$_pwd"
-        short_title=$(basename $PWD)
+        short_title=$(basename "$PWD")
     fi
 
     if [[ "$STY" ]]; then
         # I am in a screen session, set the short title
-        printf "\033k$short_title\033\\"
+        printf "\033k$short_title\033\\" >&2
     fi
 
-    printf "\e]0;%s\007" "$title"
+    printf "\e]0;%s\007" "$title" >&2
 }
 
 # Inspired by http://superuser.com/a/175802/57412
 preexec_invoke_exec () {
     [ -n "$COMP_LINE" ] && return  # do nothing if completing
+
+    if [[ "$BASH_COMMAND" == "$PROMPT_COMMAND" ]]; then
+        preexec "$BASH_COMMAND"
+        _prompt_wait=true
+        return
+    fi
+
+    if [ -z "$_prompt_wait" ]; then
+        # Probably a non manual execution, don't care about those.
+        return
+    fi
+
     preexec "$BASH_COMMAND"
+    unset _prompt_wait
 }
 trap 'preexec_invoke_exec' DEBUG
 
