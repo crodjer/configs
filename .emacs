@@ -138,6 +138,11 @@
 ;; ------------
 (ac-config-default)
 
+;; ----------------------
+;; Highlight current line
+;; ----------------------
+(global-hl-line-mode)
+
 ;; ---------
 ;; Ido mode
 ;; ---------
