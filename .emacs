@@ -324,7 +324,7 @@ makes)."
 ;; --
 ;; UI
 ;; --
-(load-theme 'tango)
+(load-theme 'whiteboard)
 
 ;; Options:
 ;; adwaita 	deeper-blue 	dichromacy 	light-blue 	manoj-dark 	misterioso
