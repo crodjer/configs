@@ -325,6 +325,7 @@ makes)."
 ;; UI
 ;; --
 (load-theme 'tango)
+
 ;; Options:
 ;; adwaita 	deeper-blue 	dichromacy 	light-blue 	manoj-dark 	misterioso
 ;; tango 	tango-dark 	tsdh-dark 	tsdh-light 	wheatgrass 	whiteboard
@@ -409,6 +410,7 @@ makes)."
  ;; If there is more than one, they won't work right.
  '(flymake-errline ((t ("red"))))
  '(flymake-warnline ((t nil)))
+ '(linum-relative-current-face ((t (:inherit linum :background "#444444" :foreground "#CAE682"))))
  '(whitespace-trailing ((t (:background "gainsboro")))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
