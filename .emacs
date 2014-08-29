@@ -325,9 +325,10 @@ makes)."
 
 (set-face-attribute 'default nil :height 96)
 
-;; Line numbers
+;; Line numbers and highlight
 (setq linum-format 'linum-relative)
 (global-linum-mode 1)
+(hl-line-mode)
 
 ;; Parenthesis pairs
 (show-paren-mode 1)
@@ -409,6 +410,7 @@ makes)."
  ;; If there is more than one, they won't work right.
  '(flymake-errline ((t ("red"))))
  '(flymake-warnline ((t nil)))
+ '(hl-line ((t (:inherit highlight :background "gainsboro"))))
  '(linum-relative-current-face ((t (:inherit linum :background "#444444" :foreground "#CAE682"))))
  '(whitespace-trailing ((t (:background "gainsboro")))))
 (custom-set-variables
