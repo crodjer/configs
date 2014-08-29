@@ -53,6 +53,7 @@
 (require 'paredit)
 (require 'geiser-install)
 (require 'erlang)
+(require 'linum-relative)
 
 ;; ----------------------
 ;; General customizations
@@ -133,11 +134,6 @@
 ;; General modes
 ;; -------------
 
-;; ------------
-;; Autocomplete
-;; ------------
-(ac-config-default)
-
 ;; ---------
 ;; Ido mode
 ;; ---------
@@ -152,12 +148,6 @@
           (lambda () (flyspell-mode 0)))
 (add-hook 'html-mode-hook 'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
-;; --------
-;; FCI mode
-;; --------
-(add-hook 'prog-mode-hook 'fci-mode)
-(add-hook 'text-mode-hook 'fci-mode)
 
 ;; ------------
 ;; Haskell mode
@@ -324,7 +314,7 @@ makes)."
 ;; --
 ;; UI
 ;; --
-(load-theme 'whiteboard)
+(load-theme 'tango)
 
 ;; Options:
 ;; adwaita 	deeper-blue 	dichromacy 	light-blue 	manoj-dark 	misterioso
@@ -333,21 +323,30 @@ makes)."
 
 (global-whitespace-mode t)
 
+(set-face-attribute 'default nil :height 96)
+
+;; Line numbers
+(setq linum-format 'linum-relative)
+(global-linum-mode 1)
+
+;; Parenthesis pairs
+(show-paren-mode 1)
+
+;; Autocomplete
+(ac-config-default)
+(ac-flyspell-workaround)
+
+;; Fill column indicator
+(setq fci-rule-width 2)
+(add-hook 'prog-mode-hook 'fci-mode)
+(add-hook 'text-mode-hook 'fci-mode)
+
+;; Remove ugly UI elements
 (menu-bar-mode -1)
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
-
-(set-face-attribute 'default nil :height 96)
-
-(setq linum-format "%4d")
-(global-linum-mode 1)
-
-(setq fci-rule-width 2)
-
-(show-paren-mode 1)
-
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Custom functions
