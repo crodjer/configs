@@ -73,6 +73,8 @@
               (:name jshint-mode :website "https://github.com/daleharvey/jshint-mode" :description "Integrate JSHint into Emacs via a node.js server. JSHint (http://www.jshint.com/) is a static code analysis tool for JavaScript." :type github :pkgname "daleharvey/jshint-mode"))
  (less-css-mode status "installed" recipe
                 (:name less-css-mode :description "Emacs mode for LESS CSS (lesscss.org), with support for compile-on-save" :type github :pkgname "purcell/less-css-mode"))
+ (linum-relative status "installed" recipe
+                 (:name linum-relative :type emacswiki :description "Display relative line number in the left margin" :features linum-relative))
  (nose status "installed" recipe
        (:type github :pkgname "emacsmirror/nose" :name nose :website "https://bitbucket.org/durin42/nosemacs" :description "Emacs extension to provide easy nosetest integration." :type emacsmirror :pkgname nose))
  (package status "installed" recipe
