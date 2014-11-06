@@ -18,7 +18,7 @@ exists() {
 # BASE - PATH             #
 #-------------------------#
 export                       PATH="$HOME/.bin"
-[ -d "$HOME/.local" ]     && PATH="$PATH:$HOME/.local/bin"
+[ -d "$HOME/.local" ]     && PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
 [ -d "$HOME/.cabal" ]     && PATH="$PATH:$HOME/.cabal/bin"
 [ -d "/opt/local" ]       && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
 [ -d "/bin/vendor_perl" ] && PATH="$PATH:/bin/vendor_perl"
@@ -34,6 +34,7 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "/opt/local" ]  && MANPATH="$MANPATH:/opt/local/share/man:/opt/local/man"
                         MANPATH="$MANPATH:/usr/share/man:/usr/man"
 
+export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
 
 #-------------------------#
 # BASE - Environment

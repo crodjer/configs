@@ -41,10 +41,11 @@ exists pacman && {
   alias pud='p -Sy'
   alias pug='p -Syu'
   alias pr='p -R'
-  alias pugf='pug'
+  alias pugf='yaourt -Syu --aur --noconfirm'
   alias pse='pacman -Ss'
   alias psh='pacman -Si'
   alias pshi='pacman -Qi'
+  alias pclean='p -Sc'
 }
 
 exists aptitude && {
@@ -151,7 +152,7 @@ function ghc-pkg-reset() {
 
 # MPC aliases
 alias m="mpc"
-alias mstatus="mpc -f '%artist% - %title%\n%album%' status"
+alias mst="mpc -f '%artist% - %title%\n%album%\n%file%' status"
 alias mtog="mpc toggle"
 #Search song from playlist and also get the song #
 alias sose="mpc playlist | grep -in"
@@ -293,7 +294,10 @@ preexec () {
         $PROMPT_COMMAND
     )
     local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" | paste -sd '|')
-    local short_title=$(echo "$title" | cut -d " " -f 1)
+    local short_title=$(echo "$title" \
+        | sed -r "s/^\s*(\w+=\w+\s+)*//g" \
+        | sed -r "s/^\s*sudo\s+//g" \
+        | cut -d " " -f 1)
 
     if [[ $short_title =~ $exclude_re ]]; then
         # Matches the excluded title. We don't want to set as shell title.
