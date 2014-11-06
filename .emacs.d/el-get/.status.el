@@ -97,7 +97,7 @@
                       (pa)
                       (add-to-list 'package-archives pa 'append))
                     '(("ELPA" . "http://tromey.com/elpa/")
-                      ("melpa" . "http://melpa.milkbox.net/packages/")
+                      ("melpa" . "http://melpa.org/packages/")
                       ("gnu" . "http://elpa.gnu.org/packages/")
                       ("marmalade" . "http://marmalade-repo.org/packages/")
                       ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))))
@@ -112,7 +112,7 @@
  (popup status "installed" recipe
         (:name popup :website "https://github.com/auto-complete/popup-el" :description "Visual Popup Interface Library for Emacs" :type github :pkgname "auto-complete/popup-el"))
  (rust-mode status "installed" recipe
-            (:name rust-mode :type http :url "https://raw.github.com/mozilla/rust/master/src/etc/emacs/rust-mode.el" :description "Emacs mode for Rust" :features rust-mode))
+            (:name rust-mode :type http :url "https://raw.github.com/mozilla/rust/master/src/etc/emacs/rust-mode.el" :description "Emacs mode for Rust"))
  (s status "installed" recipe
     (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el"))
  (scala-mode2 status "installed" recipe
