@@ -1,7 +1,7 @@
 set reverse_name
 set from = "crodjer@gmail.com"
 set realname = "Rohan Jain"
-alternates "mail.rohanjain@gmail.com|rohan@interviewstreet.com|rohan@policyinnovations.in"
+alternates "mail.rohanjain@gmail.com|rohan@policyinnovations.in"
 
 # IMAP and SMTP settings
 set imap_user = "crodjer@gmail.com"
