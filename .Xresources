@@ -1,9 +1,9 @@
 ! ---[ URxvt config ]--------------------------------------------------
 
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true
-URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=12:antialias=true
-! URxvt*font: xft:Monospace:pixelsize=12
-! URxvt*boldFont: xft:Monospace:bold:pixelsize=12
+! URxvt.font: 9x15bold
+! URxvt.boldFont: 9x15bold
+URxvt*font: xft:Monospace:pixelsize=12
+URxvt*boldFont: xft:Monospace:bold:pixelsize=12
 URxvt*letterSpace: -1
 URxvt*borderLess: false
 URxvt*externalBorder: 0
@@ -31,9 +31,9 @@ URxvt*visualBell: false
 ! Looks and Colors
 URxvt*shading: 20
 URxvt*background: #eeeeec
-URxvt*foreground: #000000
-URxvt*cursorColor: #000000
-URxvt*cursorColor2: #ffffff
+URxvt*foreground: black
+URxvt*cursorColor: black
+URxvt*cursorColor2: white
 
 URxvt*color0: black
 URxvt*color1: red3
