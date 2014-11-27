@@ -104,9 +104,9 @@ alias lla='ls -al'
 # alias -g L='| less'
 
 alias reb='exec bash'
-alias ssh='TERM=linux ssh'
-alias cssh='TERM=linux cssh'
-alias screen='screen -U'
+# alias ssh='ssh'
+# alias cssh='cssh'
+alias screen='TERM=screen-256color screen -U'
 alias t='task'
 
 # Git aliases
@@ -206,6 +206,8 @@ alias entertain='mplayer "$(find "." -type f -regextype posix-egrep -regex ".*\.
 alias rand='tr -c "[:digit:]" " " < /dev/urandom | dd cbs=$COLUMNS conv=unblock | GREP_COLOR="1;32" grep --color "[^ ]"'
 
 alias h='history'
+alias hn='history -n'
+alias cv='command -v'
 
 function serve() {
     python3 -m http.server ${1:-8000}
@@ -224,6 +226,7 @@ re_comp git g
 re_comp mpc m
 re_comp pacman p
 re_comp task t
+re_comp command cv
 complete -F _t tw
 
 #-------------------------#
@@ -240,8 +243,6 @@ _col() {
 
 prompt() {
     EXIT_STATUS="$?"
-
-    history -a; history -c; history -r
 
     if git branch >/dev/null 2>/dev/null; then
         # This is a git repo
@@ -317,6 +318,7 @@ preexec () {
         printf "\033k$short_title\033\\" >&2
     fi
 
+    history -a; history -n
     printf "\e]0;%s\007" "$title" >&2
 }
 
@@ -380,6 +382,10 @@ zlemma(){
     export DJANGO_SETTINGS_MODULE=zdb_common.settings.local
 
     case $1 in
+        rp)
+            env='em'
+            project='resume-parser'
+            ;;
         em)
             env='em'
             project='entity-match'
