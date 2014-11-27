@@ -114,6 +114,4 @@
  (rust-mode status "installed" recipe
             (:name rust-mode :type http :url "https://raw.github.com/mozilla/rust/master/src/etc/emacs/rust-mode.el" :description "Emacs mode for Rust"))
  (s status "installed" recipe
-    (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el"))
- (scala-mode2 status "installed" recipe
-              (:name scala-mode2 :description "A new scala-mode for Emacs 24." :type github :pkgname "hvesalai/scala-mode2")))
+    (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el")))
