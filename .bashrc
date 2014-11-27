@@ -46,6 +46,7 @@ exists pacman && {
   alias psh='pacman -Si'
   alias pshi='pacman -Qi'
   alias pclean='p -Sc'
+  alias remove-oprhans='p -Rns $(pacman -Qqtd)'
 }
 
 exists aptitude && {
@@ -59,6 +60,7 @@ exists aptitude && {
   alias pugff='sudo apt-metalink dist-upgrade'
   alias pse='aptitude search'
   alias psh='aptitude show'
+  alias pclean='sudo aptitude clean'
 }
 
 alias halt='sudo shutdown -h now'
