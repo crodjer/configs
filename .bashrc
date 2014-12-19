@@ -77,6 +77,7 @@ alias npm='PREFIX=/home/rohan/.local npm'
 
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
+alias ejct='udisksctl power-off -b'
 
 
 exists emacsclient && {
@@ -157,7 +158,7 @@ alias m="mpc"
 alias mst="mpc -f '%artist% - %title%\n%album%\n%file%' status"
 alias mtog="mpc toggle"
 #Search song from playlist and also get the song #
-alias sose="mpc playlist | grep -in"
+alias sose="mpc playlist -f '%title% \[%album%\]' | grep -in"
 
 # Alters the mpd volume according to the sign and factor of 5
 function _alter_mpd_vol(){
@@ -234,14 +235,14 @@ complete -F _t tw
 #-------------------------#
 # Prompt
 #-------------------------#
-_col() {
-    if [[ -z "$2" ]]; then
-        BOLD_STRING="0;"
-    else
-        BOLD_STRING="1;"
-    fi
-    echo "\[\033[$BOLD_STRING$1m\]"
-}
+
+red="\[$(tput setaf 1)\]"
+green="\[$(tput setaf 2)\]"
+yellow="\[$(tput setaf 3)\]"
+blue="\[$(tput setaf 4)\]"
+cyan="\[$(tput setaf 6)\]"
+bold="\[$(tput bold)\]"
+plain="\[$(tput sgr0)\]"
 
 prompt() {
     EXIT_STATUS="$?"
@@ -259,38 +260,51 @@ prompt() {
         else
             VC_STATUS="*"
         fi
-        VC_INFO="$(_col 32 b) $VC_CHAR $(_col 36)($VC_REF$VC_STATUS)$(_col 34)"
+        VC_INFO="$bold$green $VC_CHAR $plain$cyan($VC_REF$VC_STATUS)$plain"
     else
         VC_INFO=""
     fi
 
-    if [[ $EXIT_STATUS != "0" ]]; then
-        _PUSER_COLOR=31
-        # EXIT_STRING="-[$(_col 31)$EXIT_STATUS$(_col 32)]$(_col 9)"
+    if [[ "$USER" == "root" ]]; then
+        _PSYMBOL="#"
     else
-        _PUSER_COLOR=32
+        _PSYMBOL=">"
+    fi
+
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        _HNCOLOUR=$cyan$bold
+    else
+        _HNCOLOUR=$cyan
+    fi
+
+    if [[ $EXIT_STATUS != "0" ]]; then
+        _PUSER_COLOR=$red
+    else
+        _PUSER_COLOR=$green
     fi
 
     if [[ -n "$VIRTUAL_ENV" ]];then
-        _PVENV=" $(_col 34)($(basename $VIRTUAL_ENV))"
+        _PVENV=" $blue($(basename $VIRTUAL_ENV))"
     else
         _PVENV=""
     fi
 
-    _PUSER="$(_col $_PUSER_COLOR b)\u$(_col 30)@$(_col 36)\h$(_col 34)"
-    _PTIME="$(_col 33)\@$(_col 34)"
-    _PDIR="$(_col 32)\W$(_col 34)"
+    _PUSER="$_PUSER_COLOR$bold\u$green$bold$plain@$_HNCOLOUR\h$blue"
+    _PTIME="$plain$yellow\@$blue"
+    _PDIR="$plain$green\W$blue"
 
     _L1="┌─[$_PUSER]-[$_PTIME]$VC_INFO$_PVENV"
-    _L2="└─($_PDIR)->"
+    _L2="└─($_PDIR)-$_PSYMBOL"
 
-    PS1="$(_col 34)$_L1\n$(_col 34)$_L2 $(_col 0)"
+    PS1="$blue$_L1\n$blue$_L2 $plain"
 }
 
 PROMPT_DIRTRIM=2
 PROMPT_COMMAND=prompt
 
 preexec () {
+    history -a; history -n
+
     local title=$1
     local excluded_commands=(
         source ls clear echo exec cat printf cd
@@ -315,12 +329,15 @@ preexec () {
         short_title=$(basename "$PWD")
     fi
 
+    if [[ "$EMACS" ]]; then
+        return;
+    fi
+
     if [[ "$STY" ]]; then
         # I am in a screen session, set the short title
         printf "\033k$short_title\033\\" >&2
     fi
 
-    history -a; history -n
     printf "\e]0;%s\007" "$title" >&2
 }
 
