@@ -46,7 +46,6 @@
 (require 'auto-complete-config)
 (require 'js2-mode)
 (require 'whitespace)
-(require 'scala-mode2)
 (require 'flymake)
 (require 'flymake-cursor)
 (require 'flymake-jshint)
