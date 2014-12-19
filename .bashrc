@@ -289,7 +289,7 @@ prompt() {
         _PVENV=""
     fi
 
-    _PUSER="$_PUSER_COLOR$bold\u$green$bold$plain@$_HNCOLOUR\h$blue"
+    _PUSER="$_PUSER_COLOR$bold\u$green$bold$plain@$_HNCOLOUR\h$plain$blue"
     _PTIME="$plain$yellow\@$blue"
     _PDIR="$plain$green\W$blue"
 
