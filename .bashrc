@@ -404,6 +404,15 @@ zlemma(){
         rp)
             env='em'
             project='resume-parser'
+            function rp() {
+                python -m resume_parser.v2.sections.test tmp/rp2_data/500/HTML/$1*.html 2>&1
+            }
+            function rp-emp() {
+                rp $1 | grep Employer | less
+            }
+            function rp-jt() {
+                rp $1 | grep 'PositionTitle\|JobTitle' | grep  | less
+            }
             ;;
         em)
             env='em'
