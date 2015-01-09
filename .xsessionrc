@@ -1,4 +1,4 @@
-## -*-Shell-*-
+## -*-Sh-*-
 ## Configure Xsession
 
 xrdb -merge ~/.Xresources
@@ -33,7 +33,7 @@ pkill mpd; mpd &
 pkill mpdscribble;mpdscribble &
 # pkill notification-da; /usr/lib/notification-daemon-1.0/notification-daemon &
 pkill urxvtd; urxvtd &
-pkill trayer; trayer --edge top --SetDockType true --align right --height 14 \
-      --widthtype request --tint 0x000000 --transparent true --alpha 0 &
+# pkill trayer; trayer --edge top --SetDockType true --align right --height 14 \
+#      --widthtype request --tint 0x000000 --transparent true --alpha 0 &
 
 xautolock -exit; xautolock -time 10 -locker "lock" &

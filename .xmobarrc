@@ -32,5 +32,5 @@ Config { font = "xft:Monospace:size=9:bold"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %mpd%%default:Master% | %multicpu% %memory% %battery% %wlan0wi% | <fc=#ee9a00>%date%</fc> |   "
+       , template = "%StdinReader% }{ %mpd%%default:Master% | %multicpu% %memory% %battery% %wlan0wi% | <fc=#ee9a00>%date%</fc> "
        }
