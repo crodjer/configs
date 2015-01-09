@@ -404,6 +404,8 @@ zlemma(){
         rp)
             env='em'
             project='resume-parser'
+            export RP_STATIC_DATA_PATH=~/Dropbox/rp2_data
+
             function rp() {
                 python -m resume_parser.v2.sections.test tmp/rp2_data/500/HTML/$1*.html 2>&1
             }
