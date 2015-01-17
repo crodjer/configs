@@ -212,6 +212,8 @@ alias h='history'
 alias hn='history -n'
 alias cv='command -v'
 
+alias dbx='dropbox.py'
+
 function serve() {
     python3 -m http.server ${1:-8000}
 }
@@ -413,7 +415,7 @@ zlemma(){
                 rp $1 | grep Employer | less
             }
             function rp-jt() {
-                rp $1 | grep 'PositionTitle\|JobTitle' | grep  | less
+                rp $1 | grep 'PositionTitle\|JobTitle' | less
             }
             ;;
         em)
