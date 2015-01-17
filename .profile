@@ -22,7 +22,7 @@ export                       PATH="$HOME/.bin"
 [ -d "$HOME/.cabal" ]     && PATH="$PATH:$HOME/.cabal/bin"
 [ -d "/opt/local" ]       && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
 [ -d "/bin/vendor_perl" ] && PATH="$PATH:/bin/vendor_perl"
-                             PATH="$PATH:$HOME/.gem/ruby/2.1.0/bin"
+                             PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
                              PATH="$PATH:$HOME/workspace/configs/scripts/"
                              PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
 [ "$(id -u)" == "0" ]  &&    PATH="$PATH:/usr/local/sbin/:/usr/sbin"
@@ -58,7 +58,6 @@ case "$-" in *i*) ;; *) return;; esac
 #-----------------------------#
 exists source-highlight-esc.sh && \
     export LESSOPEN="| `which source-highlight-esc.sh` %s 2> /dev/null"
-export LESS='-r'
 export GREP_COLOR=31
 export PAGER=less
 export MANPAGER=$PAGER
