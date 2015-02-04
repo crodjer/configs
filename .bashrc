@@ -406,6 +406,7 @@ zlemma(){
         rp)
             env='em'
             project='resume-parser'
+            export EM_NAMES_SOURCE=file://$HOME/workspace/zlemma/resume-parser/tmp/rp2_data/experimental-data/
             export RP_STATIC_DATA_PATH=~/Dropbox/rp2_data
 
             function rp() {
