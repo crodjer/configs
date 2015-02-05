@@ -113,24 +113,35 @@ alias screen='TERM=screen-256color screen -U'
 alias t='task'
 
 # Git aliases
+source /usr/share/bash-completion/completions/git
 git_branch () {
     git branch | grep "*" | cut -d " " -f 2
 }
 alias g="git"
 alias ga="git add"
+__git_complete ga _git_add
 alias gc="git commit -v"
+__git_complete gc _git_commit
 alias gca="git commit -va"
+__git_complete gca _git_commit
 alias gst="git status"
+__git_complete gst _git_status
 alias gco="git checkout"
+__git_complete gco _git_checkout
 alias gl="git pull"
+__git_complete gl _git_pull
 alias gp="git push"
+__git_complete gp _git_push
 alias gup="git fetch"
+__git_complete gup _git_fetch
 alias glg='git log --stat'
+__git_complete glg _git_log
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
 alias ggpush='gp origin $(git_branch)'
 alias ggprnp='gl origin $(git_branch) --rebase && ggpush'
 alias gglr='gl origin $(git_branch) --rebase'
+
 
 # GHC aliases
 CABAL_SANDBOX_PKG_CONF='`ls -d .cabal-sandbox/*-packages.conf.d | tail -1`'
