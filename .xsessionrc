@@ -6,7 +6,7 @@ xset b 100 400 100
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # setxkbmap -model thinkpad -layout us
-# setxkbmap -option caps:escape
+setxkbmap -option caps:escape
 xmodmap -e "keycode 107 = Super_R NoSymbol Super_R"
 
 ## Touchpad settings
