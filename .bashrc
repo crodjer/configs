@@ -46,7 +46,7 @@ exists pacman && {
   alias psh='pacman -Si'
   alias pshi='pacman -Qi'
   alias pclean='p -Sc'
-  alias remove-oprhans='p -Rns $(pacman -Qqtd)'
+  alias remove-orphans='p -Rns $(pacman -Qqtd)'
 }
 
 exists aptitude && {
@@ -139,8 +139,8 @@ __git_complete glg _git_log
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
 alias ggpush='gp origin $(git_branch)'
-alias ggprnp='gl origin $(git_branch) --rebase && ggpush'
-alias gglr='gl origin $(git_branch) --rebase'
+alias ggprnp='gl --rebase origin $(git_branch) && ggpush'
+alias gglr='gl --rebase origin $(git_branch)'
 
 
 # GHC aliases
@@ -375,7 +375,7 @@ preexec_invoke_exec () {
 trap 'preexec_invoke_exec' DEBUG
 
 exists virtualenvwrapper.sh && source `which virtualenvwrapper.sh`
-# [[ -s "/etc/profile.d/autojump.sh" ]] && source "/etc/profile.d/autojump.sh"
+[[ -s "/etc/profile.d/autojump.sh" ]] && source "/etc/profile.d/autojump.sh"
 
 #-------------------------#
 # Functions
