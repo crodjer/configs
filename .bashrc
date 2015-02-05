@@ -321,7 +321,7 @@ preexec () {
     local title=$1
     local excluded_commands=(
         source ls clear echo exec cat printf cd
-        $PROMPT_COMMAND
+        $(echo $PROMPT_COMMAND | sed 's/;//')
     )
     local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" | paste -sd '|')
     local short_title=$(echo "$title" \
@@ -358,7 +358,9 @@ preexec () {
 preexec_invoke_exec () {
     [ -n "$COMP_LINE" ] && return  # do nothing if completing
 
-    if [[ "$BASH_COMMAND" == "$PROMPT_COMMAND" ]]; then
+    if [[ $PROMPT_COMMAND =~ .*$BASH_COMMAND.* ]]; then
+        # The current command is one the prompt command i.e. a prompt
+        # execution.
         preexec "$BASH_COMMAND"
         _prompt_wait=true
         return
@@ -375,7 +377,7 @@ preexec_invoke_exec () {
 trap 'preexec_invoke_exec' DEBUG
 
 exists virtualenvwrapper.sh && source `which virtualenvwrapper.sh`
-[[ -s "/etc/profile.d/autojump.sh" ]] && source "/etc/profile.d/autojump.sh"
+[[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
 
 #-------------------------#
 # Functions
