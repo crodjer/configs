@@ -27,13 +27,10 @@ synclient TouchpadOff=1
 xsetroot -cursor_name left_ptr
 $HOME/workspace/configs/scripts/display.sh
 bash $HOME/.fehbg
+xcompmgr -f -I 0.15 -O 0.15 &
 
 ## Start some useful programms
-pkill mpd; mpd &
-pkill mpdscribble;mpdscribble &
-# pkill notification-da; /usr/lib/notification-daemon-1.0/notification-daemon &
-pkill urxvtd; urxvtd &
-# pkill trayer; trayer --edge top --SetDockType true --align right --height 14 \
-#      --widthtype request --tint 0x000000 --transparent true --alpha 0 &
+mpd
+urxvtd &
 
 xautolock -exit; xautolock -time 10 -locker "lock" &
