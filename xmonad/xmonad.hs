@@ -82,8 +82,8 @@ customPP = def
            { ppCurrent = xmobarColor "#FFEE00" "" . wrap "[" "]"
            , ppVisible = xmobarColor "#5599FF" "" . wrap "<" ">"
            , ppTitle =  shorten 80
-           , ppSep =  "<fc=#AFAF87>|</fc>"
-           , ppHiddenNoWindows = xmobarColor "#404040" ""
+           , ppSep =  "|"
+           , ppHiddenNoWindows = xmobarColor "#999999" ""
            , ppUrgent = xmobarColor "#ff0000" "" . wrap "!" "!"
            }
 
