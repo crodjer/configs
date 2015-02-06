@@ -13,9 +13,11 @@ minutes=$(date +%M)
 case $minutes in
      30)
          notification="Its half past $hours hours."
+         mpc pause
          ;;
-     0)
+     00)
          notification="Its $hours hours."
+         mpc pause
          ;;
      *)
          notification="Its $minutes past $hours hours."
