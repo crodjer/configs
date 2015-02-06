@@ -25,9 +25,10 @@ synclient TouchpadOff=1
 
 # Looks
 xsetroot -cursor_name left_ptr
-$HOME/workspace/configs/scripts/display.sh
+display.sh
 bash $HOME/.fehbg
 xcompmgr -f -I 0.15 -O 0.15 &
+tray.sh &
 
 ## Start some useful programms
 mpd
