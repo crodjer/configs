@@ -9,7 +9,7 @@ URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 0
 URxvt*scrollBar: false
-URxvt*depth: 32
+! URxvt*depth: 32
 URxvt*cursorBlink: false
 ! URxvt*inheritPixmap: true
 URxvt*termName: rxvt-unicode-256color
@@ -29,7 +29,6 @@ URxvt*urgentOnBell: true
 URxvt*visualBell: false
 
 ! Looks and Colors
-URxvt*shading: 20
 URxvt*background: #eeeeec
 URxvt*foreground: black
 URxvt*cursorColor: black

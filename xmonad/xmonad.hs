@@ -97,7 +97,8 @@ borderWidth' = 1
 
 normalBorderColor', focusedBorderColor' :: String
 normalBorderColor'  = "#CCCCCC"
-focusedBorderColor' = "#00DD00"
+focusedBorderColor' = "#00FF00"
+
 myFont = "xft:Monospace:pixelsize=12:bold:antialias=true:hinting=true"
 myFontLarge = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
 
