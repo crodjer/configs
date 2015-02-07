@@ -1,0 +1,6 @@
+background "#555"
+dockapp_mode simple
+icon_size 16
+geometry 1x1-1
+max_geometry 2x1
+skip_taskbar true
