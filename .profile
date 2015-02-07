@@ -39,18 +39,21 @@ export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
 #-------------------------#
 # BASE - Environment
 #-------------------------#
-[[ -e /usr/share/zoneinfo/Asia/Kolkata ]] && {
+[ -e /usr/share/zoneinfo/Asia/Kolkata ] && {
     export TZ="/usr/share/zoneinfo/Asia/Kolkata"
 }
-export EDITOR='vi'
-exists emacsclient && EDITOR='emacsclient -ct' || {
-    exists zile && EDITOR=zile;
+exists emacsclient && export EDITOR='emacsclient -ct' || {
+    exists zile && export EDITOR=zile
+} || {
+    export EDITOR='vi'
 }
 export HOSTALIASES=~/.hosts
 
 #-------------------------#
 # SHELL - CHECK TYPE      #
 #-------------------------#
+
+# If not running interactively, ignore following definitions.
 case "$-" in *i*) ;; *) return;; esac
 
 #-----------------------------#
@@ -68,6 +71,7 @@ export NODE_PATH=/home/rohan/.local/lib/node_modules:/usr/lib/node_modules
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
 #-----------------------------#
-# [ -r "$HOME/.profile.local" ] && \
-#     . "$HOME/.profile.local"
+[ -r "$HOME/.profile.local" ] && . "$HOME/.profile.local"
 # [ "$BASH_VERSION" -a -z "$POSIXLY_CORRECT" ] && . "$HOME/.bashrc"
+
+true # Exit status should be 0.
