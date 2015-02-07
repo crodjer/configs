@@ -28,10 +28,9 @@ xsetroot -cursor_name left_ptr
 display.sh
 bash $HOME/.fehbg
 xcompmgr -f -I 0.15 -O 0.15 &
-tray.sh &
+stalonetray &
 
 ## Start some useful programms
 mpd
 urxvtd &
-
-xautolock -exit; xautolock -time 10 -locker "lock" &
+xautolock -time 10 -locker "lock" &
