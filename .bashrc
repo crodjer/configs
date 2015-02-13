@@ -449,7 +449,7 @@ zlemma(){
             project='browserextensions'
             ;;
         *)
-            env='zlemma'
+            env='rp'
             project='zlemma'
             export DJANGO_SETTINGS_MODULE=settings.local
             ;;

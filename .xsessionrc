@@ -2,7 +2,7 @@
 ## Configure Xsession
 
 xrdb -merge ~/.Xresources
-xset b 100 400 100
+xset b 100 500 100
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # setxkbmap -model thinkpad -layout us
@@ -10,24 +10,25 @@ setxkbmap -option caps:escape
 xmodmap -e "keycode 107 = Super_R NoSymbol Super_R"
 
 ## Touchpad settings
-synclient TapButton1=1
+synclient TapButton1=0
 synclient VertEdgeScroll=0, VertTwoFingerScroll=1, HorizTwoFingerScroll=1
-synclient HorizScrollDelta=104, EmulateTwoFingerMinW=5
+synclient HorizScrollDelta=104, VertScrollDelta=32
 synclient VertHysteresis=25, HorizHysteresis=25
-synclient FingerLow=5, FingerHigh=25
-synclient MinSpeed=0, MaxSpeed=0.25
-synclient PalmDetect=1, PalmMinWidth=4, PalmMinZ=10
-synclient EmulateTwoFingerMinZ=80, VertScrollDelta=32
+synclient FingerLow=20, FingerHigh=25
+synclient MinSpeed=0, MaxSpeed=1
+synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=12
+synclient EmulateTwoFingerMinZ=40, EmulateTwoFingerMinW=14
+synclient CoastingSpeed=0 # , CoastingFriction=100
 
 # No touchpad
-synclient TouchpadOff=1
+synclient TouchpadOff=0
 # syndaemon -dKi 0.5
 
 # Looks
 xsetroot -cursor_name left_ptr
 display.sh
 bash $HOME/.fehbg
-xcompmgr -f -I 0.15 -O 0.15 &
+xcompmgr -f -I 0.1 -O 0.1 &
 stalonetray &
 
 ## Start some useful programms

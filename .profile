@@ -59,6 +59,7 @@ case "$-" in *i*) ;; *) return;; esac
 #-----------------------------#
 # ENVIRONMENT - APPLICATIONS  #
 #-----------------------------#
+export LESS=" -R "
 exists source-highlight-esc.sh && \
     export LESSOPEN="| `which source-highlight-esc.sh` %s 2> /dev/null"
 export GREP_COLOR=31
