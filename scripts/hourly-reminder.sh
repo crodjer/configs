@@ -5,23 +5,24 @@
 #
 #     0,30 * * * * /path/to/this/script/hourly-reminder.sh
 
-title="Get up!"
-
 hours=$(date +%H)
 minutes=$(date +%M)
+# notification="$hours:$minutes"
+title="$hours:$minutes"
 
 case $minutes in
      30)
-         notification="Its half past $hours hours."
-         mpc pause
+         beep_args="-f 900 -l 100"
          ;;
      00)
-         notification="Its $hours hours."
-         mpc pause
+         beep_args="-f 250 -l 400"
          ;;
      *)
-         notification="Its $minutes past $hours hours."
          ;;
 esac
 
-DISPLAY=:0 notify-send "$title" "$notification"
+DISPLAY=:0 notify-send "$title" # "$notification"
+
+if [[ $beep_args ]]; then
+    beep $beep_args
+fi
