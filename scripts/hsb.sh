@@ -29,7 +29,7 @@ OPTIONS
  -r          Re-initialize the sandbox
  -b          Link executables to the bin directory
  -p          Install this package in the sandbox
- -l          Link to the sandbox here
+ -l          Create a sandbox config in current directory
 EOF
 `
 
@@ -59,7 +59,7 @@ while getopts :hbvrlp: opt; do
             exit 0
             ;;
         l)
-            link_current=1
+            link_pwd=1
             ;;
         r)
             remove=1
@@ -111,4 +111,9 @@ fi
 
 if [[ "$link_binaries" && -e "$cabal_sandbox/bin/" ]]; then
     ln -s "$cabal_sandbox/bin/*" $BIN_DIR
+fi
+
+if [[ "$link_pwd" ]]; then
+    cd $trigger_dir
+    cabal sandbox init --sandbox=$cabal_sandbox
 fi
