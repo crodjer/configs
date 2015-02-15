@@ -1,6 +1,4 @@
-((ample-regexps status "installed" recipe
-                (:name ample-regexps :description "Compose and reuse Emacs regular expressions with ease" :type github :pkgname "immerrr/ample-regexps.el"))
- (auto-complete status "installed" recipe
+((auto-complete status "installed" recipe
                 (:name auto-complete :website "https://github.com/auto-complete/auto-complete" :description "The most intelligent auto-completion extension." :type github :pkgname "auto-complete/auto-complete" :depends
                        (popup fuzzy)
                        :features auto-complete-config :post-init
@@ -8,8 +6,6 @@
                          (add-to-list 'ac-dictionary-directories
                                       (expand-file-name "dict" default-directory))
                          (ac-config-default))))
- (cl-lib status "installed" recipe
-         (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
  (ctable status "installed" recipe
          (:name ctable :description "Table Component for elisp" :type github :pkgname "kiwanami/emacs-ctable"))
  (dash status "installed" recipe
@@ -28,8 +24,6 @@
                      (progn
                        (add-to-list 'auto-mode-alist
                                     '("\\.erl$" . erlang-mode)))))
- (f status "installed" recipe
-    (:name f :website "https://github.com/rejeep/f.el" :description "Modern API for working with files and directories in Emacs" :type github :pkgname "rejeep/f.el"))
  (find-file-in-project status "installed" recipe
                        (:name find-file-in-project :type github :pkgname "technomancy/find-file-in-project" :description "Quick access to project files in Emacs"))
  (flymake-cursor status "installed" recipe
@@ -50,7 +44,7 @@
  (git-modes status "installed" recipe
             (:name git-modes :description "GNU Emacs modes for various Git-related files" :type github :pkgname "magit/git-modes"))
  (handlebars-mode status "installed" recipe
-                  (:name handlebars-mode :website "https://github.com/danielevans/handlebars-mode" :description "Emacs Major Mode for Handlebars" :type git :url "git@github.com:danielevans/handlebars-mode.git"))
+                  (:name handlebars-mode :website "https://github.com/danielevans/handlebars-mode" :description "Emacs Major Mode for Handlebars" :type github :pkgname "danielevans/handlebars-mode"))
  (haskell-mode status "installed" recipe
                (:name haskell-mode :description "A Haskell editing mode" :type github :pkgname "haskell/haskell-mode" :info "." :build
                       `(("make" ,(format "EMACS=%s" el-get-emacs)
@@ -64,8 +58,6 @@
                         (:name highlight-indentation :description "Function for highlighting indentation" :type git :url "https://github.com/antonj/Highlight-Indentation-for-Emacs"))
  (idomenu status "installed" recipe
           (:name idomenu :type emacswiki :description "imenu tag selection a la ido" :load-path "."))
- (iedit status "installed" recipe
-        (:name iedit :description "Edit multiple regions with the same content simultaneously." :type emacswiki :features iedit))
  (js2-mode status "installed" recipe
            (:name js2-mode :website "https://github.com/mooz/js2-mode#readme" :description "An improved JavaScript editing mode" :type github :pkgname "mooz/js2-mode" :prepare
                   (autoload 'js2-mode "js2-mode" nil t)))
@@ -75,8 +67,6 @@
                 (:name less-css-mode :description "Emacs mode for LESS CSS (lesscss.org), with support for compile-on-save" :type github :pkgname "purcell/less-css-mode"))
  (linum-relative status "installed" recipe
                  (:name linum-relative :type emacswiki :description "Display relative line number in the left margin" :features linum-relative))
- (nose status "installed" recipe
-       (:type github :pkgname "emacsmirror/nose" :name nose :website "https://bitbucket.org/durin42/nosemacs" :description "Emacs extension to provide easy nosetest integration." :type emacsmirror :pkgname nose))
  (package status "installed" recipe
           (:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el" :shallow nil :features package :post-init
                  (progn
@@ -110,8 +100,8 @@
  (pkg-info status "installed" recipe
            (:name pkg-info :description "Provide information about Emacs packages." :type github :pkgname "lunaryorn/pkg-info.el" :depends s))
  (popup status "installed" recipe
-        (:name popup :website "https://github.com/auto-complete/popup-el" :description "Visual Popup Interface Library for Emacs" :type github :pkgname "auto-complete/popup-el"))
+        (:name popup :website "https://github.com/auto-complete/popup-el" :description "Visual Popup Interface Library for Emacs" :type github :submodule nil :pkgname "auto-complete/popup-el"))
  (rust-mode status "installed" recipe
-            (:name rust-mode :type http :url "https://raw.github.com/mozilla/rust/master/src/etc/emacs/rust-mode.el" :description "Emacs mode for Rust"))
+            (:name rust-mode :type github :pkgname "rust-lang/rust-mode" :description "Emacs mode for Rust"))
  (s status "installed" recipe
     (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el")))
