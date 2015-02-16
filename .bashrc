@@ -144,7 +144,12 @@ alias gglr='gl --rebase origin $(git_branch)'
 
 
 # GHC aliases
-CABAL_SANDBOX_PKG_CONF='`ls -d .cabal-sandbox/*-packages.conf.d | tail -1`'
+sandbox_pkg_conf () {
+    sandbox_dir=$(cat cabal.sandbox.config  | grep -E '^\s+prefix\s*:' | sed -r 's/^\s+prefix\s*:\s*//g')
+    ls -d $sandbox_dir/*-packages.conf.d/ | tail -1
+}
+
+CABAL_SANDBOX_PKG_CONF='`sandbox_pkg_conf`'
 CABAL_SANDBOX_ARGS="-no-user-package-db -package-db=$CABAL_SANDBOX_PKG_CONF"
 alias ghc-sandbox="ghc $CABAL_SANDBOX_ARGS"
 alias ghci-sandbox="ghci $CABAL_SANDBOX_ARGS"
