@@ -155,7 +155,6 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,               xK_Return), spawn $ XMonad.terminal conf)
     , ((modMask,               xK_p     ), shellPrompt myXPConfig)
     , ((modMask .|. shiftMask, xK_c     ), kill)
-    , ((modMask .|. shiftMask, xK_p     ), spawn "gmrun")
     , ((modMask,               xK_d     ), spawn "xautolock -locknow")
 
     -- layouts

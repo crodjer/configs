@@ -419,6 +419,8 @@ zlemma(){
     zlemma_parent=/home/rohan/workspace/zlemma
 
     export DJANGO_SETTINGS_MODULE=zdb_common.settings.local
+    env='rp'
+    project='zlemma'
 
     case $1 in
         rp)
@@ -428,7 +430,10 @@ zlemma(){
             export RP_STATIC_DATA_PATH=~/Dropbox/rp2_data
 
             function rp() {
-                python -m resume_parser.v2.sections.test tmp/rp2_data/500/HTML/$1*.html 2>&1
+                python -m resume_parser $1 2>&1
+            }
+            function sd() {
+                ./scripts/section_headings.py $1 2>&1
             }
             function rp-emp() {
                 rp $1 | grep Employer | less
@@ -440,6 +445,11 @@ zlemma(){
         em)
             env='em'
             project='entity-match'
+            ;;
+        redis*)
+            zlemma rp
+            cd ../tmp/
+            redis-server
             ;;
         re*)
             env='inscoring'

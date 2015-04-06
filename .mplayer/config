@@ -19,7 +19,7 @@ volume=5
 #a52drc=1
 
 ## Appearance
-heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
+# heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
 # stop-xscreensaver="yes"
 
 ### Subtitles
