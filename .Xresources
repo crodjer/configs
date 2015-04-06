@@ -23,6 +23,7 @@ URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.keysym.M-w:   perl:clipboard:copy
 URxvt.keysym.M-y:   perl:clipboard:paste
 URxvt.keysym.M-C-y perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.url-select.launcher: /usr/bin/firefox
 URxvt.url-select.underline: true
 URxvt*urgentOnBell: true

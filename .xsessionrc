@@ -21,7 +21,7 @@ synclient EmulateTwoFingerMinZ=40, EmulateTwoFingerMinW=14
 synclient CoastingSpeed=0 # , CoastingFriction=100
 
 # No touchpad
-synclient TouchpadOff=0
+synclient TouchpadOff=1
 # syndaemon -dKi 0.5
 
 # Looks

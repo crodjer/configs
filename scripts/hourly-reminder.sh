@@ -10,6 +10,12 @@ minutes=$(date +%M)
 # notification="$hours:$minutes"
 title="$hours:$minutes"
 
+allow_beep="true"
+
+jacked.sh && {
+    unset allow_beep
+}
+
 case $minutes in
      30)
          beep_args="-f 900 -l 100"
@@ -21,8 +27,9 @@ case $minutes in
          ;;
 esac
 
-DISPLAY=:0 notify-send "$title" # "$notification"
+export DISPLAY=:0
+notify-send "$title" # "$notification"
 
-if [[ $beep_args ]]; then
+if [[ $beep_args && $allow_beep ]]; then
     beep $beep_args
 fi
