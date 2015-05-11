@@ -33,7 +33,7 @@ esac
 echo $allow_beep
 
 export DISPLAY=:0
-# notify-send "$title" # "$notification"
+notify-send "$title" # "$notification"
 
 if [[ $beep_args && $allow_beep ]]; then
     beep $beep_args
