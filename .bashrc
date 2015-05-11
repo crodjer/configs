@@ -141,20 +141,10 @@ alias gcd='git checkout develop'
 alias ggpush='gp origin $(git_branch)'
 alias ggprnp='gl --rebase origin $(git_branch) && ggpush'
 alias gglr='gl --rebase origin $(git_branch)'
-
-
-# GHC aliases
-sandbox_pkg_conf () {
-    sandbox_dir=$(cat cabal.sandbox.config  | grep -E '^\s+prefix\s*:' | sed -r 's/^\s+prefix\s*:\s*//g')
-    ls -d $sandbox_dir/*-packages.conf.d/ | tail -1
-}
-
-CABAL_SANDBOX_PKG_CONF='`sandbox_pkg_conf`'
-CABAL_SANDBOX_ARGS="-no-user-package-db -package-db=$CABAL_SANDBOX_PKG_CONF"
-alias ghc-sandbox="ghc $CABAL_SANDBOX_ARGS"
-alias ghci-sandbox="ghci $CABAL_SANDBOX_ARGS"
-alias runhaskell-sandbox="runhaskell $CABAL_SANDBOX_ARGS"
-alias ghc-pkg-sandbox="ghc-pkg --no-user-package-db --package-db $CABAL_SANDBOX_PKG_CONF"
+alias sb-ghc="cabal exec ghc"
+alias sb-ghci="cabal exec ghci"
+alias sb-runhaskell="cabal exec runhaskell"
+alias sb-ghc-pkg="cabal exec ghc-pkg"
 
 function ghc-pkg-reset() {
     read -p 'Erasing all your user ghc and cabal packages. Are you sure (y/n)? ' ans
@@ -432,7 +422,7 @@ zlemma(){
             function rp() {
                 python -m resume_parser $1 2>&1
             }
-            function sd() {
+            function shd() {
                 ./scripts/section_headings.py $1 2>&1
             }
             function rp-emp() {

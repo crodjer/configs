@@ -68,6 +68,7 @@ export MANPAGER=$PAGER
 export NODE_PATH=/home/rohan/.local/lib/node_modules:/usr/lib/node_modules
 # export GOPATH=/home/rohan/workspace/go
 # export PATH=$PATH:$GOPATH/bin
+export CHESSDIR=/home/rohan/.chess/
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
