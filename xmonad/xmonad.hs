@@ -108,9 +108,9 @@ workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 -- layouts
 myTiled = smartBorders $ ResizableTall 1 (3/100) (52/100) []
-myFull = smartBorders $ Full
-myTabbed = smartBorders $ tabbed shrinkText def
-mySWNConfig = defaultSWNConfig
+myFull = noBorders $ Full
+myTabbed = noBorders $ tabbed shrinkText def
+mySWNConfig = def
               { swn_font = myFontLarge
               , swn_fade = 1
               , swn_bgcolor = "#dddddd"
@@ -134,7 +134,7 @@ customLayout = myShowWName $ avoidStruts $
 terminal' :: String
 terminal' = "urxvtc"
 
-myXPConfig = defaultXPConfig
+myXPConfig = def
              { promptKeymap = emacsLikeXPKeymap
              , position = Top
              , promptBorderWidth = 1
