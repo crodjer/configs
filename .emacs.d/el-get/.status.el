@@ -29,6 +29,8 @@
                      (progn
                        (add-to-list 'auto-mode-alist
                                     '("\\.erl$" . erlang-mode)))))
+ (fill-column-indicator status "installed" recipe
+                        (:name fill-column-indicator :type github :website "https://github.com/alpaker/Fill-Column-Indicator#readme" :description "An Emacs minor mode that graphically indicates the fill column." :pkgname "alpaker/Fill-Column-Indicator"))
  (find-file-in-project status "installed" recipe
                        (:name find-file-in-project :type github :pkgname "technomancy/find-file-in-project" :description "Quick access to project files in Emacs"))
  (flymake-cursor status "installed" recipe
@@ -72,6 +74,10 @@
                 (:name less-css-mode :description "Emacs mode for LESS CSS (lesscss.org), with support for compile-on-save" :type github :pkgname "purcell/less-css-mode"))
  (linum-relative status "installed" recipe
                  (:name linum-relative :type emacswiki :description "Display relative line number in the left margin" :features linum-relative))
+ (markdown-mode status "installed" recipe
+                (:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type git :url "git://jblevins.org/git/markdown-mode.git" :prepare
+                       (add-to-list 'auto-mode-alist
+                                    '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
  (package status "installed" recipe
           (:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el" :shallow nil :features package :post-init
                  (progn

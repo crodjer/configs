@@ -22,10 +22,6 @@
 (require 'gnus)
 (require 'tramp)
 
-;; Installed in ~/.elisp
-(require 'fill-column-indicator)
-(require 'markdown-mode)
-
 ;; El get
 ;; Tracked in ~/.emacs.d/el-get/.status.el
 
@@ -53,6 +49,8 @@
 (require 'geiser-install)
 (require 'erlang)
 (require 'linum-relative)
+(require 'fill-column-indicator)
+(require 'markdown-mode)
 
 ;; ----------------------
 ;; General customizations
