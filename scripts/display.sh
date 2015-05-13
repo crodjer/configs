@@ -33,8 +33,9 @@ case $SCREENS in
     ;;
     1) # VGA + LAPTOP
         xrandr --output HDMI1 --off
-        xrandr --output  LVDS1 --auto --output VGA1 --auto --right-of LVDS1
+        # xrandr --output  LVDS1 --auto --output VGA1 --auto --right-of LVDS1
         # xrandr --output VGA1 --auto --pos 0x0 --output LVDS1 --auto --pos 1920x312 --primary
+        xrandr --output LVDS1 --auto --pos 0x312 --primary --output VGA1 --auto --pos 1366x0
     ;;
     2) # HDMI + LAPTOP
         xrandr --output VGA1 --off
