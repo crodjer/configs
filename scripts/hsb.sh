@@ -110,7 +110,7 @@ if [[ "$inital_package" ]]; then
 fi
 
 if [[ "$link_binaries" && -e "$cabal_sandbox/bin/" ]]; then
-    ln -s "$cabal_sandbox/bin/*" $BIN_DIR
+    ln -s $cabal_sandbox/bin/* $BIN_DIR/
 fi
 
 if [[ "$link_pwd" ]]; then
