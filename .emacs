@@ -38,7 +38,6 @@
 
 (el-get 'sync)
 
-(require 'haskell-mode-autoloads)
 (require 'auto-complete-config)
 (require 'js2-mode)
 (require 'whitespace)
@@ -115,7 +114,6 @@
 ;; ----------------
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
-(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("\\.mkd$\\|.md$\\|.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("mutt-.*-" . mail-mode))
