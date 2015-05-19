@@ -68,9 +68,13 @@ alias reboot='sudo reboot'
 #Save session to disk and bind caps as escape on resume
 # alias s2disk='dbus-send --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Hibernate && displays'
 # alias s2ram='dbus-send --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend && displays'
-alias s2disk='sudo pm-hibernate && display.sh'
-alias s2ram='sudo pm-suspend && display.sh'
-alias s2both='sudo s2both && display.sh'
+# alias s2disk='sudo pm-hibernate && display.sh'
+# alias s2ram='sudo pm-suspend && display.sh'
+# alias s2both='sudo s2both && display.sh'
+
+alias s2disk='sudo systemctl hibernate && display.sh'
+alias s2ram='sudo systemctl suspend && display.sh'
+alias s2both='sudo systemctl hybrid-sleep && display.sh'
 
 alias node='env NODE_NO_READLINE=1 rlwrap node'
 alias npm='PREFIX=/home/rohan/.local npm'
