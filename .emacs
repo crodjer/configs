@@ -67,6 +67,7 @@
  js-indent-level 2
  js2-basic-offset 2
  js2-bounce-indent-p nil
+ elm-indent-offset 2
  haskell-indent-offset 2
 
  ;; Backups
@@ -131,6 +132,9 @@
 ;; -------------
 ;; General modes
 ;; -------------
+
+;; Disable automatic re-indentation of lines.
+(electric-indent-mode -1)
 
 ;; ---------
 ;; Ido mode
@@ -224,13 +228,17 @@ commands."
 (add-hook 'hack-local-variables-hook #'flymake-mode-hook-function)
 (setq virtualenv-workon-starts-python nil)
 
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq-local electric-indent-chars (delq ?: electric-indent-chars))))
+
 ;; ---
 ;; Elm
 ;; ---
-(add-hook 'elm-mode-hook 'turn-off-elm-indent)
-(add-hook 'elm-mode-hook 'turn-on-haskell-indent)
+;; (add-hook 'elm-mode-hook 'turn-on-haskell-indent)
 ;; (add-hook 'elm-mode-hook
-;;           (lambda () (setq-local ')))
+;;      (lambda () (setq-local haskell-literate nil)))
+;; (add-hook 'elm-mode-hook 'turn-off-elm-indent)
 
 ;; ----------
 ;; Javascript
