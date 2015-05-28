@@ -1,5 +1,4 @@
 (:name el-get
        :type git
        :url "git://github.com/jcollard/elm-mode.git"
-       :features elm-mode
-       :load-path ("."))
+       :features elm-mode)
