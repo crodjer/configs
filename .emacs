@@ -67,6 +67,7 @@
  js-indent-level 2
  js2-basic-offset 2
  js2-bounce-indent-p nil
+ haskell-indent-offset 2
 
  ;; Backups
  backup-by-copying t
@@ -222,6 +223,14 @@ commands."
 ;; .dir-locals.el
 (add-hook 'hack-local-variables-hook #'flymake-mode-hook-function)
 (setq virtualenv-workon-starts-python nil)
+
+;; ---
+;; Elm
+;; ---
+(add-hook 'elm-mode-hook 'turn-off-elm-indent)
+(add-hook 'elm-mode-hook 'turn-on-haskell-indent)
+;; (add-hook 'elm-mode-hook
+;;           (lambda () (setq-local ')))
 
 ;; ----------
 ;; Javascript
@@ -383,8 +392,14 @@ makes)."
 (defadvice kill-line (after kill-line-cleanup-whitespace activate compile)
   "cleanup whitespace on kill-line"
   (if (not (bolp))
-	  (delete-region (point) (progn (skip-chars-forward " \t") (point)))))
+      (delete-region (point) (progn (skip-chars-forward " \t") (point)))))
 
+;; bury *scratch* buffer instead of kill it
+(defadvice kill-buffer (around kill-buffer-around-advice activate)
+  (let ((buffer-to-kill (ad-get-arg 0)))
+    (if (equal buffer-to-kill "*scratch*")
+        (bury-buffer)
+      ad-do-it)))
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Custom keybindings
