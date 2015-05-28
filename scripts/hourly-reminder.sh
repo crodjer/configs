@@ -18,6 +18,10 @@ $script_dir/jacked.sh && {
     unset allow_beep
 }
 
+if [ -f /tmp/no-reminder-beep.lock ]; then
+    unset allow_beep
+fi
+
 case $minutes in
      30)
          beep_args="-f 900 -l 100"
