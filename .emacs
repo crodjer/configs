@@ -235,10 +235,13 @@ commands."
 ;; ---
 ;; Elm
 ;; ---
+;; (remove-hook 'elm-mode-hook (first elm-mode-hook))
 ;; (add-hook 'elm-mode-hook 'turn-on-haskell-indent)
 ;; (add-hook 'elm-mode-hook
 ;;      (lambda () (setq-local haskell-literate nil)))
 ;; (add-hook 'elm-mode-hook 'turn-off-elm-indent)
+(add-hook 'elm-mode-hook 'fci-mode)
+(add-hook 'elm-mode-hook 'auto-complete-mode)
 
 ;; ----------
 ;; Javascript
