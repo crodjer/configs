@@ -11,21 +11,21 @@
 # BASE - UTILITY          #
 #-------------------------#
 exists() {
-    test -x "$(command -v "$1")"
+    command -v "$1" &> /dev/null
 }
 
 #-------------------------#
 # BASE - PATH             #
 #-------------------------#
-export                       PATH="$HOME/.bin"
-[ -d "$HOME/.local" ]     && PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
-[ -d "$HOME/.cabal" ]     && PATH="$PATH:$HOME/.cabal/bin"
-[ -d "/opt/local" ]       && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
-[ -d "/bin/vendor_perl" ] && PATH="$PATH:/bin/vendor_perl"
-                             PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
-                             PATH="$PATH:$HOME/workspace/configs/scripts/"
-                             PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
-[ "$(id -u)" == "0" ]  &&    PATH="$PATH:/usr/local/sbin/:/usr/sbin"
+export                        PATH="$HOME/.bin"
+[ -d "$HOME/.local" ]      && PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
+[ -d "$HOME/.cabal" ]      && PATH="$PATH:$HOME/.cabal/bin"
+[ -d "/opt/local" ]        && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
+[ -d "/bin/vendor_perl" ]  && PATH="$PATH:/bin/vendor_perl"
+                              PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin/"
+                              PATH="$PATH:$HOME/workspace/configs/scripts/"
+                              PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
+[ "$(id -u)" == "0" ]  &&     PATH="$PATH:/usr/local/sbin/:/usr/sbin"
 
 
 export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
@@ -69,6 +69,7 @@ export NODE_PATH=/home/rohan/.local/lib/node_modules:/usr/lib/node_modules
 # export GOPATH=/home/rohan/workspace/go
 # export PATH=$PATH:$GOPATH/bin
 export CHESSDIR=/home/rohan/.chess/
+export GEM_HOME=/home/rohan/.gem/ruby/
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
