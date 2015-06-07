@@ -100,34 +100,33 @@ normalBorderColor'  = "#CCCCCC"
 focusedBorderColor' = "#00FF00"
 
 myFont = "xft:Monospace:pixelsize=12:bold:antialias=true:hinting=true"
-myFontLarge = "xft:Monospace:pixelsize=60:bold:antialias=true:hinting=true"
+myFontLarge = "xft:Monospace:pixelsize=30:bold:antialias=true:hinting=true"
 
 -- workspaces
 workspaces' :: [WorkspaceId]
 workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 -- layouts
+customLayout = myShowWName $
+                 onWorkspaces ["4", "5", "6"] work $
+                 onWorkspaces ["8", "9"] (avoidStruts normal) $
+                 onWorkspaces ["2"] full
+                 normal
+    where
+      normal = avoidStruts $ myTiled ||| myFull ||| myTabbed
+      work = avoidStruts $ myTiled ||| myFull
+      full = myTabbed ||| myFull ||| myTiled
+
 myTiled = smartBorders $ ResizableTall 1 (3/100) (52/100) []
 myFull = noBorders $ Full
 myTabbed = noBorders $ tabbed shrinkText def
 mySWNConfig = def
               { swn_font = myFontLarge
               , swn_fade = 1
-              , swn_bgcolor = "#dddddd"
-              , swn_color = "#000000"
+              , swn_bgcolor = "#000000"
+              , swn_color = "#FFFFFF"
               }
 myShowWName = showWName' mySWNConfig
-
-customLayout = myShowWName $ avoidStruts $
-                 onWorkspaces ["4", "5", "6"] workLayout $
-                 {-onWorkspaces ["8", "9"] (noBorders normalLayout) $-}
-                 onWorkspaces ["2"] fullLayout
-                 normalLayout
-
-    where
-      normalLayout = myTiled ||| myFull ||| myTabbed
-      workLayout = myTiled ||| myFull
-      fullLayout = myTabbed ||| myFull ||| myTiled
 
 -------------------------------------------------------------------------------
 -- Terminal --
