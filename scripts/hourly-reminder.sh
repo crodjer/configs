@@ -30,13 +30,16 @@ case $minutes in
          beep_args="-f 250 -l 400"
          ;;
      *)
-         beep_args="-f 300 -l 100"
+         # beep_args="-f 300 -l 100"
          ;;
 esac
 
-echo $allow_beep
+if [[ $(ps -ef | grep -v grep | grep "xserverrc" | grep " :0 ") ]]; then
+    export DISPLAY=:0
+elif [[ $(ps -ef | grep -v grep | grep "xserverrc" | grep " :1 ") ]]; then
+    export DISPLAY=:1
+fi
 
-export DISPLAY=:0
 notify-send "$title" # "$notification"
 
 if [[ $beep_args && $allow_beep ]]; then

@@ -109,15 +109,16 @@ workspaces' = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 -- layouts
 customLayout = myShowWName $
                  onWorkspaces ["4", "5", "6"] work $
-                 onWorkspaces ["8", "9"] (avoidStruts normal) $
+                 onWorkspaces ["8", "9"] normal $
                  onWorkspaces ["2"] full
                  normal
+
     where
       normal = avoidStruts $ myTiled ||| myFull ||| myTabbed
       work = avoidStruts $ myTiled ||| myFull
-      full = myTabbed ||| myFull ||| myTiled
+      full = avoidStrutsOn [] $ myTabbed ||| myFull ||| myTiled
 
-myTiled = smartBorders $ ResizableTall 1 (3/100) (52/100) []
+myTiled = smartBorders $ ResizableTall 1 (3/100) (51/100) []
 myFull = noBorders $ Full
 myTabbed = noBorders $ tabbed shrinkText def
 mySWNConfig = def

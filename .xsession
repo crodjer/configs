@@ -1,1 +1,1 @@
-dbus-launch xmonad.sh
+dbus-launch xmonad
