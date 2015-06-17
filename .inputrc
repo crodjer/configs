@@ -7,4 +7,6 @@ set show-all-if-ambiguous on
 
 "\ep": menu-complete-backward
 "\en": menu-complete
+"\eh": "\C-aman \C-e\C-m"
+
 # Tab: menu-complete

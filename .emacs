@@ -154,9 +154,9 @@
 ;; ------------
 ;; Haskell mode
 ;; ------------
-(autoload 'ghc-init "ghc" nil t)
+;; (autoload 'ghc-init "ghc" nil t)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
 (defadvice ghc-display
   (after ghc-display-auto-pop-advice ())

@@ -9,6 +9,8 @@
                          (add-to-list 'ac-dictionary-directories
                                       (expand-file-name "dict" default-directory))
                          (ac-config-default))))
+ (bats-mode status "installed" recipe
+            (:name bats-mode :auto-generated t :type elpa :description "Emacs mode for editing and running Bats tests" :repo nil))
  (crontab-mode status "installed" recipe
                (:name crontab-mode :description "Mode for editing crontab files" :type http :url "http://web.archive.org/web/20080716014153/http://www.mahalito.net/~harley/elisp/crontab-mode.el"))
  (ctable status "installed" recipe
