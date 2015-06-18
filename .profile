@@ -25,7 +25,7 @@ export                        PATH="$HOME/.bin"
                               PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin/"
                               PATH="$PATH:$HOME/workspace/configs/scripts/"
                               PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
-[ "$(id -u)" == "0" ]  &&     PATH="$PATH:/usr/local/sbin/:/usr/sbin"
+[ "$(id -u)" -eq "0" ]  &&    PATH="$PATH:/usr/local/sbin/:/usr/sbin"
 
 
 export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
