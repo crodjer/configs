@@ -388,25 +388,6 @@ exists virtualenvwrapper.sh && source `which virtualenvwrapper.sh`
 # exists rbenv && eval "$(rbenv init -)"
 
 #-------------------------#
-# XMonad sandbox cleanup
-#-------------------------#
-
-# The parent of this process wasn't cabal, remove XMonad related stuff from env
-if [[ ! $(ps -o comm= $PPID) =~ "cabal" ]]; then
-    unset GHC_PACKAGE_PATH
-    IFS=:
-    # convert it to an array
-    t=($PATH)
-    unset IFS
-    # perform any array operations to remove elements from the array
-    t=(${t[@]%%*cabal-sandbox*})
-    IFS=:
-    # output the new array
-    export PATH="${t[*]}"
-    unset IFS
-fi
-
-#-------------------------#
 # Functions
 #-------------------------#
 couchenv(){
