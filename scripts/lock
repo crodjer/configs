@@ -1,4 +1,2 @@
 #!/usr/bin/env bash
-i3lock -c 002b36 -p win -i /home/rohan/pictures/misc/sherlock_holmes_1366x768_18561.png -t $@
-# /home/rohan/pictures/misc/thedivisionbell.png
-# /home/rohan/pictures/misc/debian_63_by_d_arthwound-d3321nn.png -t $@
+slock
