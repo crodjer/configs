@@ -1,6 +1,6 @@
 set keymap emacs
 set editing-mode emacs
-set completion-ignore-case On
+# set completion-ignore-case on
 set mark-symlinked-directories on
 set bell-style none
 set show-all-if-ambiguous on
