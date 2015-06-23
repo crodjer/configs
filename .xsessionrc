@@ -35,3 +35,4 @@ stalonetray &
 mpd
 urxvtd &
 xautolock -time 10 -locker "lock" &
+pulseaudio --check && pulseaudio --kill; pulseaudio --start
