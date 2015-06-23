@@ -15,6 +15,7 @@ import System.Exit
 import System.IO (Handle, hPutStrLn)
 import XMonad.Actions.CycleWS
 import XMonad.Actions.NoBorders
+import XMonad.Actions.UpdatePointer
 
 -- utils
 import XMonad.Util.Run (spawnPipe)
@@ -70,6 +71,7 @@ manageHook' = composeAll
 
 logHook' :: Handle ->  X ()
 logHook' h = dynamicLogWithPP (customPP { ppOutput = hPutStrLn h })
+             >> (updatePointer (0.5, 0.25) (0, 0))
 
 layoutHook' = customLayout
 -- Top-level binding with no type signature:           layoutHook' :: XMonad.Layout.LayoutModifier.ModifiedLayout
@@ -202,11 +204,11 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 
     -- XF86AudioMute
-    , ((0 , 0x1008ff12), spawn "amixer -q set Master toggle")
+    , ((0 , 0x1008ff12), spawn "pactl set-sink-mute 0 toggle")
     -- XF86AudioLowerVolume
-    , ((0 , 0x1008ff11), spawn "amixer -q set Master 1- unmute")
+    , ((0 , 0x1008ff11), spawn "pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -5%")
     -- XF86AudioRaiseVolume
-    , ((0 , 0x1008ff13), spawn "amixer -q set Master 1+ unmute")
+    , ((0 , 0x1008ff13), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
     -- XF86AudioNext
     , ((0 , 0x1008ff17), spawn "mpc next")
     -- XF86AudioPrev
