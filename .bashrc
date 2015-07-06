@@ -223,6 +223,8 @@ alias hn='history -n'
 alias cv='command -v'
 
 alias dbx='dropbox.py'
+alias gist='gist -c'
+alias agist='gist -a'
 
 function serve() {
     python3 -m http.server ${1:-8000}
@@ -386,6 +388,7 @@ trap 'preexec_invoke_exec' DEBUG
 exists virtualenvwrapper.sh && source `which virtualenvwrapper.sh`
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
 # exists rbenv && eval "$(rbenv init -)"
+export LFS=/mnt/lfs
 
 #-------------------------#
 # Functions
@@ -478,6 +481,7 @@ zlemma(){
     export PYTHONPATH=$PWD:$PYTHONPATH
     workon $env
 }
+alias zl=zlemma
 
 hr(){
     cd ~/workspace/is/ruby/hackerrank
