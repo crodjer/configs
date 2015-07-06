@@ -107,6 +107,9 @@
  whitespace-style '(face tabs trailing)
  create-lockfiles nil
  tramp-default-method "ssh"
+ tags-revert-without-query 1
+ ido-ignore-extensions t
+ gc-cons-threshold 20000000
 )
 
 ;; Server
@@ -136,12 +139,20 @@
 
 ;; Disable automatic re-indentation of lines.
 (electric-indent-mode -1)
+(helm-mode 1)
+
+;; ----------
+;; Projectile
+;; ----------
+
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
 
 ;; ---------
 ;; Ido mode
 ;; ---------
 (ido-mode t)
-(setq ido-ignore-extensions t)
+(flx-ido-mode 1)
 
 ;; -------------
 ;; Flyspell mode
