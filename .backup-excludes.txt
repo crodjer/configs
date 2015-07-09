@@ -1,0 +1,13 @@
+/dev/*
+/proc/*
+/sys/*
+/tmp/*
+/run/*
+/mnt/*
+/media/*
+/lost+found"
+*/.thumbnails/*
+*/.cache/mozilla/*
+*/.cache/chromium/*
+*/.local/share/Trash/*
+*/.gvfs
