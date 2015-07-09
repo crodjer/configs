@@ -11,3 +11,4 @@
 */.cache/chromium/*
 */.local/share/Trash/*
 */.gvfs
+*/.mpd/mpd.log
