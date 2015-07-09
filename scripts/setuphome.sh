@@ -165,6 +165,7 @@ setUp(){
     link .bash_profile
     link .bashrc
     link .irbrc
+    link .backup-excludes.txt
     link vim/vimrc .vimrc
     link vim/gvimrc .gvimrc
 
