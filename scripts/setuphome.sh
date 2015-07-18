@@ -165,14 +165,14 @@ setUp(){
     link .bash_profile
     link .bashrc
     link .irbrc
+    link .polipo
     link .backup-excludes.txt
-    link vim/vimrc .vimrc
-    link vim/gvimrc .gvimrc
 
     # $HOME/.config directroy for programs which store conf here
     mkHomeConfDir config
     link config/awesome .config/awesome _parent
     link config/zathura .config/zathura _parent
+    link config/uzbl .config/uzbl _parent
     link .mplayer .mplayer _parent
 
     # $HOME/.xmonad directroy for xmonad configs

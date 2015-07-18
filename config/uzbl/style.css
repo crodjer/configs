@@ -1,0 +1,34 @@
+#uzbl_link_hints > span {
+    z-index:            10000   !important;
+
+    background-color:   #ffbf00        !important;
+    margin:             0              !important;
+    padding:            3px            !important;
+
+    color:              #000   !important;
+    font-size:          15px   !important;
+    line-height:        15px   !important;
+    font-weight:        bold   !important;
+    font-variant:       normal !important;
+    text-decoration:    none   !important;
+
+    opacity:            0.9;
+    border:             1px solid #000 !important;
+    border-radius:      3px;
+  /* Play around with this, pretty fun things to do :) */
+  /* -webkit-transform: scale(1) rotate(0deg) translate(-6px,-5px) !important; */
+}
+
+/* we can have different colours for different types of hints! */
+#uzbl_link_hints.new-window > span {
+    background-color: #ffff00 !important;
+    color:            black   !important;
+}
+
+.uzbl-follow-text-match {
+  outline: 2px solid invert;
+  background: #333 !important;
+  color: white !important;
+}
+
+/* vim:set et ts=4: */
