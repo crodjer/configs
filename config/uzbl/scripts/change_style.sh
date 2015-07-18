@@ -28,7 +28,7 @@ for i in $STYLE_PATH/*.css; do
         if [ -f $DEFAULT_STYLE ]; then
             # Create a temporary stylesheet based on default and the override.
             tmp_stylesheet_path=$STYLES_TEMP_DIR/${stylesheet}.css
-            cat $DEFAULT_STYLE $stylesheet_path > $tmp_stylesheet_path
+            cat $stylesheet_path $DEFAULT_STYLE > $tmp_stylesheet_path
             stylesheet_path=$tmp_stylesheet_path
         fi
 
@@ -39,7 +39,7 @@ for i in $STYLE_PATH/*.css; do
 done
 
 if [ $STYLESHEET_SET -eq 0 ]; then
-    echo "set stylesheet_uri = $DEFAULT_STYLE" > "$UZBL_FIFO"
+    echo "set stylesheet_uri = file://$DEFAULT_STYLE" > "$UZBL_FIFO"
 fi
 
 exit 0
