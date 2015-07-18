@@ -37,7 +37,7 @@ set set_status      = set status_message =
 # Spawn path shortcuts. In spawn the first dir+path match is used in "dir1:dir2:dir3:executable"
 set scripts_dir     = @data_home/uzbl:@config_home/uzbl:@prefix/share/uzbl/examples/data:scripts
 
-# set proxy_url       = http://localhost:8123
+set proxy_url       = http://localhost:8123
 
 # === Hardcoded handlers =====================================================
 
