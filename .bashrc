@@ -41,7 +41,7 @@ exists pacman && {
   alias pud='p -Sy'
   alias pug='p -Syu'
   alias pr='p -R'
-  alias pugf='yaourt -Syu --aur --noconfirm'
+  alias pugf='p -Syu'
   alias pse='pacman -Ss'
   alias psh='pacman -Si'
   alias pshi='pacman -Qi'
