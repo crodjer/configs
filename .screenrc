@@ -5,7 +5,7 @@ hardstatus alwayslastline " %w"
 attrcolor b ".I"
 term screen-256color
 #erase background with current bg color
-defbce "on"
+defbce "off"
 
 vbell "off"
 escape ^tT

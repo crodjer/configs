@@ -2,7 +2,7 @@
 
 dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 exclude_from=$dir/../.backup-excludes.txt
-source="${1%/}"
+source="$1"
 target="${2%/}"
 status=0
 

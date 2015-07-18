@@ -22,7 +22,7 @@ export                        PATH="$HOME/.bin"
 [ -d "$HOME/.cabal" ]      && PATH="$PATH:$HOME/.cabal/bin"
 [ -d "/opt/local" ]        && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
 [ -d "/bin/vendor_perl" ]  && PATH="$PATH:/bin/vendor_perl"
-                              PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin/"
+                              PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
                               PATH="$PATH:$HOME/workspace/configs/scripts/"
                               PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
 [ "$(id -u)" -eq "0" ]  &&    PATH="$PATH:/usr/local/sbin/:/usr/sbin"
@@ -34,7 +34,7 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "/opt/local" ]  && MANPATH="$MANPATH:/opt/local/share/man:/opt/local/man"
                         MANPATH="$MANPATH:/usr/share/man:/usr/man"
 
-export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
+# export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
 
 #-------------------------#
 # BASE - Environment
