@@ -9,6 +9,5 @@
 */.thumbnails/*
 */.cache/mozilla/*
 */.cache/chromium/*
-*/.local/share/Trash/*
 */.gvfs
-*/.mpd/mpd.log
+*/.pylint.d/*
