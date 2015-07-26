@@ -246,8 +246,8 @@ set ebind     = @mode_bind global,-insert
 @cbind  k            = scroll vertical -20
 @cbind  h            = scroll horizontal -20
 @cbind  l            = scroll horizontal 20
-@cbind  <Ctrl>u      = scroll vertical 90%
-@cbind  <Ctrl>d      = scroll vertical -90%
+@cbind  <Ctrl>d      = scroll vertical 90%
+@cbind  <Ctrl>u      = scroll vertical -90%
 @cbind  gg           = scroll vertical begin
 @cbind  G            = scroll vertical end
 @cbind  <Home>       = scroll vertical begin
@@ -281,11 +281,11 @@ set ebind     = @mode_bind global,-insert
 @cbind  <Ctrl>p = hardcopy
 
 # Web searching binds
-@cbind  sg<Google:>_         = uri http://www.google.com/search?q=\@<encodeURIComponent(%r)>\@
-@cbind  sd<DuckDuckGo:>_     = uri http://duckduckgo.com/?q=%s
+@cbind  sg<Google:>_         = uri https://www.google.com/search?q=\@<encodeURIComponent(%r)>\@
+@cbind  sd<DuckDuckGo:>_     = uri https://duckduckgo.com/?q=%s
 @cbind  sp<StartPage:>_      = uri https://startpage.com/do/search?query=\@<encodeURIComponent(%r)>\@
-@cbind  sa<Archwiki:>_       = uri http://wiki.archlinux.org/index.php/Special:Search?search=\@<encodeURIComponent(%r)>\@&go=Go
-@cbind  sw<Wikipedia:>_      = uri http://en.wikipedia.org/w/index.php?title=Special:Search&search=\@<encodeURIComponent(%r)>\@&go=Go
+@cbind  sa<Archwiki:>_       = uri https://wiki.archlinux.org/index.php/Special:Search?search=\@<encodeURIComponent(%r)>\@&go=Go
+@cbind  sw<Wikipedia:>_      = uri https://en.wikipedia.org/w/index.php?title=Special:Search&search=\@<encodeURIComponent(%r)>\@&go=Go
 
 # Handy binds
 # Set function shortcut
@@ -322,9 +322,9 @@ set ebind     = @mode_bind global,-insert
 @cbind  zS  = event REQ_NEW_WINDOW \@(echo "$UZBL_URI" | sed -e 's/^http:/https:/')\@
 
 # Yanking & pasting binds
-@cbind  yu  = sh 'echo -n "$UZBL_URI" | xclip'
-@cbind  yU  = sh 'echo -n "$1" | xclip' '\@SELECTED_URI'
-@cbind  yy  = sh 'echo -n "$UZBL_TITLE" | xclip'
+@cbind  yu  = sh 'echo -n "$UZBL_URI" | xclip -selection clipboard'
+@cbind  yU  = sh 'echo -n "$1" | xclip' '\@SELECTED_URI -selection clipboard'
+@cbind  yy  = sh 'echo -n "$UZBL_TITLE" | xclip  -selection clipboard'
 @cbind  ys  = spawn @scripts_dir/follow.sh \@< uzbl.follow.followSelection('returnuri') >\@ clipboard
 
 # Clone current window
@@ -348,7 +348,7 @@ set ebind     = @mode_bind global,-insert
 @cbind  u  = spawn @scripts_dir/load_url_from_bookmarks.sh
 
 # Temporary bookmarks
-@cbind  <Ctrl>d  = spawn @scripts_dir/insert_temp.sh
+@cbind  <Ctrl>D  = spawn @scripts_dir/insert_temp.sh
 @cbind  D        = spawn @scripts_dir/load_url_from_temps.sh
 
 # Link following (similar to vimperator and konqueror)
@@ -417,7 +417,7 @@ set preset = event PRESET_TABS
 # === Context menu items =====================================================
 
 # Default context menu
-menu_add Search = set uri = http://duckduckgo.com/
+menu_add Search = set uri = https://duckduckgo.com/
 menu_add Go Home = set uri = about:blank
 menu_separator separator_1
 menu_add Quit uzbl = exit
