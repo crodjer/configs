@@ -25,8 +25,6 @@
    (:name deferred :description "Simple asynchronous functions for emacs lisp." :type github :pkgname "kiwanami/emacs-deferred"))
  (el-get status "installed" recipe
          (:name el-get :website "https://github.com/dimitri/el-get#readme" :description "Manage the external elisp bits and pieces you depend upon." :type github :branch "4.stable" :pkgname "dimitri/el-get" :info "." :load "el-get.el"))
- (elm-mode status "installed" recipe
-           (:name el-get :type git :url "git://github.com/jcollard/elm-mode.git" :features elm-mode))
  (epc status "installed" recipe
       (:name epc :description "An RPC stack for Emacs Lisp" :type github :pkgname "kiwanami/emacs-epc" :depends
              (deferred ctable)))
@@ -113,6 +111,7 @@
 (:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type git :url "git://jblevins.org/git/markdown-mode.git" :prepare
 (add-to-list 'auto-mode-alist
 '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
+(mu4e status "required" recipe nil)
 (package status "installed" recipe
 (:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el" :shallow nil :features package :post-init
 (progn

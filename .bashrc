@@ -30,6 +30,11 @@ alias df='df -h'
 alias du='du -hs'
 alias less='less'
 alias free='free -m'
+alias netctl='sudo netctl'
+alias netctl-auto='sudo netctl-auto'
+alias n='sudo netctl'
+alias na='sudo netctl-auto'
+alias wvdial='sudo wvdial'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -244,6 +249,9 @@ re_comp mpc m
 re_comp pacman p
 re_comp task t
 re_comp command cv
+re_comp netctl n
+re_comp netctl na
+re_comp netctl netctl-auto
 complete -F _t tw
 
 #-------------------------#

@@ -1,2 +1,2 @@
-text/html; lynx -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
-application/pdf; mupdf %s; nametemplate=%s.pdf
+text/html; w3m -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
+application/pdf; zathura %s; nametemplate=%s.pdf

@@ -143,30 +143,31 @@ setUp(){
 
     # Link configuration files to $HOME/file
     link .asoundrc
+    link .backup-excludes.txt
+    link .bash_profile
+    link .bashrc
     link .gitconfig
     link .goobookrc
     link .hgrc
     link .inputrc
+    link .irbrc
+    link .mailcap
     link .mpdconf
     link .muttrc
-    link .mailcap
-    link oh-my-zsh .oh-my-zsh
-    link .screenrc
-    link .udisks-glue.conf
-    link vim .vim
-    link .xmobarrc
-    link .profile
-    link .Xresources
-    link .xsessionrc
-    link .xsession
-    link .xinitrc
-    link .screenlayout
-    link .zshrc
-    link .bash_profile
-    link .bashrc
-    link .irbrc
     link .polipo
-    link .backup-excludes.txt
+    link .profile
+    link .screenlayout
+    link .screenrc
+    link .signature
+    link .udisks-glue.conf
+    link .xinitrc
+    link .xmobarrc
+    link .Xresources
+    link .xsession
+    link .xsessionrc
+    link .zshrc
+    link oh-my-zsh .oh-my-zsh
+    link vim .vim
 
     # $HOME/.config directroy for programs which store conf here
     mkHomeConfDir config
