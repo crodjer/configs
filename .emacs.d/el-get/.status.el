@@ -111,7 +111,6 @@
 (:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type git :url "git://jblevins.org/git/markdown-mode.git" :prepare
 (add-to-list 'auto-mode-alist
 '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
-(mu4e status "required" recipe nil)
 (package status "installed" recipe
 (:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el" :shallow nil :features package :post-init
 (progn

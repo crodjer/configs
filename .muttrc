@@ -34,7 +34,6 @@ macro index,pager gt "<change-folder>=[Gmail]/Starred<enter>" "Go to Starred Mai
 macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 bind index,pager I flag-message
 bind index,pager a group-reply
-bind index o display-message
 bind index - collapse-thread
 bind index \# noop
 
@@ -90,33 +89,12 @@ set mailcap_path = ~/.mailcap
 auto_view text/html
 alternative_order text/plain text/html text
 
-# Configure some variables
-set imap_keepalive = 500
-set move = no
-set copy = yes
-unset record
-set delete = yes
-set edit_headers = yes
-set autoedit = no
-set beep = no
-set beep_new = yes
-set check_new = no
-set include = yes
-set attribution = "On %d, %n wrote:"
-set index_format = "%Z %M | %D | %-20.20F %s"
-set date_format = "%H:%M %Z / %e %b"
-set followup_to = no
-set honor_followup_to = no
-
 # Google contacts
 set query_command = "goobook query %s"
 set query_format = "%4c %t %-40.40a %-40.40n %?e?(%e)?"
 
 # Mailing list
-subscribe django-developers@googlegroups.com
 subscribe xmonad@haskell.org
-subscribe overnite-2012@googlegroups.com
-subscribe agfe08@googlegroups.com
 
 # Theme
 
