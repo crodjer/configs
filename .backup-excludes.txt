@@ -12,3 +12,4 @@
 */.cache/chromium/*
 */.gvfs
 */.pylint.d/*
+*/tmp/*.tmp
