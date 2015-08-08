@@ -44,8 +44,4 @@ if [ $(command -v task) ]; then
     notification="Pending: $(task status:pending count)"
 fi
 
-notify-send $title "$notification"
-
-if [[ $beep_args && $allow_beep ]]; then
-    beep $beep_args
-fi
+alert.sh $title "$notification"
