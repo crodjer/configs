@@ -44,4 +44,4 @@ if [ $(command -v task) ]; then
     notification="Pending: $(task status:pending count)"
 fi
 
-alert.sh $title "$notification"
+alert.sh $title $notification
