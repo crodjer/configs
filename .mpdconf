@@ -7,8 +7,8 @@ log_file                "~/.mpd/mpd.log"
 pid_file                "~/.mpd/mpd.pid"
 
 audio_output {
-        type            "alsa"
-        name            "MPD Audo Device"
+        type            "pulse"
+        name            "MPD Pulseaudio Output"
         format          "48000:16:2"
         mixer_type      "software"
         mixer_device    "software"
