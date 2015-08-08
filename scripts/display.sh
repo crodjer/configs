@@ -13,15 +13,9 @@ fi
 # See if external monitor is present at HDMI
 xrandr | grep HDMI | grep " connected " &> /dev/null
 if [ $? -eq 0 ]; then
+    HDMI_CONNECTED=true
     SCREENS=$((2+SCREENS))
 fi
-
-# Connecting HDMI messes up with urxvt in some way, this fixes it
-hdmi_urxvt_fix(){
-xrdb -merge <<EOF
-URxvt*letterSpace:0
-EOF
-}
 
 # Run this for reseting the looks of URxvt etc.
 xrdb -merge ~/.Xresources
@@ -47,6 +41,13 @@ case $SCREENS in
         hdmi_urxvt_fix
     ;;
 esac
+
+if [[ "$HDMI_CONNECTED" ]]; then
+xrdb -merge <<EOF
+URxvt*letterSpace:0
+EOF
+fi
+
 
 # Reset my wallpaper
 bash $HOME/.fehbg
