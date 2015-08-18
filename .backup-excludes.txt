@@ -13,3 +13,4 @@
 */.gvfs
 */.pylint.d/*
 */tmp/*.tmp
+*/.local/lib/node_modules

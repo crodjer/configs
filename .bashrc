@@ -229,6 +229,7 @@ alias cv='command -v'
 
 alias dbx='dropbox.py'
 alias gist='gist -c'
+alias sgist='gist -p'
 alias agist='gist -a'
 
 function serve() {
@@ -506,5 +507,16 @@ sg() {
         find . -iname "$1" | xargs grep "$2"
     else
         echo 'Input the file and grep patterns'
+    fi
+}
+
+reroute () {
+    interface=$1
+    route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4)
+    if [ -n "$route" ]; then
+        sudo ip route del default &> /dev/null
+        sudo ip route replace default via $route
+    else
+        echo "Invalid route $interface" >&2
     fi
 }

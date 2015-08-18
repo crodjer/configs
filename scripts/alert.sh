@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-printf "\a"
 paplay /usr/share/sounds/freedesktop/stereo/message.oga
+printf "\a"
 
 if [[ -n $@ ]]; then
     title=$1

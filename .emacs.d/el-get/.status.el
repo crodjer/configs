@@ -105,6 +105,8 @@
 (:name jshint-mode :website "https://github.com/daleharvey/jshint-mode" :description "Integrate JSHint into Emacs via a node.js server. JSHint (http://www.jshint.com/) is a static code analysis tool for JavaScript." :type github :pkgname "daleharvey/jshint-mode"))
 (less-css-mode status "installed" recipe
 (:name less-css-mode :description "Emacs mode for LESS CSS (lesscss.org), with support for compile-on-save" :type github :pkgname "purcell/less-css-mode"))
+(let-alist status "installed" recipe
+(:name let-alist :description "Easily let-bind values of an assoc-list by their names." :builtin "25.0.50" :type http :url "http://git.savannah.gnu.org/cgit/emacs/elpa.git/plain/packages/let-alist/let-alist.el"))
 (linum-relative status "installed" recipe
 (:name linum-relative :type emacswiki :description "Display relative line number in the left margin" :features linum-relative))
 (markdown-mode status "installed" recipe
@@ -151,4 +153,12 @@
 (rust-mode status "installed" recipe
 (:name rust-mode :type github :pkgname "rust-lang/rust-mode" :description "Emacs mode for Rust"))
 (s status "installed" recipe
-(:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el")))
+(:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el"))
+(structured-haskell-mode status "installed" recipe
+(:name structured-haskell-mode :description "Structured Haskell editing operations." :type github :pkgname "chrisdone/structured-haskell-mode" :depends
+(haskell-mode)
+:build
+`(("cabal" "install"))
+:load-path "elisp" :post-init
+(setq shm-program-name
+(concat default-directory "dist/build/structured-haskell-mode/structured-haskell-mode")))))
