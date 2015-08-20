@@ -2,7 +2,8 @@
 ## Configure Xsession
 
 xrdb -merge ~/.Xresources
-xset b 100 500 100
+xset -b
+# xset b 100 500 100
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # setxkbmap -model thinkpad -layout us
