@@ -16,4 +16,4 @@ if [ $(command -v task) ]; then
     notification="Pending: $(task status:pending count)"
 fi
 
-$script_dir/alert.sh $title $notification &>> /tmp/hourly-reminder.log
+$script_dir/alert.sh $title $notification
