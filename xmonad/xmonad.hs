@@ -206,7 +206,7 @@ keys' conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- XF86AudioMute
     , ((0 , 0x1008ff12), spawn "pactl set-sink-mute 0 toggle")
     -- XF86AudioLowerVolume
-    , ((0 , 0x1008ff11), spawn "pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -5%")
+    , ((0 , 0x1008ff11), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%")
     -- XF86AudioRaiseVolume
     , ((0 , 0x1008ff13), spawn "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%")
     -- XF86AudioNext

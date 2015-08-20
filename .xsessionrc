@@ -3,8 +3,6 @@
 
 xrdb -merge ~/.Xresources
 
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
-
 # Keyboard map
 setxkbmap -option caps:escape
 xmodmap -e "keycode 107 = Super_R NoSymbol Super_R"
@@ -20,9 +18,8 @@ synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=12
 synclient EmulateTwoFingerMinZ=40, EmulateTwoFingerMinW=14
 synclient CoastingSpeed=0 # , CoastingFriction=100
 
-# No touchpad
-synclient TouchpadOff=1
 # syndaemon -dKi 0.5
+synclient TouchpadOff=1 # Completely disable touchpad.
 
 # Looks
 xsetroot -cursor_name left_ptr
@@ -31,14 +28,15 @@ bash $HOME/.fehbg
 xcompmgr -f -I 0.15 -O 0.15 &
 stalonetray &
 
-# Start some useful programms
-mpd
-urxvtd &
-xautolock -time 10 -locker "lock" &
-pgrep -f pulseaudio || pulseaudio &
-pkill -f mpd-notification; mpd-notification -m $HOME/music/library &
-
-# Beep
-xset b 100 500 100
+# Sound
+start-pulseaudio-x11
+pactl set-sink-volume 0 120%
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
 pactl load-module module-x11-bell sample=beep
+xset b 100
+mpd
+pkill -f mpd-notification; mpd-notification -m $HOME/music/library &
+
+# Misc
+urxvtd &
+xautolock -time 10 -locker "lock" &
