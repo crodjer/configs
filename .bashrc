@@ -510,7 +510,7 @@ sg() {
     fi
 }
 
-reroute () {
+route_to () {
     interface=$1
     route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4)
     if [ -n "$route" ]; then
