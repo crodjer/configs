@@ -2,11 +2,10 @@
 ## Configure Xsession
 
 xrdb -merge ~/.Xresources
-xset -b
-# xset b 100 500 100
+
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
-# setxkbmap -model thinkpad -layout us
+# Keyboard map
 setxkbmap -option caps:escape
 xmodmap -e "keycode 107 = Super_R NoSymbol Super_R"
 
@@ -32,9 +31,14 @@ bash $HOME/.fehbg
 xcompmgr -f -I 0.15 -O 0.15 &
 stalonetray &
 
-## Start some useful programms
+# Start some useful programms
 mpd
 urxvtd &
 xautolock -time 10 -locker "lock" &
 pgrep -f pulseaudio || pulseaudio &
 pkill -f mpd-notification; mpd-notification -m $HOME/music/library &
+
+# Beep
+xset b 100 500 100
+pactl upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
+pactl load-module module-x11-bell sample=beep
