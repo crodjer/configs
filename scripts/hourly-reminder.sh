@@ -16,4 +16,13 @@ if [ $(command -v task) ]; then
     notification="Pending: $(task status:pending count)"
 fi
 
-$script_dir/alert.sh $title $notification
+case $minutes in
+     0)
+         reminder=reminder
+         ;;
+     *)
+         reminder=reminder-soft
+esac
+
+pactl play-sample $reminder
+notify-send "$title" "$notification"
