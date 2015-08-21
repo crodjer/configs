@@ -13,7 +13,7 @@ set config_home = @(echo $XDG_CONFIG_HOME)@
 set fifo_dir   = /tmp
 set socket_dir = /tmp
 
-set shell_cmd       = sh -c
+set shell_cmd       = bash -c
 
 # === General config aliases =================================================
 
@@ -99,6 +99,13 @@ set download_handler    = sync_spawn @scripts_dir/download.sh
 @on_event   SCROLL_VERT    set scroll_message = \@<(function(curr, min, max, size){if(max == size) return '--'; var p=(curr/(max - size)); return Math.round(10000*p)/100;})(%1,%2,%3,%4)>\@%
 
 # === Behaviour and appearance ===============================================
+
+set enable_spellcheck            = 1
+# You'll have to specify what language uzbl should use.  Use the
+# "spellcheck_languages" variable for this and give it your language choice in
+# lang_COUNTRY form I'll just use en_US, but you can have more than one. As long
+# as you separate them with a comma.
+set spellcheck_languages         = en_GB
 
 # Custom CSS can be defined here, including link follower hint styles
 set stylesheet_uri = file://@config_home/uzbl/style.css
