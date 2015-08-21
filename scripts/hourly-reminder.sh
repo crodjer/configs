@@ -17,7 +17,7 @@ if [ $(command -v task) ]; then
 fi
 
 case $minutes in
-     0)
+     00)
          reminder=reminder
          ;;
      *)
