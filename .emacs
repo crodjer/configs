@@ -393,9 +393,14 @@ makes)."
 
 ;; Fill column indicator
 (setq fci-rule-width 2)
-(add-hook 'prog-mode-hook 'fci-mode)
+(defun fci-mode-in-graphics-display ()
+  (if (display-graphic-p)
+      (progn
+        ;; if graphic
+        (fci-mode 1))))
+(add-hook 'prog-mode-hook 'fci-mode-in-graphics-display)
 (add-hook 'text-mode-hook 'visual-line-mode)
-(add-hook 'text-mode-hook 'fci-mode)
+(add-hook 'text-mode-hook 'fci-mode-in-graphics-display)
 
 ;; Remove ugly UI elements
 (menu-bar-mode -1)
