@@ -139,14 +139,13 @@
 
 ;; Disable automatic re-indentation of lines.
 (electric-indent-mode -1)
-(helm-mode 1)
 
 ;; ----------
 ;; Projectile
 ;; ----------
 
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
+;; (projectile-global-mode)
+;; (setq projectile-completion-system 'helm)
 
 ;; ---------
 ;; Ido mode
@@ -167,12 +166,17 @@
 ;; Haskell mode
 ;; ------------
 ;; (autoload 'ghc-init "ghc" nil t)
+(add-hook 'literate-haskell-mode-hook
+          (lambda ()
+            (haskell-indentation-mode 1)
+            (structured-haskell-mode 0)))
+(setq haskell-mode-hook nil)
 (add-hook 'haskell-mode-hook
           (lambda ()
+            (haskell-indentation-mode 0)
             (set-face-background 'shm-current-face "WhiteSmoke")
-            (set-face-background 'shm-quarantine-face "LightGrey")))
-(add-hook 'haskell-mode-hook 'structured-haskell-mode)
-
+            (set-face-background 'shm-quarantine-face "LightGrey")
+            (structured-haskell-mode 1)))
 
 (defadvice ghc-display
   (after ghc-display-auto-pop-advice ())
@@ -190,6 +194,13 @@
     (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
     (define-key haskell-mode-map (kbd "C-c M-.") nil)
     (define-key haskell-mode-map (kbd "C-c C-d") nil)))
+
+;; ------------
+;; Clojure mode
+;; -----------
+
+(add-hook 'cider-mode-hook #'eldoc-mode)
+
 ;; -----------
 ;; Python Mode
 ;; -----------

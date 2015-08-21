@@ -1,4 +1,11 @@
-((ag status "installed" recipe
+((ac-cider status "installed" recipe
+           (:name ac-cider :description "ac-cider is a completion source for Emacs auto-complete package" :type github :pkgname "clojure-emacs/ac-cider" :depends
+                  (auto-complete cider)
+                  :prepare
+                  (progn
+                    (add-hook 'cider-mode-hook 'ac-cider-setup)
+                    (add-hook 'cider-repl-mode-hook 'ac-cider-setup))))
+ (ag status "installed" recipe
      (:name ag :description "A simple ag frontend, loosely based on ack-and-half.el." :type github :pkgname "Wilfred/ag.el" :depends
             (dash s)))
  (async status "installed" recipe
@@ -13,8 +20,13 @@
                          (ac-config-default))))
  (bats-mode status "installed" recipe
             (:name bats-mode :auto-generated t :type elpa :description "Emacs mode for editing and running Bats tests" :repo nil))
+ (cider status "installed" recipe
+        (:name cider :description "CIDER is a Clojure IDE and REPL." :type github :pkgname "clojure-emacs/cider" :depends
+               (dash queue clojure-mode pkg-info)))
  (cl-lib status "installed" recipe
          (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
+ (clojure-mode status "installed" recipe
+               (:name clojure-mode :website "https://github.com/clojure-emacs/clojure-mode" :description "Emacs support for the Clojure language." :type github :pkgname "clojure-emacs/clojure-mode"))
  (crontab-mode status "installed" recipe
                (:name crontab-mode :description "Mode for editing crontab files" :type http :url "http://web.archive.org/web/20080716014153/http://www.mahalito.net/~harley/elisp/crontab-mode.el"))
  (ctable status "installed" recipe
@@ -78,87 +90,70 @@
                         (require 'haskell-mode-autoloads)
                         (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
                         (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))))
- (helm status "installed" recipe
-       (:name helm :description "Emacs incremental and narrowing framework" :type github :pkgname "emacs-helm/helm" :autoloads "helm-autoloads" :build
-              ("make")
-              :build/darwin
-              `(("make" ,(format "EMACS_COMMAND=%s" el-get-emacs)))
-              :build/windows-nt
-              (let
-                  ((generated-autoload-file
-                    (expand-file-name "helm-autoloads.el"))
-                   \
-                   (backup-inhibited t))
-              (update-directory-autoloads default-directory)
-              nil)))
-(helm-ag status "installed" recipe
-(:name helm-ag :description "The silver search with helm interface." :type github :pkgname "syohex/emacs-helm-ag" :depends
-(helm)))
-(highlight-indentation status "installed" recipe
-(:name highlight-indentation :description "Function for highlighting indentation" :type git :url "https://github.com/antonj/Highlight-Indentation-for-Emacs"))
-(idomenu status "installed" recipe
-(:name idomenu :type emacswiki :description "imenu tag selection a la ido" :load-path "."))
-(js2-mode status "installed" recipe
-(:name js2-mode :website "https://github.com/mooz/js2-mode#readme" :description "An improved JavaScript editing mode" :type github :pkgname "mooz/js2-mode" :prepare
-(autoload 'js2-mode "js2-mode" nil t)))
-(jshint-mode status "installed" recipe
-(:name jshint-mode :website "https://github.com/daleharvey/jshint-mode" :description "Integrate JSHint into Emacs via a node.js server. JSHint (http://www.jshint.com/) is a static code analysis tool for JavaScript." :type github :pkgname "daleharvey/jshint-mode"))
-(less-css-mode status "installed" recipe
-(:name less-css-mode :description "Emacs mode for LESS CSS (lesscss.org), with support for compile-on-save" :type github :pkgname "purcell/less-css-mode"))
-(let-alist status "installed" recipe
-(:name let-alist :description "Easily let-bind values of an assoc-list by their names." :builtin "25.0.50" :type http :url "http://git.savannah.gnu.org/cgit/emacs/elpa.git/plain/packages/let-alist/let-alist.el"))
-(linum-relative status "installed" recipe
-(:name linum-relative :type emacswiki :description "Display relative line number in the left margin" :features linum-relative))
-(markdown-mode status "installed" recipe
-(:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type git :url "git://jblevins.org/git/markdown-mode.git" :prepare
-(add-to-list 'auto-mode-alist
-'("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
-(package status "installed" recipe
-(:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el" :shallow nil :features package :post-init
-(progn
-(let
-((old-package-user-dir
-(expand-file-name
-(convert-standard-filename
-(concat
-(file-name-as-directory default-directory)
-"elpa")))))
-(when
-(file-directory-p old-package-user-dir)
-(add-to-list 'package-directory-list old-package-user-dir)))
-(setq package-archives
-(bound-and-true-p package-archives))
-(mapc
-(lambda
-(pa)
-(add-to-list 'package-archives pa 'append))
-'(("ELPA" . "http://tromey.com/elpa/")
-("melpa" . "http://melpa.org/packages/")
-("gnu" . "http://elpa.gnu.org/packages/")
-("marmalade" . "http://marmalade-repo.org/packages/")
-("SC" . "http://joseito.republika.pl/sunrise-commander/"))))))
-(paredit status "installed" recipe
-(:name paredit :description "Minor mode for editing parentheses" :type http :prepare
-(progn
-(autoload 'enable-paredit-mode "paredit")
-(autoload 'disable-paredit-mode "paredit"))
-:url "http://mumble.net/~campbell/emacs/paredit.el"))
-(pkg-info status "installed" recipe
-(:name pkg-info :description "Provide information about Emacs packages." :type github :pkgname "lunaryorn/pkg-info.el" :depends s))
-(popup status "installed" recipe
-(:name popup :website "https://github.com/auto-complete/popup-el" :description "Visual Popup Interface Library for Emacs" :type github :submodule nil :pkgname "auto-complete/popup-el"))
-(projectile status "installed" recipe
-(:name projectile :description "Project navigation and management library for Emacs." :type github :pkgname "bbatsov/projectile" :depends
-(dash s f pkg-info)))
-(rust-mode status "installed" recipe
-(:name rust-mode :type github :pkgname "rust-lang/rust-mode" :description "Emacs mode for Rust"))
-(s status "installed" recipe
-(:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el"))
-(structured-haskell-mode status "installed" recipe
-(:name structured-haskell-mode :description "Structured Haskell editing operations." :type github :pkgname "chrisdone/structured-haskell-mode" :depends
-(haskell-mode)
-:build
-`(("cabal" "install"))
-:load-path "elisp" :post-init
-(setq shm-program-name
-(concat default-directory "dist/build/structured-haskell-mode/structured-haskell-mode")))))
+ (highlight-indentation status "installed" recipe
+                        (:name highlight-indentation :description "Function for highlighting indentation" :type git :url "https://github.com/antonj/Highlight-Indentation-for-Emacs"))
+ (idomenu status "installed" recipe
+          (:name idomenu :type emacswiki :description "imenu tag selection a la ido" :load-path "."))
+ (js2-mode status "installed" recipe
+           (:name js2-mode :website "https://github.com/mooz/js2-mode#readme" :description "An improved JavaScript editing mode" :type github :pkgname "mooz/js2-mode" :prepare
+                  (autoload 'js2-mode "js2-mode" nil t)))
+ (jshint-mode status "installed" recipe
+              (:name jshint-mode :website "https://github.com/daleharvey/jshint-mode" :description "Integrate JSHint into Emacs via a node.js server. JSHint (http://www.jshint.com/) is a static code analysis tool for JavaScript." :type github :pkgname "daleharvey/jshint-mode"))
+ (less-css-mode status "installed" recipe
+                (:name less-css-mode :description "Emacs mode for LESS CSS (lesscss.org), with support for compile-on-save" :type github :pkgname "purcell/less-css-mode"))
+ (let-alist status "installed" recipe
+            (:name let-alist :description "Easily let-bind values of an assoc-list by their names." :builtin "25.0.50" :type http :url "http://git.savannah.gnu.org/cgit/emacs/elpa.git/plain/packages/let-alist/let-alist.el"))
+ (linum-relative status "installed" recipe
+                 (:name linum-relative :type emacswiki :description "Display relative line number in the left margin" :features linum-relative))
+ (markdown-mode status "installed" recipe
+                (:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type git :url "git://jblevins.org/git/markdown-mode.git" :prepare
+                       (add-to-list 'auto-mode-alist
+                                    '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
+ (package status "installed" recipe
+          (:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "http://repo.or.cz/w/emacs.git/blob_plain/1a0a666f941c99882093d7bd08ced15033bc3f0c:/lisp/emacs-lisp/package.el" :shallow nil :features package :post-init
+                 (progn
+                   (let
+                       ((old-package-user-dir
+                         (expand-file-name
+                          (convert-standard-filename
+                           (concat
+                            (file-name-as-directory default-directory)
+                            "elpa")))))
+                     (when
+                         (file-directory-p old-package-user-dir)
+                       (add-to-list 'package-directory-list old-package-user-dir)))
+                   (setq package-archives
+                         (bound-and-true-p package-archives))
+                   (mapc
+                    (lambda
+                      (pa)
+                      (add-to-list 'package-archives pa 'append))
+                    '(("ELPA" . "http://tromey.com/elpa/")
+                      ("melpa" . "http://melpa.org/packages/")
+                      ("gnu" . "http://elpa.gnu.org/packages/")
+                      ("marmalade" . "http://marmalade-repo.org/packages/")
+                      ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))))
+ (paredit status "installed" recipe
+          (:name paredit :description "Minor mode for editing parentheses" :type http :prepare
+                 (progn
+                   (autoload 'enable-paredit-mode "paredit")
+                   (autoload 'disable-paredit-mode "paredit"))
+                 :url "http://mumble.net/~campbell/emacs/paredit.el"))
+ (pkg-info status "installed" recipe
+           (:name pkg-info :description "Provide information about Emacs packages." :type github :pkgname "lunaryorn/pkg-info.el" :depends s))
+ (popup status "installed" recipe
+        (:name popup :website "https://github.com/auto-complete/popup-el" :description "Visual Popup Interface Library for Emacs" :type github :submodule nil :pkgname "auto-complete/popup-el"))
+ (queue status "installed" recipe
+        (:name queue :description "Queue data structure" :type elpa))
+ (rust-mode status "installed" recipe
+            (:name rust-mode :type github :pkgname "rust-lang/rust-mode" :description "Emacs mode for Rust"))
+ (s status "installed" recipe
+    (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el"))
+ (structured-haskell-mode status "installed" recipe
+                          (:name structured-haskell-mode :description "Structured Haskell editing operations." :type github :pkgname "chrisdone/structured-haskell-mode" :depends
+                                 (haskell-mode)
+                                 :build
+                                 `(("cabal" "install"))
+                                 :load-path "elisp" :post-init
+                                 (setq shm-program-name
+                                       (concat default-directory "dist/build/structured-haskell-mode/structured-haskell-mode")))))
