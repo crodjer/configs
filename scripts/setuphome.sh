@@ -166,6 +166,7 @@ setUp(){
     link .xsession
     link .xsessionrc
     link .zshrc
+    link .guile
     link oh-my-zsh .oh-my-zsh
     link vim .vim
 
