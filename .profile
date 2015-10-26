@@ -10,9 +10,10 @@
 #-------------------------#
 # BASE - UTILITY          #
 #-------------------------#
-exists() {
+exists () {
     command -v "$1" &> /dev/null
 }
+export -f exists
 
 #-------------------------#
 # BASE - PATH             #
@@ -23,11 +24,13 @@ export                        PATH="$HOME/.bin"
 [ -d "/opt/local" ]        && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
 [ -d "/bin/vendor_perl" ]  && PATH="$PATH:/bin/vendor_perl"
                               PATH="$PATH:/opt/clojurescript/bin"
+                              PATH="$PATH:$HOME/.gem/ruby/bin"
+                              PATH="$PATH:$HOME/.gem/ruby/2.0.0/bin"
                               PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
                               PATH="$PATH:$HOME/workspace/configs/scripts"
-                              PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
-[ "$(id -u)" -eq "0" ]  &&    PATH="$PATH:/usr/local/sbin/:/usr/sbin"
-
+                              PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/sbin"
+                              PATH="$PATH:/usr/local/sbin:/usr/sbin"
+# [ "$(id -u)" -eq "0" ]  &&    PATH="$PATH:/usr/local/sbin/:/usr/sbin"
 
 export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "$HOME/.local" ]&& MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
@@ -50,6 +53,10 @@ exists emacsclient && export EDITOR='emacsclient -ct' || {
 }
 export HOSTALIASES=~/.hosts
 
+if [[ $(uname -a) =~ Darwin ]]; then
+    MACOS=true
+fi
+
 #-------------------------#
 # SHELL - CHECK TYPE      #
 #-------------------------#
@@ -66,11 +73,11 @@ exists source-highlight-esc.sh && \
 export GREP_COLOR=31
 export PAGER=less
 export MANPAGER=$PAGER
-export NODE_PATH=/home/rohan/.local/lib/node_modules:/usr/lib/node_modules
+export NODE_PATH=$HOME/.local/lib/node_modules:/usr/lib/node_modules
 # export GOPATH=/home/rohan/workspace/go
 # export PATH=$PATH:$GOPATH/bin
-export CHESSDIR=/home/rohan/.chess/
-export GEM_HOME=/home/rohan/.gem/ruby/
+export CHESSDIR=$HOME/.chess/
+export GEM_HOME=$HOME/.gem/ruby/
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #

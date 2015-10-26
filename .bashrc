@@ -5,19 +5,25 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+if [[ $(uname -a) =~ Darwin ]]; then
+    MACOS=true
+fi
+
 #-------------------------#
 # Bash configuration
 #-------------------------#
-shopt -s histappend autocd globstar
+if [[ $MACOS ]]; then
+    shopt -s histappend
+else
+    shopt -s histappend autocd globstar
+fi
+
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL=ignoredups:ignorespace:erasedups
 export HISTSIZE=
 export HISTFILESIZE=
 export HISTIGNORE="ls:la:l:ll:lla:[bf]g:clear:exit"
 PS1='[\u@\h \W]\$ '
-exists() {
-    command -v "$1" &> /dev/null
-}
 
 # Enabled blocked forward incrmental search
 # http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=383760
@@ -105,9 +111,13 @@ alias ez='e ~/.zshrc'
 alias ev='e ~/.vimrc'
 alias ee='e ~/.emacs'
 #A pad to dump arbit data
-alias ed='e /home/rohan/workspace/trash/dumppad.md'
+alias ed='e $HOME/workspace/trash/dumppad.md'
 
-alias ls='ls --color=auto'
+if [[ $MACOS ]]; then
+    alias ls='ls -G'
+else
+    alias ls='ls --color=auto'
+fi
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
@@ -118,14 +128,24 @@ alias lla='ls -al'
 alias reb='exec bash'
 # alias ssh='ssh'
 # alias cssh='cssh'
-alias screen='TERM=screen-256color screen -U'
+if [[ $MACOS ]]; then
+    alias screen='screen -U'
+else
+    alias screen='TERM=screen256color screen -U'
+fi
+
 alias t='task'
 
 # Git aliases
-source /usr/share/bash-completion/completions/git
+if [[ $MACOS ]]; then
+    source /usr/local/etc/bash_completion.d/git-completion.bash
+else
+    source /usr/share/bash-completion/completions/git
+fi
 git_branch () {
     git branch | grep "*" | cut -d " " -f 2
 }
+
 alias g="git"
 alias ga="git add"
 __git_complete ga _git_add
@@ -239,11 +259,30 @@ function serve() {
 #-------------------------#
 # Completion
 #-------------------------#
+# Only in mac
+if [ -f /usr/local/etc/bash_completion ]; then
+    source /usr/local/etc/bash_completion
+fi
+
+
 re_comp() {
-    [[ -e /usr/share/bash-completion/completions/$1 ]] && {
-        source /usr/share/bash-completion/completions/$1
-        complete -F _$1 $2
-    }
+    if [[ $MACOS ]]; then
+
+        [[ -e /usr/local/etc/bash_completion.d/$1-completion.bash ]] && {
+            source /usr/local/etc/bash_completion.d/$1-completion.bash
+            complete -F _$1 $2
+        } || {
+            [[ -e /usr/local/etc/bash_completion.d/$1 ]] && {
+                source /usr/local/etc/bash_completion.d/$1
+                complete -F _$1 $2
+            }
+        }
+    else
+        [[ -e /usr/share/bash-completion/completions/$1 ]] && {
+            source /usr/share/bash-completion/completions/$1
+            complete -F _$1 $2
+        }
+    fi
 }
 re_comp git g
 re_comp mpc m
@@ -266,14 +305,6 @@ blue='\[$(tput setaf 4)\]'
 cyan='\[$(tput setaf 6)\]'
 bold='\[$(tput bold)\]'
 plain='\[$(tput sgr0)\]'
-
-# red=""
-# green=""
-# yellow=""
-# blue=""
-# cyan=""
-# bold=""
-# plain=""
 
 prompt() {
     EXIT_STATUS="$?"
@@ -341,11 +372,21 @@ preexec () {
         source ls clear echo exec cat printf cd
         $(echo $PROMPT_COMMAND | sed 's/;//')
     )
-    local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" | paste -sd '|')
-    local short_title=$(echo "$title" \
-        | sed -r "s/^\s*(\w+=\w+\s+)*//g" \
-        | sed -r "s/^\s*sudo\s+//g" \
-        | cut -d " " -f 1)
+    if [[ $MACOS ]]; then
+        local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" \
+                                  | paste -s -d '|' -)
+        local short_title=$(echo "$title" \
+                                   | sed -E "s/^\s*(\w+=\w+\s+)*//g" \
+                                   | sed -E "s/^\s*sudo\s+//g" \
+                                   | cut -d " " -f 1)
+    else
+        local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" \
+                                  | paste -s -d '|' -)
+        local short_title=$(echo "$title" \
+                                   | sed -r "s/^\s*(\w+=\w+\s+)*//g" \
+                                   | sed -r "s/^\s*sudo\s+//g" \
+                                   | cut -d " " -f 1)
+    fi
 
     if [[ $short_title =~ $exclude_re ]]; then
         # Matches the excluded title. We don't want to set as shell title.
@@ -395,6 +436,8 @@ preexec_invoke_exec () {
 trap 'preexec_invoke_exec' DEBUG
 
 exists virtualenvwrapper.sh && source `which virtualenvwrapper.sh`
+
+[[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
 # exists rbenv && eval "$(rbenv init -)"
 export LFS=/mnt/lfs
@@ -402,100 +445,6 @@ export LFS=/mnt/lfs
 #-------------------------#
 # Functions
 #-------------------------#
-couchenv(){
-    source $HOME/workspace/src/build-couchdb/build/env.sh
-    export COUCH='http://admin:admin@localhost:5984'
-
-    cguid(){
-        echo $(curl -X GET $COUCH/_uuids 2> /dev/null G -o '\w\{32\}')
-    }
-
-    ccurl(){
-        UUID=$(cguid)
-        ABS_PATH=$(echo $1 | sed "s/UUID/$UUID/g")
-        METHOD=${2:-GET}
-        curl -X  $METHOD $COUCH/$ABS_PATH ${@:3}
-    }
-
-    ccurlv(){
-        UUID=$(cguid)
-        ABS_PATH=$(echo $1 | sed "s/UUID/$UUID/g")
-        METHOD=${2:-GET}
-        curl -vX  $METHOD $COUCH/$ABS_PATH ${@:3}
-    }
-
-}
-
-dj(){
-    cd ~/workspace/src/django && workon django
-}
-
-zlemma(){
-    zlemma_parent=/home/rohan/workspace/zlemma
-
-    export DJANGO_SETTINGS_MODULE=zdb_common.settings.local
-    env='rp'
-    project='zlemma'
-
-    case $1 in
-        rp)
-            env='em'
-            project='resume-parser'
-            export EM_NAMES_SOURCE=file://$HOME/workspace/zlemma/resume-parser/tmp/rp2_data/experimental-data/
-            export RP_STATIC_DATA_PATH=~/Dropbox/rp2_data
-
-            function rp() {
-                python -m resume_parser $1 2>&1
-            }
-            function shd() {
-                ./scripts/section_headings.py $1 2>&1
-            }
-            function rp-emp() {
-                rp $1 | grep Employer | less
-            }
-            function rp-jt() {
-                rp $1 | grep 'PositionTitle\|JobTitle' | less
-            }
-            ;;
-        em)
-            env='em'
-            project='entity-match'
-            ;;
-        redis*)
-            zlemma rp
-            cd ../tmp/
-            redis-server
-            ;;
-        re*)
-            env='inscoring'
-            project='recruiterservice'
-            ;;
-        sc*)
-            env='inscoring'
-            project='scoringservice'
-            ;;
-        ex*)
-            env='zlemma'
-            project='browserextensions'
-            ;;
-        *)
-            env='rp'
-            project='zlemma'
-            export DJANGO_SETTINGS_MODULE=settings.local
-            ;;
-    esac
-
-    deactivate 2> /dev/null
-    cd $zlemma_parent/$project
-    export PYTHONPATH=$PWD:$PYTHONPATH
-    workon $env
-}
-alias zl=zlemma
-
-hr(){
-    cd ~/workspace/is/ruby/hackerrank
-    alias gpr='gl --rebase && gp'
-}
 
 s() {
     find . -iname "*$@*"
@@ -520,3 +469,7 @@ route_to () {
         echo "Invalid route $interface" >&2
     fi
 }
+
+if [ -e $HOME/.bashrc.local ]; then
+    source $HOME/.bashrc.local
+fi

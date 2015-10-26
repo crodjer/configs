@@ -8,6 +8,7 @@
 ;; ----------
 ;; Load paths
 ;; ----------
+(add-to-list 'load-path "~/.emacs.d/local/")
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -16,18 +17,18 @@
 ;; ---------
 
 ;; Bundled in distro
-(require 'package)
-(require 'uniquify)
-(require 'saveplace)
-(require 'gnus)
-(require 'tramp)
+;; (require 'package)
+;; (require 'uniquify)
+;; (require 'saveplace)
+;; (require 'gnus)
+;; (require 'tramp)
 
 ;; El get
 ;; Tracked in ~/.emacs.d/el-get/.status.el
 
-(add-to-list
-  'package-archives
-  '("marmalade" . "http://marmalade-repo.org/packages/"))
+; (add-to-list
+;  'package-archives
+;  '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -45,13 +46,15 @@
 (require 'whitespace)
 (require 'flymake)
 (require 'flymake-cursor)
-(require 'flymake-jshint)
+; (require 'flymake-jshint)
 (require 'paredit)
 (require 'geiser-install)
-(require 'erlang)
+; (require 'erlang)
 (require 'linum-relative)
 (require 'fill-column-indicator)
 (require 'markdown-mode)
+(require 'magit)
+
 
 ;; ----------------------
 ;; General customizations
@@ -98,7 +101,6 @@
  next-line-add-newlines nil
  blink-matching-paren t
  winner-mode t
- visible-bell t
  uniquify-buffer-name-style 'forward
  save-place t
  x-select-enable-clickboard t
@@ -110,6 +112,9 @@
  tags-revert-without-query 1
  ido-ignore-extensions t
  gc-cons-threshold 20000000
+ local-elisp-directory "~/.emacs.d/local"
+ twittering-use-master-password t
+ vc-display-status nil
 )
 
 ;; Server
@@ -131,6 +136,7 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.rkt$" . scheme-mode))
 (add-to-list 'auto-mode-alist '("\\.pyx$" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'auto-mode-alist '("crontab." . crontab-mode))
 
 ;; -------------
@@ -151,7 +157,7 @@
 ;; Ido mode
 ;; ---------
 (ido-mode t)
-(flx-ido-mode 1)
+; (flx-ido-mode 1)
 
 ;; -------------
 ;; Flyspell mode
@@ -161,6 +167,11 @@
           (lambda () (flyspell-mode 0)))
 (add-hook 'html-mode-hook 'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+;; -----
+;; Magit
+;; -----
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; ------------
 ;; Haskell mode
@@ -200,6 +211,12 @@
 ;; -----------
 
 (add-hook 'cider-mode-hook #'eldoc-mode)
+(setq cider-prefer-local-resources t
+      cider-show-error-buffer 'only-in-repl
+      cider-stacktrace-default-filters '(tooling dup)
+      cider-stacktrace-fill-column 80
+      nrepl-buffer-name-show-port t
+      cider-prompt-save-file-on-load nil)
 
 ;; -----------
 ;; Python Mode
@@ -358,6 +375,8 @@ makes)."
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+(add-hook 'clojure-mode-hook          #'enable-paredit-mode)
+(add-hook 'cider-repl-mode-hook       #'enable-paredit-mode)
 
 ;; ---------
 ;; Mail mode
@@ -376,8 +395,7 @@ makes)."
 ;; wombat
 
 (global-whitespace-mode t)
-
-(set-face-attribute 'default nil :height 96)
+(set-face-attribute 'default nil :height (* 120))
 
 ;; Line numbers and highlight
 (setq linum-format 'linum-relative)
@@ -409,15 +427,32 @@ makes)."
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-;;;;;;;;;;;;;;;;;;;
+;; -----
+;; MacOS
+;; -----
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+(when (eq system-type 'darwin)
+  (setq
+   visible-bell nil
+   frame-title-format "%b"
+   icon-title-format  "%b")
+  (global-unset-key (kbd "s-p")) ;; stupid binding
+  (global-unset-key (kbd "M-TAB"))
+  (menu-bar-mode 1))
+
+;; ----------------
 ;; Custom functions
-;;;;;;;;;;;;;;;;;;;
+;; ----------------
 
 (defun halve-other-window-height ()
   "Expand current window to use half of the other window's lines."
   (interactive)
   (enlarge-window (/ (window-height (next-window)) 2)))
-(global-set-key (kbd "C-x v") 'halve-other-window-height)
+(global-set-key (kbd "C-c v") 'halve-other-window-height)
+(global-set-key (kbd "C-c C-v") 'halve-other-window-height)
 
 ;; Shift region (http://www.emacswiki.org/emacs/IndentingText)
 (defun shift-region (distance)
@@ -440,9 +475,9 @@ makes)."
   (interactive)
   (shift-region -1))
 
-;;;;;;;
+;; ----
 ;; Misc
-;;;;;;;
+;; ----
 (defadvice kill-line (after kill-line-cleanup-whitespace activate compile)
   "cleanup whitespace on kill-line"
   (if (not (bolp))
@@ -455,19 +490,30 @@ makes)."
         (bury-buffer)
       ad-do-it)))
 
-;;;;;;;;;;;;;;;;;;;;;
+;; ------------------
 ;; Custom keybindings
-;;;;;;;;;;;;;;;;;;;;;
+;; ------------------
 (global-set-key "\M-z" 'eval-last-sexp)
 (global-set-key "\C-j" 'newline)
 (global-set-key (kbd "<C-return>") 'newline)
 (global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "C-c C-s") 'ag-project)
 (global-set-key (kbd "C-<") 'shift-left)
 (global-set-key (kbd "C->") 'shift-right)
+(global-set-key (kbd "s-j") nil)
+(global-set-key (kbd "s-k") nil)
 
-;;;;;;;;;;;;;;;;;
+;; ----------------
+;; Load local files
+;; ----------------
+(mapc (lambda (name)
+        (load-file (concat (file-name-as-directory local-elisp-directory)
+                           name)))
+      (directory-files local-elisp-directory nil "\\.el$"))
+
+;; -------------
 ;; Autogenerated
-;;;;;;;;;;;;;;;;
+;; -------------
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
