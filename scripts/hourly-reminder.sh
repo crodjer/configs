@@ -10,6 +10,10 @@ hours=$(date +%H)
 minutes=$(date +%M)
 title="$hours:$minutes"
 
+if [[ $(uname -a) =~ Darwin ]]; then
+    MACOS=true
+fi
+
 export DISPLAY=$(pgrep -fa xserverrc | cut -d " " -f 6)
 
 if [ $(command -v task) ]; then
@@ -24,5 +28,9 @@ case $minutes in
          reminder=reminder-soft
 esac
 
-pactl play-sample $reminder
-notify-send "$title" "$notification"
+if [[ $MACOS ]]; then
+    terminal-notifier -message "$notification" -title "$title"
+else
+    pactl play-sample $reminder
+    notify-send "$title" "$notification"
+fi

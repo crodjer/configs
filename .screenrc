@@ -9,6 +9,7 @@ defbce "off"
 
 vbell "off"
 escape ^tT
+defscrollback 100000
 
 caption always  " %d-%m %c:%s %?%F%{= Kk}%:%{=u kR}%?  %h %-024=%{+b} %C%a %D %d %M %Y%{= db}"
 caption always  "%{= db}%?%F%{= Wk}%:%{=u kw}%?%C %A %D, %d %M | %t"
