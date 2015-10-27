@@ -46,15 +46,15 @@
 (require 'whitespace)
 (require 'flymake)
 (require 'flymake-cursor)
-; (require 'flymake-jshint)
 (require 'paredit)
 (require 'geiser-install)
-; (require 'erlang)
 (require 'linum-relative)
 (require 'fill-column-indicator)
 (require 'markdown-mode)
 (require 'magit)
-
+(require 'exec-path-from-shell)
+(require 'clojure-mode)
+(require 'cider)
 
 ;; ----------------------
 ;; General customizations
@@ -157,7 +157,8 @@
 ;; Ido mode
 ;; ---------
 (ido-mode t)
-; (flx-ido-mode 1)
+;; (ido-everywhere)
+;; (ido-ubiquitous)
 
 ;; -------------
 ;; Flyspell mode
@@ -210,6 +211,7 @@
 ;; Clojure mode
 ;; -----------
 
+;; (add-hook 'clojure-mode-hook 'clj-refactor-mode)
 (add-hook 'cider-mode-hook #'eldoc-mode)
 (setq cider-prefer-local-resources t
       cider-show-error-buffer 'only-in-repl
