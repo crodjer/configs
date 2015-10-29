@@ -54,7 +54,7 @@ exists emacsclient && export EDITOR='emacsclient -ct' || {
 export HOSTALIASES=~/.hosts
 
 if [[ $(uname -a) =~ Darwin ]]; then
-    MACOS=true
+    export MACOS=true
 fi
 
 #-------------------------#
@@ -62,7 +62,7 @@ fi
 #-------------------------#
 
 # If not running interactively, ignore following definitions.
-case "$-" in *i*) ;; *) return;; esac
+case "$-" in *i*) ;; *) exit 0;; esac
 
 #-----------------------------#
 # ENVIRONMENT - APPLICATIONS  #

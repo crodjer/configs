@@ -50,6 +50,7 @@
 (require 'geiser-install)
 (require 'linum-relative)
 (require 'fill-column-indicator)
+(require 'ag)
 (require 'markdown-mode)
 (require 'magit)
 (require 'exec-path-from-shell)
@@ -157,8 +158,6 @@
 ;; Ido mode
 ;; ---------
 (ido-mode t)
-;; (ido-everywhere)
-;; (ido-ubiquitous)
 
 ;; -------------
 ;; Flyspell mode
