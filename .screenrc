@@ -4,8 +4,9 @@ hardstatus alwayslastline " %w"
 # allow bold colors - necessary for some reason
 attrcolor b ".I"
 term screen-256color
-#erase background with current bg color
-defbce "off"
+termcapinfo xterm|rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# erase background with current bg color
+defbce "on"
 
 vbell "off"
 escape ^tT
@@ -13,7 +14,7 @@ defscrollback 100000
 
 caption always  " %d-%m %c:%s %?%F%{= Kk}%:%{=u kR}%?  %h %-024=%{+b} %C%a %D %d %M %Y%{= db}"
 caption always  "%{= db}%?%F%{= Wk}%:%{=u kw}%?%C %A %D, %d %M | %t"
-#caption always  "%C%a %D %d %M %{= db}%?%F%{= Kk}%:%{=u kR}%?  %h %-024=%{+b}"
-#hardstatus alwayslastline "%{= kR} %-Lw%{=b Kk} %n%f %t %{-}%+Lw %=%{= dd}"
+# caption always  "%C%a %D %d %M %{= db}%?%F%{= Kk}%:%{=u kR}%?  %h %-024=%{+b}"
+# hardstatus alwayslastline "%{= kR} %-Lw%{=b Kk} %n%f %t %{-}%+Lw %=%{= dd}"
 
 bell_msg "Alert in window %n"

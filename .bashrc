@@ -2,12 +2,10 @@
 # ~/.bashrc
 #
 
+# Depends on my ~/.profile
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
-if [[ $(uname -a) =~ Darwin ]]; then
-    MACOS=true
-fi
 
 #-------------------------#
 # Bash configuration
@@ -131,40 +129,25 @@ alias reb='exec bash'
 if [[ $MACOS ]]; then
     alias screen='screen -U'
 else
-    alias screen='TERM=screen256color screen -U'
+    alias screen='screen -U'
 fi
 
 alias t='task'
 
-# Git aliases
-if [[ $MACOS ]]; then
-    source /usr/local/etc/bash_completion.d/git-completion.bash
-else
-    source /usr/share/bash-completion/completions/git
-fi
 git_branch () {
     git branch | grep "*" | cut -d " " -f 2
 }
 
 alias g="git"
 alias ga="git add"
-__git_complete ga _git_add
 alias gc="git commit -v"
-__git_complete gc _git_commit
 alias gca="git commit -va"
-__git_complete gca _git_commit
 alias gst="git status"
-__git_complete gst _git_status
 alias gco="git checkout"
-__git_complete gco _git_checkout
 alias gl="git pull"
-__git_complete gl _git_pull
 alias gp="git push"
-__git_complete gp _git_push
 alias gup="git fetch"
-__git_complete gup _git_fetch
 alias glg='git log --stat'
-__git_complete glg _git_log
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
 alias ggpush='gp origin $(git_branch)'
@@ -174,6 +157,25 @@ alias sb-ghc="cabal exec ghc"
 alias sb-ghci="cabal exec ghci"
 alias sb-runhaskell="cabal exec runhaskell"
 alias sb-ghc-pkg="cabal exec ghc-pkg"
+
+# Git aliases
+if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+    source /usr/local/etc/bash_completion.d/git-completion.bash
+elif [ -e /usr/share/bash-completion/completions/git ]; then
+    source /usr/share/bash-completion/completions/git
+fi
+
+exists __git_complete && {
+    __git_complete ga _git_add
+    __git_complete gc _git_commit
+    __git_complete gca _git_commit
+    __git_complete gst _git_status
+    __git_complete gco _git_checkout
+    __git_complete gl _git_pull
+    __git_complete gp _git_push
+    __git_complete gup _git_fetch
+    __git_complete glg _git_log
+}
 
 function ghc-pkg-reset() {
     read -p 'Erasing all your user ghc and cabal packages. Are you sure (y/n)? ' ans
@@ -266,23 +268,18 @@ fi
 
 
 re_comp() {
-    if [[ $MACOS ]]; then
-
-        [[ -e /usr/local/etc/bash_completion.d/$1-completion.bash ]] && {
-            source /usr/local/etc/bash_completion.d/$1-completion.bash
-            complete -F _$1 $2
-        } || {
-            [[ -e /usr/local/etc/bash_completion.d/$1 ]] && {
-                source /usr/local/etc/bash_completion.d/$1
-                complete -F _$1 $2
-            }
-        }
-    else
-        [[ -e /usr/share/bash-completion/completions/$1 ]] && {
-            source /usr/share/bash-completion/completions/$1
+    [[ -e /usr/share/bash-completion/completions/$1 ]] && {
+        source /usr/share/bash-completion/completions/$1
+        complete -F _$1 $2
+    } || [[ -e /usr/local/etc/bash_completion.d/$1-completion.bash ]] && {
+        source /usr/local/etc/bash_completion.d/$1-completion.bash
+        complete -F _$1 $2
+    } || {
+        [[ -e /usr/local/etc/bash_completion.d/$1 ]] && {
+            source /usr/local/etc/bash_completion.d/$1
             complete -F _$1 $2
         }
-    fi
+    }
 }
 re_comp git g
 re_comp mpc m
