@@ -183,7 +183,7 @@ setUp(){
     mkHomeConfDir emacs.d
     mkHomeConfDir emacs.d/el-get
     link .emacs
-    link .emacs.d/el-get/status.el
+    link .emacs.d/el-get/.status.el
     link .emacs.d/el-get-user
     link .emacs.d/elisp
 
