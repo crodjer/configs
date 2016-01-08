@@ -46,4 +46,10 @@
 [push]
 	default = simple
 [commit]
-	gpgSign = true
+	# gpgSign = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[merge]
+	summary = true
