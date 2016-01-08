@@ -56,6 +56,8 @@
 (require 'exec-path-from-shell)
 (require 'clojure-mode)
 (require 'cider)
+(require 'yaml-mode)
+;; (require 'clj-refactor-mode)
 
 ;; ----------------------
 ;; General customizations
@@ -82,10 +84,11 @@
  kept-old-versions 2
  version-control t
  backup-by-copying-when-linked t
+ vc-make-backup-files t
 
  ;; Autosave
  auto-save-interval 60
- auto-save-file-name-transforms '((".*" "~/.emacs.d/saves/\\1" t))
+ auto-save-file-name-transforms '((".*" "~/.emacs.d/backups/\\1" t))
 
  ;; Startup
  inhibit-startup-echo-area-message t
@@ -115,8 +118,7 @@
  gc-cons-threshold 20000000
  local-elisp-directory "~/.emacs.d/local"
  twittering-use-master-password t
- vc-display-status nil
-)
+ vc-display-status nil)
 
 ;; Server
 ;; ------------------
@@ -146,6 +148,8 @@
 
 ;; Disable automatic re-indentation of lines.
 (electric-indent-mode -1)
+(global-auto-revert-mode t)
+(add-hook 'before-save-hook  'force-backup-of-buffer)
 
 ;; ----------
 ;; Projectile
@@ -210,14 +214,20 @@
 ;; Clojure mode
 ;; -----------
 
-;; (add-hook 'clojure-mode-hook 'clj-refactor-mode)
+(add-hook 'clojure-mode-hook 'clj-refactor-mode)
+(add-hook 'clojure-mode-hook 'midje-mode)
 (add-hook 'cider-mode-hook #'eldoc-mode)
 (setq cider-prefer-local-resources t
       cider-show-error-buffer 'only-in-repl
       cider-stacktrace-default-filters '(tooling dup)
       cider-stacktrace-fill-column 80
       nrepl-buffer-name-show-port t
-      cider-prompt-save-file-on-load nil)
+      cider-prompt-save-file-on-load nil
+      cljr-suppress-middleware-warnings t
+      cider-repl-prompt-function 'cider-repl-prompt-on-newline)
+(defun cider-repl-prompt-on-newline (namespace)
+  "Return a prompt string with newline"
+  (concat namespace "> "))
 
 ;; -----------
 ;; Python Mode
@@ -437,6 +447,7 @@ makes)."
 
 (when (eq system-type 'darwin)
   (setq
+   ring-bell-function 'ignore
    visible-bell nil
    frame-title-format "%b"
    icon-title-format  "%b")
@@ -476,6 +487,15 @@ makes)."
   (interactive)
   (shift-region -1))
 
+(defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive)
+    (revert-buffer t t))
+
+(defun force-backup-of-buffer ()
+  (let ((buffer-backed-up nil))
+    (backup-buffer)))
+
 ;; ----
 ;; Misc
 ;; ----
@@ -501,6 +521,7 @@ makes)."
 (global-set-key (kbd "C-c C-s") 'ag-project)
 (global-set-key (kbd "C-<") 'shift-left)
 (global-set-key (kbd "C->") 'shift-right)
+(global-set-key (kbd "C-c r") 'revert-buffer-no-confirm)
 (global-set-key (kbd "s-j") nil)
 (global-set-key (kbd "s-k") nil)
 
@@ -522,6 +543,7 @@ makes)."
  ;; If there is more than one, they won't work right.
  '(flymake-errline ((t ("red"))))
  '(flymake-warnline ((t nil)))
+ '(hackernews-link-face ((t (:foreground "Black"))))
  '(hl-line ((t (:inherit highlight :background "gainsboro"))))
  '(linum-relative-current-face ((t (:inherit linum :background "#444444" :foreground "#CAE682"))))
  '(whitespace-trailing ((t (:background "gainsboro")))))
@@ -530,5 +552,10 @@ makes)."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(completion-ignored-extensions (quote (".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".hi")))
- '(safe-local-variable-values (quote (python-shell-extra-pythonpaths . "/home/rohan/workspace/zlemma/zlemma") (erlang-indent-level . 4))))
+ '(completion-ignored-extensions
+   (quote
+    (".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".hi")))
+ '(safe-local-variable-values
+   (quote
+    (python-shell-extra-pythonpaths . "/home/rohan/workspace/zlemma/zlemma")
+    (erlang-indent-level . 4))))

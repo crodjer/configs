@@ -20,8 +20,15 @@
                (dash queue clojure-mode pkg-info spinner)))
  (cl-lib status "installed" recipe
          (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
+ (clj-refactor status "installed" recipe
+               (:name clj-refactor :description "A collection of simple clojure refactoring functions" :type github :depends
+                      (dash s clojure-mode yasnippet paredit multiple-cursors cider edn)
+                      :pkgname "magnars/clj-refactor.el"))
  (clojure-mode status "installed" recipe
                (:name clojure-mode :website "https://github.com/clojure-emacs/clojure-mode" :description "Emacs support for the Clojure language." :type github :pkgname "clojure-emacs/clojure-mode"))
+ (confluence status "installed" recipe
+             (:name confluence :auto-generated t :type elpa :description "Emacs mode for interacting with confluence wikis" :repo nil :depends
+                    (xml-rpc)))
  (ctable status "installed" recipe
          (:name ctable :description "Table Component for elisp" :type github :pkgname "kiwanami/emacs-ctable"))
  (dash status "installed" recipe
@@ -79,6 +86,9 @@
                   ("make")
                   ("sh" "-c" ,(concat "cd doc && " el-get-install-info " --dir-file=./dir *.info")))
                 :info "doc" :autoloads nil :features geiser-load))
+ (hackernews status "installed" recipe
+             (:name hackernews :auto-generated t :type elpa :description "Access the hackernews aggregator from Emacs" :repo nil :depends
+                    (json)))
  (hydra status "installed" recipe
         (:name hydra :description "make Emacs bindings that stick around" :type github :depends
                (cl-lib)
@@ -92,6 +102,11 @@
                   (autoload 'js2-mode "js2-mode" nil t)))
  (json status "installed" recipe
        (:name json :description "JavaScript Object Notation parser / generator" :type http :builtin "23" :url "http://edward.oconnor.cx/elisp/json.el"))
+ (ledger-mode status "installed" recipe
+              (:name ledger-mode :description "A major mode for editing ledger .dat files" :type github :pkgname "ledger/ledger" :checkout "v3.1" :load-path "lisp" :prepare
+                     (progn
+                       (add-to-list 'auto-mode-alist
+                                    '("\\.dat$" . ledger-mode)))))
  (linum-relative status "installed" recipe
                  (:name linum-relative :type emacswiki :description "Display relative line number in the left margin" :features linum-relative))
  (lua-mode status "installed" recipe
@@ -119,6 +134,8 @@
                 (:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type git :url "git://jblevins.org/git/markdown-mode.git" :prepare
                        (add-to-list 'auto-mode-alist
                                     '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
+ (midje-mode status "installed" recipe
+             (:name midje-mode :type github :pkgname "dnaumov/midje-mode" :website "https://github.com/dnaumov/midje-mode" :description "Midje is a testing framework for the Clojure programming language;\nmidje-mode integrates it with Emacs, providing features like navigation and test reports."))
  (multiple-cursors status "installed" recipe
                    (:name multiple-cursors :description "An experiment in adding multiple cursors to emacs" :type github :pkgname "magnars/multiple-cursors.el"))
  (package status "installed" recipe
@@ -173,6 +190,8 @@
           (:name spinner :description "Emacs mode-line spinner for operations in progress." :type github :pkgname "Bruce-Connor/spinner.el"))
  (twittering-mode status "installed" recipe
                   (:name twittering-mode :description "Major mode for Twitter" :type github :pkgname "hayamiz/twittering-mode" :features twittering-mode :compile "twittering-mode.el"))
+ (xml-rpc status "installed" recipe
+          (:name xml-rpc :auto-generated t :type elpa :description "An elisp implementation of clientside XML-RPC" :repo nil))
  (yaml-mode status "installed" recipe
             (:name yaml-mode :description "Simple major mode to edit YAML file for emacs" :type github :pkgname "yoshiki/yaml-mode"))
  (yasnippet status "installed" recipe
