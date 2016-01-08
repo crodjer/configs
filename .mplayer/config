@@ -12,11 +12,11 @@ vo=xv
 fs="yes"
 
 ### Audio
-ao="alsa,oss"
+# ao="alsa,oss"
 softvol="yes"
 softvol-max=800
 volume=5
-a52drc=1
+# a54drc=1
 
 ## Appearance
 # heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
