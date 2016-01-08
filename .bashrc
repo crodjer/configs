@@ -7,14 +7,18 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+exists () {
+    command -v "$1" &> /dev/null
+}
+
+if [[ $(uname -a) =~ Darwin ]]; then
+    export MACOS=true
+fi
+
 #-------------------------#
 # Bash configuration
 #-------------------------#
-if [[ $MACOS ]]; then
-    shopt -s histappend
-else
-    shopt -s histappend autocd globstar
-fi
+shopt -s histappend autocd globstar
 
 export HISTTIMEFORMAT="%F %T "
 export HISTCONTROL=ignoredups:ignorespace:erasedups
@@ -254,6 +258,9 @@ alias gist='gist -c'
 alias sgist='gist -p'
 alias agist='gist -a'
 
+alias acc='ledger -f ~/.accounts.dat'
+alias aria2c='aria2c -j2 --seed-time 0 --max-upload-limit 1'
+
 function serve() {
     python3 -m http.server ${1:-8000}
 }
@@ -362,7 +369,7 @@ PROMPT_DIRTRIM=2
 PROMPT_COMMAND=prompt
 
 preexec () {
-    history -a; history -n
+    history -a; history -c; history -r
 
     local title=$1
     local excluded_commands=(
