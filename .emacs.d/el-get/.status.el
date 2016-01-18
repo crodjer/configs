@@ -86,6 +86,8 @@
                   ("make")
                   ("sh" "-c" ,(concat "cd doc && " el-get-install-info " --dir-file=./dir *.info")))
                 :info "doc" :autoloads nil :features geiser-load))
+ (groovy-mode status "installed" recipe
+              (:name groovy-mode :auto-generated t :type elpa :description "Groovy mode derived mode" :repo nil))
  (hackernews status "installed" recipe
              (:name hackernews :auto-generated t :type elpa :description "Access the hackernews aggregator from Emacs" :repo nil :depends
                     (json)))

@@ -3,8 +3,8 @@
 PROGRAM_NAME=$(basename $0)
 SANDBOX_DIR=$(echo ${SANDBOX_DIR:-"$HOME/.cabal.sandboxes"} | sed 's/\/$//g')
 DEFAULT_BINS=(
-    "$HOME/bin"
     "$HOME/.bin"
+    "$HOME/bin"
     "$HOME/.local/bin"
     "$HOME/.cabal/bin"
 )
