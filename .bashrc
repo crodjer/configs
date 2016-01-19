@@ -275,12 +275,16 @@ fi
 
 
 re_comp() {
-    [[ -e /usr/share/bash-completion/completions/$1 ]] && {
-        source /usr/share/bash-completion/completions/$1
-        complete -F _$1 $2
-    } || [[ -e /usr/local/etc/bash_completion.d/$1-completion.bash ]] && {
-        source /usr/local/etc/bash_completion.d/$1-completion.bash
-        complete -F _$1 $2
+    {
+        [[ -e /usr/share/bash-completion/completions/$1 ]] && {
+            source /usr/share/bash-completion/completions/$1
+            complete -F _$1 $2
+        }
+    } || {
+        [[ -e /usr/local/etc/bash_completion.d/$1-completion.bash ]] && {
+            source /usr/local/etc/bash_completion.d/$1-completion.bash
+            complete -F _$1 $2
+        }
     } || {
         [[ -e /usr/local/etc/bash_completion.d/$1 ]] && {
             source /usr/local/etc/bash_completion.d/$1
