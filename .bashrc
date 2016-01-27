@@ -381,20 +381,20 @@ preexec () {
         $(echo $PROMPT_COMMAND | sed 's/;//')
     )
     if [[ $MACOS ]]; then
-        local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" \
-                                  | paste -s -d '|' -)
-        local short_title=$(echo "$title" \
-                                   | sed -E "s/^\s*(\w+=\w+\s+)*//g" \
-                                   | sed -E "s/^\s*sudo\s+//g" \
-                                   | cut -d " " -f 1)
+        sed=gsed
+        cut=gcut
+        paste=gpaste
     else
-        local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" \
-                                  | paste -s -d '|' -)
-        local short_title=$(echo "$title" \
-                                   | sed -r "s/^\s*(\w+=\w+\s+)*//g" \
-                                   | sed -r "s/^\s*sudo\s+//g" \
-                                   | cut -d " " -f 1)
+        sed=sed
+        cut=cut
+        paste=paste
     fi
+
+    local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" \
+                              | $paste -s -d '|' -)
+    local short_title=$(echo "$title" \
+                               | $sed -r "s/^\s*(\w+=\w+\s+)*//g" \
+                               | $sed -r "s/^\s*sudo\s+/# /g")
 
     if [[ $short_title =~ $exclude_re ]]; then
         # Matches the excluded title. We don't want to set as shell title.
