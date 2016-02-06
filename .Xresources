@@ -1,6 +1,31 @@
+! --[ Color definitions ]----------------------------------------------
+
+#define _background #eeeeec
+#define _foreground black
+#define _cursorColor black
+#define _cursorColor2 white
+
+#define _color0 black
+#define _color1 red3
+#define _color2 green4
+#define _color3 yellow4
+#define _color4 blue2
+#define _color5 magenta3
+#define _color6 cyan4
+#define _color7 gray90
+#define _color8 gray50
+#define _color9 red
+#define _color10 green2
+#define _color11 yellow3
+#define _color12 #5c5cff
+#define _color13 magenta
+#define _color14 cyan2
+#define _color15 white
+
+
 ! ---[ URxvt config ]--------------------------------------------------
 
-! URxvt.font: 9x15bold
+! URxvt.font: 9x15
 ! URxvt.boldFont: 9x15bold
 URxvt*font: xft:Monospace:pixelsize=12
 URxvt*boldFont: xft:Monospace:bold:pixelsize=12
@@ -31,29 +56,63 @@ URxvt*visualBell: false
 URxvt.clipboard.autocopy: true
 
 ! Looks and Colors
-URxvt*background: #eeeeec
-URxvt*foreground: black
-URxvt*cursorColor: black
-URxvt*cursorColor2: white
+URxvt*background: _background
+URxvt*foreground: _foreground
+URxvt*cursorColor: _cursorColor
+URxvt*cursorColor2: _cursorColor2
 
-URxvt*color0: black
-URxvt*color1: red3
-URxvt*color2: green4
-URxvt*color3: yellow4
-URxvt*color4: blue2
-URxvt*color5: magenta3
-URxvt*color6: cyan4
-URxvt*color7: gray90
-URxvt*color8: gray50
-URxvt*color9: red
-URxvt*color10: green2
-URxvt*color11: yellow3
-URxvt*color12: rgb:5c/5c/ff
-URxvt*color13: magenta
-URxvt*color14: cyan2
-URxvt*color15: white
+URxvt*color0: _color0
+URxvt*color1: _color1
+URxvt*color2: _color2
+URxvt*color3: _color3
+URxvt*color4: _color4
+URxvt*color5: _color5
+URxvt*color6: _color6
+URxvt*color7: _color7
+URxvt*color8: _color8
+URxvt*color9: _color9
+URxvt*color10: _color10
+URxvt*color11: _color11
+URxvt*color12: _color12
+URxvt*color13: _color13
+URxvt*color14: _color14
+URxvt*color15: _color15
 
-! ---[ Fonts config ]--------------------------------------------------
+! ---[ XTerm config ]--------------------------------------------------
+
+XTerm*faceName: Monospace
+XTerm*faceSize: 9
+XTerm*termName: xterm
+XTerm*eightBitInput: false
+XTerm*metaSendsEscape: true
+XTerm*altIsNotMeta: true
+XTerm*selectToClipboard: true
+
+XTerm*color0         : _color0
+XTerm*color1         : _color1
+XTerm*color2         : _color2
+XTerm*color3         : _color3
+XTerm*color4         : _color4
+XTerm*color5         : _color5
+XTerm*color6         : _color6
+XTerm*color7         : _color7
+XTerm*color8         : _color8
+XTerm*color9         : _color9
+XTerm*color10        : _color10
+XTerm*color11        : _color11
+XTerm*color12        : _color12
+XTerm*color13        : _color13
+XTerm*color14        : _color14
+XTerm*color15        : _color15
+XTerm*foreground     : _foreground
+XTerm*background     : _background
+XTerm*cursorColor    : _cursorColor
+
+! ---[ Emacs config ]--------------------------------------------------
+Emacs.FontBackend: xft
+Emacs.font: Monospace-9
+
+! ---[ fonts config ]--------------------------------------------------
 Xft.dpi: 96
 Xft.antialias: true
 Xft.rgba: rgba
