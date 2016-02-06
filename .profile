@@ -57,13 +57,6 @@ if [[ $(uname -a) =~ Darwin ]]; then
     export MACOS=true
 fi
 
-#-------------------------#
-# SHELL - CHECK TYPE      #
-#-------------------------#
-
-# If not running interactively, ignore following definitions.
-case "$-" in *i*) ;; *) exit 0;; esac
-
 #-----------------------------#
 # ENVIRONMENT - APPLICATIONS  #
 #-----------------------------#
