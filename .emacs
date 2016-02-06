@@ -57,6 +57,8 @@
 (require 'clojure-mode)
 (require 'cider)
 (require 'yaml-mode)
+(require 'haskell-mode)
+(require 'ghc)
 ;; (require 'clj-refactor-mode)
 
 ;; ----------------------
@@ -180,18 +182,18 @@
 ;; ------------
 ;; Haskell mode
 ;; ------------
-;; (autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-init "ghc" nil t)
 (add-hook 'literate-haskell-mode-hook
           (lambda ()
             (haskell-indentation-mode 1)
             (structured-haskell-mode 0)))
-(setq haskell-mode-hook nil)
 (add-hook 'haskell-mode-hook
           (lambda ()
-            (haskell-indentation-mode 0)
-            (set-face-background 'shm-current-face "WhiteSmoke")
-            (set-face-background 'shm-quarantine-face "LightGrey")
-            (structured-haskell-mode 1)))
+            (ghc-init)
+            (haskell-indentation-mode 1)
+            ;; (set-face-background 'shm-current-face "WhiteSmoke")
+            ;; (set-face-background 'shm-quarantine-face "LightGrey")
+            (structured-haskell-mode 0)))
 
 (defadvice ghc-display
   (after ghc-display-auto-pop-advice ())
@@ -406,7 +408,6 @@ makes)."
 ;; wombat
 
 (global-whitespace-mode t)
-(set-face-attribute 'default nil :height (* 120))
 
 ;; Line numbers and highlight
 (setq linum-format 'linum-relative)
@@ -446,6 +447,7 @@ makes)."
   (exec-path-from-shell-initialize))
 
 (when (eq system-type 'darwin)
+  (set-face-attribute 'default nil :height (* 120))
   (setq
    ring-bell-function 'ignore
    visible-bell nil
@@ -554,8 +556,4 @@ makes)."
  ;; If there is more than one, they won't work right.
  '(completion-ignored-extensions
    (quote
-    (".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".hi")))
- '(safe-local-variable-values
-   (quote
-    (python-shell-extra-pythonpaths . "/home/rohan/workspace/zlemma/zlemma")
-    (erlang-indent-level . 4))))
+    (".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".hi"))))

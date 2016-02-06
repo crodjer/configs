@@ -86,11 +86,22 @@
                   ("make")
                   ("sh" "-c" ,(concat "cd doc && " el-get-install-info " --dir-file=./dir *.info")))
                 :info "doc" :autoloads nil :features geiser-load))
+ (ghc-mod status "installed" recipe
+          (:name ghc-mod :description "Happy Haskell programming" :type github :pkgname "kazu-yamamoto/ghc-mod" :load-path "elisp"))
  (groovy-mode status "installed" recipe
               (:name groovy-mode :auto-generated t :type elpa :description "Groovy mode derived mode" :repo nil))
  (hackernews status "installed" recipe
              (:name hackernews :auto-generated t :type elpa :description "Access the hackernews aggregator from Emacs" :repo nil :depends
                     (json)))
+ (haskell-mode status "installed" recipe
+               (:name haskell-mode :description "A Haskell editing mode" :type github :pkgname "haskell/haskell-mode" :info "." :build
+                      `(("make" ,(format "EMACS=%s" el-get-emacs)
+                         "all"))
+                      :post-init
+                      (progn
+                        (require 'haskell-mode-autoloads)
+                        (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+                        (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation))))
  (hydra status "installed" recipe
         (:name hydra :description "make Emacs bindings that stick around" :type github :depends
                (cl-lib)
@@ -190,6 +201,14 @@
       (:name seq :auto-generated t :type elpa :description "Sequence manipulation functions" :repo nil))
  (spinner status "installed" recipe
           (:name spinner :description "Emacs mode-line spinner for operations in progress." :type github :pkgname "Bruce-Connor/spinner.el"))
+ (structured-haskell-mode status "installed" recipe
+                          (:name structured-haskell-mode :description "Structured Haskell editing operations." :type github :pkgname "chrisdone/structured-haskell-mode" :depends
+                                 (haskell-mode)
+                                 :build
+                                 `(("cabal" "install"))
+                                 :load-path "elisp" :post-init
+                                 (setq shm-program-name
+                                       (concat default-directory "dist/build/structured-haskell-mode/structured-haskell-mode"))))
  (twittering-mode status "installed" recipe
                   (:name twittering-mode :description "Major mode for Twitter" :type github :pkgname "hayamiz/twittering-mode" :features twittering-mode :compile "twittering-mode.el"))
  (xml-rpc status "installed" recipe
