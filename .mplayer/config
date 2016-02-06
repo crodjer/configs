@@ -8,7 +8,7 @@ fstype=none
 ### Video
 double="yes"
 ontop="1"
-vo=xv
+#vo=xv
 fs="yes"
 
 ### Audio
