@@ -261,6 +261,13 @@ alias agist='gist -a'
 alias acc='ledger -f ~/.accounts.dat'
 alias aria2c='aria2c -j2 --seed-time 0 --max-upload-limit 1'
 
+function pi-wlan() {
+    local pi_host=$(arp -na | grep 74:da:38:62:8d:68 \
+                            | grep -ohE "\d+.\d+.\d+.\d+")
+    echo "Raspberry Pi connected at" $pi_host
+    ssh $pi_host
+}
+
 function serve() {
     python3 -m http.server ${1:-8000}
 }
