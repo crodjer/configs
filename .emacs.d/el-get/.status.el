@@ -17,18 +17,15 @@
                          (ac-config-default))))
  (cider status "installed" recipe
         (:name cider :description "CIDER is a Clojure IDE and REPL." :type github :pkgname "clojure-emacs/cider" :depends
-               (dash queue clojure-mode pkg-info spinner)))
+               (seq queue clojure-mode pkg-info spinner)))
  (cl-lib status "installed" recipe
          (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
  (clj-refactor status "installed" recipe
                (:name clj-refactor :description "A collection of simple clojure refactoring functions" :type github :depends
-                      (dash s clojure-mode yasnippet paredit multiple-cursors cider edn)
+                      (dash s clojure-mode yasnippet paredit multiple-cursors cider edn inflections hydra)
                       :pkgname "magnars/clj-refactor.el"))
  (clojure-mode status "installed" recipe
                (:name clojure-mode :website "https://github.com/clojure-emacs/clojure-mode" :description "Emacs support for the Clojure language." :type github :pkgname "clojure-emacs/clojure-mode"))
- (confluence status "installed" recipe
-             (:name confluence :auto-generated t :type elpa :description "Emacs mode for interacting with confluence wikis" :repo nil :depends
-                    (xml-rpc)))
  (ctable status "installed" recipe
          (:name ctable :description "Table Component for elisp" :type github :pkgname "kiwanami/emacs-ctable"))
  (dash status "installed" recipe
@@ -107,7 +104,9 @@
                (cl-lib)
                :pkgname "abo-abo/hydra"))
  (ido-ubiquitous status "installed" recipe
-                 (:name ido-ubiquitous :description "Use ido (nearly) everywhere" :website "https://github.com/DarwinAwardWinner/ido-ubiquitous" :type github :pkgname "DarwinAwardWinner/ido-ubiquitous"))
+                 (:name ido-ubiquitous :description "Use ido (nearly) everywhere" :website "https://github.com/DarwinAwardWinner/ido-ubiquitous" :type github :depends
+                        (cl-lib s)
+                        :pkgname "DarwinAwardWinner/ido-ubiquitous"))
  (inflections status "installed" recipe
               (:name inflections :description "Convert english words between singular and plural" :type elpa))
  (js2-mode status "installed" recipe
@@ -126,25 +125,10 @@
            (:name lua-mode :description "A major-mode for editing Lua scripts" :depends
                   (ample-regexps)
                   :type github :pkgname "immerrr/lua-mode"))
- (magit status "installed" recipe
-        (:name magit :website "https://github.com/magit/magit#readme" :description "It's Magit! An Emacs mode for Git." :type github :pkgname "magit/magit" :branch "master" :minimum-emacs-version "24.4" :depends
-               (dash)
-               :provide
-               (with-editor)
-               :info "Documentation" :load-path "lisp/" :compile "lisp/" :build
-               `(("make" ,(format "EMACSBIN=%s" el-get-emacs)
-                  "docs")
-                 ("touch" "lisp/magit-autoloads.el"))
-               :build/berkeley-unix
-               `(("gmake" ,(format "EMACSBIN=%s" el-get-emacs)
-                  "docs")
-                 ("touch" "lisp/magit-autoloads.el"))
-               :build/windows-nt
-               (with-temp-file "lisp/magit-autoloads.el" nil)))
  (makey status "installed" recipe
         (:name makey :description "Interactive commandline mode" :type github :pkgname "mickeynp/makey"))
  (markdown-mode status "installed" recipe
-                (:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type git :url "git://jblevins.org/git/markdown-mode.git" :prepare
+                (:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type github :pkgname "jrblevin/markdown-mode" :prepare
                        (add-to-list 'auto-mode-alist
                                     '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
  (midje-mode status "installed" recipe
@@ -176,11 +160,11 @@
                       ("marmalade" . "http://marmalade-repo.org/packages/")
                       ("SC" . "http://joseito.republika.pl/sunrise-commander/"))))))
  (paredit status "installed" recipe
-          (:name paredit :description "Minor mode for editing parentheses" :type http :prepare
+          (:name paredit :description "Minor mode for editing parentheses" :type github :prepare
                  (progn
                    (autoload 'enable-paredit-mode "paredit")
                    (autoload 'disable-paredit-mode "paredit"))
-                 :url "http://mumble.net/~campbell/emacs/paredit.el"))
+                 :pkgname "emacsmirror/paredit"))
  (peg status "installed" recipe
       (:name peg :type emacswiki :description "Parsing Expression Grammars in Emacs Lisp" :website "http://www.emacswiki.org/emacs/download/peg.el"))
  (pkg-info status "installed" recipe
@@ -198,7 +182,7 @@
  (s status "installed" recipe
     (:name s :description "The long lost Emacs string manipulation library." :type github :pkgname "magnars/s.el"))
  (seq status "installed" recipe
-      (:name seq :auto-generated t :type elpa :description "Sequence manipulation functions" :repo nil))
+      (:name seq :description "Sequence manipulation library for Emacs" :builtin "25" :type github :pkgname "NicolasPetton/seq.el"))
  (spinner status "installed" recipe
           (:name spinner :description "Emacs mode-line spinner for operations in progress." :type github :pkgname "Bruce-Connor/spinner.el"))
  (structured-haskell-mode status "installed" recipe
@@ -211,6 +195,8 @@
                                        (concat default-directory "dist/build/structured-haskell-mode/structured-haskell-mode"))))
  (twittering-mode status "installed" recipe
                   (:name twittering-mode :description "Major mode for Twitter" :type github :pkgname "hayamiz/twittering-mode" :features twittering-mode :compile "twittering-mode.el"))
+ (with-editor status "installed" recipe
+   (:name with-editor :description "Use the Emacsclient as $EDITOR" :type github :pkgname "magit/with-editor"))
  (xml-rpc status "installed" recipe
           (:name xml-rpc :auto-generated t :type elpa :description "An elisp implementation of clientside XML-RPC" :repo nil))
  (yaml-mode status "installed" recipe

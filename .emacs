@@ -59,6 +59,8 @@
 (require 'yaml-mode)
 (require 'haskell-mode)
 (require 'ghc)
+(require 'lua-mode)
+(require 'shm)
 ;; (require 'clj-refactor-mode)
 
 ;; ----------------------
@@ -190,10 +192,10 @@
 (add-hook 'haskell-mode-hook
           (lambda ()
             (ghc-init)
-            (haskell-indentation-mode 1)
-            ;; (set-face-background 'shm-current-face "WhiteSmoke")
-            ;; (set-face-background 'shm-quarantine-face "LightGrey")
-            (structured-haskell-mode 0)))
+            (haskell-indentation-mode 0)
+            (set-face-background 'shm-current-face "WhiteSmoke")
+            (set-face-background 'shm-quarantine-face "LightGrey")
+            (structured-haskell-mode 1)))
 
 (defadvice ghc-display
   (after ghc-display-auto-pop-advice ())
@@ -447,7 +449,7 @@ makes)."
   (exec-path-from-shell-initialize))
 
 (when (eq system-type 'darwin)
-  (set-face-attribute 'default nil :height (* 120))
+  (set-face-attribute 'default nil :height (* 125))
   (setq
    ring-bell-function 'ignore
    visible-bell nil
