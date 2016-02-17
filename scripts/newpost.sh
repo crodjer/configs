@@ -4,7 +4,7 @@ id=$1
 date=$(date +%F)
 year=$(date +%Y)
 title="${@:2}"
-site=$HOME/workspace/site
+site=$HOME/workspace/rohanjain.in
 path=$site/drafts/$year/$id.mkd
 
 if [ -z $id ]; then
