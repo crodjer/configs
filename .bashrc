@@ -474,6 +474,18 @@ sg() {
     fi
 }
 
+docker-cleanup() {
+    if [[ $MACOS ]]; then
+        xargs=gxargs
+    else
+        xargs=xargs
+    fi
+    docker ps --no-trunc -aq -f status=exited \
+        | $xargs --no-run-if-empty docker rm -v
+    docker images -q -f "dangling=true" \
+        | $xargs --no-run-if-empty docker rmi
+}
+
 route_to () {
     interface=$1
     route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4)
