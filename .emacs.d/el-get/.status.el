@@ -15,6 +15,8 @@
                          (add-to-list 'ac-dictionary-directories
                                       (expand-file-name "dict" default-directory))
                          (ac-config-default))))
+ (beacon status "installed" recipe
+         (:name beacon :description "A light following your cursor around so you don't lose it!" :type github :pkgname "Malabarba/beacon" :depends seq))
  (cider status "installed" recipe
         (:name cider :description "CIDER is a Clojure IDE and REPL." :type github :pkgname "clojure-emacs/cider" :depends
                (seq queue clojure-mode pkg-info spinner)))
@@ -58,10 +60,18 @@
                           (feat feats)
                         (unload-feature feat t))))
                   (require 'el-get))))
+ (elm-mode status "installed" recipe
+           (:name el-get :type git :url "git://github.com/jcollard/elm-mode.git" :features elm-mode))
+ (emacs-async status "installed" recipe
+              (:name emacs-async :description "Simple library for asynchronous processing in Emacs" :type github :pkgname "jwiegley/emacs-async"))
  (epl status "installed" recipe
       (:name epl :description "EPL provides a convenient high-level API for various package.el versions, and aims to overcome its most striking idiocies." :type github :pkgname "cask/epl"))
  (exec-path-from-shell status "installed" recipe
                        (:name exec-path-from-shell :website "https://github.com/purcell/exec-path-from-shell" :description "Emacs plugin for dynamic PATH loading" :type github :pkgname "purcell/exec-path-from-shell"))
+ (f status "installed" recipe
+    (:name f :website "https://github.com/rejeep/f.el" :description "Modern API for working with files and directories in Emacs" :depends
+           (s dash)
+           :type github :pkgname "rejeep/f.el"))
  (fill-column-indicator status "installed" recipe
                         (:name fill-column-indicator :type github :website "https://github.com/alpaker/Fill-Column-Indicator#readme" :description "An Emacs minor mode that graphically indicates the fill column." :pkgname "alpaker/Fill-Column-Indicator"))
  (flymake-cursor status "installed" recipe
@@ -119,20 +129,33 @@
                      (progn
                        (add-to-list 'auto-mode-alist
                                     '("\\.dat$" . ledger-mode)))))
+ (let-alist status "installed" recipe
+            (:name let-alist :description "Easily let-bind values of an assoc-list by their names." :builtin "25.0.50" :type elpa :url "https://elpa.gnu.org/packages/let-alist.html"))
  (linum-relative status "installed" recipe
                  (:name linum-relative :type emacswiki :description "Display relative line number in the left margin" :features linum-relative))
  (lua-mode status "installed" recipe
            (:name lua-mode :description "A major-mode for editing Lua scripts" :depends
                   (ample-regexps)
                   :type github :pkgname "immerrr/lua-mode"))
+ (magit status "installed" recipe
+        (:name magit :website "https://github.com/magit/magit#readme" :description "It's Magit! An Emacs mode for Git." :type github :pkgname "magit/magit" :branch "master" :minimum-emacs-version "24.4" :depends
+               (dash with-editor emacs-async)
+               :info "Documentation" :load-path "lisp/" :compile "lisp/" :build
+               `(("make" ,(format "EMACSBIN=%s" el-get-emacs)
+                  "docs")
+                 ("touch" "lisp/magit-autoloads.el"))
+               :build/berkeley-unix
+               `(("gmake" ,(format "EMACSBIN=%s" el-get-emacs)
+                  "docs")
+                 ("touch" "lisp/magit-autoloads.el"))
+               :build/windows-nt
+               (with-temp-file "lisp/magit-autoloads.el" nil)))
  (makey status "installed" recipe
         (:name makey :description "Interactive commandline mode" :type github :pkgname "mickeynp/makey"))
  (markdown-mode status "installed" recipe
                 (:name markdown-mode :description "Major mode to edit Markdown files in Emacs" :website "http://jblevins.org/projects/markdown-mode/" :type github :pkgname "jrblevin/markdown-mode" :prepare
                        (add-to-list 'auto-mode-alist
                                     '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
- (midje-mode status "installed" recipe
-             (:name midje-mode :type github :pkgname "dnaumov/midje-mode" :website "https://github.com/dnaumov/midje-mode" :description "Midje is a testing framework for the Clojure programming language;\nmidje-mode integrates it with Emacs, providing features like navigation and test reports."))
  (multiple-cursors status "installed" recipe
                    (:name multiple-cursors :description "An experiment in adding multiple cursors to emacs" :type github :pkgname "magnars/multiple-cursors.el"))
  (package status "installed" recipe
