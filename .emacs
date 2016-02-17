@@ -19,7 +19,7 @@
 ;; Bundled in distro
 ;; (require 'package)
 ;; (require 'uniquify)
-;; (require 'saveplace)
+(require 'saveplace)
 ;; (require 'gnus)
 ;; (require 'tramp)
 
@@ -61,7 +61,7 @@
 (require 'ghc)
 (require 'lua-mode)
 (require 'shm)
-;; (require 'clj-refactor-mode)
+(require 'beacon)
 
 ;; ----------------------
 ;; General customizations
@@ -122,7 +122,8 @@
  gc-cons-threshold 20000000
  local-elisp-directory "~/.emacs.d/local"
  twittering-use-master-password t
- vc-display-status nil)
+ vc-display-status nil
+ beacon-lighter nil)
 
 ;; Server
 ;; ------------------
@@ -152,8 +153,9 @@
 
 ;; Disable automatic re-indentation of lines.
 (electric-indent-mode -1)
-(global-auto-revert-mode t)
 (add-hook 'before-save-hook  'force-backup-of-buffer)
+(global-auto-revert-mode)
+(beacon-mode 1)
 
 ;; ----------
 ;; Projectile
@@ -218,8 +220,6 @@
 ;; Clojure mode
 ;; -----------
 
-(add-hook 'clojure-mode-hook 'clj-refactor-mode)
-(add-hook 'clojure-mode-hook 'midje-mode)
 (add-hook 'cider-mode-hook #'eldoc-mode)
 (setq cider-prefer-local-resources t
       cider-show-error-buffer 'only-in-repl
@@ -227,6 +227,7 @@
       cider-stacktrace-fill-column 80
       nrepl-buffer-name-show-port t
       cider-prompt-save-file-on-load nil
+      cider-repl-use-pretty-printing t
       cljr-suppress-middleware-warnings t
       cider-repl-prompt-function 'cider-repl-prompt-on-newline)
 (defun cider-repl-prompt-on-newline (namespace)
@@ -310,7 +311,6 @@ commands."
 ;;      (lambda () (setq-local haskell-literate nil)))
 ;; (add-hook 'elm-mode-hook 'turn-off-elm-indent)
 (add-hook 'elm-mode-hook 'fci-mode)
-(add-hook 'elm-mode-hook 'auto-complete-mode)
 
 ;; ----------
 ;; Javascript
@@ -420,8 +420,8 @@ makes)."
 (show-paren-mode 1)
 
 ;; Autocomplete
-(ac-config-default)
-(ac-flyspell-workaround)
+;; (ac-config-default)
+;; (ac-flyspell-workaround)
 
 ;; Fill column indicator
 (setq fci-rule-width 2)
