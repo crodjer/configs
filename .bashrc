@@ -142,14 +142,14 @@ git_branch () {
     git branch | grep "*" | cut -d " " -f 2
 }
 
-alias g="git"
-alias ga="git add"
-alias gc="git commit -v"
-alias gca="git commit -va"
-alias gst="git status"
-alias gco="git checkout"
-alias gl="git pull"
-alias gp="git push"
+alias g='git'
+alias ga='git add'
+alias gc='git commit -v'
+alias gca='git commit -va'
+alias gst='git status'
+alias gco='git checkout'
+alias gl='git pull'
+alias gp='git push'
 alias gup="git fetch"
 alias glg='git log --stat'
 alias gcm='git checkout master'
@@ -161,6 +161,7 @@ alias sb-ghc="cabal exec ghc"
 alias sb-ghci="cabal exec ghci"
 alias sb-runhaskell="cabal exec runhaskell"
 alias sb-ghc-pkg="cabal exec ghc-pkg"
+alias sx="stack exec"
 
 # Git aliases
 if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
@@ -194,6 +195,9 @@ function ghc-pkg-reset() {
     }
 }
 
+# Stack
+exists stack && eval "$(stack --bash-completion-script stack)"
+
 # MPC aliases
 alias m="mpc"
 alias mst="mpc -f '%artist% - %title%\n%album%\n%file%' status"
@@ -214,6 +218,11 @@ function mup(){
 #Decrease Vol
 function mdw(){
     _alter_mpd_vol "-" $1
+}
+
+
+function itunes() {
+    osascript -e "tell application \"iTunes\" ${2:-to} $1";
 }
 
 function b() {

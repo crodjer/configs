@@ -15,8 +15,6 @@
                          (add-to-list 'ac-dictionary-directories
                                       (expand-file-name "dict" default-directory))
                          (ac-config-default))))
- (beacon status "installed" recipe
-         (:name beacon :description "A light following your cursor around so you don't lose it!" :type github :pkgname "Malabarba/beacon" :depends seq))
  (cider status "installed" recipe
         (:name cider :description "CIDER is a Clojure IDE and REPL." :type github :pkgname "clojure-emacs/cider" :depends
                (seq queue clojure-mode pkg-info spinner)))
@@ -34,6 +32,8 @@
        (:name dash :description "A modern list api for Emacs. No 'cl required." :type github :pkgname "magnars/dash.el"))
  (deferred status "installed" recipe
    (:name deferred :description "Simple asynchronous functions for emacs lisp." :type github :pkgname "kiwanami/emacs-deferred"))
+ (delight status "installed" recipe
+          (:name delight :auto-generated t :type elpa :description "A dimmer switch for your lighter text." :repo nil))
  (edn status "installed" recipe
       (:name edn :description "Edn.el is an emacs lisp library for reading and writing the data format edn." :type github :depends
              (dash cl-lib s peg)
@@ -66,6 +66,11 @@
               (:name emacs-async :description "Simple library for asynchronous processing in Emacs" :type github :pkgname "jwiegley/emacs-async"))
  (epl status "installed" recipe
       (:name epl :description "EPL provides a convenient high-level API for various package.el versions, and aims to overcome its most striking idiocies." :type github :pkgname "cask/epl"))
+ (erlang-mode status "installed" recipe
+              (:name erlang-mode :description "Major mode for editing and running Erlang" :type http :url "http://www.erlang.org/download/contrib/erlang.el" :prepare
+                     (progn
+                       (add-to-list 'auto-mode-alist
+                                    '("\\.erl$" . erlang-mode)))))
  (exec-path-from-shell status "installed" recipe
                        (:name exec-path-from-shell :website "https://github.com/purcell/exec-path-from-shell" :description "Emacs plugin for dynamic PATH loading" :type github :pkgname "purcell/exec-path-from-shell"))
  (f status "installed" recipe

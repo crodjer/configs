@@ -52,7 +52,6 @@
 (require 'fill-column-indicator)
 (require 'ag)
 (require 'markdown-mode)
-(require 'magit)
 (require 'exec-path-from-shell)
 (require 'clojure-mode)
 (require 'cider)
@@ -61,7 +60,6 @@
 (require 'ghc)
 (require 'lua-mode)
 (require 'shm)
-(require 'beacon)
 
 ;; ----------------------
 ;; General customizations
@@ -104,6 +102,7 @@
 
  ;; Misc
  fill-column 80
+ magit-auto-revert-mode nil
  require-final-newline t
  column-number-mode t
  next-line-add-newlines nil
@@ -123,7 +122,10 @@
  local-elisp-directory "~/.emacs.d/local"
  twittering-use-master-password t
  vc-display-status nil
- beacon-lighter nil)
+ org-catch-invisible-edits t)
+
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
 
 ;; Server
 ;; ------------------
@@ -155,7 +157,6 @@
 (electric-indent-mode -1)
 (add-hook 'before-save-hook  'force-backup-of-buffer)
 (global-auto-revert-mode)
-(beacon-mode 1)
 
 ;; ----------
 ;; Projectile
@@ -202,7 +203,7 @@
 (defadvice ghc-display
   (after ghc-display-auto-pop-advice ())
   (pop-to-buffer ghc-error-buffer-name))
-; (ad-activate 'ghc-display)
+(ad-activate 'ghc-display)
 
 (eval-after-load "haskell-mode"
   '(progn
@@ -433,6 +434,15 @@ makes)."
 (add-hook 'prog-mode-hook 'fci-mode-in-graphics-display)
 (add-hook 'text-mode-hook 'visual-line-mode)
 (add-hook 'text-mode-hook 'fci-mode-in-graphics-display)
+(add-hook 'org-mode-hook (lambda () (fci-mode 0)))
+
+;; Remove a few minor mode lighters
+(delight '((global-whitespace-mode "" whitespace)
+           (clojure-mode "Clj" :major)
+           (flyspell-mode nil "flyspell")
+           (paredit-mode " PE" "paredit")
+           (auto-complete-mode nil "auto-complete")
+           (eldoc-mode nil "eldoc")))
 
 ;; Remove ugly UI elements
 (menu-bar-mode -1)
@@ -518,7 +528,6 @@ makes)."
 ;; ------------------
 ;; Custom keybindings
 ;; ------------------
-(global-set-key "\M-z" 'eval-last-sexp)
 (global-set-key "\C-j" 'newline)
 (global-set-key (kbd "<C-return>") 'newline)
 (global-set-key (kbd "RET") 'newline-and-indent)
