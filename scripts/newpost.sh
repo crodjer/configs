@@ -2,10 +2,9 @@
 
 id=$1
 date=$(date +%F)
-year=$(date +%Y)
 title="${@:2}"
 site=$HOME/workspace/rohanjain.in
-path=$site/drafts/$year/$id.mkd
+path=$site/drafts/$id.mkd
 
 if [ -z $id ]; then
     echo "Post id is required." >&2
