@@ -14,3 +14,5 @@
 */.pylint.d/*
 */tmp/*.tmp
 */.local/lib/node_modules
+*/.local/share/Trash
+*/.tor-browser-en
