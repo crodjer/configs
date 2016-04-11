@@ -1,0 +1,50 @@
+servers = (
+  {
+    address = "<address>";
+    chatnet = "freenode";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_cert = "~/.irssi/cert.pem";
+    ssl_cafile = "~/.irssi/ca.crt";
+    username = "<username>";
+    password = "<password>";
+    ssl_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "<address>";
+    chatnet = "mozilla";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_cert = "~/.irssi/cert.pem";
+    ssl_cafile = "~/.irssi/ca.crt";
+    username = "<username>";
+    password = "<password>";
+    ssl_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "<address>";
+    chatnet = "oftc";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_cert = "~/.irssi/cert.pem";
+    ssl_cafile = "~/.irssi/ca.crt";
+    username = "<username>";
+    password = "<password>";
+    ssl_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "<address>";
+    chatnet = "klug";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_cert = "~/.irssi/cert.pem";
+    ssl_cafile = "~/.irssi/ca.crt";
+    username = "<username>";
+    password = "<password>";
+    ssl_verify = "yes";
+    autoconnect = "yes";
+  }
+);

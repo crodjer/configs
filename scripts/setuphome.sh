@@ -192,6 +192,11 @@ setUp(){
     mkHomeConfDir ncmpcpp
     link ncmpcpp/config .ncmpcpp/config
 
+    mkHomeConfDir irssi
+    link .irssi/config.tail
+    link .irssi/default.theme
+    link .irssi/scripts
+
     chmod +x ~/.xsession*
 
     mkHomeConfDir local/bin
