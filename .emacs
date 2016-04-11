@@ -191,14 +191,16 @@
 (add-hook 'literate-haskell-mode-hook
           (lambda ()
             (haskell-indentation-mode 1)
-            (structured-haskell-mode 0)))
+            ;; (structured-haskell-mode 0)
+            ))
 (add-hook 'haskell-mode-hook
           (lambda ()
             (ghc-init)
-            (haskell-indentation-mode 0)
+            (haskell-indentation-mode 1)
             (set-face-background 'shm-current-face "WhiteSmoke")
             (set-face-background 'shm-quarantine-face "LightGrey")
-            (structured-haskell-mode 1)))
+            ;; (structured-haskell-mode 1)
+            ))
 
 (defadvice ghc-display
   (after ghc-display-auto-pop-advice ())
@@ -434,7 +436,9 @@ makes)."
 (add-hook 'prog-mode-hook 'fci-mode-in-graphics-display)
 (add-hook 'text-mode-hook 'visual-line-mode)
 (add-hook 'text-mode-hook 'fci-mode-in-graphics-display)
-(add-hook 'org-mode-hook (lambda () (fci-mode 0)))
+(add-hook 'org-mode-hook (lambda ()
+                           (setq-local fill-column 72)
+                           (fci-mode 0)))
 
 ;; Remove a few minor mode lighters
 (delight '((global-whitespace-mode "" whitespace)
