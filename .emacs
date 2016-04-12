@@ -59,7 +59,6 @@
 (require 'haskell-mode)
 (require 'ghc)
 (require 'lua-mode)
-(require 'shm)
 
 ;; ----------------------
 ;; General customizations
