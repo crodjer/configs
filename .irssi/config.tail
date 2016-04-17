@@ -226,5 +226,5 @@ hilights = (
 );
 ignores = (
   { level = "MODES"; servertag = "klug"; },
-  { level = "JOINS PARTS QUITS"; }
+  { level = "CRAP JOINS PARTS QUITS"; }
 );
