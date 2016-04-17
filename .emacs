@@ -187,19 +187,14 @@
 ;; Haskell mode
 ;; ------------
 (autoload 'ghc-init "ghc" nil t)
-(add-hook 'literate-haskell-mode-hook
-          (lambda ()
-            (haskell-indentation-mode 1)
-            ;; (structured-haskell-mode 0)
-            ))
-(add-hook 'haskell-mode-hook
-          (lambda ()
-            (ghc-init)
-            (haskell-indentation-mode 1)
-            (set-face-background 'shm-current-face "WhiteSmoke")
-            (set-face-background 'shm-quarantine-face "LightGrey")
-            ;; (structured-haskell-mode 1)
-            ))
+;; (add-hook 'literate-haskell-mode-hook
+;;           (lambda ()
+;;             (haskell-indentation-mode 1)
+;;             ;; (structured-haskell-mode 0)
+;;             ))
+(add-hook 'haskell-mode-hook 'ghc-init)
+(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+
 
 (defadvice ghc-display
   (after ghc-display-auto-pop-advice ())
