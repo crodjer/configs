@@ -157,6 +157,7 @@ setUp(){
     link .polipo
     link .profile
     link .screenlayout
+    link .tmux.conf
     link .screenrc
     link .signature
     link .udisks-glue.conf
