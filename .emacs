@@ -59,6 +59,8 @@
 (require 'haskell-mode)
 (require 'ghc)
 (require 'lua-mode)
+(require 'magit)
+(require 'delight)
 
 ;; ----------------------
 ;; General customizations
