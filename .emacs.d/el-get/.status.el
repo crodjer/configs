@@ -160,6 +160,27 @@
                                     '("\\.\\(md\\|mdown\\|markdown\\)\\'" . markdown-mode))))
  (multiple-cursors status "installed" recipe
                    (:name multiple-cursors :description "An experiment in adding multiple cursors to emacs" :type github :pkgname "magnars/multiple-cursors.el"))
+ (neotree status "installed" recipe
+          (:name neotree :website "https://github.com/jaypei/emacs-neotree" :description "An Emacs tree plugin like NerdTree for Vim." :type github :branch "master" :pkgname "jaypei/emacs-neotree"))
+ (org-mode status "installed" recipe
+           (:name org-mode :website "http://orgmode.org/" :description "Org-mode is for keeping notes, maintaining ToDo lists, doing project planning, and authoring with a fast and effective plain-text system." :type git :url "git://orgmode.org/org-mode.git" :info "doc" :build/berkeley-unix `,(mapcar
+                                                                                                                                                                                                                                                                                                       (lambda
+                                                                                                                                                                                                                                                                                                         (target)
+                                                                                                                                                                                                                                                                                                         (list "gmake" target
+                                                                                                                                                                                                                                                                                                               (concat "EMACS="
+                                                                                                                                                                                                                                                                                                                       (shell-quote-argument el-get-emacs))))
+                                                                                                                                                                                                                                                                                                       '("oldorg"))
+                  :build `,(mapcar
+                            (lambda
+                              (target)
+                              (list "make" target
+                                    (concat "EMACS="
+                                            (shell-quote-argument el-get-emacs))))
+                            '("oldorg"))
+                  :load-path
+                  ("." "contrib/lisp" "lisp")
+                  :load
+                  ("lisp/org-loaddefs.el")))
  (package status "installed" recipe
           (:name package :description "ELPA implementation (\"package.el\") from Emacs 24" :builtin "24" :type http :url "http://repo.or.cz/w/emacs.git/blob_plain/ba08b24186711eaeb3748f3d1f23e2c2d9ed0d09:/lisp/emacs-lisp/package.el" :shallow nil :features package :post-init
                  (progn
