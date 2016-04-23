@@ -61,6 +61,7 @@
 (require 'lua-mode)
 (require 'magit)
 (require 'delight)
+(require 'ox-confluence)
 
 ;; ----------------------
 ;; General customizations
@@ -123,7 +124,8 @@
  local-elisp-directory "~/.emacs.d/local"
  twittering-use-master-password t
  vc-display-status nil
- org-catch-invisible-edits t)
+ org-catch-invisible-edits "smart"
+ org-startup-indented t)
 
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
@@ -139,7 +141,7 @@
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("\\.mkd$\\|.md$\\|.markdown$" . markdown-mode))
-(add-to-list 'auto-mode-alist '("mutt-.*-" . mail-mode))
+(add-to-list 'auto-mode-alist '("mutt-.*-" . message-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$\\|Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.html$\\$" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
@@ -179,6 +181,16 @@
           (lambda () (flyspell-mode 0)))
 (add-hook 'html-mode-hook 'flyspell-prog-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+;; ----------
+;; Dired mode
+;; ----------
+(put 'dired-find-alternate-file 'disabled nil)
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key dired-mode-map (kbd "^")
+              ; was dired-up-directory
+              (lambda () (interactive) (find-alternate-file "..")))))
 
 ;; -----
 ;; Magit
@@ -395,8 +407,8 @@ makes)."
 ;; ---------
 ;; Mail mode
 ;; ---------
-(add-hook 'mail-mode-hook
-     (lambda () (setq-local fill-column 70)))
+(add-hook 'message-mode-hook
+          (lambda () (setq-local fill-column 70)))
 
 ;; --
 ;; UI
