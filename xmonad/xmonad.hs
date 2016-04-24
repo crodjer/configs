@@ -120,7 +120,7 @@ customLayout = myShowWName $
       work = avoidStruts $ myTiled ||| myFull
       full = avoidStrutsOn [] $ myTabbed ||| myFull ||| myTiled
 
-myTiled = smartBorders $ ResizableTall 1 (3/100) (51/100) []
+myTiled = smartBorders $ ResizableTall 1 (3/100) (50/100) []
 myFull = noBorders $ Full
 myTabbed = noBorders $ tabbed shrinkText def
 mySWNConfig = def
