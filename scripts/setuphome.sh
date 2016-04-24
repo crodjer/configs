@@ -176,6 +176,7 @@ setUp(){
     link config/awesome .config/awesome _parent
     link config/zathura .config/zathura _parent
     link config/uzbl .config/uzbl _parent
+    link config/gtk-3.0 .config/gtk-3.0 _parent
     link .mplayer .mplayer _parent
 
     # $HOME/.xmonad directroy for xmonad configs
@@ -184,6 +185,7 @@ setUp(){
 
     mkHomeConfDir emacs.d
     mkHomeConfDir emacs.d/el-get
+    mkHomeConfDir emacs.d/local
     link .emacs
     link .emacs.d/el-get/.status.el
     link .emacs.d/el-get-user
