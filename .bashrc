@@ -18,13 +18,13 @@ fi
 #-------------------------#
 # Bash configuration
 #-------------------------#
-shopt -s histappend autocd globstar
+shopt -s histappend autocd globstar histreedit histverify
 
 export HISTTIMEFORMAT="%F %T "
-export HISTCONTROL=ignoredups:ignorespace:erasedups
+export HISTCONTROL=ignorespace:ignoredups:erasedups
 export HISTSIZE=
 export HISTFILESIZE=
-export HISTIGNORE="ls:la:l:ll:lla:[bf]g:clear:exit"
+export HISTIGNORE="ls:la:l:ll:lla:lls:sl:gst:glg:g diff:..::...:s:mtog:cd:cd -:clear:reb:exit"
 PS1='[\u@\h \W]\$ '
 
 # Enabled blocked forward incrmental search
@@ -389,7 +389,7 @@ PROMPT_DIRTRIM=2
 PROMPT_COMMAND=prompt
 
 preexec () {
-    history -a; history -c; history -r
+    history -a
 
     local title=$1
     local excluded_commands=(
