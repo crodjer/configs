@@ -74,7 +74,6 @@ logHook' h = dynamicLogWithPP (customPP { ppOutput = hPutStrLn h })
              >> (updatePointer (0.5, 0.25) (0, 0))
 
 layoutHook' = customLayout
--- Top-level binding with no type signature:           layoutHook' :: XMonad.Layout.LayoutModifier.ModifiedLayout
 
 -------------------------------------------------------------------------------
 -- Looks --
@@ -101,7 +100,10 @@ normalBorderColor', focusedBorderColor' :: String
 normalBorderColor'  = "#CCCCCC"
 focusedBorderColor' = "#00FF00"
 
+myFont :: [Char]
 myFont = "xft:Monospace:pixelsize=12:bold:antialias=true:hinting=true"
+
+myFontLarge :: [Char]
 myFontLarge = "xft:Monospace:pixelsize=30:bold:antialias=true:hinting=true"
 
 -- workspaces
@@ -120,9 +122,11 @@ customLayout = myShowWName $
       work = avoidStruts $ myTiled ||| myFull
       full = avoidStrutsOn [] $ myTabbed ||| myFull ||| myTiled
 
-myTiled = smartBorders $ ResizableTall 1 (3/100) (50/100) []
+myTiled = smartBorders $ ResizableTall 1 (3/100) (1/2) []
 myFull = noBorders $ Full
 myTabbed = noBorders $ tabbed shrinkText def
+
+mySWNConfig :: SWNConfig
 mySWNConfig = def
               { swn_font = myFontLarge
               , swn_fade = 1
@@ -136,6 +140,7 @@ myShowWName = showWName' mySWNConfig
 terminal' :: String
 terminal' = "urxvtc"
 
+myXPConfig :: XPConfig
 myXPConfig = def
              { promptKeymap = emacsLikeXPKeymap
              , position = Top
