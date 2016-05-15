@@ -1,0 +1,14 @@
+"3.10.1 (created: 2015/08/25 00:41:59)
+
+set defsearch=d
+set hintchars=hjklasdf
+set runtimepath+=~/.vimperator-plugins
+
+command! reader execute "open about:reader?url=" + content.location.href
+nmap <C-r> :reader<Space><Return>
+set gui=none
+colorscheme indigo
+
+source! /Users/rohan/.vimperatorrc.local
+
+" vim: set ft=vimperator:
