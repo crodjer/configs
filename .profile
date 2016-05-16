@@ -8,14 +8,6 @@
 # Borrowed from: http://stuff.lhunath.com/.profile
 
 #-------------------------#
-# BASE - UTILITY          #
-#-------------------------#
-exists () {
-    command -v "$1" &> /dev/null
-}
-export -f exists
-
-#-------------------------#
 # BASE - PATH             #
 #-------------------------#
 export                        PATH="$HOME/.bin"
@@ -46,14 +38,14 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -e /usr/share/zoneinfo/Asia/Kolkata ] && {
     export TZ="/usr/share/zoneinfo/Asia/Kolkata"
 }
-exists emacsclient && export EDITOR='emacsclient -ct' || {
-    exists zile && export EDITOR=zile
+command -v emacsclient &> /dev/null && export EDITOR='emacsclient -ct' || {
+    command -v zile && export EDITOR=zile
 } || {
     export EDITOR='vi'
 }
 export HOSTALIASES=~/.hosts
 
-if [[ $(uname -a) =~ Darwin ]]; then
+if [ $(uname) = Darwin ]; then
     export MACOS=true
 fi
 
@@ -61,7 +53,7 @@ fi
 # ENVIRONMENT - APPLICATIONS  #
 #-----------------------------#
 export LESS=" -R "
-exists source-highlight-esc.sh && \
+command -v source-highlight-esc.sh &> /dev/null && \
     export LESSOPEN="| `which source-highlight-esc.sh` %s 2> /dev/null"
 export GREP_COLOR=31
 export PAGER=less
