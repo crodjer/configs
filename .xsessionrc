@@ -4,15 +4,15 @@
 xrdb -merge ~/.Xresources
 
 # Keyboard map
-setxkbmap -option caps:escape
+setxkbmap -option ctrl:nocaps
 xmodmap -e "keycode 107 = Super_R NoSymbol Super_R"
 xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
 
 ## Touchpad settings
 synclient TapButton1=0
 synclient VertEdgeScroll=0, VertTwoFingerScroll=1, HorizTwoFingerScroll=1
-synclient HorizScrollDelta=104, VertScrollDelta=32
-synclient VertHysteresis=25, HorizHysteresis=25
+synclient HorizScrollDelta=-104, VertScrollDelta=-10
+synclient VertHysteresis=0, HorizHysteresis=0
 synclient FingerLow=20, FingerHigh=25
 synclient MinSpeed=0, MaxSpeed=1
 synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=12
@@ -32,7 +32,7 @@ redshift &
 
 # Sound
 start-pulseaudio-x11
-pactl set-sink-volume 0 120%
+pactl set-sink-volume 0 125%
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/complete.oga reminder
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/message-new-instant.oga reminder-soft
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
