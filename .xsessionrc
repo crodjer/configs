@@ -43,4 +43,4 @@ pkill -f mpd-notification; mpd-notification -m $HOME/music/library &
 
 # Misc
 urxvtd &
-xautolock -time 10 -locker "lock" &
+# xautolock -time 10 -locker "lock" &
