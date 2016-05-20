@@ -63,6 +63,7 @@ export NODE_PATH=$HOME/.local/lib/node_modules:/usr/lib/node_modules
 # export PATH=$PATH:$GOPATH/bin
 export CHESSDIR=$HOME/.chess/
 export GEM_HOME=$HOME/.gem/ruby/
+export AUTOSSH_POLL=60
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
