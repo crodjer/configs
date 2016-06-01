@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # ~/.bashrc
 #
@@ -139,7 +140,7 @@ fi
 alias t='task'
 
 git_branch () {
-    git branch | grep "*" | cut -d " " -f 2
+    git branch | grep "\*" | cut -d " " -f 2
 }
 
 alias g='git'
@@ -165,8 +166,10 @@ alias sx="stack exec"
 
 # Git aliases
 if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+    # shellcheck source=/dev/null
     source /usr/local/etc/bash_completion.d/git-completion.bash
 elif [ -e /usr/share/bash-completion/completions/git ]; then
+    # shellcheck source=/dev/null
     source /usr/share/bash-completion/completions/git
 fi
 
@@ -183,10 +186,10 @@ exists __git_complete && {
 }
 
 function ghc-pkg-reset() {
-    read -p 'Erasing all your user ghc and cabal packages. Are you sure (y/n)? ' ans
+    read -rp 'Erasing all your user ghc and cabal packages. Are you sure (y/n)? ' ans
     test "$ans" == "y" && {
         echo 'Erasing directories under ~/.ghc'
-        rm -rf `find ~/.ghc -maxdepth 1 -type d`
+        rm -rf "$(find ~/.ghc -maxdepth 1 -type d)"
 
         echo 'Erasing ~/.cabal/lib'
         rm -rf ~/.cabal/lib
@@ -207,17 +210,17 @@ alias sose="mpc playlist -f '%title% \[%album%\]' | grep -in"
 
 # Alters the mpd volume according to the sign and factor of 5
 function _alter_mpd_vol(){
-    num=$( echo "5*${2:-1}" | bc)
-    mpc volume $1$num
+    num=$(echo "5*${2:-1}" | bc)
+    mpc volume "$1$num"
 }
 
 #Increase Vol
 function mup(){
-    _alter_mpd_vol "+" $1
+    _alter_mpd_vol "+" "$1"
 }
 #Decrease Vol
 function mdw(){
-    _alter_mpd_vol "-" $1
+    _alter_mpd_vol "-" "$1"
 }
 
 
@@ -233,11 +236,11 @@ batteryGeneric() {
     TPACPI_BAT=1
 
     if [[ ! -z "$2" ]]; then
-        sudo tpacpi-bat -s $1 $TPACPI_BAT $2
+        sudo tpacpi-bat -s "$1" $TPACPI_BAT "$2"
     fi
 
-    sudo tpacpi-bat -v -g $1 $TPACPI_BAT
-    PERCENT=$(echo "$(sudo tpacpi-bat -g $1 $TPACPI_BAT  | cut -d ' ' -f 1)" | bc)
+    sudo tpacpi-bat -v -g "$1" $TPACPI_BAT
+    PERCENT=$(sudo tpacpi-bat -g "$1" $TPACPI_BAT  | cut -d ' ' -f 1 | bc)
     if [[ $PERCENT = 0 ]]; then
         echo "Threshold set to default"
     else
@@ -246,12 +249,12 @@ batteryGeneric() {
 }
 
 thinkPadBatteryStartThreshold() {
-    batteryGeneric "ST" $1
+    batteryGeneric "ST" "$1"
 }
 alias tpBatST='thinkPadBatteryStartThreshold'
 
 thinkPadBatteryStopThreshold() {
-    batteryGeneric "SP" $1
+    batteryGeneric "SP" "$1"
 }
 alias tpBatSP='thinkPadBatteryStopThreshold'
 
@@ -271,14 +274,14 @@ alias acc='ledger -f ~/.accounts.dat'
 alias aria2c='aria2c -j2 --seed-time 0 --max-upload-limit 1'
 
 function pi-wlan() {
-    local pi_host=$(arp -na | grep 74:da:38:62:8d:68 \
-                            | grep -ohE "\d+.\d+.\d+.\d+")
-    echo "Raspberry Pi connected at" $pi_host
-    ssh $pi_host
+    pi_host=$(arp -na | grep 74:da:38:62:8d:68 \
+                      | grep -ohE "\d+.\d+.\d+.\d+")
+    echo "Raspberry Pi connected at $pi_host"
+    ssh "$pi_host"
 }
 
 function serve() {
-    python3 -m http.server ${1:-8000}
+    python3 -m http.server "${1:-8000}"
 }
 
 #-------------------------#
@@ -286,6 +289,7 @@ function serve() {
 #-------------------------#
 # Only in mac
 if [ -f /usr/local/etc/bash_completion ]; then
+    # shellcheck source=/dev/null
     source /usr/local/etc/bash_completion
 fi
 
@@ -293,18 +297,21 @@ fi
 re_comp() {
     {
         [[ -e /usr/share/bash-completion/completions/$1 ]] && {
+            # shellcheck source=/dev/null
             source /usr/share/bash-completion/completions/$1
-            complete -F _$1 $2
+            complete -F "_$1" "$2"
         }
     } || {
         [[ -e /usr/local/etc/bash_completion.d/$1-completion.bash ]] && {
+            # shellcheck source=/dev/null
             source /usr/local/etc/bash_completion.d/$1-completion.bash
-            complete -F _$1 $2
+            complete -F "_$1" "$2"
         }
     } || {
         [[ -e /usr/local/etc/bash_completion.d/$1 ]] && {
+            # shellcheck source=/dev/null
             source /usr/local/etc/bash_completion.d/$1
-            complete -F _$1 $2
+            complete -F "_$1" "$2"
         }
     }
 }
@@ -322,13 +329,13 @@ complete -F _t tw
 # Prompt
 #-------------------------#
 
-red='\[$(tput setaf 1)\]'
-green='\[$(tput setaf 2)\]'
-yellow='\[$(tput setaf 3)\]'
-blue='\[$(tput setaf 4)\]'
-cyan='\[$(tput setaf 6)\]'
-bold='\[$(tput bold)\]'
-plain='\[$(tput sgr0)\]'
+red="\[$(tput setaf 1)\]"
+green="\[$(tput setaf 2)\]"
+yellow="\[$(tput setaf 3)\]"
+blue="\[$(tput setaf 4)\]"
+cyan="\[$(tput setaf 6)\]"
+bold="\[$(tput bold)\]"
+plain="\[$(tput sgr0)\]"
 
 prompt() {
     EXIT_STATUS="$?"
@@ -370,7 +377,7 @@ prompt() {
     fi
 
     if [[ -n "$VIRTUAL_ENV" ]];then
-        _PVENV=" $blue($(basename $VIRTUAL_ENV))"
+        _PVENV=" $blue($(basename "$VIRTUAL_ENV"))"
     else
         _PVENV=""
     fi
@@ -394,23 +401,24 @@ preexec () {
     local title=$1
     local excluded_commands=(
         source ls clear echo exec cat printf cd
-        $(echo $PROMPT_COMMAND | sed 's/;//')
+        ${PROMPT_COMMAND//;/}
     )
+    local exclude_re
+    local short_title
+
     if [[ $MACOS ]]; then
         sed=gsed
-        cut=gcut
         paste=gpaste
     else
         sed=sed
-        cut=cut
         paste=paste
     fi
 
-    local exclude_re=$(printf '%s\n' "${excluded_commands[@]}" \
-                              | $paste -s -d '|' -)
-    local short_title=$(echo "$title" \
-                               | $sed -r "s/^\s*(\w+=\w+\s+)*//g" \
-                               | $sed -r "s/^\s*sudo\s+/# /g")
+    exclude_re=$(printf '%s\n' "${excluded_commands[@]}" \
+                     | $paste -s -d '|' -)
+    short_title=$(echo "$title" \
+                      | $sed -r "s/^\s*(\w+=\w+\s+)*//g" \
+                      | $sed -r "s/^\s*sudo\s+/# /g")
 
     if [[ $short_title =~ $exclude_re ]]; then
         # Matches the excluded title. We don't want to set as shell title.
@@ -431,7 +439,7 @@ preexec () {
 
     if [[ "$STY" ]]; then
         # I am in a screen session, set the short title
-        printf "\033k$short_title\033\\" >&2
+        printf "\033k%s\033\\" "$short_title" >&2
     fi
 
     printf "\e]0;%s\007" "$title" >&2
@@ -459,10 +467,15 @@ preexec_invoke_exec () {
 }
 trap 'preexec_invoke_exec' DEBUG
 
-exists virtualenvwrapper.sh && source `which virtualenvwrapper.sh`
+# shellcheck source=/dev/null
+exists virtualenvwrapper.sh && source "$(which virtualenvwrapper.sh)"
 
+# shellcheck source=/dev/null
 [[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
+
+# shellcheck source=/dev/null
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
+
 # exists rbenv && eval "$(rbenv init -)"
 export LFS=/mnt/lfs
 
@@ -497,15 +510,19 @@ docker-cleanup() {
 
 route_to () {
     interface=$1
-    route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4)
+    route="$(ip route \
+                 | grep "$interface" \
+                 | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' \
+                 | cut -d ' ' -f -4)"
     if [ -n "$route" ]; then
         sudo ip route del default &> /dev/null
-        sudo ip route replace default via $route
+        sudo ip route replace default via "$route"
     else
         echo "Invalid route $interface" >&2
     fi
 }
 
-if [ -e $HOME/.bashrc.local ]; then
-    source $HOME/.bashrc.local
+if [ -e "$HOME/.bashrc.local" ]; then
+    # shellcheck source=/dev/null
+    source "$HOME/.bashrc.local"
 fi
