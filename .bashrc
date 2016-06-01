@@ -484,13 +484,13 @@ export LFS=/mnt/lfs
 #-------------------------#
 
 s() {
-    find . -iname "*$@*"
+    find . -iname "*$**"
 }
 
 #Search for text in files
 sg() {
     if [ $# -gt 1 ];then
-        find . -iname "$1" | xargs grep "$2"
+        find . -type f -iname "*$1*" -print0 | xargs grep "$2"
     else
         echo 'Input the file and grep patterns'
     fi
