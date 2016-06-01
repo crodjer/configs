@@ -5,6 +5,7 @@
 [user]
 	name = Rohan Jain
 	email = crodjer@gmail.com
+	signingkey = 0F7F3109
 [github]
 	user = crodjer
 [format]
