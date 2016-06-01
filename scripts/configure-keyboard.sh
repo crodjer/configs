@@ -1,4 +1,4 @@
-## -*-Sh-*-
+#!/usr/bin/env sh
 ## Configure Keyboard
 
 setxkbmap -option ctrl:nocaps

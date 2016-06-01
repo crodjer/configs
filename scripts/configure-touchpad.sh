@@ -1,4 +1,4 @@
-## -*-Sh-*-
+#!/usr/bin/env sh
 ## Configure Touchpad
 
 synclient TapButton1=0

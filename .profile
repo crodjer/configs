@@ -38,14 +38,14 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -e /usr/share/zoneinfo/Asia/Kolkata ] && {
     export TZ="/usr/share/zoneinfo/Asia/Kolkata"
 }
-command -v emacsclient &> /dev/null && export EDITOR='emacsclient -ct' || {
+command -v emacsclient > /dev/null && export EDITOR='emacsclient -ct' || {
     command -v zile && export EDITOR=zile
 } || {
     export EDITOR='vi'
 }
 export HOSTALIASES=~/.hosts
 
-if [ $(uname) = Darwin ]; then
+if [ "$(uname)" = Darwin ]; then
     export MACOS=true
 fi
 
@@ -53,8 +53,9 @@ fi
 # ENVIRONMENT - APPLICATIONS  #
 #-----------------------------#
 export LESS=" -R "
-command -v source-highlight-esc.sh &> /dev/null && \
-    export LESSOPEN="| `which source-highlight-esc.sh` %s 2> /dev/null"
+command -v source-highlight-esc.sh > /dev/null && \
+    LESSOPEN="| $(which source-highlight-esc.sh) %s 2> /dev/null"
+export LESSOPEN
 export GREP_COLOR=31
 export PAGER=less
 export MANPAGER=$PAGER
@@ -68,6 +69,7 @@ export AUTOSSH_POLL=60
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
 #-----------------------------#
+# shellcheck source=/dev/null
 [ -r "$HOME/.profile.local" ] && . "$HOME/.profile.local"
 # [ "$BASH_VERSION" -a -z "$POSIXLY_CORRECT" ] && . "$HOME/.bashrc"
 
