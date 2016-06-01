@@ -10,7 +10,8 @@
 (package-initialize)
 
 (defvar my-packages
-  '(better-defaults
+  '(ag
+    better-defaults
     cider
     fill-column-indicator
     ghc
@@ -43,6 +44,20 @@
 ;; Defaults
 ;; ----------------------------------------
 (setq-default vc-follow-symlinks t)
+
+;; ----------------------------------------
+;; Ag
+;; ----------------------------------------
+(global-set-key (kbd "C-c C-s") 'ag-project)
+
+;; ----------------------------------------
+;; Clojure
+;; ----------------------------------------
+(with-eval-after-load 'clojure-mode
+  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook 'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook 'enable-paredit-mode)
+  (add-hook 'cider-repl-mode-hook 'eldoc-mode))
 
 ;; ----------------------------------------
 ;; Dired
@@ -162,4 +177,4 @@
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
+    (auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
