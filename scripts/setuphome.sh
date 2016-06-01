@@ -177,6 +177,7 @@ setUp(){
     link config/zathura .config/zathura _parent
     link config/uzbl .config/uzbl _parent
     link config/gtk-3.0 .config/gtk-3.0 _parent
+    link config/nvim .config/nvim _parent
     link .mplayer .mplayer _parent
 
     # $HOME/.xmonad directroy for xmonad configs
