@@ -163,6 +163,7 @@ alias sb-ghci="cabal exec ghci"
 alias sb-runhaskell="cabal exec runhaskell"
 alias sb-ghc-pkg="cabal exec ghc-pkg"
 alias sx="stack exec"
+alias sdcv="sdcv -c"
 
 # Git aliases
 if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then

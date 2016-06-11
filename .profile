@@ -59,6 +59,8 @@ export LESSOPEN
 export GREP_COLOR=31
 export PAGER=less
 export MANPAGER=$PAGER
+export SDCV_HISTSIZE=10000
+export SDCV_PAGER=less
 export NODE_PATH=$HOME/.local/lib/node_modules:/usr/lib/node_modules
 # export GOPATH=/home/rohan/workspace/go
 # export PATH=$PATH:$GOPATH/bin
