@@ -14,6 +14,7 @@
     better-defaults
     cider
     fill-column-indicator
+    git-commit
     ghc
     markdown-mode
     paredit))
@@ -113,6 +114,11 @@
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;; ----------------------------------------
+;; Git commit mode
+;; ----------------------------------------
+(global-git-commit-mode)
+
+;; ----------------------------------------
 ;; Haskell
 ;; ----------------------------------------
 (with-eval-after-load 'haskell-mode
@@ -188,4 +194,4 @@
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
+    (git-commit auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
