@@ -64,7 +64,7 @@
   (interactive)
   (revert-buffer t t))
 (global-set-key (kbd "C-c r")
-                revert-buffer-no-confirm)
+                'revert-buffer-no-confirm)
 
 ;; ----------------------------------------
 ;; Clojure
