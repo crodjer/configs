@@ -20,7 +20,8 @@ Config { font = "xft:Monospace:size=9:bold"
                       10
                     , Run Date "%d %a %I:%M" "date" 10
                     , Run StdinReader
-                    , Run ThermalZone 0 ["-t", "T:<temp>C"] 30
+                    , Run ThermalZone 0 ["-t", "<temp>C"] 30
+                    , Run ThermalZone 1 ["-t", "<temp>C"] 30
                     , Run CoreTemp ["-t", "T:<core0>|<core1>",
                                     "-L", "30", "-H", "50",
                                     "-l", "lightblue", "-n", "gray90",
@@ -31,5 +32,5 @@ Config { font = "xft:Monospace:size=9:bold"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %multicpu% %memory% %battery% %wlan0wi%|<fc=#ee9a00>%date%</fc>|     "
+       , template = "%StdinReader% }{ %multicpu% %memory% T:%thermal0%/%thermal1% %battery% %wlan0wi%|<fc=#ee9a00>%date%</fc>|     "
        }
