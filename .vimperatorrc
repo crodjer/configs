@@ -6,6 +6,7 @@ set hintchars=hjklasdf
 command! reader execute "open about:reader?url=" + content.location.href
 nmap <C-r> :reader<Space><Return>
 set gui=none
+set gui=tabs
 colorscheme indigo
 
 source! /Users/rohan/.vimperatorrc.local
