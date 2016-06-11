@@ -2,7 +2,6 @@
 
 set defsearch=d
 set hintchars=hjklasdf
-set runtimepath+=~/.vimperator-plugins
 
 command! reader execute "open about:reader?url=" + content.location.href
 nmap <C-r> :reader<Space><Return>
