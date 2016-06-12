@@ -18,7 +18,7 @@ Config { font = "xft:Monospace:size=9:bold"
                        "-i", "", "-l", "red", "-m", "blue",
                        "-h", "green"]
                       10
-                    , Run Date "%d %a %I:%M" "date" 10
+                    , Run Date "%a, %d %b, %I:%M" "date" 10
                     , Run StdinReader
                     , Run ThermalZone 0 ["-t", "<temp>C"] 30
                     , Run ThermalZone 1 ["-t", "<temp>C"] 30
