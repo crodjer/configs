@@ -71,6 +71,7 @@
 ;; Clojure
 ;; ----------------------------------------
 (with-eval-after-load 'clojure-mode
+  (setq cider-repl-use-pretty-printing t)
   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
   (add-hook 'clojure-mode-hook 'eldoc-mode)
   (add-hook 'cider-repl-mode-hook 'enable-paredit-mode)
