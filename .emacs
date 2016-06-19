@@ -123,6 +123,7 @@
 ;; Haskell
 ;; ----------------------------------------
 (with-eval-after-load 'haskell-mode
+  (setq haskell-ask-also-kill-buffers nil)
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
 
 ;; ----------------------------------------
