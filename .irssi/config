@@ -1,3 +1,32 @@
+servers = (
+  {
+    address = "irc.oftc.net";
+    chatnet = "oftc";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_cert = "~/.irssi/certs/crodjer.pem";
+    ssl_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.mozilla.org";
+    chatnet = "mozilla";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_cert = "~/.irssi/certs/crodjer.pem";
+    ssl_verify = "yes";
+    autoconnect = "yes";
+  },
+  {
+    address = "chat.freenode.net";
+    chatnet = "freenode";
+    port = "6697";
+    use_ssl = "yes";
+    ssl_cert = "~/.irssi/certs/crodjer.pem";
+    ssl_verify = "yes";
+    autoconnect = "yes";
+  }
+);
 
 chatnets = {
   mozilla = { type = "IRC"; };
@@ -7,7 +36,12 @@ chatnets = {
   klug = { type = "IRC"; };
 };
 
-channels = ( );
+channels = (
+  { name = "#codesurfers"; chatnet = "oftc"; autojoin = "yes"; },
+  { name = "#elm"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; },
+  { name = "#redox"; chatnet = "mozilla"; autojoin = "yes"; }
+);
 
 aliases = {
   J = "join";
