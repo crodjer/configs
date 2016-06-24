@@ -232,7 +232,7 @@ settings = {
     uberprompt_load_hook = "/^vm_add";
     uberprompt_unload_hook = "/^vm_del";
     awl_display_key = "$Q|%n%C$H$C$S%n";
-    awl_display_key_active = "$Q|%n%_%W$H$C$S%n";
+    awl_display_key_active = "$Q|%n%_%K$H$C$S%n";
     awl_block = "-15";
   };
 };

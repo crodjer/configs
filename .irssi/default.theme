@@ -118,7 +118,7 @@ abstracts = {
   ##
 
   # the basic styling of how to print message, $0 = nick mode, $1 = nick
-  msgnick = "%K<%n$0$1-%K>%n %|";
+  msgnick = "$1-%_>%_ %|";
 
   # message from you is printed. "ownnick" specifies the styling of the
   # nick ($0 part in msgnick) and "ownmsgnick" specifies the styling of the
@@ -271,9 +271,9 @@ abstracts = {
   topicsbstart = "{sbstart $*}";
   topicsbend = "{sbend $*}";
 
-  prompt = "[$*] ";
+  prompt = " $*> ";
 
-  sb = " %c[%n$*%c]%n";
+  sb = " $* %W%n";
   sbmode = "(%c+%n$*)";
   sbaway = " (%GzZzZ%n)";
   sbservertag = ":$0 (change with ^X)";
@@ -284,7 +284,7 @@ abstracts = {
   # ',' separator
   sb_act_sep = "%c$*";
   # normal text
-  sb_act_text = "%c$*";
+  sb_act_text = "$*";
   # public message
   sb_act_msg = "%W$*";
   # hilight
