@@ -40,7 +40,6 @@ channels = (
   { name = "#codesurfers"; chatnet = "oftc"; autojoin = "yes"; },
   { name = "#elm"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; },
-  { name = "#redox"; chatnet = "mozilla"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -260,5 +259,5 @@ hilights = (
 );
 ignores = (
   { level = "MODES"; servertag = "klug"; },
-  { level = "CRAP JOINS PARTS QUITS"; }
+  { level = "CRAP JOINS PARTS QUITS NICKS"; }
 );
