@@ -15,13 +15,11 @@ export                        PATH="$HOME/.bin"
 [ -d "$HOME/.cabal" ]      && PATH="$PATH:$HOME/.cabal/bin"
 [ -d "/opt/local" ]        && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
 [ -d "/bin/vendor_perl" ]  && PATH="$PATH:/bin/vendor_perl"
-                              PATH="$PATH:/opt/clojurescript/bin"
                               PATH="$PATH:$HOME/.gem/ruby/bin"
                               PATH="$PATH:$HOME/.gem/ruby/2.0.0/bin"
                               PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
                               PATH="$PATH:$HOME/workspace/configs/scripts"
                               PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/sbin"
-                              PATH="$PATH:/usr/local/sbin:/usr/sbin"
 # [ "$(id -u)" -eq "0" ]  &&    PATH="$PATH:/usr/local/sbin/:/usr/sbin"
 
 export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
@@ -67,6 +65,7 @@ export NODE_PATH=$HOME/.local/lib/node_modules:/usr/lib/node_modules
 export CHESSDIR=$HOME/.chess/
 export GEM_HOME=$HOME/.gem/ruby/
 export AUTOSSH_POLL=60
+export SCIKIT_LEARN_DATA=~/.scikit_learn_data
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
