@@ -39,7 +39,7 @@ chatnets = {
 channels = (
   { name = "#codesurfers"; chatnet = "oftc"; autojoin = "yes"; },
   { name = "#elm"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; },
+  { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; }
 );
 
 aliases = {
