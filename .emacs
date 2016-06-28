@@ -17,7 +17,8 @@
     git-commit
     ghc
     markdown-mode
-    paredit))
+    paredit
+    xclip))
 
 (defun my-packages-installed-p ()
   (loop for p in my-packages
@@ -196,4 +197,4 @@
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (git-commit auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
+    (xclip git-commit auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
