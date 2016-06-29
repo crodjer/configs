@@ -485,6 +485,10 @@ export LFS=/mnt/lfs
 #-------------------------#
 
 s() {
+    if [ -z $1 ]; then
+        echo "A search pattern is required"
+        return 1
+    fi
     find . -iname "*$**"
 }
 
@@ -493,12 +497,12 @@ sg() {
     if [ $# -gt 1 ];then
         find . -type f -iname "*$1*" -print0 | xargs grep "$2"
     else
-        echo 'Input the file and grep patterns'
+        echo 'Input the search and grep'
     fi
 }
 
 docker-cleanup() {
-    if [[ $MACOS ]]; then
+    if [ $MACOS ]; then
         xargs=gxargs
     else
         xargs=xargs
@@ -527,3 +531,6 @@ if [ -e "$HOME/.bashrc.local" ]; then
     # shellcheck source=/dev/null
     source "$HOME/.bashrc.local"
 fi
+
+# Exit with success
+true
