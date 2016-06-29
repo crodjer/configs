@@ -19,7 +19,6 @@ fi
 
 attach-windows () {
     sleep 0.1
-    send-keys                          # 0
     tmux split-window -hc $configs_dir # 0 (split)
     tmux new-window                    # 1
     tmux new-window -t 9 $top_command  # 9
