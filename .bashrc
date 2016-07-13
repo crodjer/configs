@@ -90,8 +90,7 @@ alias s2disk='sudo systemctl hibernate && display.sh'
 alias s2ram='sudo systemctl suspend && display.sh'
 alias s2both='sudo systemctl hybrid-sleep && display.sh'
 
-alias node='env NODE_NO_READLINE=1 rlwrap node'
-alias npm='PREFIX=/home/rohan/.local npm'
+# alias npm='PREFIX=/home/rohan/.local npm'
 
 alias mnt='udisksctl mount -b'
 alias umnt='udisksctl unmount -b'
