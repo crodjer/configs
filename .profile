@@ -15,6 +15,7 @@ export                        PATH="$HOME/.bin"
 [ -d "$HOME/.cabal" ]      && PATH="$PATH:$HOME/.cabal/bin"
 [ -d "/opt/local" ]        && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
 [ -d "/bin/vendor_perl" ]  && PATH="$PATH:/bin/vendor_perl"
+                              PATH="$PATH:$HOME/.cargo/bin"
                               PATH="$PATH:$HOME/.gem/ruby/bin"
                               PATH="$PATH:$HOME/.gem/ruby/2.0.0/bin"
                               PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
@@ -76,3 +77,4 @@ export SCIKIT_LEARN_DATA=~/.scikit_learn_data
 # [ "$BASH_VERSION" -a -z "$POSIXLY_CORRECT" ] && . "$HOME/.bashrc"
 
 true # Exit status should be 0.
+
