@@ -169,7 +169,6 @@ setUp(){
     link .zshrc
     link .guile
     link oh-my-zsh .oh-my-zsh
-    link vim .vim
 
     # $HOME/.config directroy for programs which store conf here
     mkHomeConfDir config
