@@ -77,3 +77,12 @@ nnoremap <C-L> :nohls<CR><C-L>
 
 "`#` should follow neighbouring indentation
 inoremap # X<BS>#
+
+imap ( ()<left>
+imap { {}<left>
+imap [ []<left>
+
+"" Load local plugins
+call plug#begin()
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+call plug#end()
