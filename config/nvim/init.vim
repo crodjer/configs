@@ -3,26 +3,14 @@ set noswapfile          "disable swapfiles
 set hidden              "hide buffers when not displayed
 set textwidth=80        "maximum width of text that can be inserted
 set nofoldenable        "dont fold by default
+
+" Format options
+set formatoptions-=o    "disable auto comment leader insertion with o/O
 set formatoptions-=t    "dislable autowrapping using textwidth
 set formatoptions+=c    "enable auto wrapping and formatting in comments
-
-"use w!! to save with root permissions
-cmap w!! %!sudo tee > /dev/null %
-
-"undofiles configuration
-set undodir=~/.vim/undofiles
 set undofile
 
-"commandline configuration
-set showcmd                 "display incomplete commands
-set wildmode=list:longest   "make cmdline tab completion similar to bash
-set wildmenu                "enable C-n and C-p to scroll through matches
-"stuff to ignore when tab completing
-set wildignore=*.o,*~,*.pyc,*.hi
-
-
-"" Indentation and syntax highlighting
-
+" Indentation / syntax highlighting
 syntax enable
 filetype plugin on
 filetype indent on
@@ -30,26 +18,36 @@ set autoindent
 set smartindent
 
 
+"commandline configuration
+set showcmd                 "display incomplete commands
+set wildmode=list           "make cmdline tab completion similar to bash
+set wildmenu                "enable C-n and C-p to scroll through matches
+"stuff to ignore when tab completing
+set wildignore=*.o,*~,*.pyc,*.hi
+
+
 "" Looks
 colorscheme default
 set colorcolumn=+0          "mark the ideal max text width
 set rnu                     "show relative line numbers
 set showmode                "show current mode down the bottom
-" set statusline=%f%m%*
-" set statusline+=\ %y%*
-" set statusline +=%=%5l%*             "current line
-" set statusline +=/%L%*               "total lines
-" set statusline +=\ %v%*              "virtual column number
+
+set statusline=%y                   " File type
+set statusline+=\ %r%w              " Readonly / Preview flags
+set statusline+=\ %f%*              " File path
+set statusline+=%m                  " Modified flag
+set statusline+=%=                  " Right alignment separator
+set statusline+=%l/%L%*             " Line number / Total lines
+set statusline+=\ [%p%%]            " Percent through lines
+
 set ruler
 highlight ColorColumn ctermbg='LightGrey'
+highlight Pmenu ctermbg='LightGrey'
+highlight PmenuSel ctermbg='White'
 
 "display tabs and trailing spaces
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
-
-"reselect visual block after indent/outdent
-vnoremap < <gv
-vnoremap > >gv
 
 "" Handling whitespaces
 
@@ -84,8 +82,19 @@ imap ( ()<left>
 imap { {}<left>
 imap [ []<left>
 
-"" Load local plugins
+"reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+"use w!! to save with root permissions
+cmap w!! %!sudo tee > /dev/null %
+
+"" Load plugins
 call plug#begin()
+" General plugins
+Plug 'Valloric/YouCompleteMe'
+
+" Language plugins
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 call plug#end()
