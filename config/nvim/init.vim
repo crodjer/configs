@@ -36,8 +36,12 @@ set statusline=%y                   " File type
 set statusline+=\ %r%w              " Readonly / Preview flags
 set statusline+=\ %f%*              " File path
 set statusline+=%m                  " Modified flag
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 set statusline+=%=                  " Right alignment separator
 set statusline+=%l/%L%*             " Line number / Total lines
+set statusline+=\|%c                " Column number
 set statusline+=\ [%p%%]            " Percent through lines
 
 set ruler
@@ -97,4 +101,21 @@ Plug 'Valloric/YouCompleteMe'
 " Language plugins
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
+Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx']}
+Plug 'scrooloose/syntastic'
 call plug#end()
+
+
+"" Plugin configurations
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"" Language configurations
+
+" JS/JSX
+let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers = ['eslint']
+autocmd FileType javascript setlocal sw=4 sts=4 et
