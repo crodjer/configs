@@ -154,6 +154,7 @@ setUp(){
     link .mailcap
     link .mpdconf
     link .muttrc
+    link .npmrc
     link .polipo
     link .profile
     link .screenlayout
