@@ -39,11 +39,10 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -e /usr/share/zoneinfo/Asia/Kolkata ] && {
     export TZ="/usr/share/zoneinfo/Asia/Kolkata"
 }
-command -v emacsclient > /dev/null && export EDITOR='emacsclient -ct' || {
-    command -v zile && export EDITOR=zile
-} || {
-    export EDITOR='vi'
-}
+
+command -v nvim > /dev/null && EDITOR='nvim' || EDITOR='vi'
+export EDITOR
+
 export HOSTALIASES=~/.hosts
 
 if [ "$(uname)" = Darwin ]; then
@@ -63,8 +62,6 @@ export MANPAGER=$PAGER
 export SDCV_HISTSIZE=10000
 export SDCV_PAGER=less
 export NODE_PATH=$HOME/.local/lib/node_modules:/usr/lib/node_modules
-# export GOPATH=/home/rohan/workspace/go
-# export PATH=$PATH:$GOPATH/bin
 export CHESSDIR=$HOME/.chess/
 export GEM_HOME=$HOME/.gem/ruby/
 export AUTOSSH_POLL=60
