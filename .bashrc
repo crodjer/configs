@@ -483,7 +483,7 @@ export LFS=/mnt/lfs
 # Functions
 #-------------------------#
 
-s() {
+function s {
     if [ -z $1 ]; then
         echo "A search pattern is required"
         return 1
@@ -492,7 +492,7 @@ s() {
 }
 
 #Search for text in files
-sg() {
+function sg {
     if [ $# -gt 1 ];then
         find . -type f -iname "*$1*" -print0 | xargs grep "$2"
     else
@@ -500,7 +500,11 @@ sg() {
     fi
 }
 
-docker-cleanup() {
+function vs {
+    export NVIM_LISTEN_ADDRESS=/tmp/$1-vim.sock
+}
+
+function docker-cleanup {
     if [ $MACOS ]; then
         xargs=gxargs
     else
@@ -512,7 +516,7 @@ docker-cleanup() {
         | $xargs --no-run-if-empty docker rmi
 }
 
-route_to () {
+function route_to {
     interface=$1
     route="$(ip route \
                  | grep "$interface" \
