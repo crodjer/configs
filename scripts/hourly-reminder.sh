@@ -29,7 +29,7 @@ case $minutes in
 esac
 
 if [[ $MACOS ]]; then
-    terminal-notifier -message "$notification" -title "$title"
+    terminal-notifier -message "$notification" -title "$title" -sound Tink
 else
     pactl play-sample $reminder
     notify-send "$title" "$notification"
