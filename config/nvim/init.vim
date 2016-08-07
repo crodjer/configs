@@ -149,4 +149,8 @@ autocmd FileType javascript setlocal sw=2 sts=2 et
 autocmd FileType elm setlocal sw=2 sts=2 et
 
 " Clojure
-" autocmd FileType clojure nnoremap <leader>e :%Eval<cr>
+autocmd FileType clojure nnoremap <buffer> <leader>e :Eval<cr>
+autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
+
+" Crontab
+autocmd FileType crontab setlocal backupcopy=yes
