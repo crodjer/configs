@@ -22,14 +22,20 @@ fi
 
 case $minutes in
      00)
+         osx_sound=Blow
          reminder=reminder
          ;;
      *)
+         osx_sound=Tink
          reminder=reminder-soft
 esac
 
 if [[ $MACOS ]]; then
-    terminal-notifier -message "$notification" -title "$title" -sound Tink
+    if [ "$osx_sound" ]; then
+        osx_sound="-sound $osx_sound"
+    fi
+
+    terminal-notifier -message "$notification" -title "$title" $osx_sound
 else
     pactl play-sample $reminder
     notify-send "$title" "$notification"
