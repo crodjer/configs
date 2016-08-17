@@ -5,7 +5,7 @@
 ;; Packages
 ;; ----------------------------------------
 (add-to-list 'package-archives
-             '("melpa" . "https://stable.melpa.org/packages/")
+             '("melpa" . "https://melpa.org/packages/")
              t)
 (package-initialize)
 
@@ -32,6 +32,16 @@
   (dolist (p my-packages)
     (when (not (package-installed-p p))
       (package-install p))))
+
+
+;; Elisp files
+(let ((elisp-directory "~/.emacs.d/elisp"))
+  (when (not (file-exists-p "~/.emacs.d/elisp"))
+    (make-directory elisp-directory))
+  (mapc (lambda (name)
+          (load-file (concat (file-name-as-directory elisp-directory)
+                             name)))
+        (directory-files elisp-directory nil "\\.el$")))
 
 ;; Local files
 (let ((local-elisp-directory "~/.emacs.d/local"))
