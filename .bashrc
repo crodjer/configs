@@ -468,7 +468,11 @@ preexec_invoke_exec () {
 trap 'preexec_invoke_exec' DEBUG
 
 # shellcheck source=/dev/null
-exists virtualenvwrapper.sh && source "$(which virtualenvwrapper.sh)"
+exists virtualenvwrapper_lazy.sh && {
+    source "$(which virtualenvwrapper_lazy.sh)"
+} || {
+    exists virtualenvwrapper.sh &&  source "$(which virtualenvwrapper.sh)"
+}
 
 # shellcheck source=/dev/null
 [[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
