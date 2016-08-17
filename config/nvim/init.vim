@@ -100,6 +100,11 @@ vnoremap > >gv
 "use w!! to save with root permissions
 cmap w!! %!sudo tee > /dev/null %
 
+"" Custom functions
+
+" Custom commands
+command! STW %s/\s\+$//e
+
 
 "" Load plugins
 if empty(glob(plug_path))
@@ -123,6 +128,7 @@ Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx']}
 Plug 'elmcast/elm-vim'
 Plug 'guns/vim-clojure-static', { 'for': ['clojure', 'edn'] }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
 " Done loading plugins
 call plug#end()
