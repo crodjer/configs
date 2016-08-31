@@ -11,6 +11,7 @@
 
 (defvar my-packages
   '(ag
+    auto-complete
     better-defaults
     cider
     fill-column-indicator
@@ -61,6 +62,11 @@
 ;; Ag
 ;; ----------------------------------------
 (global-set-key (kbd "C-c C-s") 'ag-project)
+
+;; ----------------------------------------
+;; Auto complete
+(ac-config-default)
+;; ----------------------------------------
 
 ;; ----------------------------------------
 ;; Buffers and files
