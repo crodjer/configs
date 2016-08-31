@@ -28,7 +28,11 @@ filetype plugin on
 filetype indent on
 set autoindent
 set smartindent
-
+if has('nvim')
+    runtime plugins/matchit.vim
+else
+    runtime macros/matchit.vim
+end
 
 "commandline configuration
 set showcmd                 "display incomplete commands
@@ -40,7 +44,7 @@ set wildignore=*.o,*~,*.pyc,*.hi
 
 "" Looks
 colorscheme default
-set colorcolumn=+0          "mark the ideal max text width
+set colorcolumn=+1          "mark the ideal max text width
 set rnu                     "show relative line numbers
 set showmode                "show current mode down the bottom
 set laststatus=2
@@ -64,8 +68,8 @@ highlight PmenuSel ctermbg='White'
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
-"" Handling whitespaces
 
+"" Handling whitespaces
 set expandtab                   "use spaces for tabs and set it to 4 spaces
 set tabstop=4
 set softtabstop=4
@@ -73,14 +77,15 @@ set shiftwidth=4
 set nowrap                      "dont wrap lines
 set backspace=indent,eol,start  "backspace through everything in insert mode
 
+
 "" Searching
 set hlsearch        "highlight search by default
 set incsearch       "incremental search
 set ignorecase      "ignore cases while searching
 set smartcase       "consider case for search patterns with uppercase letters
 
-"" Mappings
 
+"" Mappings
 "Set comma as my leader
 let mapleader = ","
 
@@ -100,6 +105,7 @@ vnoremap > >gv
 "use w!! to save with root permissions
 cmap w!! %!sudo tee > /dev/null %
 
+
 "" Custom functions
 
 " Custom commands
@@ -114,8 +120,10 @@ endif
 
 silent! call plug#begin()
 " General plugins
-if (has( 'python' ) || has( 'python3' )) && v:version > 703
-    Plug 'Valloric/YouCompleteMe'
+if has('nvim') && has( 'python3' )
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+elseif has("lua")
+    Plug 'Shougo/neocomplete.vim'
 endif
 Plug 'scrooloose/syntastic'
 Plug 'mileszs/ack.vim'
@@ -129,12 +137,16 @@ Plug 'elmcast/elm-vim'
 Plug 'guns/vim-clojure-static', { 'for': ['clojure', 'edn'] }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'hbs'] }
 
 " Done loading plugins
 call plug#end()
 
 
 "" Plugin configurations
+let g:deoplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -144,8 +156,8 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-"" Language configurations
 
+"" Language configurations
 " JS/JSX
 let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
