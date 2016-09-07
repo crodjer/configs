@@ -5,7 +5,7 @@
 ;; Packages
 ;; ----------------------------------------
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/")
+             '("melpa" . "https://stable.melpa.org/packages/")
              t)
 (package-initialize)
 
