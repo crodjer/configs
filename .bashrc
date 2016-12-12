@@ -137,6 +137,8 @@ else
 fi
 
 alias t='task'
+alias tw='task project:Work'
+alias tp='task project:Personal'
 
 git_branch () {
     git branch | grep "\*" | cut -d " " -f 2
@@ -313,17 +315,24 @@ re_comp() {
             source /usr/local/etc/bash_completion.d/$1
             complete -F "_$1" "$2"
         }
+    } || {
+        [[ -e /usr/local/etc/bash_completion.d/$1.sh ]] && {
+            # shellcheck source=/dev/null
+            source /usr/local/etc/bash_completion.d/$1.sh
+            complete -F "_$1" "$2"
+        }
     }
 }
 re_comp git g
 re_comp mpc m
 re_comp pacman p
 re_comp task t
+re_comp task tp
+re_comp task tw
 re_comp command cv
 re_comp netctl n
 re_comp netctl na
 re_comp netctl netctl-auto
-complete -F _t tw
 
 #-------------------------#
 # Prompt
