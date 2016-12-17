@@ -2,3 +2,4 @@
 autoload
 plugged
 .init.vim-rplugin~
+spell

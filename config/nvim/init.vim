@@ -172,3 +172,6 @@ autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
 
 " Crontab
 autocmd FileType crontab setlocal backupcopy=yes
+
+" Markdown
+autocmd FileType md,rst,text setlocal spell spelllang=en
