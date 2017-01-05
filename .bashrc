@@ -489,7 +489,6 @@ exists virtualenvwrapper_lazy.sh && {
 # shellcheck source=/dev/null
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
 
-# exists rbenv && eval "$(rbenv init -)"
 export LFS=/mnt/lfs
 
 #-------------------------#
