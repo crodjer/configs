@@ -3,7 +3,7 @@
 id=$1
 date=$(date +%F)
 title="${@:2}"
-site=$HOME/workspace/rohanjain.in
+site=$HOME/projects/rohanjain.in
 path=$site/drafts/$id.mkd
 
 if [ -z $id ]; then
@@ -22,6 +22,6 @@ author: Rohan
 EOF
 )
 
-mkdir -p $(dirname $path)
+# mkdir -p $(dirname $path)
 echo "$template" > $path
 $EDITOR $path
