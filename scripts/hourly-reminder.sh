@@ -17,7 +17,7 @@ fi
 export DISPLAY=$(pgrep -fa xserverrc | cut -d " " -f 6)
 
 if [ $(command -v task) ]; then
-    notification="Pending: $(task status:pending count)"
+    notification="Pending: $(task status:pending +next count 2> /dev/null)"
 fi
 
 case $minutes in
