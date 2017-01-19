@@ -129,7 +129,8 @@ Plug 'scrooloose/syntastic'
 Plug 'mileszs/ack.vim'
 
 " Language plugins
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': ['rust']}
+Plug 'racer-rust/vim-racer', { 'for': ['rust']}
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
 Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx']}
@@ -175,3 +176,7 @@ autocmd FileType crontab setlocal backupcopy=yes
 
 " Markdown
 autocmd FileType md,rst,text setlocal spell spelllang=en
+
+" Rust
+set hidden
+let g:racer_cmd = "~/.cargo/bin/racer"
