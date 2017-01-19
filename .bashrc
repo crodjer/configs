@@ -139,6 +139,27 @@ fi
 alias t='task'
 alias tw='task project:Work'
 alias tp='task project:Personal'
+alias i='task add +in'
+tickle () {
+    deadline=$1
+    shift
+    i +tickle wait:$deadline $@
+}
+alias think='tickle +1d'
+alias tick=tickle
+alias rnd='task add +rnd +next +@computer +@online'
+webpage_title (){
+    wget -qO- "$*" | hxselect -s '\n' -c  'title' 2>/dev/null
+}
+read_and_review (){
+    link="$1"
+    title=$(webpage_title $link)
+    echo $title
+    descr="\"Read and review: $title\""
+    id=$(task add +next +rnr "$descr" | sed -n 's/Created task \(.*\)./\1/p')
+    task "$id" annotate "$link"
+}
+alias rnr=read_and_review
 
 git_branch () {
     git branch | grep "\*" | cut -d " " -f 2
