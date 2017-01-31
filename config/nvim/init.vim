@@ -139,6 +139,7 @@ Plug 'guns/vim-clojure-static', { 'for': ['clojure', 'edn'] }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'hbs'] }
+Plug 'jceb/vim-orgmode', { 'for': ['org']}
 
 " Done loading plugins
 call plug#end()
@@ -175,7 +176,7 @@ autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
 autocmd FileType crontab setlocal backupcopy=yes
 
 " Markdown
-autocmd FileType md,rst,text setlocal spell spelllang=en
+autocmd FileType markdown,rst,text setlocal spell spelllang=en
 
 " Rust
 set hidden
