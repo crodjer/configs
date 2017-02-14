@@ -428,14 +428,6 @@ PROMPT_COMMAND=prompt
 preexec () {
     history -a
 
-    local title=$1
-    local excluded_commands=(
-        source ls clear echo exec cat printf cd
-        ${PROMPT_COMMAND//;/}
-    )
-    local exclude_re
-    local short_title
-
     if [[ $MACOS ]]; then
         sed=gsed
         paste=gpaste
@@ -444,56 +436,21 @@ preexec () {
         paste=paste
     fi
 
-    exclude_re=$(printf '%s\n' "${excluded_commands[@]}" \
-                     | $paste -s -d '|' -)
-    short_title=$(echo "$title" \
-                      | $sed -r "s/^\s*(\w+=\w+\s+)*//g" \
-                      | $sed -r "s/^\s*sudo\s+/# /g")
-
-    if [[ $short_title =~ $exclude_re ]]; then
-        # Matches the excluded title. We don't want to set as shell title.
-        unset title
-    fi
-
-    if [ -z "$title" ]; then
-        # No title available, build it based on user, host and pwd
-        _pwd=$PWD
-        [[ "$_pwd" =~ ^"$HOME"(/|$) ]] && _pwd="~${_pwd#$HOME}"
-        title="$USER@$(hostname):$_pwd"
-        short_title=$(basename "$PWD")
-    fi
-
     if [[ "$EMACS" ]]; then
         return;
     fi
-
-    if [[ "$STY" ]]; then
-        # I am in a screen session, set the short title
-        printf "\033k%s\033\\" "$short_title" >&2
-    fi
-
-    printf "\e]0;%s\007" "$title" >&2
 }
 
 # Inspired by http://superuser.com/a/175802/57412
 preexec_invoke_exec () {
     [ -n "$COMP_LINE" ] && return  # do nothing if completing
 
-    if [[ $PROMPT_COMMAND =~ .*$BASH_COMMAND.* ]]; then
+    if [[ $PROMPT_COMMAND == $BASH_COMMAND* ]]; then
         # The current command is one the prompt command i.e. a prompt
         # execution.
         preexec "$BASH_COMMAND"
-        _prompt_wait=true
         return
     fi
-
-    if [ -z "$_prompt_wait" ]; then
-        # Probably a non manual execution, don't care about those.
-        return
-    fi
-
-    preexec "$BASH_COMMAND"
-    unset _prompt_wait
 }
 trap 'preexec_invoke_exec' DEBUG
 
