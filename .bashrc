@@ -492,6 +492,17 @@ function sg {
 
 function vs {
     export NVIM_LISTEN_ADDRESS=/tmp/$1-vim.sock
+    export VI_SERVER=$1-vim
+}
+
+# Fire up a new server according to the argument supplied
+function vis {
+    vim --servername $VI_SERVER
+}
+
+# Open up the files in the environment Vim server.
+function vic {
+    vim --servername $VI_SERVER --remote-silent $*
 }
 
 function docker-cleanup {
