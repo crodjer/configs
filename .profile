@@ -23,7 +23,7 @@ export                        PATH="$HOME/.bin"
                               PATH="$PATH:$HOME/configs/scripts"
                               PATH="$PATH:$HOME/workspace/configs/scripts"
                               PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/sbin"
-                              PATH="$PATH:/usr/local/sbin/:/usr/sbin"
+                              PATH="$PATH:/usr/local/sbin:/usr/sbin"
 
 export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "$HOME/.local" ]&& MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
