@@ -15,6 +15,7 @@ set textwidth=80          "maximum width of text that can be inserted
 set nofoldenable          "dont fold by default
 set clipboard=unnamedplus "use system cliboard
 set mouse-=a
+set novisualbell
 
 " Format options
 set formatoptions-=o    "disable auto comment leader insertion with o/O
