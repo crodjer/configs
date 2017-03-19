@@ -55,3 +55,5 @@
 	required = true
 [merge]
 	summary = true
+[diff]
+	tool = vimdiff
