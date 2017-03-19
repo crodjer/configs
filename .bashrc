@@ -295,6 +295,7 @@ alias agist='gist -a'
 
 alias acc='ledger -f ~/.accounts.dat'
 alias aria2c='aria2c -j2 --seed-time 0 --max-upload-limit 1'
+alias rsync='rsync -vrhP'
 
 function pi-wlan() {
     pi_host=$(arp -na | grep 74:da:38:62:8d:68 \
