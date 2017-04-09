@@ -27,8 +27,8 @@
 
 ! URxvt.font: 9x15
 ! URxvt.boldFont: 9x15bold
-URxvt*font: xft:Monospace:pixelsize=12
-URxvt*boldFont: xft:Monospace:bold:pixelsize=12
+URxvt*font: xft:Monospace:pixelsize=15
+URxvt*boldFont: xft:Monospace:bold:pixelsize=15
 URxvt*letterSpace: -1
 URxvt*borderLess: false
 URxvt*externalBorder: 0
