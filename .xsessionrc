@@ -4,14 +4,14 @@
 xrdb -merge ~/.Xresources
 
 configure-keyboard.sh
-configure-touchpad.sh
+# configure-touchpad.sh
 configure-sound.sh
 
 ################################################################
 # Looks and Applications (in decreasing order of importance)
 ################################################################
 
-# xautolock -time 10 -locker "lock" &
+xautolock -time 10 -locker "lock" &
 urxvtd &
 redshift &
 stalonetray &
