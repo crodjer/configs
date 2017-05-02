@@ -290,6 +290,8 @@ function serve() {
 if [ -f /usr/local/etc/bash_completion ]; then
     # shellcheck source=/dev/null
     source /usr/local/etc/bash_completion
+elif [ -f /etc/bash_completion ]; then
+ . /etc/bash_completion
 fi
 
 

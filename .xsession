@@ -1,1 +1,1 @@
-dbus-launch xmonad
+dbus-launch i3
