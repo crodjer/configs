@@ -38,7 +38,6 @@ chatnets = {
 
 channels = (
   { name = "#codesurfers"; chatnet = "oftc"; autojoin = "yes"; },
-  { name = "#elm"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; },
   { name = "#rust-beginners"; chatnet = "mozilla"; autojoin = "yes"; }
 );
@@ -223,7 +222,6 @@ settings = {
     autolog = "yes";
     autolog_path = "~/.irclogs/$tag/$0.log";
     beep_when_window_active = "yes";
-    bell_beeps = "yes";
     beep_when_away = "yes";
     beep_msg_level = "MSGS DCC DCCMSGS HILIGHT";
     show_names_on_join = "no";
