@@ -37,7 +37,7 @@ chatnets = {
 };
 
 channels = (
-  { name = "#codesurfers"; chatnet = "oftc"; autojoin = "yes"; },
+  { name = "#codesurfers"; chatnet = "oftc"; autojoin = "no"; },
   { name = "#rust"; chatnet = "mozilla"; autojoin = "yes"; },
   { name = "#rust-beginners"; chatnet = "mozilla"; autojoin = "yes"; }
 );
