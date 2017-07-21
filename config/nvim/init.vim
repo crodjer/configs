@@ -69,6 +69,11 @@ highlight PmenuSel ctermbg='White'
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
+"" GUI
+if exists('g:GuiLoaded')
+    Guifont Monospace:h12
+endif
+
 
 "" Handling whitespaces
 set expandtab                   "use spaces for tabs and set it to 4 spaces

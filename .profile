@@ -76,3 +76,5 @@ export SCIKIT_LEARN_DATA=~/.scikit_learn_data
 
 true # Exit status should be 0.
 
+
+export PATH="$HOME/.cargo/bin:$PATH"

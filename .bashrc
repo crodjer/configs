@@ -472,6 +472,7 @@ function vs {
     export NVIM_LISTEN_ADDRESS=/tmp/$1-vim.sock
     export VI_SERVER=$1-vim
 }
+vs default
 
 # Fire up a new server according to the argument supplied
 function vis {
