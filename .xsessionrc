@@ -2,6 +2,9 @@
 ## Configure Xsession
 
 xrdb -merge ~/.Xresources
+if [ -f ~/.Xresources.local ]; then
+    xrdb -merge ~/.Xresources.local
+fi
 
 configure-keyboard.sh
 # configure-touchpad.sh
