@@ -441,6 +441,7 @@ exists virtualenvwrapper_lazy.sh && {
 
 # shellcheck source=/dev/null
 [[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
+[[ -s "/usr/share/autojump/autojump.sh" ]] && source "/usr/share/autojump/autojump.sh"
 
 # shellcheck source=/dev/null
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
