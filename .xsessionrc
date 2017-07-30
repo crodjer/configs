@@ -16,7 +16,7 @@ configure-sound.sh
 
 xautolock -time 10 -locker "lock" &
 urxvtd &
-redshift &
+redshift -l 17.53:73.86 &
 stalonetray &
 xsetroot -cursor_name left_ptr
 display.sh
