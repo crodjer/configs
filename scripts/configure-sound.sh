@@ -2,7 +2,7 @@
 ## Configure Pulseaudio
 
 start-pulseaudio-x11
-pactl set-sink-volume 0 125%
+pactl set-sink-volume 0 100%
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/complete.oga reminder
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/message-new-instant.oga reminder-soft
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
