@@ -18,10 +18,9 @@ xautolock -time 10 -locker "lock" &
 urxvtd &
 redshift -l 17.53:73.86 &
 stalonetray &
-xsetroot -cursor_name left_ptr
+xcompmgr -f -I 0.5 -O 0.5 &
+xsetroot -cursor_name left_ptr -solid "#000"
 display.sh
 bash "$HOME/.fehbg"
-xcompmgr -f -I 0.15 -O 0.15 &
 cmst &
-# mpd
 
