@@ -199,29 +199,6 @@ function ghc-pkg-reset() {
 # Stack
 exists stack && eval "$(stack --bash-completion-script stack)"
 
-# MPC aliases
-alias m="mpc"
-alias mst="mpc -f '%artist% - %title%\n%album%\n%file%' status"
-alias mtog="mpc toggle"
-#Search song from playlist and also get the song #
-alias sose="mpc playlist -f '%title% \[%album%\]' | grep -in"
-
-# Alters the mpd volume according to the sign and factor of 5
-function _alter_mpd_vol(){
-    num=$(echo "5*${2:-1}" | bc)
-    mpc volume "$1$num"
-}
-
-#Increase Vol
-function mup(){
-    _alter_mpd_vol "+" "$1"
-}
-#Decrease Vol
-function mdw(){
-    _alter_mpd_vol "-" "$1"
-}
-
-
 function itunes() {
     osascript -e "tell application \"iTunes\" ${2:-to} $1";
 }
