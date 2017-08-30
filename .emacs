@@ -15,11 +15,15 @@
     better-defaults
     cider
     clj-refactor
+    company
     fill-column-indicator
+    flx-ido
     git-commit
     ghc
+    magit
     markdown-mode
     paredit
+    projectile
     which-key
     xclip))
 
@@ -93,6 +97,8 @@
   (cider-mode 1))
 (defun enable-clj-refactor-mode ()
   (clj-refactor-mode 1))
+(defun enable-projectile-mode ()
+  (projectile-mode))
 
 (with-eval-after-load 'clojure-mode
   (require 'subr-x)
@@ -103,9 +109,21 @@
   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
   (add-hook 'clojure-mode-hook 'eldoc-mode)
   (add-hook 'clojure-mode-hook 'enable-cider-mode)
+  (add-hook 'clojure-mode-hook 'enable-clj-refactor-mode)
+  (add-hook 'clojure-mode-hook 'enable-projectile-mode)
   (add-hook 'cider-repl-mode-hook 'enable-paredit-mode)
   (add-hook 'cider-repl-mode-hook 'eldoc-mode)
-  (add-hook 'clojure-mode-hook 'enable-clj-refactor-mode))
+  (add-hook 'cider-repl-mode-hook 'enable-clj-refactor-mode)
+  (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+  (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
+
+
+;; ----------------------------------------
+;; Company
+;; ----------------------------------------
+(global-company-mode)
+(global-set-key (kbd "M-TAB") #'company-complete)
+
 
 ;; ----------------------------------------
 ;; Dired
@@ -120,6 +138,16 @@
 ;; Elisp
 ;; ----------------------------------------
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+
+;; ----------------------------------------
+;; Ido
+;; ----------------------------------------
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 
 ;; ----------------------------------------
 ;; Fill column indicator
@@ -182,6 +210,8 @@
   (menu-bar-mode 1))
 
 (when (eq system-type 'darwin)
+  (set-face-attribute 'default nil :height 140)
+
   (defun copy-from-osx ()
     (shell-command-to-string "pbpaste"))
 
@@ -206,12 +236,23 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; ----------------------------------------
+;; Magit
+;; ----------------------------------------
+(global-set-key (kbd "C-x g")
+                'magit-status)
+
+;; ----------------------------------------
 ;; Org mode
 ;; ----------------------------------------
 (setq org-startup-indented t)
 (add-hook 'org-mode-hook (lambda ()
                            (setq-local fill-column 72)
                            (fci-mode 0)))
+
+;; ----------------------------------------
+;; Projectile model
+;; ----------------------------------------
+(projectile-mode)
 
 ;; ----------------------------------------
 ;; Split windows
@@ -247,4 +288,4 @@
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (which-key projectile clj-refactor xclip git-commit auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
+    (flx-ido company magit which-key projectile clj-refactor xclip git-commit auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
