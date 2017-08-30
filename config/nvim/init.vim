@@ -111,6 +111,9 @@ vnoremap > >gv
 "use w!! to save with root permissions
 cmap w!! %!sudo tee > /dev/null %
 
+"toggle spell check
+nnoremap <leader>z :setlocal spell! spelllang=en<CR>
+
 
 "" Custom functions
 
@@ -182,7 +185,9 @@ autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
 autocmd FileType crontab setlocal backupcopy=yes
 
 " Markdown
-autocmd FileType markdown,rst,text setlocal spell spelllang=en
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
+autocmd FileType markdown,rst setlocal spell spelllang=en
+autocmd FileType markdown,rst setlocal sw=2 sts=2 et
 
 " Rust
 set hidden
