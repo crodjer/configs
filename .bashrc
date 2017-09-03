@@ -423,8 +423,6 @@ exists virtualenvwrapper_lazy.sh && {
 # shellcheck source=/dev/null
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
 
-export LFS=/mnt/lfs
-
 #-------------------------#
 # Functions
 #-------------------------#
