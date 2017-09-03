@@ -17,7 +17,6 @@
     clj-refactor
     company
     fill-column-indicator
-    flx-ido
     git-commit
     ghc
     magit
@@ -89,6 +88,7 @@
   (revert-buffer t t))
 (global-set-key (kbd "C-c r")
                 'revert-buffer-no-confirm)
+(recentf-mode t)
 
 ;; ----------------------------------------
 ;; Clojure
@@ -144,10 +144,6 @@
 ;; ----------------------------------------
 (ido-mode 1)
 (ido-everywhere 1)
-(flx-ido-mode 1)
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
 
 ;; ----------------------------------------
 ;; Fill column indicator
@@ -288,4 +284,4 @@
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (flx-ido company magit which-key projectile clj-refactor xclip git-commit auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
+    (company magit which-key projectile clj-refactor xclip git-commit auto-complete ag elm-mode exec-path-from-shell paredit markdown-mode ghc fill-column-indicator cider better-defaults))))
