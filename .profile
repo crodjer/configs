@@ -18,8 +18,6 @@ export                        PATH="$HOME/.bin"
                               PATH="$PATH:$HOME/.npm-packages/bin"
                               PATH="$PATH:$HOME/.cargo/bin"
                               PATH="$PATH:$HOME/.gem/ruby/bin"
-                              PATH="$PATH:$HOME/.gem/ruby/2.0.0/bin"
-                              PATH="$PATH:$HOME/.gem/ruby/2.2.0/bin"
                               PATH="$PATH:$HOME/configs/scripts"
                               PATH="$PATH:$HOME/workspace/configs/scripts"
                               PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/sbin"
@@ -75,6 +73,3 @@ export SCIKIT_LEARN_DATA=~/.scikit_learn_data
 # [ "$BASH_VERSION" -a -z "$POSIXLY_CORRECT" ] && . "$HOME/.bashrc"
 
 true # Exit status should be 0.
-
-
-export PATH="$HOME/.cargo/bin:$PATH"
