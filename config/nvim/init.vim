@@ -1,4 +1,4 @@
-"" Enviornment Variables
+"" Environment Variables
 if has('nvim')
     let vim_config_dir = "~/.config/nvim"
 else
@@ -12,15 +12,15 @@ let plug_source = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/pl
 set noswapfile            "disable swapfiles
 set hidden                "hide buffers when not displayed
 set textwidth=80          "maximum width of text that can be inserted
-set nofoldenable          "dont fold by default
-set clipboard=unnamedplus "use system cliboard
+set nofoldenable          "don't fold by default
+set clipboard=unnamedplus "use system clipboard
 set mouse-=a
 set novisualbell
 
 " Format options
 set formatoptions-=o    "disable auto comment leader insertion with o/O
 set formatoptions+=c    "enable auto wrapping and formatting in comments
-set formatoptions-=t    "dislable autowrapping using textwidth
+set formatoptions-=t    "disable autowrapping using textwidth
 set undofile
 
 " Indentation / syntax highlighting
@@ -35,9 +35,9 @@ else
     runtime macros/matchit.vim
 end
 
-"commandline configuration
+"command line configuration
 set showcmd                 "display incomplete commands
-set wildmode=list           "make cmdline tab completion similar to bash
+set wildmode=list           "make cmd line tab completion similar to bash
 set wildmenu                "enable C-n and C-p to scroll through matches
 "stuff to ignore when tab completing
 set wildignore=*.o,*~,*.pyc,*.hi
@@ -50,7 +50,7 @@ set rnu                     "show relative line numbers
 set showmode                "show current mode down the bottom
 set laststatus=2
 set statusline=%y                   " File type
-set statusline+=\ %r%w              " Readonly / Preview flags
+set statusline+=\ %r%w              " Read only / Preview flags
 set statusline+=\ %f%*              " File path
 set statusline+=%m                  " Modified flag
 set statusline+=%#warningmsg#
@@ -75,12 +75,12 @@ if exists('g:GuiLoaded')
 endif
 
 
-"" Handling whitespaces
+"" Handling whitespace
 set expandtab                   "use spaces for tabs and set it to 4 spaces
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set nowrap                      "dont wrap lines
+set nowrap                      "don't wrap lines
 set backspace=indent,eol,start  "backspace through everything in insert mode
 
 
@@ -186,7 +186,6 @@ autocmd FileType crontab setlocal backupcopy=yes
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
-autocmd FileType markdown,rst setlocal spell spelllang=en
 autocmd FileType markdown,rst setlocal sw=2 sts=2 et
 
 " Rust
