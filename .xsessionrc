@@ -14,7 +14,7 @@ configure-sound.sh
 # Looks and Applications (in decreasing order of importance)
 ################################################################
 
-xautolock -time 10 -locker "lock" &
+# xautolock -time 10 -locker "lock" &
 urxvtd &
 redshift -l 17.53:73.86 -b 0.5 &
 stalonetray &
