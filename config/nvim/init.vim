@@ -189,5 +189,7 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 autocmd FileType markdown,rst setlocal sw=2 sts=2 et
 
 " Rust
-set hidden
 let g:racer_cmd = "~/.cargo/bin/racer"
+
+" Java
+autocmd FileType java setlocal sw=2 sts=2 et
