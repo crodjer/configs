@@ -105,7 +105,11 @@
   (require 'clj-refactor)
 
   (setq cljr-favor-prefix-notation nil)
+  (setq cider-prompt-for-symbol nil)
   (setq cider-repl-use-pretty-printing t)
+
+  (define-key cider-mode-map (kbd "C-x c d n") 'cider-browse-ns)
+
   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
   (add-hook 'clojure-mode-hook 'eldoc-mode)
   (add-hook 'clojure-mode-hook 'enable-cider-mode)
@@ -218,7 +222,10 @@
         (process-send-eof proc))))
 
   (setq interprogram-cut-function 'paste-to-osx)
-  (setq interprogram-paste-function 'copy-from-osx))
+  (setq interprogram-paste-function 'copy-from-osx)
+
+  ;; Disable native fullscreen in OSX.
+  (setq ns-use-native-fullscreen nil))
 
 
 ;; ----------------------------------------
