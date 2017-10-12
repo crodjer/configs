@@ -95,6 +95,9 @@ set smartcase       "consider case for search patterns with uppercase letters
 "Set comma as my leader
 let mapleader = ","
 
+"Open file relative to current file
+map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
 "restore messed up vim
 map <F8> :redraw! \| :noh \| <cr><c-w>=
 
