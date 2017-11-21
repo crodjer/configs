@@ -44,6 +44,7 @@
     lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(black)%s%C(reset) %C(bold black)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
     lg2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(black)%s%C(reset) %C(bold black)— %an%C(reset)' --abbrev-commit
     lg = !"git lg1"
+    lh = log --pretty=oneline --abbrev-commit
     gerrit-merge-push = !sh -c 'git push $0 HEAD:refs/for/$1'
 [push]
 	default = simple
