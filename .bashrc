@@ -150,6 +150,7 @@ alias gl='git pull'
 alias gp='git push'
 alias gup="git fetch"
 alias glg='git log --stat'
+alias glh='git lh'
 alias gcm='git checkout master'
 alias gcd='git checkout develop'
 alias ggpush='gp origin $(git_branch)'
