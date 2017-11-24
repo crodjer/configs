@@ -131,27 +131,27 @@ if empty(glob(plug_path))
 endif
 
 silent! call plug#begin()
+
 " General plugins
 if has('nvim') && has( 'python3' )
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 elseif has("lua")
     Plug 'Shougo/neocomplete.vim'
 endif
+
 Plug 'scrooloose/syntastic'
 Plug 'mileszs/ack.vim'
 
 " Language plugins
-Plug 'rust-lang/rust.vim', { 'for': ['rust']}
-Plug 'racer-rust/vim-racer', { 'for': ['rust']}
-Plug 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim', {'for': ['rust']}
+Plug 'racer-rust/vim-racer', {'for': ['rust']}
+Plug 'cespare/vim-toml', {'for': ['toml']}
 Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
-Plug 'mxw/vim-jsx', { 'for': ['js', 'jsx']}
-Plug 'elmcast/elm-vim'
-Plug 'guns/vim-clojure-static', { 'for': ['clojure', 'edn'] }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
-Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'hbs'] }
-Plug 'jceb/vim-orgmode', { 'for': ['org']}
+Plug 'mxw/vim-jsx', {'for': ['js', 'jsx']}
+Plug 'guns/vim-clojure-static', {'for': ['clojure', 'edn'] }
+Plug 'tpope/vim-fireplace', {'for': 'clojure' }
+Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile' }
+Plug 'mustache/vim-mustache-handlebars', {'for': ['mustache', 'hbs'] }
 
 " Done loading plugins
 call plug#end()
@@ -176,9 +176,6 @@ endif
 let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
 autocmd FileType javascript setlocal sw=2 sts=2 et
-
-" Elm
-autocmd FileType elm setlocal sw=2 sts=2 et
 
 " Clojure
 autocmd FileType clojure nnoremap <buffer> <leader>e :Eval<cr>
