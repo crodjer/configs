@@ -138,7 +138,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 
 bindsym $mod+XF86MonBrightnessDown exec xbacklight -set 1 # Set brightness to minimum
-bindsym $mod+XF86MonBrightnessUp exec xbacklight -set 60 # Set brightness to comfortable
+bindsym $mod+XF86MonBrightnessUp exec xbacklight -set 50 # Set brightness to comfortable
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
