@@ -190,6 +190,7 @@ autocmd FileType markdown,rst setlocal sw=2 sts=2 et
 
 " Rust
 let g:racer_cmd = "~/.cargo/bin/racer"
+autocmd FileType rust setlocal textwidth=80 " Rust plugin seems to override it.
 
 " Java
 autocmd FileType java setlocal sw=2 sts=2 et
