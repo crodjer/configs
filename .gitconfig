@@ -48,8 +48,6 @@
     gerrit-merge-push = !sh -c 'git push $0 HEAD:refs/for/$1'
 [push]
 	default = simple
-[commit]
-	# gpgSign = true
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
@@ -58,3 +56,5 @@
 	summary = true
 [diff]
 	tool = vimdiff
+[commit]
+	verbose = true
