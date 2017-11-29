@@ -134,8 +134,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id amixer sset Master 5%- #decrea
 bindsym XF86AudioMute exec --no-startup-id amixer sset Master toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessDown exec xbacklight -dec 3 # decrease screen brightness
-bindsym XF86MonBrightnessUp exec xbacklight -inc 3 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 
 bindsym $mod+XF86MonBrightnessDown exec xbacklight -set 1 # Set brightness to minimum
 bindsym $mod+XF86MonBrightnessUp exec xbacklight -set 60 # Set brightness to comfortable
