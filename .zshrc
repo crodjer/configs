@@ -49,9 +49,16 @@ fi
 # Utility functions
 #-------------------------#
 gen-prompt () {
+    local prev_exit="$?"
+    local user_color="green"
+
+    if [ $prev_exit -eq 1 ]; then
+        user_color="red"
+    fi
+
     ## Generate a simple, informative multiline prompt.
-    local _line_1='%F{blue}┌─[%B%F{green}%n%f%b@%F{green}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f'
-    local _line_2='%F{blue}└─%(!.#.>)%f '
+    local _line_1="%F{blue}┌─[%B%F{$user_color}%n%f%b@%F{green}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f"
+    local _line_2="%F{blue}└─%(!.#.>)%f "
 
     # Render git info, if available, in the prompt.
     if git branch >/dev/null 2>/dev/null; then
