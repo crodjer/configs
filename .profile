@@ -47,6 +47,89 @@ if [ "$(uname)" = Darwin ]; then
     export MACOS=true
 fi
 
+function make_home () {
+    local usage="$0 [-h <host>] [-x] [-c <configs-dir>]"
+    usage="$usage\n\th: the remote host"
+    usage="$usage\n\tc: the source configs directory (default: ~/configs/)"
+    usage="$usage\n\tx: actually run commands (dry run by default)"
+
+    local dry_run="true"
+    local configs=(
+        .zshrc
+        .profile
+        .zprofile
+        .inputrc
+        .bashrc
+        .bash_profile
+        .gitconfig
+        .gitignore
+        .config/nvim/init.vim
+    )
+
+    local remote
+    local host
+    local configs_src
+    local config
+
+    if [[ -d "$HOME/configs/" ]]; then
+        configs_src="$HOME/configs"
+    else
+        configs_src="$HOME"
+    fi
+
+    while getopts "hr:c:x" opt; do
+        case $opt in
+            h)
+                echo "$usage"
+                return 0
+                ;;
+            r)
+                remote="true"
+                host=$OPTARG
+                ;;
+            x)
+                unset dry_run
+                ;;
+            c)
+                configs_src=$OPTARG
+                ;;
+            \?)
+                echo "$usage" >&2
+                return 1
+                ;;
+        esac
+    done
+
+    function run () {
+            echo "$ $*"
+        if [ -z "$dry_run" ]; then
+            eval $*
+        fi
+    }
+
+    for config in "${configs[@]}"
+    do
+        local parent_dir="$(dirname "$config")"
+
+        if [ $parent_dir = "." ]; then
+            unset parent_dir
+        fi
+
+        if [ "$remote" ]; then
+            if [ "$parent_dir" ]; then
+                run ssh $host mkdir -p "'~/$(dirname $config)'"
+            fi
+            run scp "$configs_src/$config" $host:~/$config
+        else
+            if [ "$parent_dir" ]; then
+                run mkdir -p "~/$(dirname $config)" &> /dev/null
+            fi
+            run ln -s "$configs_src/$config" "~/$config"
+        fi
+    done
+}
+export make_home
+
 #-----------------------------#
 # ENVIRONMENT - APPLICATIONS  #
 #-----------------------------#
