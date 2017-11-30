@@ -39,7 +39,7 @@ compinit
 #-------------------------#
 alias rez='exec zsh'
 
-if [[ $MACOS ]]; then
+if [ -n "$MACOS" ]; then
     alias ls='ls -G'
 else
     alias ls='ls --color=auto'
