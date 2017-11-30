@@ -101,7 +101,7 @@ function make_home () {
     done
 
     function run () {
-            echo "$ $*"
+        echo "$ $*"
         if [ -z "$dry_run" ]; then
             eval $*
         fi
@@ -110,8 +110,6 @@ function make_home () {
     for config in "${configs[@]}"
     do
         local parent_dir="$(dirname "$config")"
-
-        echo $parent_dir
 
         if [ "$parent_dir" = "." ]; then
             unset parent_dir
