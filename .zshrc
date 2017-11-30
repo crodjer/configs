@@ -94,5 +94,14 @@ RPROMPT="%F{green}%~%f"
 # Set the default Vim server name.
 vs default
 
+# Load local bashrc configs as well.
+if [ -e "$HOME/.bashrc.local" ]; then
+    source "$HOME/.bashrc.local"
+fi
+
+if [ -e "$HOME/.zshrc.local" ]; then
+    source "$HOME/.zshrc.local"
+fi
+
 # Exit with success
 true
