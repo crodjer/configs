@@ -111,18 +111,20 @@ function make_home () {
     do
         local parent_dir="$(dirname "$config")"
 
-        if [ $parent_dir = "." ]; then
+        echo $parent_dir
+
+        if [ "$parent_dir" = "." ]; then
             unset parent_dir
         fi
 
         if [ "$remote" ]; then
-            if [ "$parent_dir" ]; then
+            if [ -n "$parent_dir" ]; then
                 run ssh $host mkdir -p "'~/$(dirname $config)'"
             fi
             run scp "$configs_src/$config" $host:~/$config
         else
-            if [ "$parent_dir" ]; then
-                run mkdir -p "~/$(dirname $config)" &> /dev/null
+            if [ -n "$parent_dir" ]; then
+                run mkdir -p "~/$(dirname $config)"
             fi
             run ln -s "$configs_src/$config" "~/$config"
         fi
