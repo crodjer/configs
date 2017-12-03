@@ -27,16 +27,14 @@
 
 ! URxvt.font: 9x15
 ! URxvt.boldFont: 9x15bold
-URxvt*font: xft:Monospace:pixelsize=18
-URxvt*boldFont: xft:Monospace:bold:pixelsize=18
-URxvt*letterSpace: -1
+URxvt*font: xft:NimbusMono:pixelsize=14
+URxvt*boldFont: xft:NimbusMono:bold:pixelsize=14
+! URxvt*letterSpace: -1
 URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 0
 URxvt*scrollBar: false
-! URxvt*depth: 32
 URxvt*cursorBlink: false
-! URxvt*inheritPixmap: true
 URxvt*termName: rxvt-unicode-256color
 URxvt*saveLines: 10000
 URxvt*scrollTtyOutput: false
@@ -81,7 +79,7 @@ URxvt*color15: _color15
 
 ! ---[ XTerm config ]--------------------------------------------------
 
-XTerm*faceName: Monospace
+XTerm*faceName: NimbusMono
 XTerm*faceSize: 9
 XTerm*termName: xterm
 XTerm*eightBitInput: false
@@ -109,15 +107,10 @@ XTerm*foreground     : _foreground
 XTerm*background     : _background
 XTerm*cursorColor    : _cursorColor
 
-! ---[ Emacs config ]--------------------------------------------------
-Emacs.FontBackend: xft
-Emacs.font: Monospace-9
-
 ! ---[ fonts config ]--------------------------------------------------
-Xft.dpi: 96
-Xft.antialias: true
-Xft.rgba: rgba
-Xft.hinting: true
-Xft.autohint: true
-Xft.render: true
-Xft.hintstyle: hintslight
+! Xft.antialias: true
+! Xft.rgba: rgba
+! Xft.hinting: true
+! Xft.autohint: true
+! Xft.render: true
+! Xft.hintstyle: hintfull
