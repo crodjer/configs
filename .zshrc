@@ -12,8 +12,10 @@
 #-------------------------#
 HISTFILE=~/.histfile
 HISTSIZE=10000
-SAVEHIST=500000
-setopt appendhistory autocd correct extendedglob notify PROMPT_SUBST
+SAVEHIST=100000
+setopt autocd correct extended_glob hist_ignore_all_dups \
+    hist_expire_dups_first hist_ignore_space notify prompt_subst share_history
+
 unsetopt beep correct_all
 bindkey -e
 
