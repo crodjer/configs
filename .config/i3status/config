@@ -11,11 +11,11 @@ general {
         interval = 1
 }
 
-order += "disk /"
 order += "wireless _first_"
 order += "battery all"
 order += "load"
 order += "cpu_temperature 0"
+order += "volume master"
 order += "tztime local"
 
 wireless _first_ {
@@ -25,6 +25,11 @@ wireless _first_ {
 
 battery all {
     format = "%status %percentage"
+    status_chr = "⚡"
+    status_bat = "🔋"
+    status_unk = "?"
+    status_full = "☻"
+    low_threshold = 20
 }
 
 tztime local {
@@ -43,4 +48,12 @@ cpu_temperature 0 {
 
 disk "/" {
     format = "%avail"
+}
+
+volume master {
+    format = "🔊 %volume"
+    format_muted = "🔈 %volume"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
 }
