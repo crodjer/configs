@@ -117,6 +117,11 @@ cmap w!! %!sudo tee > /dev/null %
 "toggle spell check
 nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 
+"auto insert matching pair
+inoremap { {}<Esc>i
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+
 
 "" Custom functions
 
