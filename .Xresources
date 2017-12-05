@@ -24,12 +24,9 @@
 
 
 ! ---[ URxvt config ]--------------------------------------------------
-
-! URxvt.font: 9x15
-! URxvt.boldFont: 9x15bold
-URxvt*font: xft:NimbusMono:pixelsize=14
-URxvt*boldFont: xft:NimbusMono:bold:pixelsize=14
-! URxvt*letterSpace: -1
+URxvt*font: xft:NimbusMono:pixelsize=15
+URxvt*boldFont: xft:NimbusMono:bold:pixelsize=15
+URxvt*letterSpace: -1
 URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 0
@@ -108,9 +105,9 @@ XTerm*background     : _background
 XTerm*cursorColor    : _cursorColor
 
 ! ---[ fonts config ]--------------------------------------------------
-! Xft.antialias: true
-! Xft.rgba: rgba
-! Xft.hinting: true
-! Xft.autohint: true
-! Xft.render: true
-! Xft.hintstyle: hintfull
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.autohint: true
+Xft.render: true
+Xft.hintstyle: hintslight
