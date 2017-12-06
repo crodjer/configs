@@ -14,7 +14,6 @@
     auto-complete
     better-defaults
     cider
-    clj-refactor
     company
     fill-column-indicator
     git-commit
@@ -96,22 +95,23 @@
 
 (with-eval-after-load 'clojure-mode
   (require 'subr-x)
-  (require 'clj-refactor)
+  ;; (require 'clj-refactor)
+
 
   (setq cljr-favor-prefix-notation nil)
   (setq cider-prompt-for-symbol nil)
   (setq cider-repl-use-pretty-printing t)
 
-  (define-key cider-mode-map (kbd "C-x c d n") 'cider-browse-ns)
+  ;; (define-key cider-mode-map (kbd "C-x c d n") 'cider-browse-ns)
 
   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
   (add-hook 'clojure-mode-hook 'eldoc-mode)
   (add-hook 'clojure-mode-hook 'enable-cider-mode)
-  (add-hook 'clojure-mode-hook 'enable-clj-refactor-mode)
+  ;; (add-hook 'clojure-mode-hook 'enable-clj-refactor-mode)
   (add-hook 'cider-repl-mode-hook 'enable-paredit-mode)
   (add-hook 'cider-repl-mode-hook 'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook 'enable-clj-refactor-mode)
   (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+  ;; (add-hook 'cider-repl-mode-hook 'enable-clj-refactor-mode)
   (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
 
 
@@ -272,4 +272,4 @@
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (company magit projectile clj-refactor xclip auto-complete ag exec-path-from-shell paredit fill-column-indicator cider better-defaults))))
+    (company magit projectile xclip auto-complete ag exec-path-from-shell paredit fill-column-indicator cider better-defaults))))

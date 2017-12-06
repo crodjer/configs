@@ -40,7 +40,7 @@ set showcmd                 "display incomplete commands
 set wildmode=list           "make cmd line tab completion similar to bash
 set wildmenu                "enable C-n and C-p to scroll through matches
 "stuff to ignore when tab completing
-set wildignore=*.o,*~,*.pyc,*.hi
+set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
 
 "" Looks
@@ -96,7 +96,7 @@ set smartcase       "consider case for search patterns with uppercase letters
 let mapleader = ","
 
 "Open file relative to current file
-map <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+vmap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 "restore messed up vim
 map <F8> :redraw! \| :noh \| <cr><c-w>=
@@ -118,7 +118,7 @@ cmap w!! %!sudo tee > /dev/null %
 nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 
 "auto insert matching pair
-inoremap { {}<Esc>i
+inoremap { {<CR>}<Esc>O<TAB>
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 
@@ -183,7 +183,6 @@ let g:syntastic_javascript_checkers = ['eslint']
 autocmd FileType javascript setlocal sw=2 sts=2 et
 
 " Clojure
-autocmd FileType clojure nnoremap <buffer> <leader>e :Eval<cr>
 autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
 
 " Crontab
