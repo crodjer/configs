@@ -9,13 +9,12 @@ let plug_source = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/pl
 
 
 "" Basic behaviour
-set noswapfile            "disable swapfiles
-set hidden                "hide buffers when not displayed
-set textwidth=80          "maximum width of text that can be inserted
-set nofoldenable          "don't fold by default
-set clipboard=unnamedplus "use system clipboard
+set noswapfile              "disable swapfiles
+set hidden                  "hide buffers when not displayed
+set textwidth=80            "maximum width of text that can be inserted
+set nofoldenable            "don't fold by default
+set clipboard=unnamedplus   "use system clipboard
 set mouse-=a
-set novisualbell
 
 " Format options
 set formatoptions-=o    "disable auto comment leader insertion with o/O
@@ -45,20 +44,20 @@ set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
 "" Looks
 colorscheme default
-set colorcolumn=+1          "mark the ideal max text width
-set rnu                     "show relative line numbers
-set showmode                "show current mode down the bottom
+set colorcolumn=+1                      "mark the ideal max text width
+set rnu                                 "show relative line numbers
+set showmode                            "show current mode down the bottom
 set laststatus=2
-set statusline=%y                   " File type
-set statusline+=\ %r%w              " Read only / Preview flags
-set statusline+=\ %f%*              " File path
-set statusline+=%m                  " Modified flag
+set statusline=%y                       " File type
+set statusline+=\ %r%w                  " Read only / Preview flags
+set statusline+=\ %{expand('%:~:.')}    " File path
+set statusline+=%m                      " Modified flag
 set statusline+=%#warningmsg#
 set statusline+=%*
-set statusline+=%=                  " Right alignment separator
-set statusline+=%l/%L%*             " Line number / Total lines
-set statusline+=\|%c                " Column number
-set statusline+=\ [%p%%]            " Percent through lines
+set statusline+=%=                      " Right alignment separator
+set statusline+=%l/%L%*                 " Line number / Total lines
+set statusline+=\|%c                    " Column number
+set statusline+=\ [%p%%]                " Percent through lines
 
 set ruler
 highlight ColorColumn ctermbg='LightGrey'
@@ -96,7 +95,7 @@ set smartcase       "consider case for search patterns with uppercase letters
 let mapleader = ","
 
 "Open file relative to current file
-vmap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 "restore messed up vim
 map <F8> :redraw! \| :noh \| <cr><c-w>=
@@ -122,6 +121,9 @@ inoremap { {<CR>}<Esc>O<TAB>
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 
+"edit re-load config file
+nnoremap <leader>ce :e $MYVIMRC<CR>
+nnoremap <leader>cs :so $MYVIMRC<CR>
 
 "" Custom functions
 
