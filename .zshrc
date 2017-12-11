@@ -18,6 +18,8 @@ setopt autocd correct extended_glob hist_ignore_all_dups \
 
 unsetopt beep correct_all
 bindkey -e
+autoload -U select-word-style
+select-word-style bash
 
 if [[ $(uname -a) =~ Darwin ]]; then
     local MACOS=true
@@ -29,9 +31,12 @@ fi
 zstyle ':completion:*' completer _expand _complete _ignored
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
-zstyle ':completion:*' menu select=long
+zstyle ':completion:*' menu select
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle :compinstall filename "$HOME/.zshrc"
+bindkey '^[n' expand-or-complete
+bindkey '^[p' reverse-menu-complete
+bindkey '^[[Z' reverse-menu-complete
 
 autoload -Uz compinit
 compinit
