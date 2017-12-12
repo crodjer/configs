@@ -117,7 +117,7 @@ cmap w!! %!sudo tee > /dev/null %
 nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 
 "auto insert matching pair
-inoremap { {<CR>}<Esc>O<TAB>
+inoremap { {}<Esc>i
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 
