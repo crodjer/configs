@@ -16,7 +16,7 @@ configure-sound.sh
 
 xautolock -time 10 -locker "lock" &
 urxvtd &
-redshift -l 17.53:73.86 -b 1:0.5 &
+redshift -l 17.53:73.86 -b 0.8:0.5 &
 compton &
 xsetroot -cursor_name left_ptr -solid "#000"
 bash "$HOME/.fehbg"
