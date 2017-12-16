@@ -151,6 +151,7 @@ Plug 'scrooloose/syntastic'
 Plug 'mileszs/ack.vim'
 
 " Language plugins
+Plug 'gabrielelana/vim-markdown'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'racer-rust/vim-racer', {'for': ['rust']}
 Plug 'cespare/vim-toml', {'for': ['toml']}
