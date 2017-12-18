@@ -64,6 +64,7 @@ set ruler
 highlight ColorColumn ctermbg='LightGrey'
 highlight Pmenu ctermbg='LightGrey'
 highlight PmenuSel ctermbg='White'
+highlight SpellBad ctermbg='Red' gui=undercurl guisp=Red
 
 "display tabs and trailing spaces
 set list
