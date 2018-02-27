@@ -195,7 +195,7 @@ autocmd FileType crontab setlocal backupcopy=yes
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
-autocmd FileType markdown,rst setlocal sw=2 sts=2 et
+autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70
 
 " Rust
 let g:racer_cmd = "~/.cargo/bin/racer"
