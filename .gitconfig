@@ -58,3 +58,5 @@
 	tool = vimdiff
 [commit]
 	verbose = true
+[rerere]
+	enabled = true
