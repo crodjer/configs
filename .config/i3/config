@@ -132,7 +132,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Audio controls
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id amixer sset Master 100% # Set volume to the max
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 150% # Set volume to the max
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer sset Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer sset Master 5%- #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id amixer sset Master toggle # mute sound

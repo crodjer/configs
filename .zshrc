@@ -89,9 +89,16 @@ gen-prompt () {
 }
 
 function vs {
+    i3-msg -t get_version &> /dev/null && {
+        local i3_ws=$(i3-msg -t  get_workspaces | \
+            python -mjson.tool | \
+            grep -E '"focused":\s*true' -A 1 | \
+            grep "name" | \
+            cut -d '"' -f 4)
+    }
     # Set the NVIM listen address. Works for the server (launched via `nvim`)
     # and client (launched via `nvr`).
-    export NVIM_LISTEN_ADDRESS=/tmp/$1-vim.sock
+    export NVIM_LISTEN_ADDRESS=/tmp/${i3_ws:-$1}-vim.sock
 }
 
 #-------------------------#
