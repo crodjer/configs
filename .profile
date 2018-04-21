@@ -147,6 +147,7 @@ export CHESSDIR=$HOME/.chess/
 export GEM_HOME=$HOME/.gem/ruby/
 export AUTOSSH_POLL=60
 export SCIKIT_LEARN_DATA=~/.scikit_learn_data
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #

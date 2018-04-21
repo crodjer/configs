@@ -6,22 +6,24 @@ if [ -f ~/.Xresources.local ]; then
     xrdb -merge ~/.Xresources.local
 fi
 
-configure-keyboard.sh
-# configure-touchpad.sh
-configure-sound.sh
-
 ################################################################
-# Looks and Applications (in decreasing order of importance)
+# Looks and Applications
 ################################################################
 
-xautolock -time 10 -locker "lock" &
-urxvtd &
-redshift -l 17.53:73.86 -b 0.8:0.5 &
-compton &
-xsetroot -cursor_name left_ptr -solid "#000"
-bash "$HOME/.fehbg"
-cmst &
+
+i3-msg -t get_version &> /dev/null && {
+    urxvtd &
+    configure-keyboard.sh
+    # configure-touchpad.sh
+    configure-sound.sh
+    xautolock -time 10 -locker "lock" &
+    # compton &
+    nm-applet &
+    bash "$HOME/.fehbg"
+    xsetroot -cursor_name left_ptr -solid "#000"
+    redshift -l 17.53:73.86 -b 0.8:0.5 &
+}
 
 if [ -f ~/.xsessionrc.local ]; then
-   sh ~/.xsessionrc.local
+   bash ~/.xsessionrc.local
 fi
