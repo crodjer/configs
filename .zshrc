@@ -88,17 +88,24 @@ gen-prompt () {
     echo "$_line_1$_newline$_line_2"
 }
 
-function vs {
-    i3-msg -t get_version &> /dev/null && {
-        local i3_ws=$(i3-msg -t  get_workspaces | \
-            python -mjson.tool | \
-            grep -E '"focused":\s*true' -A 1 | \
-            grep "name" | \
-            cut -d '"' -f 4)
-    }
+function vim-server {
+    local server_name="default"
+    local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
+    local i3_ws=$(i3-msg -t  get_workspaces 2> /dev/null| \
+        python -mjson.tool 2> /dev/null | \
+        grep -E '"focused":\s*true' -A 1 | \
+        grep "name" | \
+        cut -d '"' -f 4 &> /dev/null)
+
+    if [ "$tmux_window" ]; then
+        server_name="tmux-$tmux_window"
+    elif [ "$i3_ws" ]; then
+        server_name="i3-$i3_ws"
+    fi
+
     # Set the NVIM listen address. Works for the server (launched via `nvim`)
     # and client (launched via `nvr`).
-    export NVIM_LISTEN_ADDRESS=/tmp/${i3_ws:-$1}-vim.sock
+    export NVIM_LISTEN_ADDRESS=/tmp/nvim-${server_name:-$1}-vim.sock
 }
 
 #-------------------------#
@@ -113,7 +120,7 @@ RPROMPT="%F{green}%~%f"
 [[ -s "/etc/profile.d/autojump.zsh" ]] && source "/etc/profile.d/autojump.zsh"
 
 # Set the default Vim server name.
-vs default
+vim-server
 
 # Load local bashrc configs as well.
 if [ -e "$HOME/.bashrc.local" ]; then
