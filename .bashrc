@@ -154,7 +154,7 @@ trap 'preexec_invoke_exec' DEBUG
 #-------------------------#
 # Functions
 #-------------------------#
-function vim-server {
+function set-nvim-listen-address {
     local server_name="default"
     local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
     local i3_ws=$(i3-msg -t  get_workspaces 2> /dev/null| \
@@ -177,7 +177,7 @@ function vim-server {
 #-------------------------#
 # Initializations
 #-------------------------#
-vim-server
+set-nvim-listen-address
 
 [[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
 [[ -s "/usr/share/autojump/autojump.sh" ]] && source "/usr/share/autojump/autojump.sh"

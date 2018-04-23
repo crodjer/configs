@@ -88,7 +88,7 @@ gen-prompt () {
     echo "$_line_1$_newline$_line_2"
 }
 
-function vim-server {
+function set-nvim-listen-address {
     local server_name="default"
     local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
     local i3_ws=$(i3-msg -t  get_workspaces 2> /dev/null| \
@@ -120,7 +120,7 @@ RPROMPT="%F{green}%~%f"
 [[ -s "/etc/profile.d/autojump.zsh" ]] && source "/etc/profile.d/autojump.zsh"
 
 # Set the default Vim server name.
-vim-server
+set-nvim-listen-address
 
 # Load local bashrc configs as well.
 if [ -e "$HOME/.bashrc.local" ]; then
