@@ -95,7 +95,7 @@ function set-nvim-listen-address {
         python -mjson.tool 2> /dev/null | \
         grep -E '"focused":\s*true' -A 1 | \
         grep "name" | \
-        cut -d '"' -f 4 &> /dev/null)
+        cut -d '"' -f 4 2> /dev/null)
 
     if [ "$tmux_window" ]; then
         server_name="tmux-$tmux_window"
