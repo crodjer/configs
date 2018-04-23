@@ -32,12 +32,30 @@ window:
   decorations: true
 
 # Display tabs using this many cells (changes require restart)
-tabspaces: 8
+tabspaces: 4
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
 
 # Font configuration (changes require restart)
+#
+# Important font attributes like antialiasing, subpixel aa, and hinting can be
+# controlled through fontconfig. Specifically, the following attributes should
+# have an effect:
+#
+# * hintstyle
+# * antialias
+# * lcdfilter
+# * rgba
+#
+# For instance, if you wish to disable subpixel antialiasing, you might set the
+# rgba property to "none". If you wish to completely disable antialiasing, you
+# can set antialias to false.
+#
+# Please see these resources for more information on how to use fontconfig
+#
+# * https://wiki.archlinux.org/index.php/font_configuration#Fontconfig_configuration
+# * file:///usr/share/doc/fontconfig/fontconfig-user.html
 font:
   # The normal (roman) font face to use.
   normal:
@@ -260,6 +278,10 @@ live_config_reload: true
 #   `command` must be a map containing a `program` string, and `args` array of
 #     strings. For example:
 #     - { ... , command: { program: "alacritty", args: ["-e", "vttest"] } }
+#
+# Want to add a binding (e.g. "PageUp") but are unsure what the X sequence
+# (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
+# then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
   - { key: V,        mods: Command,     action: Paste                        }
   - { key: C,        mods: Command,     action: Copy                         }
