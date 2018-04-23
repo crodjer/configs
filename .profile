@@ -64,6 +64,8 @@ function make_home () {
         .gitconfig
         .gitignore
         .config/nvim/init.vim
+        .config/alacritty/alacritty.yml
+        .tmux.conf
     )
 
     local remote
