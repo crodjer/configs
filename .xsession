@@ -1,1 +1,1 @@
-# dbus-launch i3
+dbus-launch i3
