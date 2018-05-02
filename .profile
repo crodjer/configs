@@ -126,7 +126,7 @@ function make_home () {
             if [ -n "$parent_dir" ]; then
                 run mkdir -p "~/$(dirname $config)"
             fi
-            run ln -s "$configs_src/$config" "~/$config"
+            run ln -sf "$configs_src/$config" "~/$config"
         fi
     done
 }
