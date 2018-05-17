@@ -40,13 +40,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 
-command -v emacsclient &> /dev/null && {
-    alias e='emacsclient -n'
-    alias ec='emacsclient -c'
-    alias et='emacsclient -ct'
-    alias ef='emacsclient -n -c'
-}
-
 if [[ $MACOS ]]; then
     alias ls='ls -G'
 else
@@ -174,6 +167,10 @@ function set-nvim-listen-address {
     export NVIM_LISTEN_ADDRESS=/tmp/${ws:-$1}-vim.sock
 }
 
+function reload-shell () {
+    source ~/.profile
+    exec $SHELL
+}
 #-------------------------#
 # Initializations
 #-------------------------#

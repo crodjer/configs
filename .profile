@@ -73,7 +73,7 @@ function make_home () {
     local configs_src
     local config
 
-    if [[ -d "$HOME/configs/" ]]; then
+    if [ -d "$HOME/configs/" ]; then
         configs_src="$HOME/configs"
     else
         configs_src="$HOME"

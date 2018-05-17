@@ -108,6 +108,12 @@ function set-nvim-listen-address {
     export NVIM_LISTEN_ADDRESS=/tmp/nvim-${server_name:-$1}-vim.sock
 }
 
+function reload-shell () {
+    source ~/.profile
+    exec $SHELL
+}
+
+
 #-------------------------#
 # Initializations
 #-------------------------#

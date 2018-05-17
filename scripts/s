@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+if [ -z "$1"  ]; then
+    return 1
+fi
+
+find . -iname "*$1*"

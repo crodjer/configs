@@ -119,9 +119,9 @@ cmap w!! %!sudo tee > /dev/null %
 nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 
 "auto insert matching pair
-inoremap { {}<Esc>i
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
+" inoremap { {}<Esc>i
+" inoremap ( ()<Esc>i
+" inoremap [ []<Esc>i
 
 "edit re-load config file
 nnoremap <leader>ce :e $MYVIMRC<CR>
@@ -150,6 +150,7 @@ endif
 
 Plug 'scrooloose/syntastic'
 Plug 'mileszs/ack.vim'
+Plug 'jiangmiao/auto-pairs'
 
 " Language plugins
 Plug 'gabrielelana/vim-markdown'
@@ -158,10 +159,8 @@ Plug 'racer-rust/vim-racer', {'for': ['rust']}
 Plug 'cespare/vim-toml', {'for': ['toml']}
 Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
 Plug 'mxw/vim-jsx', {'for': ['js', 'jsx']}
-Plug 'guns/vim-clojure-static', {'for': ['clojure', 'edn'] }
-Plug 'tpope/vim-fireplace', {'for': 'clojure' }
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile' }
-Plug 'mustache/vim-mustache-handlebars', {'for': ['mustache', 'hbs'] }
+Plug 'tpope/vim-endwise', {'for': 'ruby'}
 
 " Done loading plugins
 call plug#end()
@@ -176,7 +175,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-if executable('ag')
+if executable('rg')
+    let g:ackprg = 'rg --vimgrep'
+elseif executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
@@ -196,6 +197,9 @@ autocmd FileType crontab setlocal backupcopy=yes
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70
+
+" Ruby
+autocmd FileType ruby setlocal sw=2 sts=2 et
 
 " Rust
 let g:racer_cmd = "~/.cargo/bin/racer"
