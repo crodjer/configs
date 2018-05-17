@@ -127,6 +127,9 @@ nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 nnoremap <leader>ce :e $MYVIMRC<CR>
 nnoremap <leader>cs :so $MYVIMRC<CR>
 
+"fuzzy finder
+nnoremap <C-P> :FZF<CR>
+
 "" Custom functions
 
 " Custom commands
@@ -151,6 +154,7 @@ endif
 Plug 'scrooloose/syntastic'
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf'
 
 " Language plugins
 Plug 'gabrielelana/vim-markdown'

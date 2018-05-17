@@ -128,6 +128,9 @@ RPROMPT="%F{green}%~%f"
 # Set the default Vim server name.
 set-nvim-listen-address
 
+# Initialize fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Load local bashrc configs as well.
 if [ -e "$HOME/.bashrc.local" ]; then
     source "$HOME/.bashrc.local"
