@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+command -v nvr > /dev/null && remote='nvr' || remote=$EDITOR
+
+if [  -z "$1" ]; then
+    $remote $(fzf)
+else
+    $remote $1
+fi
