@@ -146,7 +146,6 @@ export SDCV_HISTSIZE=10000
 export SDCV_PAGER=less
 export NODE_PATH=$HOME/.local/lib/node_modules:/usr/lib/node_modules
 export CHESSDIR=$HOME/.chess/
-export GEM_HOME=$HOME/.gem/ruby/
 export AUTOSSH_POLL=60
 export SCIKIT_LEARN_DATA=~/.scikit_learn_data
 export VIRTUAL_ENV_DISABLE_PROMPT=1

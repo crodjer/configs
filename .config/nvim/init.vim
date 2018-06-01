@@ -127,9 +127,6 @@ nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 nnoremap <leader>ce :e $MYVIMRC<CR>
 nnoremap <leader>cs :so $MYVIMRC<CR>
 
-"fuzzy finder
-nnoremap <C-P> :FZF<CR>
-
 "" Custom functions
 
 " Custom commands
@@ -165,6 +162,7 @@ Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
 Plug 'mxw/vim-jsx', {'for': ['js', 'jsx']}
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile' }
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
+Plug 'kchmck/vim-coffee-script'
 
 " Done loading plugins
 call plug#end()
