@@ -181,7 +181,7 @@ set-nvim-listen-address
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
 
 # Initialize fzf
-[ -f ~/.fzf.bash] && source ~/.fzf.bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 if [ -e "$HOME/.bashrc.local" ]; then
     source "$HOME/.bashrc.local"
