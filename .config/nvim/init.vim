@@ -126,6 +126,7 @@ nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 "edit re-load config file
 nnoremap <leader>ce :e $MYVIMRC<CR>
 nnoremap <leader>cs :so $MYVIMRC<CR>
+nnoremap <leader>s :FZF<CR>
 
 "" Custom functions
 
@@ -195,6 +196,9 @@ autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
 
 " Crontab
 autocmd FileType crontab setlocal backupcopy=yes
+
+" Coffee
+autocmd FileType coffee setlocal sw=2 sts=2 et
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
