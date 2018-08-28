@@ -70,6 +70,9 @@ highlight SpellBad ctermbg='Red' gui=undercurl guisp=Red
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
+"disable paste mode
+set nopaste
+
 "" GUI
 if exists('g:GuiLoaded')
     Guifont Monospace:h12
@@ -153,6 +156,7 @@ Plug 'scrooloose/syntastic'
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
+Plug 'tpope/vim-surround'
 
 " Language plugins
 Plug 'gabrielelana/vim-markdown'
@@ -160,10 +164,12 @@ Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'racer-rust/vim-racer', {'for': ['rust']}
 Plug 'cespare/vim-toml', {'for': ['toml']}
 Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
-Plug 'mxw/vim-jsx', {'for': ['js', 'jsx']}
+Plug 'mxw/vim-jsx', {'for': ['jsx']}
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile' }
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
+Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
 Plug 'kchmck/vim-coffee-script'
+Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Done loading plugins
 call plug#end()
@@ -187,7 +193,7 @@ endif
 
 "" Language configurations
 " JS/JSX
-let g:jsx_ext_required = 0
+let g:jsx_ext_required = 1
 let g:syntastic_javascript_checkers = ['eslint']
 autocmd FileType javascript setlocal sw=2 sts=2 et
 
