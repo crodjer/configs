@@ -130,7 +130,6 @@ nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 "edit re-load config file
 nnoremap <leader>ce :e $MYVIMRC<CR>
 nnoremap <leader>cs :so $MYVIMRC<CR>
-nnoremap <leader>s :FZF<CR>
 
 "" Custom functions
 
@@ -157,6 +156,7 @@ Plug 'scrooloose/syntastic'
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 
 " Language plugins
@@ -168,7 +168,6 @@ Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
 Plug 'mxw/vim-jsx', {'for': ['jsx']}
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile' }
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
-Plug 'python-mode/python-mode', { 'branch': 'develop', 'for': 'python' }
 Plug 'kchmck/vim-coffee-script'
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
@@ -206,6 +205,15 @@ autocmd FileType crontab setlocal backupcopy=yes
 
 " Coffee
 autocmd FileType coffee setlocal sw=2 sts=2 et
+
+" FZF
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+nnoremap <leader>s :GFiles<CR>
+nnoremap <leader>as :FZF<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :History<CR>
 
 " Git commit
 autocmd FileType gitcommit setlocal spell! spelllang=en
