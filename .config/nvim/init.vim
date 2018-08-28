@@ -207,6 +207,9 @@ autocmd FileType crontab setlocal backupcopy=yes
 " Coffee
 autocmd FileType coffee setlocal sw=2 sts=2 et
 
+" Git commit
+autocmd FileType gitcommit setlocal spell! spelllang=en
+
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70
