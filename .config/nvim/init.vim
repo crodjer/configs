@@ -72,6 +72,7 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
 "disable paste mode
 set nopaste
+autocmd InsertLeave * set nopaste
 
 "" GUI
 if exists('g:GuiLoaded')
