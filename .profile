@@ -66,6 +66,7 @@ function make_home () {
         .config/nvim/init.vim
         .config/alacritty/alacritty.yml
         .tmux.conf
+        .toprc
     )
 
     local remote
