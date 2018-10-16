@@ -160,7 +160,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 
 " Language plugins
-Plug 'gabrielelana/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'racer-rust/vim-racer', {'for': ['rust']}
 Plug 'cespare/vim-toml', {'for': ['toml']}
@@ -220,7 +221,7 @@ autocmd FileType gitcommit setlocal spell! spelllang=en
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
-autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70
+autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=2
 
 " Ruby
 autocmd FileType ruby setlocal sw=2 sts=2 et
