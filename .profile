@@ -23,11 +23,12 @@ export                        PATH="$HOME/.bin"
                               PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/sbin"
                               PATH="$PATH:/usr/local/sbin:/usr/sbin"
 
-export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
-[ -d "$HOME/.local" ]&& MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
-[ -d "$HOME/.cabal" ]&& MANPATH="$MANPATH:$HOME/.cabal/share/man"
-[ -d "/opt/local" ]  && MANPATH="$MANPATH:/opt/local/share/man:/opt/local/man"
-                        MANPATH="$MANPATH:/usr/share/man:/usr/man"
+export                      MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
+[ -d "$HOME/.local" ]   &&  MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
+[ -d "$HOME/.cabal" ]   &&  MANPATH="$MANPATH:$HOME/.cabal/share/man"
+[ -d "$HOME/.npm-packages" ]   &&  MANPATH="$MANPATH:$HOME/.npm-packages/share/man"
+[ -d "/opt/local" ]     &&  MANPATH="$MANPATH:/opt/local/share/man:/opt/local/man"
+                            MANPATH="$MANPATH:/usr/share/man:/usr/man"
 
 # export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
 
@@ -67,6 +68,7 @@ function make_home () {
         .config/alacritty/alacritty.yml
         .tmux.conf
         .toprc
+        .npmrc
     )
 
     local remote
@@ -150,12 +152,14 @@ export CHESSDIR=$HOME/.chess/
 export AUTOSSH_POLL=60
 export SCIKIT_LEARN_DATA=~/.scikit_learn_data
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export NPM_PACKAGES="$HOME/.npm-packages"
+export MANPATH="$HOME/.npm-packages/share/man:$MANPATH"
+
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
 #-----------------------------#
 # shellcheck source=/dev/null
 [ -r "$HOME/.profile.local" ] && . "$HOME/.profile.local"
-# [ "$BASH_VERSION" -a -z "$POSIXLY_CORRECT" ] && . "$HOME/.bashrc"
 
 true # Exit status should be 0.
