@@ -35,9 +35,9 @@ export                      MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/
 #-------------------------#
 # BASE - Environment
 #-------------------------#
-[ -e /usr/share/zoneinfo/Asia/Kolkata ] && {
-    export TZ="/usr/share/zoneinfo/Asia/Kolkata"
-}
+# [ -e /usr/share/zoneinfo/Asia/Kolkata ] && {
+#     export TZ="/usr/share/zoneinfo/Asia/Kolkata"
+# }
 
 command -v nvim > /dev/null && EDITOR='nvim' || EDITOR='vi'
 export EDITOR
