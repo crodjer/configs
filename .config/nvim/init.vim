@@ -166,6 +166,7 @@ Plug 'rust-lang/rust.vim', {'for': ['rust']}
 Plug 'racer-rust/vim-racer', {'for': ['rust']}
 Plug 'cespare/vim-toml', {'for': ['toml']}
 Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
+Plug 'leafgarland/typescript-vim', { 'for': ['ts', 'tsc']}
 Plug 'mxw/vim-jsx', {'for': ['jsx']}
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile' }
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
@@ -232,3 +233,6 @@ autocmd FileType rust setlocal textwidth=80 " Rust plugin seems to override it.
 
 " Java
 autocmd FileType java setlocal sw=2 sts=2 et
+
+" YAML
+autocmd FileType yaml setlocal sw=2 sts=2 et

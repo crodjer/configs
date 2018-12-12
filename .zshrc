@@ -38,6 +38,8 @@ bindkey '^[n' expand-or-complete
 bindkey '^[p' reverse-menu-complete
 bindkey '^[[Z' reverse-menu-complete
 
+fpath+=~/.zfunc
+
 autoload -Uz compinit
 compinit
 
