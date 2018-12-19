@@ -206,7 +206,7 @@ autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
 autocmd FileType crontab setlocal backupcopy=yes
 
 " Coffee
-autocmd FileType coffee setlocal sw=2 sts=2 et
+autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldenable foldnestmax=5
 
 " FZF
 autocmd! FileType fzf
