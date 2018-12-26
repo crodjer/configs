@@ -15,6 +15,8 @@ set textwidth=80            "maximum width of text that can be inserted
 set nofoldenable            "don't fold by default
 set clipboard=unnamedplus   "use system clipboard
 set mouse-=a
+set cursorline
+set signcolumn=no
 
 " Format options
 set formatoptions-=o    "disable auto comment leader insertion with o/O
@@ -61,9 +63,10 @@ set statusline+=\|%c                    " Column number
 set statusline+=\ [%p%%]                " Percent through lines
 
 set ruler
+highlight CursorLine cterm=NONE ctermbg='LightGrey'
 highlight ColorColumn ctermbg='LightGrey'
-highlight Pmenu ctermbg='LightGrey'
-highlight PmenuSel ctermbg='White'
+highlight Pmenu ctermbg='LightYellow'
+highlight PmenuSel ctermbg='Yellow'
 highlight SpellBad ctermbg='Red' gui=undercurl guisp=Red
 
 "display tabs and trailing spaces
@@ -158,6 +161,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
+Plug 'majutsushi/tagbar'
 
 " Language plugins
 Plug 'godlygeek/tabular'
@@ -170,7 +174,7 @@ Plug 'leafgarland/typescript-vim', { 'for': ['ts', 'tsc']}
 Plug 'mxw/vim-jsx', {'for': ['jsx']}
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile' }
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
-Plug 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " Done loading plugins
@@ -206,7 +210,17 @@ autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
 autocmd FileType crontab setlocal backupcopy=yes
 
 " Coffee
-autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldenable foldnestmax=5
+autocmd FileType coffee setlocal sw=2 sts=2 et
+let g:tagbar_type_coffee = {
+    \ 'ctagstype' : 'coffee',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 'm:methods',
+        \ 'f:functions',
+        \ 'v:variables',
+        \ 'f:fields',
+    \ ]
+\ }
 
 " FZF
 autocmd! FileType fzf
@@ -220,6 +234,9 @@ nnoremap <leader>h :History<CR>
 " Git commit
 autocmd FileType gitcommit setlocal spell! spelllang=en
 
+" Java
+autocmd FileType java setlocal sw=2 sts=2 et
+
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=2
@@ -229,10 +246,14 @@ autocmd FileType ruby setlocal sw=2 sts=2 et
 
 " Rust
 let g:racer_cmd = "~/.cargo/bin/racer"
-autocmd FileType rust setlocal textwidth=80 " Rust plugin seems to override it.
+let g:rustfmt_autosave = 1
+autocmd FileType rust setlocal textwidth=80
+autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
 
-" Java
-autocmd FileType java setlocal sw=2 sts=2 et
+" Tagbar
+let g:tagbar_width = 20
+nnoremap <leader>t :TagbarToggle<CR>
+
 
 " YAML
 autocmd FileType yaml setlocal sw=2 sts=2 et
