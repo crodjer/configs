@@ -221,6 +221,7 @@ let g:tagbar_type_coffee = {
         \ 'f:fields',
     \ ]
 \ }
+autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldenable foldnestmax=5
 
 " FZF
 autocmd! FileType fzf
@@ -251,7 +252,7 @@ autocmd FileType rust setlocal textwidth=80
 autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
 
 " Tagbar
-let g:tagbar_width = 20
+let g:tagbar_width = 21
 nnoremap <leader>t :TagbarToggle<CR>
 
 
