@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source $(dirname $0)/../.shell_functions
+set_nvim_listen_address
+
+if [ -S $NVIM_LISTEN_ADDRESS ]; then
+    rm $NVIM_LISTEN_ADDRESS
+fi
+
+nvim

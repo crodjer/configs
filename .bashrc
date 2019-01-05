@@ -144,38 +144,11 @@ preexec_invoke_exec () {
 }
 trap 'preexec_invoke_exec' DEBUG
 
-#-------------------------#
-# Functions
-#-------------------------#
-function set-nvim-listen-address {
-    local server_name="default"
-    local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
-    local i3_ws=$(i3-msg -t  get_workspaces 2> /dev/null| \
-        python -mjson.tool 2> /dev/null | \
-        grep -E '"focused":\s*true' -A 1 | \
-        grep "name" | \
-        cut -d '"' -f 4 2> /dev/null)
+source "$CONFIGS_SRC_DIR/.shell_functions"
 
-    if [ "$tmux_window" ]; then
-        server_name="tmux-$tmux_window"
-    elif [ "$i3_ws" ]; then
-        server_name="i3-$i3_ws"
-    fi
-
-    # Set the NVIM listen address. Works for the server (launched via `nvim`)
-    # and client (launched via `nvr`).
-    export NVIM_LISTEN_ADDRESS=/tmp/${ws:-$1}-vim.sock
-}
-
-function reload-shell () {
-    source ~/.profile
-    exec $SHELL
-}
 #-------------------------#
 # Initializations
 #-------------------------#
-set-nvim-listen-address
-
 [[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
 [[ -s "/usr/share/autojump/autojump.sh" ]] && source "/usr/share/autojump/autojump.sh"
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
