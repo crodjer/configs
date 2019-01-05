@@ -16,7 +16,6 @@ set nofoldenable            "don't fold by default
 set clipboard=unnamedplus   "use system clipboard
 set mouse-=a
 set cursorline
-set signcolumn=no
 
 " Format options
 set formatoptions-=o    "disable auto comment leader insertion with o/O
@@ -149,33 +148,23 @@ endif
 silent! call plug#begin()
 
 " General plugins
-if has('nvim') && has( 'python3' )
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-elseif has("lua")
-    Plug 'Shougo/neocomplete.vim'
-endif
-
 Plug 'scrooloose/syntastic'
-Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
+Plug 'godlygeek/tabular'
 
 " Language plugins
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'rust-lang/rust.vim', {'for': ['rust']}
-Plug 'racer-rust/vim-racer', {'for': ['rust']}
-Plug 'cespare/vim-toml', {'for': ['toml']}
-Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'json']}
-Plug 'leafgarland/typescript-vim', { 'for': ['ts', 'tsc']}
-Plug 'mxw/vim-jsx', {'for': ['jsx']}
-Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile' }
-Plug 'tpope/vim-endwise', {'for': 'ruby'}
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
+Plug 'plasticboy/vim-markdown'       , { 'for': ['markdown', 'md', 'mkd'] }
+Plug 'rust-lang/rust.vim'            , { 'for': ['rust']}
+Plug 'racer-rust/vim-racer'          , { 'for': ['rust']}
+Plug 'cespare/vim-toml'              , { 'for': ['toml']}
+Plug 'pangloss/vim-javascript'       , { 'for': ['js', 'jsx', 'json']}
+Plug 'ekalinin/Dockerfile.vim'       , { 'for': 'Dockerfile' }
+Plug 'tpope/vim-endwise'             , { 'for': 'ruby'}
+Plug 'kchmck/vim-coffee-script'      , { 'for': 'coffee' }
+Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
 
 " Done loading plugins
 call plug#end()
@@ -183,8 +172,6 @@ call plug#end()
 
 "" Plugin configurations
 let g:deoplete#enable_at_startup = 1
-let g:neocomplete#enable_at_startup = 1
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -195,7 +182,6 @@ if executable('rg')
 elseif executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
-
 
 "" Language configurations
 " JS/JSX
@@ -252,7 +238,7 @@ autocmd FileType rust setlocal textwidth=80
 autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
 
 " Tagbar
-let g:tagbar_width = 21
+let g:tagbar_width = 28
 nnoremap <leader>t :TagbarToggle<CR>
 
 
