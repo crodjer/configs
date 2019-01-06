@@ -169,9 +169,8 @@ Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
 " Done loading plugins
 call plug#end()
 
-
 "" Plugin configurations
-let g:deoplete#enable_at_startup = 1
+let g:AutoPairsFlyMode = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -233,12 +232,13 @@ autocmd FileType ruby setlocal sw=2 sts=2 et
 
 " Rust
 let g:racer_cmd = "~/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
 let g:rustfmt_autosave = 1
 autocmd FileType rust setlocal textwidth=80
 autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
 
 " Tagbar
-let g:tagbar_width = 28
+let g:tagbar_width = 20
 nnoremap <leader>t :TagbarToggle<CR>
 
 
