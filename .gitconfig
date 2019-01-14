@@ -5,7 +5,7 @@
 [user]
 	name = Rohan Jain
 	email = crodjer@gmail.com
-	signingkey = 0F7F3109
+	signingkey = 1399BE943D776BA00CE694CC72DC514A0F7F3109
 [github]
 	user = crodjer
 [format]
@@ -30,9 +30,6 @@
 	user = crodjer@gmail.com
 	port = 993
 	sslverify = false
-[branch "master"]
-	remote = origin
-	merge = refs/heads/master
 [instaweb]
 	browser = firefox
 	port = 4321
