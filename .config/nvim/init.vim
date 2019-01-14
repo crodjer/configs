@@ -150,6 +150,7 @@ silent! call plug#begin()
 " General plugins
 Plug 'scrooloose/syntastic'
 Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
@@ -162,7 +163,6 @@ Plug 'racer-rust/vim-racer'          , { 'for': ['rust']}
 Plug 'cespare/vim-toml'              , { 'for': ['toml']}
 Plug 'pangloss/vim-javascript'       , { 'for': ['js', 'jsx', 'json']}
 Plug 'ekalinin/Dockerfile.vim'       , { 'for': 'Dockerfile' }
-Plug 'tpope/vim-endwise'             , { 'for': 'ruby'}
 Plug 'kchmck/vim-coffee-script'      , { 'for': 'coffee' }
 Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
 
