@@ -70,6 +70,7 @@ export SCIKIT_LEARN_DATA=~/.scikit_learn_data
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export NPM_PACKAGES="$HOME/.npm-packages"
 export MANPATH="$HOME/.npm-packages/share/man:$MANPATH"
+export GPODDER_HOME="$HOME/.gpodder"
 
 
 #-----------------------------#
