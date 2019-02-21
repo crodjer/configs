@@ -54,6 +54,8 @@ else
     alias ls='ls --color=auto'
 fi
 
+alias cb='xclip -selection clipboard'
+
 #-------------------------#
 # Utility functions
 #-------------------------#
