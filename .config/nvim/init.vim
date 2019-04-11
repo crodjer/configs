@@ -165,6 +165,7 @@ Plug 'pangloss/vim-javascript'       , { 'for': ['js', 'jsx', 'json']}
 Plug 'ekalinin/Dockerfile.vim'       , { 'for': 'Dockerfile' }
 Plug 'kchmck/vim-coffee-script'      , { 'for': 'coffee' }
 Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
+Plug 'leafgarland/typescript-vim'    , { 'for': ['ts'] }
 
 " Done loading plugins
 call plug#end()
