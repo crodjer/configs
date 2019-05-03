@@ -40,7 +40,7 @@ window:
   decorations: full
 
   # When true, alacritty starts maximized.
-  start_maximized: true
+  startup_mode: Maximized
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -109,7 +109,7 @@ font:
     #style: Italic
 
   # Point size
-  size: 8.5
+  size: 14
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
