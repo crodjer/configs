@@ -67,8 +67,14 @@ gen-prompt () {
         user_color="red"
     fi
 
+    local host_color="green"
+
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        host_color="red"
+    fi
+
     ## Generate a simple, informative multiline prompt.
-    local _line_1="%F{blue}┌─[%B%F{$user_color}%n%f%b@%F{green}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f"
+    local _line_1="%F{blue}┌─[%B%F{$user_color}%n%f%b@%F{${host_color}}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f"
     local _line_2="%F{blue}└─%(!.#.>)%f "
 
     # Render git info, if available, in the prompt.
