@@ -224,7 +224,7 @@ settings = {
     beep_when_window_active = "yes";
     beep_when_away = "yes";
     beep_msg_level = "MSGS DCC DCCMSGS HILIGHT";
-    show_names_on_join = "no";
+    show_names_on_join = "yes";
   };
   "perl/core/scripts" = {
     uberprompt_load_hook = "/^vm_add";
