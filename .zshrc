@@ -7,6 +7,12 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+if [ "$CONFIGS_SRC_DIR" ]; then
+    source $CONFIGS_SRC_DIR/.shell_functions
+fi
+
+debug_shell ZSH: Options
+
 #-------------------------#
 # Options
 #-------------------------#
@@ -24,6 +30,8 @@ select-word-style bash
 if [[ $(uname -a) =~ Darwin ]]; then
     local MACOS=true
 fi
+
+debug_shell ZSH: Completion
 
 #-------------------------#
 # Completion
@@ -43,6 +51,8 @@ fpath+=~/.zfunc
 autoload -Uz compinit
 compinit
 
+debug_shell ZSH: Aliases
+
 #-------------------------#
 # Aliases
 #-------------------------#
@@ -55,6 +65,8 @@ else
 fi
 
 alias cb='xclip -selection clipboard'
+
+debug_shell ZSH: Utility functions
 
 #-------------------------#
 # Utility functions
@@ -100,6 +112,8 @@ gen-prompt () {
 
 source "$CONFIGS_SRC_DIR/.shell_functions"
 
+debug_shell ZSH: Initializations
+
 #-------------------------#
 # Initializations
 #-------------------------#
@@ -126,5 +140,6 @@ if [ -e "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
 fi
 
+debug_shell ZSH: Done
 # Exit with success
 true

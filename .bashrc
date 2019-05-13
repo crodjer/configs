@@ -8,6 +8,10 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+if [ "$CONFIGS_SRC_DIR" ]; then
+    source $CONFIGS_SRC_DIR/.shell_functions
+fi
+
 #-------------------------#
 # Bash configuration
 #-------------------------#
@@ -143,8 +147,6 @@ preexec_invoke_exec () {
     fi
 }
 trap 'preexec_invoke_exec' DEBUG
-
-source "$CONFIGS_SRC_DIR/.shell_functions"
 
 #-------------------------#
 # Initializations
