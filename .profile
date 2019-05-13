@@ -7,9 +7,16 @@
 #
 # Borrowed from: http://stuff.lhunath.com/.profile
 
+function debug_shell () {
+    if [ "$DEBUG_SHELL" ]; then
+        echo "$(date +'%T-%N') $@"
+    fi
+}
+
 #-------------------------#
 # BASE - PATH             #
 #-------------------------#
+debug_shell Profile: Path
 export                        PATH="$HOME/.bin"
 [ -d "$HOME/.local" ]      && PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
 [ -d "$HOME/.cabal" ]      && PATH="$PATH:$HOME/.cabal/bin"
@@ -36,6 +43,7 @@ export                      MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/
 #-------------------------#
 # BASE - Environment
 #-------------------------#
+debug_shell Profile: Environment
 # [ -e /usr/share/zoneinfo/Asia/Kolkata ] && {
 #     export TZ="/usr/share/zoneinfo/Asia/Kolkata"
 # }
@@ -52,6 +60,7 @@ fi
 #-----------------------------#
 # ENVIRONMENT - APPLICATIONS  #
 #-----------------------------#
+debug_shell Profile: Applications
 export LESS=" -R "
 command -v source-highlight-esc.sh > /dev/null && \
     LESSOPEN="| $(which source-highlight-esc.sh) %s 2> /dev/null"
@@ -72,11 +81,12 @@ export NPM_PACKAGES="$HOME/.npm-packages"
 export MANPATH="$HOME/.npm-packages/share/man:$MANPATH"
 export GPODDER_HOME="$HOME/.gpodder"
 
-
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
 #-----------------------------#
+debug_shell Profile: Local
 # shellcheck source=/dev/null
 [ -r "$HOME/.profile.local" ] && . "$HOME/.profile.local"
 
+debug_shell Profile: Done
 true # Exit status should be 0.

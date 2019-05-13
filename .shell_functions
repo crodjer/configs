@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
+debug_shell () {
+    if [ "$DEBUG_SHELL" ]; then
+        echo "$(date +'%T-%N') $@"
+    fi
+}
+
 function make_home () {
     local usage="$0 [-h <host>] [-x] [-c <configs-dir>]"
     usage="$usage\n\th: the remote host"
