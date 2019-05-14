@@ -17,10 +17,12 @@ debug_shell ZSH: Options
 # Options
 #-------------------------#
 HISTFILE=~/.histfile
-HISTSIZE=10000
+HISTSIZE=1000
 SAVEHIST=100000
-setopt autocd correct extended_glob hist_ignore_all_dups \
-    hist_expire_dups_first hist_ignore_space notify prompt_subst share_history
+REPORTTIME=3
+setopt autocd correct extended_glob hist_ignore_all_dups
+setopt hist_expire_dups_first hist_ignore_space notify prompt_subst
+setopt share_history
 
 unsetopt beep correct_all
 bindkey -e
@@ -89,13 +91,13 @@ gen-prompt () {
     local _line_1="%F{blue}┌─[%B%F{$user_color}%n%f%b@%F{${host_color}}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f"
     local _line_2="%F{blue}└─%(!.#.>)%f "
 
-    # Render git info, if available, in the prompt.
-    if git branch >/dev/null 2>/dev/null; then
+    local git_branch=$(git symbolic-ref --short HEAD 2> /dev/null || {
+        git rev-list --max-count=1 HEAD 2>/dev/null | cut -c 1-8
+    })
 
-        local _git_branch=$(git symbolic-ref --short HEAD 2> /dev/null || {
-            git rev-list --max-count=1 HEAD 2>/dev/null | cut -c 1-8
-        })
-        local _git_status="$_git_branch$([ "$(git status --porcelain)" ] && echo "*")"
+    # Render git info, if available, in the prompt.
+    if [ "$git_branch" ]; then
+        local _git_status="$git_branch$([ "$(git status --porcelain)" ] && echo "*")"
         _line_1="$_line_1 %B%F{green}±%b %F{cyan}($_git_status)%f"
     fi
 
