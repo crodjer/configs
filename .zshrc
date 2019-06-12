@@ -20,9 +20,9 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=100000
 REPORTTIME=3
-setopt autocd correct extended_glob hist_ignore_all_dups
-setopt hist_expire_dups_first hist_ignore_space notify prompt_subst
-setopt share_history
+setopt hist_ignore_all_dups hist_ignore_space share_history extended_history
+setopt hist_expire_dups_first
+setopt autocd correct extended_glob notify prompt_subst
 
 unsetopt beep correct_all
 bindkey -e
