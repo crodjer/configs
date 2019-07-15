@@ -167,6 +167,7 @@ Plug 'ekalinin/Dockerfile.vim'       , { 'for': 'Dockerfile' }
 Plug 'kchmck/vim-coffee-script'      , { 'for': 'coffee' }
 Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
 Plug 'leafgarland/typescript-vim'    , { 'for': ['ts'] }
+Plug 'tpope/vim-fireplace'           , { 'for': ['clojure', 'clj'] }
 
 " Done loading plugins
 call plug#end()
