@@ -228,7 +228,11 @@ autocmd FileType java setlocal sw=2 sts=2 et
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
+let g:vim_markdown_new_list_item_indent = 1
 autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=2
+
+" Python
+let g:syntastic_python_checkers = ['python3']
 
 " Ruby
 autocmd FileType ruby setlocal sw=2 sts=2 et
