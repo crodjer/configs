@@ -17,7 +17,7 @@ debug_shell ZSH: Options
 # Options
 #-------------------------#
 HISTFILE=~/.histfile
-HISTSIZE=1000
+HISTSIZE=50000
 SAVEHIST=100000
 REPORTTIME=3
 setopt hist_ignore_all_dups hist_ignore_space share_history extended_history
