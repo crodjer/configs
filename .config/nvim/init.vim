@@ -58,7 +58,8 @@ set statusline+=%m                      " Modified flag
 set statusline+=%#warningmsg#
 set statusline+=%*
 set statusline+=%=                      " Right alignment separator
-set statusline+=%l/%L%*                 " Line number / Total lines
+set statusline+=%{FugitiveStatusline()} " Git Status
+set statusline+=\ %l/%L%*               " Line number / Total lines
 set statusline+=\|%c                    " Column number
 set statusline+=\ [%p%%]                " Percent through lines
 
@@ -156,6 +157,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-fugitive'
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'       , { 'for': ['markdown', 'md', 'mkd'] }
