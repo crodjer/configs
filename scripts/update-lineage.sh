@@ -39,10 +39,10 @@ if [ "$(curl -s "$lineage_url?sha256")" !=  "$(sha256sum $lineage_zip)" ]; then
     exit 1
 fi
 
-if [ "$(curl -sL $gapps_url.md5)" !=  "$(md5sum $gapps_zip)" ]; then
-    >&2 echo "OpenGApps SHA256 Sum Mismatch!"
-    exit 1
-fi
+# if [ "$(curl -sL $gapps_url.md5)" !=  "$(md5sum $gapps_zip)" ]; then
+#     >&2 echo "OpenGApps SHA256 Sum Mismatch!"
+#     exit 1
+# fi
 
 echo "Please reboot your phone into recovery connect to this machine."
 read -p "Press enter once done..."
