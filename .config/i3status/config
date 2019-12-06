@@ -8,7 +8,7 @@
 
 general {
     colors = true
-        interval = 1
+    interval = 1
 }
 
 order += "wireless _first_"
@@ -42,7 +42,7 @@ load {
 
 cpu_temperature 0 {
     format = "%degrees°C"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input"
     max_threshold = 50
 }
 

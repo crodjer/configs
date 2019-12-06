@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source $HOME/configs/.shell_functions
+set_nvim_listen_address
+gnvim $@
