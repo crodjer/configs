@@ -10,16 +10,16 @@ fi
 # Looks and Applications
 ################################################################
 
-urxvtd &
 configure-keyboard.sh
-# configure-touchpad.sh
+configure-touchpad.sh
 configure-sound.sh
 xautolock -time 10 -locker "lock" &
 compton &
 nm-applet &
 bash "$HOME/.fehbg"
 xsetroot -cursor_name left_ptr -solid "#000"
-redshift -l 17.53:73.86 -b 0.8:0.5 &
+redshift -l 17.53:73.86 -b 1:0.8 &
+clipit &
 
 if [ -f ~/.xsessionrc.local ]; then
    bash ~/.xsessionrc.local

@@ -64,10 +64,11 @@ set statusline+=\|%c                    " Column number
 set statusline+=\ [%p%%]                " Percent through lines
 
 set ruler
+highlight Normal guibg=#f0f0f0
 highlight CursorLine cterm=NONE ctermbg='LightGrey'
 highlight ColorColumn ctermbg='LightGrey'
 highlight Pmenu ctermbg='LightYellow'
-highlight PmenuSel ctermbg='Yellow'
+highlight PmenuSel ctermbg='Yellow' guibg='Yellow'
 highlight SpellBad ctermbg='Red' gui=undercurl guisp=Red
 
 "display tabs and trailing spaces
@@ -79,10 +80,7 @@ set nopaste
 autocmd InsertLeave * set nopaste
 
 "" GUI
-if exists('g:GuiLoaded')
-    Guifont Monospace:h12
-endif
-
+set guifont=Ubuntu\ Mono:h13
 
 "" Handling whitespace
 set expandtab                   "use spaces for tabs and set it to 4 spaces
@@ -250,6 +248,3 @@ autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
 let g:tagbar_width = 20
 nnoremap <leader>t :TagbarToggle<CR>
 
-
-" YAML
-autocmd FileType yaml setlocal sw=2 sts=2 et

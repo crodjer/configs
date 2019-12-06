@@ -100,7 +100,7 @@ font:
     #style: Italic
 
   # Point size
-  size: 14
+  size: 8
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -122,7 +122,7 @@ draw_bold_text_with_bright_colors: false
 colors:
   # Default colors
   primary:
-    background: '0xeeeeec'
+    background: '0xf0f0f0'
     foreground: '0x2e3436'
 
     # Bright and dim foreground colors
@@ -378,6 +378,10 @@ key_bindings:
   - { key: Copy,                    action: Copy                         }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
+  - { key: Y,        mods: Control, action: Paste                        }
+  - { key: W,        mods: Control, action: Copy                         }
+  - { key: V,        mods: Control, action: ScrollPageUp                 }
+  - { key: V,        mods: Alt,     action: ScrollPageDown               }
   - { key: Insert,   mods: Shift,   action: PasteSelection               }
   - { key: Key0,     mods: Control, action: ResetFontSize                }
   - { key: Equals,   mods: Control, action: IncreaseFontSize             }

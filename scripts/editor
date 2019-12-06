@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+set_nvim_listen_address
+

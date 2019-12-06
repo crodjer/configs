@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+i3-msg workspace 3
+sleep 0.5
+
+SCREENSHOT_DIR=/tmp/lock-screenshot
+mkdir -p $SCREENSHOT_DIR
+rm -rf $SCREENSHOT_DIR/*.png
+
+flameshot full -p $SCREENSHOT_DIR
+
+sleep 0.5
+i3lock -p win -i $SCREENSHOT_DIR/screenshot.png

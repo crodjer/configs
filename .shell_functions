@@ -110,11 +110,11 @@ function set_nvim_listen_address {
 
     # Set the NVIM listen address. Works for the server (launched via `nvim`)
     # and client (launched via `nvr`).
-    export NVIM_LISTEN_ADDRESS=/tmp/nvim-${server_name:-$1}-vim.sock
+    export NVIM_LISTEN_ADDRESS="/tmp/nvim-${server_name:-$1}-vim.sock"
 }
 export set_nvim_listen_address
 
-function reload-shell () {
+function reload_shell () {
     source ~/.profile
     exec $SHELL
 }
