@@ -44,7 +44,7 @@ set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
 
 "" Looks
-colorscheme default
+colorscheme solarized
 set background=light
 set colorcolumn=+1                      "mark the ideal max text width
 set relativenumber                      "show relative line numbers
@@ -64,7 +64,7 @@ set statusline+=\|%c                    " Column number
 set statusline+=\ [%p%%]                " Percent through lines
 
 set ruler
-highlight Normal guibg=#f0f0f0
+highlight Normal guibg=#fdf6e3
 highlight CursorLine cterm=NONE ctermbg='LightGrey'
 highlight ColorColumn ctermbg='LightGrey'
 highlight Pmenu ctermbg='LightYellow'
@@ -168,6 +168,7 @@ Plug 'kchmck/vim-coffee-script'      , { 'for': 'coffee' }
 Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
 Plug 'leafgarland/typescript-vim'    , { 'for': ['ts'] }
 Plug 'tpope/vim-fireplace'           , { 'for': ['clojure', 'clj'] }
+Plug 'ElmCast/elm-vim'               , { 'for': ['elm'] }
 
 " Done loading plugins
 call plug#end()
@@ -228,7 +229,7 @@ autocmd FileType java setlocal sw=2 sts=2 et
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
-let g:vim_markdown_new_list_item_indent = 1
+let g:vim_markdown_new_list_item_indent = 2
 autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=2
 
 " Python

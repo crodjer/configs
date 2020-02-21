@@ -29,19 +29,10 @@ echo "Downloading LineageOS for $codename..."
 aria2c -c "$lineage_url"
 
 echo "Downloading OpenGApps for $GAPPS_PLATFORM:$GAPPS_VERSION:$GAPPS_VARIENT..."
-aria2c -c "$gapps_url"
+# aria2c -c "$gapps_url"
 
 lineage_zip=$(basename $lineage_url)
 gapps_zip=$(basename $gapps_url)
-
-if [ "$(curl -s "$lineage_url?sha256")" !=  "$(sha256sum $lineage_zip)" ]; then
-    >&2 echo "LineageOS SHA256 Sum Mismatch!"
-    exit 1
-fi
-if [ "$(curl -sL $gapps_url.md5)" !=  "$(md5sum $gapps_zip)" ]; then
-    >&2 echo "OpenGApps SHA256 Sum Mismatch!"
-    exit 1
-fi
 
 echo "Please reboot your phone into recovery connect to this machine."
 read -p "Press enter once done..."
@@ -49,14 +40,18 @@ read -p "Press enter once done..."
 echo "Pushing zips to recovery via adb..."
 adb push $lineage_zip $gapps_zip /tmp/
 
-echo "Installing Lineage"
-adb shell twrp install $lineage_zip
-echo "Installing GApps"
-adb shell twrp install $gapps_zip
+echo "Please install the pushed zips."
+read -p "Press enter once done..."
 
-echo "Cleaning Cache/Dalvik"
-adb shell twrp wipe cache
-adb shell twrp wipe dalvik
+# echo "Installing Lineage"
+# adb shell twrp install /tmp/$lineage_zip
+# sleep 120
+# echo "Installing GApps"
+# adb shell twrp install /tmp/$gapps_zip
+
+# echo "Cleaning Cache/Dalvik"
+# adb shell twrp wipe cache
+# adb shell twrp wipe dalvik
 
 echo "Updating Hosts to block ads."
 adb shell mount -o rw /dev/block/bootdevice/by-name/system /system

@@ -10,6 +10,6 @@ synclient MinSpeed=0, MaxSpeed=1
 synclient PalmDetect=1, PalmMinWidth=5, PalmMinZ=12
 synclient EmulateTwoFingerMinZ=40, EmulateTwoFingerMinW=14
 synclient CoastingSpeed=0 # , CoastingFriction=100
-synclient TouchpadOff=0 # Completely disable touchpad.
 synclient MaxTapTime=0
-syndaemon -dKi 0.5
+syndaemon -dKi 0.1
+synclient TouchpadOff=1 # Completely disable touchpad.

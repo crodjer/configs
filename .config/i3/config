@@ -88,7 +88,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stackng
+bindsym $mod+s layout stackingstacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -142,18 +142,16 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
 
 # Screen brightness controls
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
-bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 
-bindsym $mod+eF86MonBrightnessDown exec xbacklight -set 1 # Set brightness to minimum
+bindsym $mod+XF86MonBrightnessDown exec xbacklight -set 1 # Set brightness to minimum
 bindsym $mod+XF86MonBrightnessUp exec xbacklight -set 20 # Set brightness to comfortable
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # Take screenshots
-bindsym $mod+Super_R exec flameshot gui
-bindsym $mod+Print exec flameshot gui
-
+bindsym $mod+Ctrl+Shift+p exec flameshot gui
 
 # Lock screen
 bindsym $mod+x exec mlock
