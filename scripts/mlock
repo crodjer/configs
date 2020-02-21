@@ -9,5 +9,5 @@ rm -rf $SCREENSHOT_DIR/*.png
 
 flameshot full -p $SCREENSHOT_DIR
 
-sleep 0.5
+sleep 1
 i3lock -p win -i $SCREENSHOT_DIR/screenshot.png

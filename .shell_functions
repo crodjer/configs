@@ -23,6 +23,7 @@ function make_home () {
         .gitconfig
         .gitignore
         .config/nvim/init.vim
+        .config/nvim/colors
         .config/alacritty/alacritty.yml
         .tmux.conf
         .toprc
