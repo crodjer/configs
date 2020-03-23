@@ -16,9 +16,11 @@ configure-sound.sh
 xautolock -time 10 -locker "lock" &
 compton &
 nm-applet &
+blueman-applet &
 bash "$HOME/.fehbg"
 xsetroot -cursor_name left_ptr -solid "#000"
 redshift-gtk &
+mpd --kill; mpd
 # redshift -l 17.53:73.86 -b 1:0.8 &
 clipit &
 
