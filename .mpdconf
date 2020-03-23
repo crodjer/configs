@@ -1,6 +1,6 @@
 port                "6600"
 bind_to_address     "0.0.0.0"
-music_directory     "~/music/library"
+music_directory     "~/music/"
 playlist_directory      "~/music/playlists"
 db_file                 "~/.mpd/mpd.db"
 log_file                "~/.mpd/mpd.log"

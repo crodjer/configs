@@ -70,17 +70,18 @@ highlight ColorColumn ctermbg='LightGrey'
 highlight Pmenu ctermbg='LightYellow'
 highlight PmenuSel ctermbg='Yellow' guibg='Yellow'
 highlight SpellBad ctermbg='Red' gui=undercurl guisp=Red
+highlight Normal ctermbg=None
 
 "display tabs and trailing spaces
 set list
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+set listchars=tab:\ \ ,trail:⋅,nbsp:⋅
 
 "disable paste mode
 set nopaste
 autocmd InsertLeave * set nopaste
 
 "" GUI
-set guifont=Ubuntu\ Mono:h13
+set guifont=Ubuntu\ Mono:h15
 
 "" Handling whitespace
 set expandtab                   "use spaces for tabs and set it to 4 spaces
@@ -210,7 +211,7 @@ let g:tagbar_type_coffee = {
         \ 'f:fields',
     \ ]
 \ }
-autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldenable foldnestmax=5
+autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldnestmax=3
 
 " FZF
 autocmd! FileType fzf
@@ -224,6 +225,9 @@ nnoremap <leader>h :History<CR>
 " Git commit
 autocmd FileType gitcommit setlocal spell! spelllang=en
 
+" Go
+autocmd FileType go setlocal noet ts=2 sw=2 sts=2 ai
+
 " Java
 autocmd FileType java setlocal sw=2 sts=2 et
 
@@ -233,7 +237,8 @@ let g:vim_markdown_new_list_item_indent = 2
 autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=2
 
 " Python
-let g:syntastic_python_checkers = ['python3']
+let g:syntastic_python_checkers = ['pylint']
+" let g:syntastic_python_python_exec = 'python3'
 
 " Ruby
 autocmd FileType ruby setlocal sw=2 sts=2 et
