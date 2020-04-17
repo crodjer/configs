@@ -334,8 +334,6 @@ key_bindings:
   - { key: Copy,                    action: Copy                         }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
-  - { key: V,        mods: Control, action: ScrollPageUp                 }
-  - { key: V,        mods: Alt,     action: ScrollPageDown               }
   - { key: Insert,   mods: Shift,   action: PasteSelection               }
   - { key: Key0,     mods: Control, action: ResetFontSize                }
   - { key: Equals,   mods: Control, action: IncreaseFontSize             }

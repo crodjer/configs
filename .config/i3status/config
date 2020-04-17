@@ -14,7 +14,7 @@ general {
 order += "wireless _first_"
 order += "battery all"
 order += "load"
-order += "cpu_temperature 0"
+order += "cpu_temperature 1"
 order += "volume master"
 order += "tztime local"
 
@@ -37,12 +37,13 @@ tztime local {
 }
 
 load {
-    format = "%1min"
+    format = "%1min %5min"
+    format_above_threshold= "⚠️ %1min %5min"
 }
 
-cpu_temperature 0 {
+cpu_temperature 1 {
     format = "%degrees°C"
-    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input"
+    path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input"
     max_threshold = 50
 }
 
