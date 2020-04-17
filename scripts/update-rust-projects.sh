@@ -8,8 +8,8 @@ function run_command {
     bash -c "$cmd" &> /tmp/cron-$log.log
 }
 
-run_command "docker container prune -f && docker image prune -af" docker-cleanup
-run_command "docker container prune -f"  docker-container-cleanup
+# run_command "docker container prune -f && docker image prune -af" docker-cleanup
+run_command "docker container prune"  docker-container-cleanup
 run_command "rustup update"  rustup-update
 run_command "cargo +nightly install-update racer"  racer-update
 run_command "cargo install-update -a"  cargo-update
