@@ -1,4 +1,4 @@
-# #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 set -e
 
@@ -20,7 +20,6 @@ gapps_pattern="https://downloads.sourceforge.net/project/opengapps/$GAPPS_PLATFO
 gapps_url=$(curl -s https://api.opengapps.org/list | grep -Eo $gapps_pattern | head -1)
 echo "$gapps_url"
 
-work_dir=$(mktemp --tmpdir -d lineageos-update-XXXX)
 work_dir="/tmp/lineage-updates-$codename"
 mkdir -p $work_dir
 
@@ -40,21 +39,21 @@ read -p "Press enter once done..."
 echo "Pushing zips to recovery via adb..."
 adb push $lineage_zip $gapps_zip /tmp/
 
-# echo "Please install the pushed zips."
-# read -p "Press enter once done..."
+echo "Please install the pushed zips."
+read -p "Press enter once done..."
 
-echo "Installing Lineage..."
-adb shell twrp install /tmp/$lineage_zip
-echo "Installing GApps..."
-adb shell twrp install /tmp/$gapps_zip
+# echo "Installing Lineage..."
+# adb shell twrp install /tmp/$lineage_zip
+# echo "Installing GApps..."
+# adb shell twrp install /tmp/$gapps_zip
+# 
+# echo "Cleaning Cache/Dalvik"
+# adb shell twrp wipe cache
+# adb shell twrp wipe dalvik
 
-echo "Cleaning Cache/Dalvik"
-adb shell twrp wipe cache
-adb shell twrp wipe dalvik
-
-echo "Updating Hosts to block ads."
-adb shell mount -o rw /dev/block/bootdevice/by-name/system /system
-adb shell cp /system/etc/hosts /system/etc/hosts.bk
-wget https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts -O $work_dir/hosts
-adb push $work_dir/hosts /system/etc/hosts
-adb shell umount /system
+# echo "Updating Hosts to block ads."
+# adb shell mount -o rw /dev/block/bootdevice/by-name/system /system
+# adb shell cp /system/etc/hosts /system/etc/hosts.bk
+# wget https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts -O $work_dir/hosts
+# adb push $work_dir/hosts /system/etc/hosts
+# adb shell umount /system

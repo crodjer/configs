@@ -12,4 +12,4 @@ synclient EmulateTwoFingerMinZ=40, EmulateTwoFingerMinW=14
 synclient CoastingSpeed=0 # , CoastingFriction=100
 synclient MaxTapTime=0
 syndaemon -dKi 0.1
-synclient TouchpadOff=1 # Completely disable touchpad.
+# synclient TouchpadOff=1 # Completely disable touchpad.
