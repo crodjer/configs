@@ -13,6 +13,5 @@ run_command "docker container prune -f"  docker-container-cleanup
 run_command "$HOME/.cargo/bin/rustup update"  rustup-update
 run_command "$HOME/.cargo/bin/cargo +nightly install-update racer"  racer-update
 run_command "$HOME/.cargo/bin/cargo install-update -a"  cargo-update
-run_command "cd $HOME/projects/gnvim && git pull && cargo build --release"  cargo-update
 run_command "cd $HOME/projects/alacritty && git pull && cargo build --release"  alacritty-update
 run_command "cd $HOME/projects/tmux && git pull && ./autogen.sh && make"  tmux-update
