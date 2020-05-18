@@ -67,6 +67,7 @@ else
 fi
 
 alias cb='xclip -selection clipboard'
+alias k='kubectl'
 
 debug_shell ZSH: Utility functions
 

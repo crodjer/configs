@@ -144,13 +144,15 @@ endif
 silent! call plug#begin()
 
 " General plugins
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
 
 " Language plugins
@@ -224,7 +226,8 @@ autocmd FileType gitcommit setlocal spell spelllang=en
 autocmd FileType go setlocal noet ts=2 sw=2 sts=2 ai
 
 " Java
-autocmd FileType java setlocal sw=2 sts=2 et
+autocmd FileType java setlocal sw=4 sts=4 et
+let g:syntastic_java_javac_executable= "*.jar"
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']

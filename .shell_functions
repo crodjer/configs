@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 debug_shell () {
     if [ "$DEBUG_SHELL" ]; then
@@ -119,5 +119,21 @@ function reload_shell () {
     exec $SHELL
 }
 export reload_shell
+
+function set_java_home() {
+    local java_home=/usr/lib/jvm/$1
+
+    if [ -z $1 ]; then
+        1>&2 echo "JVM dir is required!"
+        return 1
+    fi
+
+    if [ ! -d $java_home ]; then
+        1>&2 echo "$java_home is not a valid Java Home!"
+    fi
+
+    export PATH=$java_home/bin:$(echo $PATH | sed -E 's#:?.+jvm/[^/]+/bin:##g')
+    export JAVA_HOME=$java_home
+}
 
 set_nvim_listen_address
