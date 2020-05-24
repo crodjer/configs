@@ -12,7 +12,6 @@ if [ "$CONFIGS_SRC_DIR" ]; then
 fi
 
 debug_shell ZSH: Options
-
 #-------------------------#
 # Options
 #-------------------------#
@@ -51,7 +50,16 @@ bindkey '^[[Z' reverse-menu-complete
 fpath+=~/.zfunc
 
 autoload -Uz compinit
-compinit
+# Instead of having compinit happen on every prompt, use the cached version in
+# the prompt and have it re-load every 5 minutes via Cron
+# * * * * * zsh -i -c 'compinit'
+if [[ $(uname -a) =~ Darwin && $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]]; then
+	compinit;
+elif [[ -n $HOME/.zcompdump(#qN.mh+1) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
 
 debug_shell ZSH: Aliases
 
