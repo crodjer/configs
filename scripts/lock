@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-i3lock -i /home/rohan/pictures/misc/rust-lang.png
+# i3lock -i /home/rohan/pictures/misc/rust-lang.png
