@@ -11,6 +11,12 @@ if [ "$CONFIGS_SRC_DIR" ]; then
     source $CONFIGS_SRC_DIR/.shell_functions
 fi
 
+debug_shell () {
+    if [ "$DEBUG_SHELL" ]; then
+        echo "$(date +'%T-%N') $@"
+    fi
+}
+
 debug_shell ZSH: Options
 #-------------------------#
 # Options
@@ -121,23 +127,26 @@ gen-prompt () {
     echo "$_line_1$_newline$_line_2"
 }
 
-source "$CONFIGS_SRC_DIR/.shell_functions"
+debug_shell ZSH: Prompt
+#-------------------------#
+# Prompt
+#-------------------------#
+if [ -x "$(command -v starship)" -a -f $HOME/.config/starship.toml ]; then
+    eval "$(starship init zsh)"
+else
+    PROMPT='$(gen-prompt)'
+    RPROMPT="%F{green}%~%f"
+fi
 
 debug_shell ZSH: Initializations
-
 #-------------------------#
 # Initializations
 #-------------------------#
-PROMPT='$(gen-prompt)'
-RPROMPT="%F{green}%~%f"
 
 # Initialize autojump
 [[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
 [[ -s "/usr/share/autojump/autojump.sh" ]] && source "/usr/share/autojump/autojump.sh"
 [[ -s "/etc/profile.d/autojump.zsh" ]] && source "/etc/profile.d/autojump.zsh"
-
-# Set the default Vim server name.
-set_nvim_listen_address
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -152,5 +161,6 @@ if [ -e "$HOME/.zshrc.local" ]; then
 fi
 
 debug_shell ZSH: Done
+
 # Exit with success
 true
