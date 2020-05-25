@@ -59,7 +59,7 @@ autoload -Uz compinit
 # Instead of having compinit happen on every prompt, use the cached version in
 # the prompt and have it re-load every 5 minutes via Cron
 # * * * * * zsh -i -c 'compinit'
-if [[ $(uname -a) =~ Darwin && $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]]; then
+if [[ "$MACOS" && $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]]; then
 	compinit;
 elif [[ -n $HOME/.zcompdump(#qN.mh+1) ]]; then
 	compinit;
@@ -131,7 +131,9 @@ debug_shell ZSH: Prompt
 #-------------------------#
 # Prompt
 #-------------------------#
-if [ -x "$(command -v starship)" -a -f $HOME/.config/starship.toml ]; then
+if [ -x "$(command -v starship)" -a \
+    -f $HOME/.config/starship.toml -a \
+    -n "$MACOS" -o -n "$DISPLAY" ]; then
     eval "$(starship init zsh)"
 else
     PROMPT='$(gen-prompt)'
