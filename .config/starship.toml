@@ -21,7 +21,7 @@ min_time = 2_000
 show_milliseconds = true
 
 [kubernetes]
-disabled = false
+disabled = true
 
 [memory_usage]
 disabled = false
