@@ -44,7 +44,7 @@ set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
 "" Looks
 set background=light
-colorscheme solarized
+colorscheme desert
 set colorcolumn=+1                      "mark the ideal max text width
 set relativenumber                      "show relative line numbers
 set number                              "show absolute current line number
@@ -66,6 +66,7 @@ set ruler
 highlight Normal guibg=#fdf6e3 ctermbg=None
 highlight SpellBad cterm=underline gui=underline guisp=Grey
 highlight rubyDefine ctermbg=None
+highlight ColorColumn ctermbg=7
 
 "display tabs and trailing spaces
 set list
