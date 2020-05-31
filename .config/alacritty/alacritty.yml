@@ -68,77 +68,91 @@ scrolling:
 # Please see these resources for more information on how to use fontconfig:
 #   - https://wiki.archlinux.org/index.php/font_configuration#Fontconfig_configuration
 #   - file:///usr/share/doc/fontconfig/fontconfig-user.html
-font:
-  # Normal (roman) font face
-  normal:
-    family: 'Ubuntu Mono'
-    # The `style` can be specified to pick a specific face.
-    #style: Regular
 
-  # Bold font face
-  bold:
-    family: 'Ubuntu Mono'
-    # The `style` can be specified to pick a specific face.
-    #style: Bold
+fonts:
+    source_code_pro: &scp
+        family: 'Source Code Pro'
 
-  # Italic font face
-  italic:
-    family: 'Ubuntu Mono'
-    # The `style` can be specified to pick a specific face.
-    #style: Italic
+    # Raspberry Pi Font config.
+    raspberry_pi: &rpi
+        normal: *scp
+        bold: *scp
+        italic: *scp
+        size: 10
 
-  # Point size
-  size: 10
-
-  # Offset is the extra space around each character. `offset.y` can be thought of
-  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
-  offset:
-    x: 0
-    y: 1
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increasing `x` moves the glyph to the right,
-  # increasing `y` moves the glyph upwards.
-  glyph_offset:
-    x: 0
-    y: 0
+font: *rpi
 
 # If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: false
+draw_bold_text_with_bright_colors: true
 
-# Colors (Tomorrow Night Bright)
-colors:
-  # Default colors
-  primary:
-    background: '0xfdf6e3' # base3
-    foreground: '0x657b83' # base00
+schemes:
+  solarized_light: &light
+    # Default colors
+    primary:
+      background: '#fdf6e3' # base3
+      foreground: '#657b83' # base00
 
-  # Cursor colors
-  cursor:
-    text:   '0xfdf6e3' # base3
-    cursor: '0x657b83' # base00
+    # Cursor colors
+    cursor:
+      text:   '#fdf6e3' # base3
+      cursor: '#657b83' # base00
 
-  # Normal colors
-  normal:
-    black:   '0x073642' # base02
-    red:     '0xdc322f' # red
-    green:   '0x859900' # green
-    yellow:  '0xb58900' # yellow
-    blue:    '0x268bd2' # blue
-    magenta: '0xd33682' # magenta
-    cyan:    '0x2aa198' # cyan
-    white:   '0xeee8d5' # base2
+    # Normal colors
+    normal:
+      black:   '#073642' # base02
+      red:     '#dc322f' # red
+      green:   '#859900' # green
+      yellow:  '#b58900' # yellow
+      blue:    '#268bd2' # blue
+      magenta: '#d33682' # magenta
+      cyan:    '#2aa198' # cyan
+      white:   '#eee8d5' # base2
 
-  # Bright colors
-  bright:
-    black:   '0x002b36' # base03
-    red:     '0xcb4b16' # orange
-    green:   '0x586e75' # base01
-    yellow:  '0x657b83' # base00
-    blue:    '0x839496' # base0
-    magenta: '0x6c71c4' # violet
-    cyan:    '0x93a1a1' # base1
-    white:   '0xcac3b1' # base3 (customised to be more visible)
+    # Bright colors
+    bright:
+      black:   '#002b36' # base03
+      red:     '#cb4b16' # orange
+      green:   '#586e75' # base01
+      yellow:  '#657b83' # base00
+      blue:    '#839496' # base0
+      magenta: '#6c71c4' # violet
+      cyan:    '#93a1a1' # base1
+      white:   '#fdf6e3' # base3
+
+  solarized_dark: &dark
+    # Default colors
+    primary:
+      background: '#002b36' # base03
+      foreground: '#839496' # base0
+
+    # Cursor colors
+    cursor:
+      text:   '#002b36' # base03
+      cursor: '#839496' # base0
+
+    # Normal colors
+    normal:
+      black:   '#073642' # base02
+      red:     '#dc322f' # red
+      green:   '#859900' # green
+      yellow:  '#b58900' # yellow
+      blue:    '#268bd2' # blue
+      magenta: '#d33682' # magenta
+      cyan:    '#2aa198' # cyan
+      white:   '#eee8d5' # base2
+
+    # Bright colors
+    bright:
+      black:   '#586e75' # base01
+      red:     '#cb4b16' # orange
+      green:   '#586e75' # base01
+      yellow:  '#657b83' # base00
+      blue:    '#839496' # base0
+      magenta: '#6c71c4' # violet
+      cyan:    '#93a1a1' # base1
+      white:   '#fdf6e3' # base3
+
+colors: *dark
 
 # Visual Bell
 #
