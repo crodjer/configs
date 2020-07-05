@@ -66,7 +66,7 @@ set ruler
 highlight Normal guibg=#fdf6e3 ctermbg=None
 highlight SpellBad cterm=underline gui=underline guisp=Grey
 highlight rubyDefine ctermbg=None
-highlight ColorColumn ctermbg=7
+highlight ColorColumn ctermbg=73
 
 "display tabs and trailing spaces
 set list
@@ -251,6 +251,5 @@ autocmd FileType rust setlocal textwidth=80
 autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
 
 " Tagbar
-let g:tagbar_width = 20
+let g:tagbar_width = 30
 nnoremap <leader>t :TagbarToggle<CR>
-
