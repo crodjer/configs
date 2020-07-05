@@ -57,3 +57,5 @@
         gpgSign = true
 [rerere]
 	enabled = true
+[pull]
+	ff = only
