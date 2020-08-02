@@ -16,6 +16,7 @@ set nofoldenable            "don't fold by default
 set clipboard=unnamedplus   "use system clipboard
 set mouse-=a
 set cursorline
+set signcolumn=yes:1
 
 " Format options
 set formatoptions-=o    "disable auto comment leader insertion with o/O
@@ -67,6 +68,7 @@ highlight Normal guibg=#fdf6e3 ctermbg=None
 highlight SpellBad cterm=underline gui=underline guisp=Grey
 highlight rubyDefine ctermbg=None
 highlight ColorColumn ctermbg=73
+highlight SignColumn ctermbg=None
 
 "display tabs and trailing spaces
 set list
@@ -168,6 +170,7 @@ Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
 Plug 'leafgarland/typescript-vim'    , { 'for': ['ts'] }
 Plug 'tpope/vim-fireplace'           , { 'for': ['clojure', 'clj'] }
 Plug 'ElmCast/elm-vim'               , { 'for': ['elm'] }
+Plug 'artur-shaik/vim-javacomplete2' , { 'for': ['java'] }
 
 " Done loading plugins
 call plug#end()
@@ -179,13 +182,25 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" Ack
 if executable('rg')
     let g:ackprg = 'rg --vimgrep'
 elseif executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
+" Ale
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_open_list = 1
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '!'
+let g:ale_sign_column_always = 1
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
+nmap <silent> <leader>ag :ALEGoToDefinition<cr>
+
 "" Language configurations
+
 " JS/JSX
 let g:jsx_ext_required = 1
 let g:syntastic_javascript_checkers = ['eslint']
@@ -227,7 +242,7 @@ autocmd FileType gitcommit setlocal spell spelllang=en
 autocmd FileType go setlocal noet ts=2 sw=2 sts=2 ai
 
 " Java
-autocmd FileType java setlocal sw=4 sts=4 et
+autocmd FileType java setlocal sw=4 sts=4 et omnifunc=javacomplete#Complete
 let g:syntastic_java_javac_executable= "*.jar"
 
 " Markdown
