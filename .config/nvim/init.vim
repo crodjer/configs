@@ -191,13 +191,18 @@ endif
 
 " Ale
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_open_list = 1
+" let g:ale_open_list = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '!'
 let g:ale_sign_column_always = 1
+
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <leader>ag :ALEGoToDefinition<cr>
+augroup CloseLoclistWindowGroup
+  autocmd!
+  autocmd QuitPre * if empty(&buftype) | lclose | endif
+augroup END
 
 "" Language configurations
 
