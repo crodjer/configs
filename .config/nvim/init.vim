@@ -45,7 +45,7 @@ set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
 "" Looks
 set background=light
-colorscheme solarized
+colorscheme tango
 set colorcolumn=+1                      "mark the ideal max text width
 set relativenumber                      "show relative line numbers
 set number                              "show absolute current line number
