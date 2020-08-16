@@ -33,7 +33,13 @@
   {
     "type": "play",
     "align": "right",
-    "width": 40,
+    "width": 40
+  },
+
+  // Control night shift
+  {
+    "type": "nightShift",
+    "align": "right"
   },
 
   // Pomodoro
