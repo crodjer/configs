@@ -4,7 +4,8 @@
   {
     "type": "dock",
     "filter": "(Brave)|(Firefox)|(Signal)|(iTerm)|(IDEA)",
-    "autoResize": true
+    "autoResize": true,
+    "align": "left"
   },
 
   // Music
