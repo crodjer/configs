@@ -82,6 +82,7 @@ export NPM_PACKAGES="$HOME/.npm-packages"
 export MANPATH="$HOME/.npm-packages/share/man:$MANPATH"
 export GPODDER_HOME="$HOME/.gpodder"
 export GPG_TTY=$(tty)
+export BAT_THEME="Solarized (light)"
 
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #

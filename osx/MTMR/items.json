@@ -3,7 +3,7 @@
   // Show my dock, while filtering the most used apps for quick switching.
   {
     "type": "dock",
-    "filter": "(Brave)|(Firefox)|(Signal)|(iTerm)|(IDEA)",
+    "filter": "(Brave)|(iTerm)|(IDEA)|(Slack)",
     "autoResize": true,
     "align": "left"
   },
