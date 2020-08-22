@@ -58,6 +58,7 @@ set statusline+=%m                      " Modified flag
 set statusline+=%#warningmsg#
 set statusline+=%*
 set statusline+=%=                      " Right alignment separator
+set statusline+=%{LinterStatus()}
 set statusline+=%{FugitiveStatusline()} " Git Status
 set statusline+=\ %l/%L%*               " Line number / Total lines
 set statusline+=\|%c                    " Column number
@@ -203,6 +204,19 @@ augroup CloseLoclistWindowGroup
   autocmd!
   autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK ' : printf(
+    \   '%dW %dE ',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
 
 "" Language configurations
 
