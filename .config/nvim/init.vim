@@ -172,6 +172,7 @@ Plug 'leafgarland/typescript-vim'    , { 'for': ['ts'] }
 Plug 'tpope/vim-fireplace'           , { 'for': ['clojure', 'clj'] }
 Plug 'ElmCast/elm-vim'               , { 'for': ['elm'] }
 Plug 'artur-shaik/vim-javacomplete2' , { 'for': ['java'] }
+Plug 'ledger/vim-ledger'             , { 'for': ['dat'] }
 
 " Done loading plugins
 call plug#end()
@@ -263,6 +264,15 @@ autocmd FileType go setlocal noet ts=2 sw=2 sts=2 ai
 " Java
 autocmd FileType java setlocal sw=4 sts=4 et omnifunc=javacomplete#Complete
 let g:syntastic_java_javac_executable= "*.jar"
+
+" Ledger
+let g:ledger_default_commodity = "₹ "
+autocmd FileType ledger inoremap <silent> <Tab> <C-R>=ledger#autocomplete_and_align()<CR>
+autocmd FileType ledger inoremap <silent> <Esc> <Esc>:LedgerAlign<CR>
+autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
+autocmd FileType ledger nnoremap <silent> <Tab> :LedgerAlign<CR>
+autocmd FileType ledger noremap { ?^\d<CR>
+autocmd FileType ledger noremap } /^\d<CR>
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
