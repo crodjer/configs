@@ -36,9 +36,14 @@ local appList = {
        binding = "s",
        autoHide = true
     },
-    Mail = {
+    ["Gmail Work"] = {
        screen = lcd,
        binding = "m",
+       autoHide = true
+    },
+    ["Gmail Personal"] = {
+       screen = lcd,
+       binding = "p",
        autoHide = true
     },
     Music = {
@@ -55,18 +60,19 @@ local appList = {
 }
 
 
+-- -- Calendar: A nice calendar on the desktop.
+hs.loadSpoon("Calendar")
+-- -- CircleClock: A nice clock on the desktop.
+hs.loadSpoon("CircleClock")
+
 -- Caffeine: A button in the menu bar.
 hs.loadSpoon("Caffeine")
 spoon.Caffeine:start()
 
 -- ReloadConfiguration: Auto reload configuration for Hammerspoon
 hs.loadSpoon("ReloadConfiguration")
+spoon.ReloadConfiguration.watch_paths = { hs.configdir, "~/configs/.hammerspoon" }
 spoon.ReloadConfiguration:start()
-
--- Calendar: A nice calendar on the desktop.
-hs.loadSpoon("Calendar")
--- CircleClock: A nice clock on the desktop.
-hs.loadSpoon("CircleClock")
 
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
@@ -93,7 +99,7 @@ hs.hotkey.bind(hsModifier, "h", function()
 
    hideApps()
    -- IDEA/Brave misbehave, so try hiding them once again.
-   hs.timer.doAfter(0.01, hideApps)
+   hs.timer.doAfter(0.1, hideApps)
 end)
 
 -- Show all applications
@@ -164,8 +170,8 @@ function handleAppEvent(appName, event, app, retry)
       setAppLayout(app, config)
    -- Deactivate event, window should be auto-hidden
    elseif event == hs.application.watcher.deactivated and config.autoHide then
-      local screenMonitor = hs.screen.find(monitor)
       local screenLCD = hs.screen.find(lcd)
+      local screenMonitor = hs.screen.find(monitor) or screenLCD
 
       for _, window in pairs(app:allWindows()) do
          -- If any autohide app's window is on the monitor, hide the app.
@@ -179,3 +185,5 @@ end
 
 appWatcher = hs.application.watcher.new(handleAppEvent)
 appWatcher:start()
+
+setLayout()
