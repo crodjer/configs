@@ -186,4 +186,4 @@ end
 appWatcher = hs.application.watcher.new(handleAppEvent)
 appWatcher:start()
 
-setLayout()
+-- setLayout()
