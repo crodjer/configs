@@ -46,6 +46,10 @@ local appList = {
        binding = "p",
        autoHide = true
     },
+    ["WhatsApp Web"] = {
+       screen = lcd,
+       autoHide = true
+    },
     Music = {
        screen = lcd,
        autoHide = true
@@ -167,7 +171,7 @@ function handleAppEvent(appName, event, app, retry)
    -- Window was launched, launch it with the correct layout / screen.
    elseif event == hs.application.watcher.launched then
       maximizeApp(app)
-      setAppLayout(app, config)
+      setAppLayout(appName, config)
    -- Deactivate event, window should be auto-hidden
    elseif event == hs.application.watcher.deactivated and config.autoHide then
       local screenLCD = hs.screen.find(lcd)
@@ -185,5 +189,3 @@ end
 
 appWatcher = hs.application.watcher.new(handleAppEvent)
 appWatcher:start()
-
--- setLayout()
