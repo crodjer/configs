@@ -88,6 +88,7 @@ spoon.WindowScreenLeftAndRight:bindHotkeys({
 -- Seal: The awesome seal plugin, with pasteboard (pb) support.
 hs.loadSpoon("Seal")
 spoon.Seal:loadPlugins({ "apps", "pasteboard" })
+spoon.Seal.plugins.pasteboard.historySize = 100
 spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
 })
