@@ -87,8 +87,21 @@ spoon.WindowScreenLeftAndRight:bindHotkeys({
 
 -- Seal: The awesome seal plugin, with pasteboard (pb) support.
 hs.loadSpoon("Seal")
-spoon.Seal:loadPlugins({ "apps", "pasteboard" })
+spoon.Seal:loadPlugins({ "apps", "pasteboard", "urlformats", "useractions" })
 spoon.Seal.plugins.pasteboard.historySize = 100
+spoon.Seal.plugins.useractions.actions = {
+   ["Heimdall Jira"] = {
+      url = "https://ifountain.atlassian.net/browse/HEIMDALL-${query}",
+      keyword = "hj"
+   },
+   ["OG Support"] = {
+      url = "https://ifountain.atlassian.net/browse/OGS-${query}",
+      keyword = "ogs"
+   }
+}
+spoon.Seal.plugins.urlformats:providersTable({
+   hj = { name = "Heimdall Jira", url = "https://ifountain.atlassian.net/browse/HEIMDALL-%s" }
+})
 spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
 })
