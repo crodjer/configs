@@ -12,7 +12,7 @@ lineage_page=https://download.lineageos.org/$codename
 pattern="https://mirrorbits.lineageos.org/full/$codename/[0-9]+/[^>]+-$codename-signed.zip"
 
 echo "Getting LineageOS URL..."
-lineage_url=$(curl -s $lineage_page | grep -Po "$pattern"  | head -1)
+lineage_url=$(curl -s $lineage_page | grep -Eo "$pattern"  | head -1)
 echo "$lineage_url"
 
 echo "Getting GApps URL..."
@@ -39,8 +39,8 @@ read -p "Press enter once done..."
 echo "Pushing zips to recovery via adb..."
 adb push $lineage_zip $gapps_zip /tmp/
 
-echo "Please install the pushed zips."
-read -p "Press enter once done..."
+# echo "Please install the pushed zips."
+# read -p "Press enter once done..."
 
 # echo "Installing Lineage..."
 # adb shell twrp install /tmp/$lineage_zip
