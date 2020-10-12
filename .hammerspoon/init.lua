@@ -15,10 +15,6 @@ local appList = {
        -- iTerm2 has a different appName and window name.
        appName = 'iTerm'
     },
-    Jira = {
-       screen = monitor,
-       binding = "j"
-    },
     ["IntelliJ IDEA"] = {
        screen = monitor,
        binding = "e",
@@ -36,18 +32,9 @@ local appList = {
        binding = "s",
        autoHide = true
     },
-    ["Gmail Work"] = {
+    Postman = {
        screen = lcd,
-       binding = "m",
-       autoHide = true
-    },
-    ["Gmail Personal"] = {
-       screen = lcd,
-       binding = "p",
-       autoHide = true
-    },
-    ["WhatsApp Web"] = {
-       screen = lcd,
+       binding = "r",
        autoHide = true
     },
     Music = {
@@ -56,7 +43,6 @@ local appList = {
     },
     Firefox = {
        screen = lcd,
-       binding = "f",
        autoHide = true
     },
     Signal = { screen = lcd, autoHide = true },
