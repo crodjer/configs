@@ -7,21 +7,27 @@ local lcd = "LCD"
 -- The attached external monitor
 local monitor = "MONITOR"
 
+-- Enable autohide
+local enableAutohide = false
+
 -- List of apps and their screeen / binding, configuration
 local appList = {
     iTerm2 = {
        screen = monitor,
        binding = "t",
        -- iTerm2 has a different appName and window name.
-       appName = 'iTerm'
+       appName = 'iTerm',
+       layout = hs.layout.maximized
     },
     ["IntelliJ IDEA"] = {
        screen = monitor,
        binding = "e",
+       layout = hs.layout.maximized
     },
     ["Brave Browser"] = {
        screen = lcd,
        binding = "b",
+       layout = hs.layout.maximized,
     },
     ["zoom.us"] = {
        screen = lcd,
@@ -30,22 +36,28 @@ local appList = {
     Slack = {
        screen = lcd,
        binding = "s",
-       autoHide = true
+       layout = hs.layout.maximized
     },
     Postman = {
        screen = lcd,
        binding = "r",
-       autoHide = true
+       autoHide = enableAutohide,
+       layout = hs.layout.maximized
     },
     Music = {
        screen = lcd,
-       autoHide = true
+       autoHide = enableAutohide
     },
     Firefox = {
        screen = lcd,
-       autoHide = true
+       binding = "f",
+       autoHide = enableAutohide,
+       layout = hs.layout.maximized
     },
-    Signal = { screen = lcd, autoHide = true },
+    Signal = { screen = lcd,
+               autoHide = enableAutohide,
+               layout = hs.layout.maximized,
+               binding = "g" },
     Finder = { screen = lcd },
 }
 
@@ -93,6 +105,13 @@ spoon.Seal:bindHotkeys({
 })
 spoon.Seal:start()
 
+hs.alert.defaultStyle.radius = 10
+hs.alert.defaultStyle.atScreenEdge = 2
+hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.5 }
+hs.alert.defaultStyle.textSize = 15
+hs.alert.defaultStyle.fadeInDuration = 0.1
+hs.alert.defaultStyle.fadeOutDuration = 0.1
+
 -- Hide all applications
 hs.hotkey.bind(hsModifier, "h", function()
    function hideApps()
@@ -106,19 +125,22 @@ hs.hotkey.bind(hsModifier, "h", function()
    hs.timer.doAfter(0.1, hideApps)
 end)
 
--- Show all applications
-hs.hotkey.bind(hsModifier, "a", function()
-   for _, app in pairs(hs.application.runningApplications()) do
-      app:unhide()
-   end
-end)
+alertId = nil
 
 -- Attach app bindings
 for app, config in pairs(appList) do
     -- Bind the app 
     if config.binding ~= nil then
        hs.hotkey.bind(hsModifier, config.binding, function()
-          hs.application.launchOrFocus(config.appName or app)
+          application = hs.application.find(config.appName or app)
+          if config.autoHide then
+             -- Do nothing.
+          elseif application then
+             hs.application.launchOrFocus(config.appName or app)
+          else
+             hs.alert.closeSpecific(alertID, 0)
+             alertId = hs.alert(app .. " not running!", nil, nil, 1)
+          end
        end)
     end
 end
@@ -130,7 +152,7 @@ function setAppLayout(app, config)
 
    -- Try to get the app's screen, otherwise default to LCD
    screen = hs.screen.find(config.screen) or hs.screen.find(lcd)
-   layout = config.layout or hs.layout.maximized
+   layout = config.layout -- or hs.layout.maximized
 
    hs.layout.apply({
       [app] = { app, nil, screen, layout, nil, nil }
@@ -167,10 +189,10 @@ function handleAppEvent(appName, event, app, retry)
 
    -- Window is activated, maximise it.
    if event == hs.application.watcher.activated then
-      maximizeApp(app)
+      -- maximizeApp(app)
+      setAppLayout(appName, config)
    -- Window was launched, launch it with the correct layout / screen.
    elseif event == hs.application.watcher.launched then
-      maximizeApp(app)
       setAppLayout(appName, config)
    -- Deactivate event, window should be auto-hidden
    elseif event == hs.application.watcher.deactivated and config.autoHide then
