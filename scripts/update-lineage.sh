@@ -34,26 +34,17 @@ lineage_zip=$(basename $lineage_url)
 gapps_zip=$(basename $gapps_url)
 
 echo "Please reboot your phone into recovery connect to this machine."
+echo "Create a TWRP backup."
 read -p "Press enter once done..."
 
 echo "Pushing zips to recovery via adb..."
-adb push $lineage_zip $gapps_zip /tmp/
+adb -d push $lineage_zip $gapps_zip /tmp/
 
-# echo "Please install the pushed zips."
-# read -p "Press enter once done..."
+echo "Installing Lineage..."
+adb -d shell twrp install /tmp/$lineage_zip
+echo "Installing GApps..."
+adb -d shell twrp install /tmp/$gapps_zip
 
-# echo "Installing Lineage..."
-# adb shell twrp install /tmp/$lineage_zip
-# echo "Installing GApps..."
-# adb shell twrp install /tmp/$gapps_zip
-# 
-# echo "Cleaning Cache/Dalvik"
-# adb shell twrp wipe cache
-# adb shell twrp wipe dalvik
-
-# echo "Updating Hosts to block ads."
-# adb shell mount -o rw /dev/block/bootdevice/by-name/system /system
-# adb shell cp /system/etc/hosts /system/etc/hosts.bk
-# wget https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts -O $work_dir/hosts
-# adb push $work_dir/hosts /system/etc/hosts
-# adb shell umount /system
+echo "Cleaning Cache/Dalvik"
+adb -d shell twrp wipe cache
+adb -d shell twrp wipe dalvik
