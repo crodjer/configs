@@ -23,6 +23,9 @@ show_milliseconds = true
 [kubernetes]
 disabled = true
 
+[nodejs]
+disabled = true
+
 [memory_usage]
 disabled = true
 show_percentage = true

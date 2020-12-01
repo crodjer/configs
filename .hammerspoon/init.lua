@@ -41,6 +41,12 @@ local appList = {
     Postman = {
        screen = lcd,
        binding = "r",
+       layout = hs.layout.maximized
+    },
+    ["Trello (Beta)"] = {
+       screen = lcd,
+       binding = "m",
+       searchName = "Trello",
        autoHide = enableAutohide,
        layout = hs.layout.maximized
     },
@@ -132,7 +138,7 @@ for app, config in pairs(appList) do
     -- Bind the app 
     if config.binding ~= nil then
        hs.hotkey.bind(hsModifier, config.binding, function()
-          application = hs.application.find(config.appName or app)
+          application = hs.application.find(config.searchName or config.appName or app)
           if config.autoHide then
              -- Do nothing.
           elseif application then
@@ -146,7 +152,8 @@ for app, config in pairs(appList) do
 end
 
 function setAppLayout(app, config)
-   if hs.application.find(app) == nil then
+   print(app)
+   if hs.application.find(config.searchName or app) == nil then
       return
    end
 
