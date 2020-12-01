@@ -157,6 +157,8 @@ trap 'preexec_invoke_exec' DEBUG
 
 # Initialize fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
+[ /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
 
 if [ -e "$HOME/.bashrc.local" ]; then
     source "$HOME/.bashrc.local"

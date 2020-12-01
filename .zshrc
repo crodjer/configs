@@ -152,6 +152,8 @@ debug_shell ZSH: Initializations
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 
 # Load local bashrc configs as well.
 if [ -e "$HOME/.bashrc.local" ]; then
