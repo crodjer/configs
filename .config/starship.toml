@@ -25,9 +25,9 @@ disabled = true
 disabled = true
 
 [memory_usage]
-disabled = false
+disabled = true
 show_percentage = true
-threshold = 75
+threshold = 80
 
 [time]
 disabled = false
