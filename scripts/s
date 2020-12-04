@@ -3,4 +3,9 @@ if [ -z "$1"  ]; then
     return 1
 fi
 
-find . -iname "*$1*"
+if [ $(command -v fd) ]; then
+    fd $1
+else
+    find . -iname "*$1*"
+fi
+
