@@ -32,7 +32,7 @@ threshold = 75
 [time]
 disabled = false
 
-[custom.temp]
-command = "sensors | grep temp | cut -d '+' -f  2"
-when = "command -v sensors"
-style = "yellow"
+# [custom.temp]
+# command = "sensors | grep temp | cut -d '+' -f  2"
+# when = "command -v sensors"
+# style = "yellow"
