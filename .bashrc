@@ -154,6 +154,7 @@ trap 'preexec_invoke_exec' DEBUG
 [[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
 [[ -s "/usr/share/autojump/autojump.sh" ]] && source "/usr/share/autojump/autojump.sh"
 [[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
+[[ -s "$HOME/.config/profile.d/autojump.bash" ]] && source "$HOME/.config/profile.d/autojump.bash"
 
 # Initialize fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
