@@ -148,6 +148,7 @@ debug_shell ZSH: Initializations
 [[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
 [[ -s "/usr/share/autojump/autojump.sh" ]] && source "/usr/share/autojump/autojump.sh"
 [[ -s "/etc/profile.d/autojump.zsh" ]] && source "/etc/profile.d/autojump.zsh"
+[[ -s "$HOME/.config/profile.d/autojump.zsh" ]] && source "$HOME/.config/profile.d/autojump.zsh"
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
