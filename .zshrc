@@ -132,8 +132,7 @@ debug_shell ZSH: Prompt
 # Prompt
 #-------------------------#
 if [ -x "$(command -v starship)" ] && \
-    [ -f $HOME/.config/starship.toml ] && \
-    [ -n "$MACOS" -o -n "$DISPLAY" ]; then
+    [ -f $HOME/.config/starship.toml ]; then
     eval "$(starship init zsh)"
 else
     PROMPT='$(gen-prompt)'
