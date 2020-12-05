@@ -28,7 +28,7 @@ class FanControl:
     last_event = None
     fan_pin = None
     low = 50.0
-    high = 60.0
+    high = 65.0
 
     def __init__(self, fan_pin, low=None, high=None):
         self.fan_pin = fan_pin
