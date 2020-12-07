@@ -15,7 +15,7 @@ servers = (
     use_ssl = "yes";
     ssl_cert = "~/.irssi/certs/crodjer.pem";
     ssl_verify = "yes";
-    autoconnect = "yes";
+    autoconnect = "no";
   },
   {
     address = "chat.freenode.net";
@@ -37,9 +37,7 @@ chatnets = {
 };
 
 channels = (
-  { name = "#codesurfers"; chatnet = "oftc"; autojoin = "yes"; },
-  { name = "#rust"; chatnet = "mozilla"; autojoin = "no"; },
-  { name = "#rust-beginners"; chatnet = "mozilla"; autojoin = "no"; }
+  { name = "#codesurfers"; chatnet = "oftc"; autojoin = "yes"; }
 );
 
 aliases = {
