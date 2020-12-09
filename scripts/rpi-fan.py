@@ -46,6 +46,7 @@ class FanControl:
         signal.signal(signal.SIGTERM, self.exit)
         self.last_event = datetime.now()
         print(self.pretty_state(), file=sys.stderr)
+        self.on()
 
     @property
     def is_on(self):
