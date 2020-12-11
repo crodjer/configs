@@ -68,6 +68,8 @@ class FanControl:
     def watch(self):
 
         while self.monitoring:
+            time.sleep(5.0)
+
             temp = self.temp
 
             if temp >= self.high:
@@ -76,7 +78,6 @@ class FanControl:
                 self.off()
 
             # print(self.pretty_state(), file=sys.stderr)
-            time.sleep(5.0)
 
         print('Done!', file=sys.stderr)
 
