@@ -28,7 +28,7 @@ class FanControl:
     last_event = None
     fan_pin = None
     low = 50.0
-    high = 65.0
+    high = 70.0
 
     def __init__(self, fan_pin, low=None, high=None):
         self.fan_pin = fan_pin
@@ -45,7 +45,6 @@ class FanControl:
         signal.signal(signal.SIGINT, self.exit)
         signal.signal(signal.SIGTERM, self.exit)
         self.last_event = datetime.now()
-        print(self.pretty_state(), file=sys.stderr)
         self.on()
 
     @property
@@ -68,21 +67,19 @@ class FanControl:
     def watch(self):
 
         while self.monitoring:
-            time.sleep(5.0)
-
             temp = self.temp
 
             if temp >= self.high:
                 self.on()
             elif temp < self.low:
                 self.off()
-
-            # print(self.pretty_state(), file=sys.stderr)
+            time.sleep(2.0)
 
         print('Done!', file=sys.stderr)
 
     def exit(self, _signum, _frame):
         self.off()
+        GPIO.cleanup()
         self.monitoring = False
         print('Exiting...', file=sys.stderr)
 
