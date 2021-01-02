@@ -1,10 +1,12 @@
+scriptencoding utf-8
+
 "" Environment Variables
 if has('nvim')
-    let vim_config_dir = "~/.config/nvim"
+    let vim_config_dir = '~/.config/nvim'
 else
-    let vim_config_dir = "~/.vim"
+    let vim_config_dir = '~/.vim'
 endif
-let plug_path = join([vim_config_dir, "autoload/plug.vim"], "/")
+let plug_path = join([vim_config_dir, 'autoload/plug.vim'], '/')
 let plug_source = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 
@@ -51,18 +53,6 @@ set relativenumber                      "show relative line numbers
 set number                              "show absolute current line number
 set showmode                            "show current mode down the bottom
 set laststatus=2
-set statusline=%y                       " File type
-set statusline+=\ %r%w                  " Read only / Preview flags
-set statusline+=\ %{expand('%:~:.')}    " File path
-set statusline+=%m                      " Modified flag
-set statusline+=%#warningmsg#
-set statusline+=%*
-set statusline+=%=                      " Right alignment separator
-set statusline+=%{LinterStatus()}
-set statusline+=%{FugitiveStatusline()} " Git Status
-set statusline+=\ %l/%L%*               " Line number / Total lines
-set statusline+=\|%c                    " Column number
-set statusline+=\ [%p%%]                " Percent through lines
 
 set ruler
 highlight Normal guibg=#fdf6e3 ctermbg=None
@@ -77,7 +67,9 @@ set listchars=tab:\ \ ,trail:⋅,nbsp:⋅
 
 "disable paste mode
 set nopaste
-autocmd InsertLeave * set nopaste
+augroup paste
+  autocmd InsertLeave * set nopaste
+augroup END
 
 "" GUI
 set guifont=Ubuntu\ Mono:h15
@@ -100,7 +92,7 @@ set smartcase       "consider case for search patterns with uppercase letters
 
 "" Mappings
 "Set comma as my leader
-let mapleader = ","
+let mapleader = ','
 
 "Open file relative to current file
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -141,7 +133,7 @@ command! STW %s/\s\+$//e
 
 "" Load plugins
 if empty(glob(plug_path))
-    echo "Installing plug..."
+    echo 'Installing plug...'
     execute 'silent !curl -fLo ' . plug_path ' --create-dirs ' . plug_source
 endif
 
@@ -150,14 +142,12 @@ silent! call plug#begin()
 " General plugins
 " Plug 'scrooloose/syntastic'
 Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'
-Plug 'godlygeek/tabular'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-fugitive'
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'       , { 'for': ['markdown', 'md', 'mkd'] }
@@ -206,93 +196,139 @@ augroup CloseLoclistWindowGroup
   autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
 
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
+let g:lightline = {}
 
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK ' : printf(
-    \   '%dW %dE ',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'raw',
+      \     'linter_infos': 'raw',
+      \     'linter_warnings': 'raw',
+      \     'linter_errors': 'raw',
+      \     'linter_ok': 'raw',
+      \ }
+let g:lightline#ale#indicator_checking = '⌛ '
+let g:lightline#ale#indicator_infos = 'ℹ️  '
+let g:lightline#ale#indicator_warnings = '⚠️  '
+let g:lightline#ale#indicator_errors = '❌ '
+let g:lightline#ale#indicator_ok = '✅ '
 
 "" Language configurations
 
 " JS/JSX
 let g:jsx_ext_required = 1
 let g:syntastic_javascript_checkers = ['eslint']
-autocmd FileType javascript setlocal sw=2 sts=2 et
+augroup javascript
+    autocmd FileType javascript setlocal sw=2 sts=2 et
+augroup END
 
 " Clojure
-autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
+augroup clojure
+    autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
+augroup END
 
 " Crontab
-autocmd FileType crontab setlocal backupcopy=yes
+augroup crontab
+    autocmd FileType crontab setlocal backupcopy=yes
+augroup END
 
 " Coffee
-autocmd FileType coffee setlocal sw=2 sts=2 et
-let g:tagbar_type_coffee = {
-    \ 'ctagstype' : 'coffee',
-    \ 'kinds'     : [
-        \ 'c:classes',
-        \ 'm:methods',
-        \ 'f:functions',
-        \ 'v:variables',
-        \ 'f:fields',
-    \ ]
-\ }
-autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldnestmax=3
+augroup coffee
+    autocmd FileType coffee setlocal sw=2 sts=2 et
+    let g:tagbar_type_coffee = {
+        \ 'ctagstype' : 'coffee',
+        \ 'kinds'     : [
+            \ 'c:classes',
+            \ 'm:methods',
+            \ 'f:functions',
+            \ 'v:variables',
+            \ 'f:fields',
+        \ ]
+    \ }
+    autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldnestmax=3
+augroup END
 
 " FZF
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup fzf
+    autocmd! FileType fzf
+    autocmd  FileType fzf set laststatus=0 noshowmode noruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
 nnoremap <leader>s :GFiles<CR>
 nnoremap <leader>as :FZF<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 
 " Git commit
-autocmd FileType gitcommit setlocal spell spelllang=en
+augroup git
+    autocmd FileType gitcommit setlocal spell spelllang=en
+augroup END
 
 " Go
-autocmd FileType go setlocal noet ts=2 sw=2 sts=2 ai
+augroup go
+    autocmd FileType go setlocal noet ts=2 sw=2 sts=2 ai
+augroup END
 
 " Java
-autocmd FileType java setlocal sw=4 sts=4 et omnifunc=javacomplete#Complete
-let g:syntastic_java_javac_executable= "*.jar"
+augroup java
+    autocmd FileType java setlocal sw=4 sts=4 et omnifunc=javacomplete#Complete
+augroup END
+let g:syntastic_java_javac_executable= '*.jar'
 
 " Ledger
-let g:ledger_default_commodity = "₹ "
-autocmd FileType ledger inoremap <silent> <Tab> <C-R>=ledger#autocomplete_and_align()<CR>
-autocmd FileType ledger inoremap <silent> <Esc> <Esc>:LedgerAlign<CR>
-autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
-autocmd FileType ledger nnoremap <silent> <Tab> :LedgerAlign<CR>
-autocmd FileType ledger noremap { ?^\d<CR>
-autocmd FileType ledger noremap } /^\d<CR>
+let g:ledger_default_commodity = '₹ '
+augroup ledger
+    autocmd FileType ledger inoremap <silent> <Tab> <C-R>=ledger#autocomplete_and_align()<CR>
+    autocmd FileType ledger inoremap <silent> <Esc> <Esc>:LedgerAlign<CR>
+    autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
+    autocmd FileType ledger nnoremap <silent> <Tab> :LedgerAlign<CR>
+    autocmd FileType ledger noremap { ?^\d<CR>
+    autocmd FileType ledger noremap } /^\d<CR>
+augroup END
+
+" Lightline
+let g:lightline.active = {
+    \ 'left': [ [ 'mode', 'paste' ],
+	\           [ 'readonly', 'filename', 'modified' ] ],
+	\ 'right': [ [ 'lineinfo' ],
+	\            [ 'percent' ],
+	\            [ 'filetype' ],
+    \            [ 'linter_checking', 'linter_errors', 'linter_warnings',
+    \              'linter_infos', 'linter_ok' ]] }
+
+call lightline#init()
+call lightline#colorscheme()
+call lightline#update()
 
 " Markdown
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 let g:vim_markdown_new_list_item_indent = 2
-autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=2
-autocmd FileType markdown,rst,text setlocal spell spelllang=en wrap
+augroup markdown
+    autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=2
+    autocmd FileType markdown,rst,text setlocal spell spelllang=en wrap
+augroup END
 
 " Python
 let g:syntastic_python_checkers = ['pylint']
-" let g:syntastic_python_python_exec = 'python3'
 
 " Ruby
-autocmd FileType ruby setlocal sw=2 sts=2 et
+augroup ruby
+    autocmd FileType ruby setlocal sw=2 sts=2 et
+augroup END
 
 " Rust
-let g:racer_cmd = "~/.cargo/bin/racer"
+let g:racer_cmd = '~/.cargo/bin/racer'
 let g:racer_experimental_completer = 1
 let g:rustfmt_autosave = 1
-autocmd FileType rust setlocal textwidth=80
-autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
+augroup rust
+    autocmd FileType rust setlocal textwidth=80
+    autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
+augroup END
 
 " Tagbar
 let g:tagbar_width = 30
