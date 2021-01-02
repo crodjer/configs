@@ -65,6 +65,9 @@ local appList = {
                layout = hs.layout.maximized,
                binding = "g" },
     Finder = { screen = lcd },
+    Notes = { screen = lcd,
+               autoHide = enableAutohide,
+               binding = "n" },
 }
 
 
