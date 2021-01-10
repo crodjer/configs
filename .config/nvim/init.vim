@@ -310,7 +310,7 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 let g:vim_markdown_new_list_item_indent = 2
 augroup markdown
     autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=2
-    autocmd FileType markdown,rst,text setlocal spell spelllang=en wrap
+    autocmd FileType markdown,rst,text setlocal spell spelllang=en nowrap
 augroup END
 
 " Python
@@ -318,7 +318,7 @@ let g:syntastic_python_checkers = ['pylint']
 
 " Ruby
 augroup ruby
-    autocmd FileType ruby setlocal sw=2 sts=2 et
+    autocmd FileType ruby setlocal sw=2 sts=2
 augroup END
 
 " Rust
@@ -328,6 +328,11 @@ let g:rustfmt_autosave = 1
 augroup rust
     autocmd FileType rust setlocal textwidth=80
     autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
+augroup END
+
+" YAML
+augroup yaml
+    autocmd FileType yaml setlocal sw=2 sts=2
 augroup END
 
 " Tagbar
