@@ -3,7 +3,7 @@ window:
   startup_mode: Maximized
 
 font:
-  size: 15.0
+  size: 14.5
 
 key_bindings:
   - { key: D,         mods: Alt,       chars: "\x1bd"          }
@@ -12,28 +12,28 @@ key_bindings:
   - { key: N,         mods: Alt,       chars: "\x1bn"          }
   - { key: P,         mods: Alt,       chars: "\x1bp"          }
   # To help with tmux bindings.
-  - { key: J,         mods: Alt,       chars: "\x1bj"          }
-  - { key: K,         mods: Alt,       chars: "\x1bk"          }
-  - { key: L,         mods: Alt,       chars: "\x1bl"          }
-  - { key: Semicolon, mods: Alt,       chars: "\x1b;"          }
-  - { key: J,         mods: Alt|Shift, chars: "\x1bJ"          }
-  - { key: K,         mods: Alt|Shift, chars: "\x1bK"          }
-  - { key: L,         mods: Alt|Shift, chars: "\x1bL"          }
-  - { key: Semicolon, mods: Alt|Shift, chars: "\x1b:"          }
-  - { key: O,         mods: Alt,       chars: "\x1bo"          }
-  - { key: O,         mods: Alt|Shift, chars: "\x1bO"          }
-  - { key: F,         mods: Alt|Shift, chars: "\x1bF"          }
-  - { key: Z,         mods: Alt,       chars: "\x1bz"          }
-  - { key: Key0,      mods: Alt,       chars: "\x1b0"          }
-  - { key: Key1,      mods: Alt,       chars: "\x1b1"          }
-  - { key: Key2,      mods: Alt,       chars: "\x1b2"          }
-  - { key: Key3,      mods: Alt,       chars: "\x1b3"          }
-  - { key: Key4,      mods: Alt,       chars: "\x1b4"          }
-  - { key: Key5,      mods: Alt,       chars: "\x1b5"          }
-  - { key: Key6,      mods: Alt,       chars: "\x1b6"          }
-  - { key: Key7,      mods: Alt,       chars: "\x1b7"          }
-  - { key: Key8,      mods: Alt,       chars: "\x1b8"          }
-  - { key: Key9,      mods: Alt,       chars: "\x1b9"          }
+  # - { key: J,         mods: Alt,       chars: "\x1bj"          }
+  # - { key: K,         mods: Alt,       chars: "\x1bk"          }
+  # - { key: L,         mods: Alt,       chars: "\x1bl"          }
+  # - { key: Semicolon, mods: Alt,       chars: "\x1b;"          }
+  # - { key: J,         mods: Alt|Shift, chars: "\x1bJ"          }
+  # - { key: K,         mods: Alt|Shift, chars: "\x1bK"          }
+  # - { key: L,         mods: Alt|Shift, chars: "\x1bL"          }
+  # - { key: Semicolon, mods: Alt|Shift, chars: "\x1b:"          }
+  # - { key: O,         mods: Alt,       chars: "\x1bo"          }
+  # - { key: O,         mods: Alt|Shift, chars: "\x1bO"          }
+  # - { key: F,         mods: Alt|Shift, chars: "\x1bF"          }
+  # - { key: Z,         mods: Alt,       chars: "\x1bz"          }
+  # - { key: Key0,      mods: Alt,       chars: "\x1b0"          }
+  # - { key: Key1,      mods: Alt,       chars: "\x1b1"          }
+  # - { key: Key2,      mods: Alt,       chars: "\x1b2"          }
+  # - { key: Key3,      mods: Alt,       chars: "\x1b3"          }
+  # - { key: Key4,      mods: Alt,       chars: "\x1b4"          }
+  # - { key: Key5,      mods: Alt,       chars: "\x1b5"          }
+  # - { key: Key6,      mods: Alt,       chars: "\x1b6"          }
+  # - { key: Key7,      mods: Alt,       chars: "\x1b7"          }
+  # - { key: Key8,      mods: Alt,       chars: "\x1b8"          }
+  # - { key: Key9,      mods: Alt,       chars: "\x1b9"          }
 
 schemes:
   solarized_light: &light
@@ -89,4 +89,4 @@ schemes:
       white:   '#fdf6e3' # base3
 
 # Use light color scheme
-colors: *light
+# colors: *dark
