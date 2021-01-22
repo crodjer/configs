@@ -12,11 +12,11 @@ local enableAutohide = false
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    Alacritty = {
+    iTerm2 = {
        screen = monitor,
        binding = "t",
        -- iTerm2 has a different appName and window name.
-       -- appName = 'iTerm',
+       appName = 'iTerm',
        layout = hs.layout.maximized
     },
     ["IntelliJ IDEA"] = {
