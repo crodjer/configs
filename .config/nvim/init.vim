@@ -46,8 +46,8 @@ set wildmenu                "enable C-n and C-p to scroll through matches
 set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
 "" Looks
-set background=light
-colorscheme tango
+" set background=light
+colorscheme desert
 set colorcolumn=+1                      "mark the ideal max text width
 set relativenumber                      "show relative line numbers
 set number                              "show absolute current line number
@@ -58,7 +58,7 @@ set ruler
 highlight Normal guibg=#fdf6e3 ctermbg=None
 highlight SpellBad cterm=underline gui=underline guisp=Grey
 highlight rubyDefine ctermbg=None
-" highlight ColorColumn ctermbg=73
+highlight ColorColumn ctermbg=240
 highlight SignColumn ctermbg=None
 
 "display tabs and trailing spaces
