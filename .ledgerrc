@@ -1,0 +1,6 @@
+; vim:filetype=ledger
+
+; --pedantic
+--explicit
+--file ~/.ledger.dat
+--date-format %e %b %y
