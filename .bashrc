@@ -97,7 +97,7 @@ prompt() {
     fi
 
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        _HNCOLOUR=$cyan$bold
+        _HNCOLOUR=$red
     else
         _HNCOLOUR=$cyan
     fi
