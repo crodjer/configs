@@ -58,7 +58,7 @@ local appList = {
        screen = lcd,
        binding = "f",
        autoHide = enableAutohide,
-       layout = hs.layout.maximized
+       -- layout = hs.layout.maximized
     },
     Signal = { screen = lcd,
                autoHide = enableAutohide,
