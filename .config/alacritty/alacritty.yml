@@ -1,6 +1,5 @@
-window:
-  decorations: none
-  startup_mode: Maximized
+# window:
+#   decorations: none
 
 font:
   size: 14.5

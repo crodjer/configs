@@ -18,6 +18,9 @@ style = "bold yellow"
 min_time = 2_000
 show_milliseconds = true
 
+[git_status]
+disabled = true
+
 [kubernetes]
 disabled = true
 
@@ -31,8 +34,3 @@ threshold = 80
 
 [time]
 disabled = false
-
-# [custom.temp]
-# command = "sensors | grep temp | cut -d '+' -f  2"
-# when = "command -v sensors"
-# style = "yellow"
