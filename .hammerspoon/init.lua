@@ -1,73 +1,18 @@
 -- Modifier to be used across Hammerspoon bindings.
 local hsModifier = { "ctrl", "alt" }
 
--- The in-built Macbook display
-local lcd = "LCD"
-
--- The attached external monitor
-local monitor = "MONITOR"
-
--- Enable autohide
-local enableAutohide = false
-
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    iTerm2 = {
-       screen = monitor,
-       binding = "t",
-       -- iTerm2 has a different appName and window name.
-       appName = 'iTerm',
-       layout = hs.layout.maximized
-    },
-    ["IntelliJ IDEA"] = {
-       screen = monitor,
-       binding = "e",
-       layout = hs.layout.maximized
-    },
-    ["Brave Browser"] = {
-       screen = lcd,
-       binding = "b",
-       layout = hs.layout.maximized,
-    },
-    ["zoom.us"] = {
-       screen = lcd,
-       binding = "o"
-    },
-    Slack = {
-       screen = lcd,
-       binding = "s",
-       layout = hs.layout.maximized
-    },
-    Postman = {
-       screen = lcd,
-       binding = "r",
-       layout = hs.layout.maximized
-    },
-    ["Trello (Beta)"] = {
-       screen = lcd,
-       binding = "m",
-       searchName = "Trello",
-       autoHide = enableAutohide,
-       layout = hs.layout.maximized
-    },
-    Music = {
-       screen = lcd,
-       autoHide = enableAutohide
-    },
-    Firefox = {
-       screen = lcd,
-       binding = "f",
-       autoHide = enableAutohide,
-       -- layout = hs.layout.maximized
-    },
-    Signal = { screen = lcd,
-               autoHide = enableAutohide,
-               layout = hs.layout.maximized,
-               binding = "g" },
-    Finder = { screen = lcd },
-    Notes = { screen = lcd,
-               autoHide = enableAutohide,
-               binding = "n" },
+    iTerm = { binding = "t" },
+    ["IntelliJ IDEA"] = { binding = "e" },
+    ["Brave Browser"] = { binding = "b" },
+    ["zoom.us"] = { binding = "o" },
+    Slack = { binding = "s" },
+    Postman = { binding = "r" },
+    Music = { },
+    Firefox = { binding = "f" },
+    Signal = { binding = "g" },
+    Notes = { binding = "n" },
 }
 
 
@@ -81,9 +26,9 @@ hs.loadSpoon("Caffeine")
 spoon.Caffeine:start()
 
 -- ReloadConfiguration: Auto reload configuration for Hammerspoon
-hs.loadSpoon("ReloadConfiguration")
-spoon.ReloadConfiguration.watch_paths = { hs.configdir, "~/configs/.hammerspoon" }
-spoon.ReloadConfiguration:start()
+-- hs.loadSpoon("ReloadConfiguration")
+-- spoon.ReloadConfiguration.watch_paths = { hs.configdir, "~/configs/.hammerspoon" }
+-- spoon.ReloadConfiguration:start()
 
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
@@ -95,7 +40,9 @@ spoon.WindowScreenLeftAndRight:bindHotkeys({
 -- Seal: The awesome seal plugin, with pasteboard (pb) support.
 hs.loadSpoon("Seal")
 spoon.Seal:loadPlugins({ "apps", "pasteboard", "urlformats", "useractions" })
-spoon.Seal.plugins.pasteboard.historySize = 100
+spoon.Seal.plugins.pasteboard.historySize = 10
+spoon.Seal.plugins.pasteboard.saveHistory = false
+
 spoon.Seal.plugins.useractions.actions = {
    ["Heimdall Jira"] = {
       url = "https://ifountain.atlassian.net/browse/HEIMDALL-${query}",
@@ -106,6 +53,7 @@ spoon.Seal.plugins.useractions.actions = {
       keyword = "ogs"
    }
 }
+
 spoon.Seal.plugins.urlformats:providersTable({
    hj = { name = "Heimdall Jira", url = "https://ifountain.atlassian.net/browse/HEIMDALL-%s" }
 })
@@ -141,11 +89,11 @@ for app, config in pairs(appList) do
     -- Bind the app 
     if config.binding ~= nil then
        hs.hotkey.bind(hsModifier, config.binding, function()
-          application = hs.application.find(config.searchName or config.appName or app)
+          application = hs.application.find(app)
           if config.autoHide then
              -- Do nothing.
           elseif application then
-             hs.application.launchOrFocus(config.appName or app)
+             hs.application.launchOrFocus(app)
           else
              hs.alert.closeSpecific(alertID, 0)
              alertId = hs.alert(app .. " not running!", nil, nil, 1)
@@ -154,70 +102,65 @@ for app, config in pairs(appList) do
     end
 end
 
-function setAppLayout(app, config)
-   print(app)
-   if hs.application.find(config.searchName or app) == nil then
-      return
-   end
+hs.window.animationDuration = 0
 
-   -- Try to get the app's screen, otherwise default to LCD
-   screen = hs.screen.find(config.screen) or hs.screen.find(lcd)
-   layout = config.layout -- or hs.layout.maximized
+hs.hotkey.bind(hsModifier, "m", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen():frame()
 
-   hs.layout.apply({
-      [app] = { app, nil, screen, layout, nil, nil }
-   })
-end
+    f.x = screen.x
+    f.y = screen.y
+    f.w = screen.w
+    f.h = screen.h
+    win:setFrame(f)
+end)
 
--- Maximize the focussed window for the given app.
-function maximizeApp(app, retry)
-   window = app:focusedWindow()
-   if window then
-      window:maximize(0)
-   elseif retry == nil then
-      hs.timer.doAfter(5, function ()
-         maximizeApp(app, true)
-      end)
-   end
-end
+hs.hotkey.bind(hsModifier, "j", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen():frame()
 
--- Set layout as per config on screen changes.
-function setLayout()
-   for appName, config in pairs(appList) do
-      setAppLayout(appName, config)
-   end
-end
-screenWatcher = hs.screen.watcher.new(setLayout)
-screenWatcher:start()
+    f.x = screen.x
+    f.y = screen.y
+    f.w = screen.w * 0.5
+    f.h = screen.h
+    win:setFrame(f)
+end)
 
--- Handle activation/launch events for apps.
-function handleAppEvent(appName, event, app, retry)
-   config = appList[appName]
-   if config == nil then
-      return
-   end
+hs.hotkey.bind(hsModifier, ";", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen():frame()
 
-   -- Window is activated, maximise it.
-   if event == hs.application.watcher.activated then
-      -- maximizeApp(app)
-      setAppLayout(appName, config)
-   -- Window was launched, launch it with the correct layout / screen.
-   elseif event == hs.application.watcher.launched then
-      setAppLayout(appName, config)
-   -- Deactivate event, window should be auto-hidden
-   elseif event == hs.application.watcher.deactivated and config.autoHide then
-      local screenLCD = hs.screen.find(lcd)
-      local screenMonitor = hs.screen.find(monitor) or screenLCD
+    f.x = screen.x  + screen.w * 0.5
+    f.y = screen.y
+    f.w = screen.w * 0.5
+    f.h = screen.h
+    win:setFrame(f)
+end)
 
-      for _, window in pairs(app:allWindows()) do
-         -- If any autohide app's window is on the monitor, hide the app.
-         if window:screen() == screenMonitor then
-            app:hide()
-            break
-         end
-      end
-   end
-end
 
-appWatcher = hs.application.watcher.new(handleAppEvent)
-appWatcher:start()
+hs.hotkey.bind(hsModifier, "k", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen():frame()
+
+    f.x = screen.x
+    f.y = screen.y + screen.h * 0.5
+    f.w = screen.w
+    f.h = screen.h * 0.5
+    win:setFrame(f)
+end)
+
+hs.hotkey.bind(hsModifier, "l", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen():frame()
+
+    f.x = screen.x
+    f.y = screen.y
+    f.w = screen.w
+    f.h = screen.h * 0.5
+    win:setFrame(f)
+end)
