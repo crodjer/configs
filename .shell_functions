@@ -99,8 +99,8 @@ function set_nvim_listen_address {
     if [ "$TMUX" ]; then
         local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
     fi
-    local i3_ws=$(i3-msg -t  get_workspaces 2> /dev/null | \
-        jq -r "map(select(.focused == true)) | map(.name) | first")
+    # local i3_ws=$(i3-msg -t  get_workspaces 2> /dev/null | \
+    #    jq -r "map(select(.focused == true)) | map(.name) | first")
 
     if [ "$tmux_window" ]; then
         server_name="tmux-$tmux_window"
