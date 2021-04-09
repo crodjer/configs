@@ -1,5 +1,6 @@
 -- Modifier to be used across Hammerspoon bindings.
 local hsModifier = { "ctrl", "alt" }
+local logger = hs.logger.new('init.lua', 'info')
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
@@ -83,6 +84,12 @@ hs.hotkey.bind(hsModifier, "h", function()
 end)
 
 alertId = nil
+
+-- Spaces
+watcher = hs.spaces.watcher.new(function (space)
+    print("Space", space)
+end)
+watcher:start()
 
 -- Attach app bindings
 for app, config in pairs(appList) do
