@@ -50,7 +50,7 @@ else
     alias ls='ls --color=auto'
 fi
 
-alias reb='exec bash'
+alias re='exec bash'
 alias aria2c='aria2c -j2 --seed-time 0 --max-upload-limit 1'
 
 git-branch () {
