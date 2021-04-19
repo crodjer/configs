@@ -48,11 +48,6 @@
     "longShellArguments": ["displaysleepnow"]
   },
 
-  // {
-  //   "type": "nightShift",
-  //   "align": "right"
-  // },
-
   {
     "type": "pomodoro",
     "align": "right",
