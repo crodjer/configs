@@ -73,7 +73,6 @@ debug_shell ZSH: Aliases
 # Aliases
 #-------------------------#
 alias re='exec zsh'
-alias tm='tmux -u new -As'
 
 if [ -n "$MACOS" ]; then
     alias ls='ls -G'
