@@ -4,18 +4,18 @@ local logger = hs.logger.new('init.lua', 'info')
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    iTerm = { binding = "t" },
+    Alacritty = { binding = "t" },
+    Alpi = { binding = "2" },
     ["IntelliJ IDEA"] = { binding = "e" },
     ["Brave Browser"] = { binding = "b" },
     ["zoom.us"] = { binding = "o" },
     Slack = { binding = "s" },
     Postman = { binding = "r" },
-    Music = { },
+    ["Amazon Music"]= { binding = "," },
     Firefox = { binding = "f" },
     Signal = { binding = "g" },
     Notes = { binding = "n" },
 }
-
 
 -- -- Calendar: A nice calendar on the desktop.
 hs.loadSpoon("Calendar")
@@ -27,9 +27,9 @@ hs.loadSpoon("Caffeine")
 spoon.Caffeine:start()
 
 -- ReloadConfiguration: Auto reload configuration for Hammerspoon
--- hs.loadSpoon("ReloadConfiguration")
--- spoon.ReloadConfiguration.watch_paths = { hs.configdir, "~/configs/.hammerspoon" }
--- spoon.ReloadConfiguration:start()
+hs.loadSpoon("ReloadConfiguration")
+spoon.ReloadConfiguration.watch_paths = { hs.configdir, "~/Documents/configs/.hammerspoon" }
+spoon.ReloadConfiguration:start()
 
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
@@ -87,7 +87,7 @@ alertId = nil
 
 -- Spaces
 watcher = hs.spaces.watcher.new(function (space)
-    print("Space", space)
+    -- print("Space", space)
 end)
 watcher:start()
 
