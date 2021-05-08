@@ -54,7 +54,7 @@
 	tool = vimdiff
 [commit]
 	verbose = true
-        gpgSign = true
+	gpgSign = false
 [rerere]
 	enabled = true
 [pull]
