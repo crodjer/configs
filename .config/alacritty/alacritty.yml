@@ -89,3 +89,4 @@ schemes:
 
 # Use light color scheme
 colors: *light
+term: alacritty
