@@ -148,6 +148,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'preservim/tagbar'
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'       , { 'for': ['markdown', 'md', 'mkd'] }
