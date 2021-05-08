@@ -17,11 +17,6 @@
   },
 
   {
-    "type": "play",
-    "align": "right"
-  },
-
-  {
     "type": "timeButton",
     "formatTemplate": "E, dd MMM",
     "align": "right",
