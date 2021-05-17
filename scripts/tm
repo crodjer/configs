@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-source ~/.profile; tmux new  -As $(hostname)
+source ~/.profile
+echo $PATH
+tmux new  -As $(hostname)
