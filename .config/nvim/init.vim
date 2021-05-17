@@ -140,7 +140,6 @@ endif
 silent! call plug#begin()
 
 " General plugins
-" Plug 'scrooloose/syntastic'
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
@@ -153,7 +152,6 @@ Plug 'preservim/tagbar'
 " Language plugins
 Plug 'plasticboy/vim-markdown'       , { 'for': ['markdown', 'md', 'mkd'] }
 Plug 'rust-lang/rust.vim'            , { 'for': ['rust']}
-Plug 'racer-rust/vim-racer'          , { 'for': ['rust']}
 Plug 'cespare/vim-toml'              , { 'for': ['toml']}
 Plug 'pangloss/vim-javascript'       , { 'for': ['js', 'jsx', 'json']}
 Plug 'ekalinin/Dockerfile.vim'       , { 'for': 'Dockerfile' }
@@ -162,7 +160,6 @@ Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
 Plug 'leafgarland/typescript-vim'    , { 'for': ['ts'] }
 Plug 'tpope/vim-fireplace'           , { 'for': ['clojure', 'clj'] }
 Plug 'ElmCast/elm-vim'               , { 'for': ['elm'] }
-Plug 'artur-shaik/vim-javacomplete2' , { 'for': ['java'] }
 Plug 'ledger/vim-ledger'             , { 'for': ['dat'] }
 
 " Done loading plugins
@@ -170,17 +167,6 @@ call plug#end()
 
 "" Plugin configurations
 let g:AutoPairsFlyMode = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Ack
-if executable('rg')
-    let g:ackprg = 'rg --vimgrep'
-elseif executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
 
 " Ale
 let g:ale_lint_on_text_changed = 'never'
@@ -188,6 +174,17 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '!'
 let g:ale_sign_column_always = 1
+
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_fixers = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace']
+  \ }
+let g:ale_linters = {
+  \ 'python': ['pyls']
+  \ }
+let g:ale_use_global_executables = 1
 
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
@@ -197,6 +194,7 @@ augroup CloseLoclistWindowGroup
   autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
 
+" Lightline
 let g:lightline = {}
 
 let g:lightline.component_expand = {
@@ -223,7 +221,6 @@ let g:lightline#ale#indicator_ok = '✅ '
 
 " JS/JSX
 let g:jsx_ext_required = 1
-let g:syntastic_javascript_checkers = ['eslint']
 augroup javascript
     autocmd FileType javascript setlocal sw=2 sts=2 et
 augroup END
@@ -276,12 +273,13 @@ augroup go
 augroup END
 
 " Java
-augroup java
-    autocmd FileType java setlocal sw=4 sts=4 et omnifunc=javacomplete#Complete
-augroup END
-let g:syntastic_java_javac_executable= '*.jar'
 
-" Ledger
+" HTML
+augroup html
+    autocmd FileType html* setlocal noet ts=2 sw=2 sts=2 ai
+augroup END
+
+"" Ledger
 let g:ledger_default_commodity = '₹ '
 augroup ledger
     autocmd FileType ledger inoremap <silent> <Tab> <C-R>=ledger#autocomplete_and_align()<CR>
@@ -315,7 +313,6 @@ augroup markdown
 augroup END
 
 " Python
-let g:syntastic_python_checkers = ['pylint']
 
 " Ruby
 augroup ruby
@@ -323,9 +320,8 @@ augroup ruby
 augroup END
 
 " Rust
-let g:racer_cmd = '~/.cargo/bin/racer'
-let g:racer_experimental_completer = 1
 let g:rustfmt_autosave = 1
+
 augroup rust
     autocmd FileType rust setlocal textwidth=80
     autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
