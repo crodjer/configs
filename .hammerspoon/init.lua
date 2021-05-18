@@ -31,9 +31,9 @@ hs.loadSpoon("Caffeine")
 spoon.Caffeine:start()
 
 -- ReloadConfiguration: Auto reload configuration for Hammerspoon
-hs.loadSpoon("ReloadConfiguration")
-spoon.ReloadConfiguration.watch_paths = { hs.configdir, "~/Documents/configs/.hammerspoon" }
-spoon.ReloadConfiguration:start()
+-- hs.loadSpoon("ReloadConfiguration")
+-- spoon.ReloadConfiguration.watch_paths = { hs.configdir, "~/Documents/configs/.hammerspoon" }
+-- spoon.ReloadConfiguration:start()
 
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
