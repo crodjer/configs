@@ -17,7 +17,7 @@ if [ -x "$(command -v rustup)" ]; then
 fi
 
 if [ -x "$(command -v cargo)" ]; then
-  run_command "cargo +nightly install-update racer"  racer-update
+  # run_command "cargo +nightly install-update racer"  racer-update
   run_command "cargo install-update -a"  cargo-update
 fi
 
