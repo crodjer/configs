@@ -124,7 +124,6 @@ nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 "edit re-load config file
 nnoremap <leader>ce :e $MYVIMRC<CR>
 nnoremap <leader>cs :so $MYVIMRC<CR>
-tnoremap <Esc> <C-\><C-n>
 
 "" Custom functions
 
