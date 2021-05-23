@@ -124,6 +124,7 @@ nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 "edit re-load config file
 nnoremap <leader>ce :e $MYVIMRC<CR>
 nnoremap <leader>cs :so $MYVIMRC<CR>
+tnoremap <Esc> <C-\><C-n>
 
 "" Custom functions
 
@@ -143,11 +144,12 @@ silent! call plug#begin()
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-endwise'
+Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/tagbar'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'       , { 'for': ['markdown', 'md', 'mkd'] }
@@ -155,18 +157,14 @@ Plug 'rust-lang/rust.vim'            , { 'for': ['rust']}
 Plug 'cespare/vim-toml'              , { 'for': ['toml']}
 Plug 'pangloss/vim-javascript'       , { 'for': ['js', 'jsx', 'json']}
 Plug 'ekalinin/Dockerfile.vim'       , { 'for': 'Dockerfile' }
-Plug 'kchmck/vim-coffee-script'      , { 'for': 'coffee' }
 Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
 Plug 'leafgarland/typescript-vim'    , { 'for': ['ts'] }
-Plug 'tpope/vim-fireplace'           , { 'for': ['clojure', 'clj'] }
-Plug 'ElmCast/elm-vim'               , { 'for': ['elm'] }
 Plug 'ledger/vim-ledger'             , { 'for': ['dat'] }
 
 " Done loading plugins
 call plug#end()
 
 "" Plugin configurations
-let g:AutoPairsFlyMode = 1
 
 " Ale
 let g:ale_lint_on_text_changed = 'never'
@@ -182,13 +180,17 @@ let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace']
   \ }
 let g:ale_linters = {
-  \ 'python': ['pyls']
+  \ 'python': ['pyls', 'pylint'],
+  \ 'rust': ['analyzer', 'rls', 'cargo'],
   \ }
 let g:ale_use_global_executables = 1
 
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
+nmap <silent> <leader>ah :ALEHover<cr>
 nmap <silent> <leader>ag :ALEGoToDefinition<cr>
+nmap <silent> <leader>ar :ALEFindReferences<cr>
+
 augroup CloseLoclistWindowGroup
   autocmd!
   autocmd QuitPre * if empty(&buftype) | lclose | endif
@@ -216,6 +218,10 @@ let g:lightline#ale#indicator_infos = 'ℹ️  '
 let g:lightline#ale#indicator_warnings = '⚠️  '
 let g:lightline#ale#indicator_errors = '❌ '
 let g:lightline#ale#indicator_ok = '✅ '
+
+" Ultisnips
+let g:UltiSnipsEditSplit = 'horizontal'
+let g:UltiSnipsSnippetDirectories = ["plugged/vim-snippets/UltiSnips"]
 
 "" Language configurations
 
@@ -257,8 +263,8 @@ augroup fzf
     autocmd  FileType fzf set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
-nnoremap <leader>s :GFiles<CR>
-nnoremap <leader>as :FZF<CR>
+nnoremap <leader>sg :GFiles<CR>
+nnoremap <leader>s :FZF<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 
