@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-source ~/.profile
-echo $PATH
-tmux new  -As $(hostname)
