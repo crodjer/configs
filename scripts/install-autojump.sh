@@ -8,7 +8,7 @@ LOCAL_PROFILE_DIR=$HOME/.config/profile.d/
 download() {
     mkdir -p $LOCAL_BIN
     DOWNLOAD_LINK=$(curl -s "$RELEASE_URL" | grep -Eo "$DOWNLOAD_PREFIX.+$1.tar.gz")
-    curl -sL $DOWNLOAD_LINK | tar -xC $LOCAL_BIN
+    curl -sL $DOWNLOAD_LINK | tar -xzC $LOCAL_BIN
 }
 
 if [ ! -x $HOME/.cargo/bin/autojump ]; then
