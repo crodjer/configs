@@ -151,18 +151,11 @@ trap 'preexec_invoke_exec' DEBUG
 #-------------------------#
 # Initializations
 #-------------------------#
-[[ -s "/usr/local/etc/profile.d/autojump.sh" ]] && source "/usr/local/etc/profile.d/autojump.sh"
-[[ -s "/usr/share/autojump/autojump.sh" ]] && source "/usr/share/autojump/autojump.sh"
-[[ -s "/etc/profile.d/autojump.bash" ]] && source "/etc/profile.d/autojump.bash"
 [[ -s "$HOME/.config/profile.d/autojump.bash" ]] && source "$HOME/.config/profile.d/autojump.bash"
 
 # Initialize fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-[[ -f /usr/share/doc/fzf/examples/completion.bash ]] && source /usr/share/doc/fzf/examples/completion.bash
-[[ -f /usr/share/doc/fzf/examples/key-bindings.bash ]] && source /usr/share/doc/fzf/examples/key-bindings.bash
-[[ -f /usr/share/fzf/completion.bash ]] && source /usr/share/fzf/completion.bash
-[[ -f /usr/share/fzf/key-bindings.bash ]] && source /usr/share/fzf/key-bindings.bash
+[ -f ~/.skim/shell/key-bindings.bash ] && source ~/.skim/shell/key-bindings.bash
 
 if [ -e "$HOME/.bashrc.local" ]; then
     source "$HOME/.bashrc.local"
