@@ -3,6 +3,9 @@ window:
 
 font:
   size: 14
+  normal:
+      family: "Menlo For Powerline"
+
 
 key_bindings:
   - { key: D,         mods: Alt,        chars: "\x1bd"          }
