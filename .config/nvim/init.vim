@@ -116,20 +116,17 @@ cmap w!! %!sudo tee > /dev/null %
 "toggle spell check
 nnoremap <leader>z :setlocal spell! spelllang=en<CR>
 
-"auto insert matching pair
-" inoremap { {}<Esc>i
-" inoremap ( ()<Esc>i
-" inoremap [ []<Esc>i
-
 "edit re-load config file
 nnoremap <leader>ce :e $MYVIMRC<CR>
 nnoremap <leader>cs :so $MYVIMRC<CR>
+
+"close preview windows
+nnoremap <leader>pc :pclose<CR>
 
 "" Custom functions
 
 " Custom commands
 command! STW %s/\s\+$//e
-
 
 "" Load plugins
 if empty(glob(plug_path))
@@ -140,15 +137,14 @@ endif
 silent! call plug#begin()
 
 " General plugins
-Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
 Plug 'Raimondi/delimitMate'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'lotabout/skim.vim'
 Plug 'preservim/tagbar'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'neovim/nvim-lspconfig'
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'       , { 'for': ['markdown', 'md', 'mkd'] }
@@ -157,7 +153,6 @@ Plug 'cespare/vim-toml'              , { 'for': ['toml']}
 Plug 'pangloss/vim-javascript'       , { 'for': ['js', 'jsx', 'json']}
 Plug 'ekalinin/Dockerfile.vim'       , { 'for': 'Dockerfile' }
 Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
-Plug 'leafgarland/typescript-vim'    , { 'for': ['ts'] }
 Plug 'ledger/vim-ledger'             , { 'for': ['dat'] }
 
 " Done loading plugins
@@ -165,62 +160,57 @@ call plug#end()
 
 "" Plugin configurations
 
-" Ale
-let g:ale_lint_on_text_changed = 'never'
-" let g:ale_open_list = 1
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '!'
-let g:ale_sign_column_always = 1
-
-set omnifunc=ale#completion#OmniFunc
-let g:ale_completion_enabled = 1
-let g:ale_completion_autoimport = 1
-let g:ale_fixers = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace']
-  \ }
-let g:ale_linters = {
-  \ 'python': ['pyls', 'pylint'],
-  \ 'rust': ['analyzer', 'rls', 'cargo'],
-  \ }
-let g:ale_use_global_executables = 1
-
-nmap <silent> <leader>aj :ALENext<cr>
-nmap <silent> <leader>ak :ALEPrevious<cr>
-nmap <silent> <leader>ah :ALEHover<cr>
-nmap <silent> <leader>ag :ALEGoToDefinition<cr>
-nmap <silent> <leader>ar :ALEFindReferences<cr>
-
-augroup CloseLoclistWindowGroup
-  autocmd!
-  autocmd QuitPre * if empty(&buftype) | lclose | endif
-augroup END
-
 " Lightline
 let g:lightline = {}
-
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_infos': 'lightline#ale#infos',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-let g:lightline.component_type = {
-      \     'linter_checking': 'raw',
-      \     'linter_infos': 'raw',
-      \     'linter_warnings': 'raw',
-      \     'linter_errors': 'raw',
-      \     'linter_ok': 'raw',
-      \ }
-let g:lightline#ale#indicator_checking = '⌛ '
-let g:lightline#ale#indicator_infos = 'ℹ️  '
-let g:lightline#ale#indicator_warnings = '⚠️  '
-let g:lightline#ale#indicator_errors = '❌ '
-let g:lightline#ale#indicator_ok = '✅ '
 
 " Ultisnips
 let g:UltiSnipsEditSplit = 'horizontal'
 let g:UltiSnipsSnippetDirectories = ["plugged/vim-snippets/UltiSnips"]
+
+" LSP Config
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "pyls", "rust_analyzer" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach }
+end
+EOF
 
 "" Language configurations
 
@@ -256,14 +246,14 @@ augroup coffee
     autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldnestmax=3
 augroup END
 
-" FZF
+" FZF/Skim
 augroup fzf
     autocmd! FileType fzf
     autocmd  FileType fzf set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
-nnoremap <leader>sg :GFiles<CR>
-nnoremap <leader>s :FZF<CR>
+nnoremap <leader>s :GFiles<CR>
+nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 
