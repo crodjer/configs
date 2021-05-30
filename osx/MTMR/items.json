@@ -9,11 +9,8 @@
   },
 
   {
-    "type": "music",
-    "align": "right",
-    "bordered": false,
-    "refreshInterval": 2,
-    "disableMarquee": true
+    "type": "play",
+    "align": "right"
   },
 
   {
