@@ -93,5 +93,5 @@ schemes:
       white:   '#fdf6e3' # base3
 
 # Use light color scheme
-colors: *light
+colors: *dark
 term: alacritty
