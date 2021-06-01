@@ -46,7 +46,7 @@ set wildmenu                "enable C-n and C-p to scroll through matches
 set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
 "" Looks
-set background=light
+set background=dark
 colorscheme solarized
 set colorcolumn=+1                      "mark the ideal max text width
 set relativenumber                      "show relative line numbers
@@ -142,7 +142,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 Plug 'lotabout/skim.vim'
 Plug 'preservim/tagbar'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'neovim/nvim-lspconfig'
 
