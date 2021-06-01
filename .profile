@@ -86,6 +86,16 @@ export GPG_TTY=$(tty)
 export BAT_THEME="Solarized (light)"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 
+if [ -x $(command -v pyenv) ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+    if [ -n "$(pyenv commands | grep virtualenv-init)" ]; then
+        eval "$(pyenv virtualenv-init -)"
+    fi
+fi
+
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
 #-----------------------------#
