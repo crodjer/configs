@@ -13,7 +13,7 @@ if [ -n "$remote_protector" -a -f "/tmp/$host.key" ]; then
     fscrypt unlock $HOME --unlock-with=/:$remote_protector --key=/tmp/$host.key &>> $log_file
     rm /tmp/$host.key
 else
-    fscrypt unlock $HOME &>> $log_file
+    fscrypt unlock $HOME --unlock-with=/:$login_protector
 fi
 
 if [ -n "$remote_protector" -a -d "$safe_dir" ]; then
