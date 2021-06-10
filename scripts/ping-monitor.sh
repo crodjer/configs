@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-ping 8.8.8.8 | grep --line-buffered -Eo '\d+\.\d+ ms'
+ping 1.1.1.1 | grep --line-buffered -Eo '[.0-9]+ ms'
