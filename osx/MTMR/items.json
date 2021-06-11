@@ -1,16 +1,16 @@
 [
   {
-    "type": "weather",
+    "type": "yandexWeather",
     "refreshInterval": 60,
     "units": "metric",
-    "bordered": false,
-    "icon_type": "text",
-    "api_key": "db2a9ae5fe8c720a9f4634429add120f"
+    "bordered": false
   },
 
   {
-    "type": "play",
-    "align": "right"
+    "type": "music",
+    "align": "right",
+    "bordered": false,
+    "disableMarquee": true
   },
 
   {
