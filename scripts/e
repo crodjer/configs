@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 command -v nvr > /dev/null && remote='nvr' || remote=$EDITOR
+command -v sk > /dev/null && sk='sk' || {
+    command -v fzf > /dev/null && sk='fzf'
+}
 
 if [  -z "$1" ]; then
-    $remote $(fzf)
+    $remote $($sk)
 else
     $remote $1
 fi
