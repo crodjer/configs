@@ -5,8 +5,7 @@ local logger = hs.logger.new('init.lua', 'info')
 -- List of apps and their screeen / binding, configuration
 local appList = {
     Alacritty = { binding = "t" },
-    Alsi = { binding = "1" },
-    Alpi = { binding = "2" },
+    Peek = { binding = "p" },
     ["Android Studio"] = { binding = "a" },
     qemu = { binding = "q" },
     ["IntelliJ IDEA"] = { binding = "e" },
@@ -25,6 +24,11 @@ local appList = {
         autoLaunch = true,
         bundleID ="com.brave.Browser.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
+    ["Google Duo"] = {
+        binding = "9",
+        autoLaunch = true,
+        bundleID ="com.brave.Browser.app.imgohncinckhbblnlmaedahepnnpmdma"
+    },
 }
 
 function renderTable(table)
@@ -34,11 +38,6 @@ function renderTable(table)
     end
     print(rendered)
 end
-
--- -- Calendar: A nice calendar on the desktop.
-hs.loadSpoon("Calendar")
--- -- CircleClock: A nice clock on the desktop.
-hs.loadSpoon("CircleClock")
 
 -- Caffeine: A button in the menu bar.
 hs.loadSpoon("Caffeine")
