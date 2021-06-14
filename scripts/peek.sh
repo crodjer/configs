@@ -17,7 +17,7 @@ else
 fi
 
 if [ -n "$remote_protector" -a -d "$safe_dir" ]; then
-    fscrypt unlock "$safe_dir" --unlock-with=/:$remote_protector --key=$HOME/.keys/ &>> $log_file
+    fscrypt unlock "$safe_dir" --unlock-with=/:$remote_protector --key=$HOME/.keys/$host.key &>> $log_file
 fi
 
 tmux -u new -As "$host"
