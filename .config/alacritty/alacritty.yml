@@ -1,10 +1,15 @@
+import:
+  - '~/.alacritty.local.yml'
+
 window:
    decorations: none
+   startup_mode: maximized
 
 font:
-  size: 15
+  size: 12
   normal:
     family: "Menlo For Powerline"
+    family: "Monospace"
 
 
 key_bindings:
