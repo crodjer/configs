@@ -140,7 +140,7 @@ hs.hotkey.bind(hsModifier, "j", function()
 
     f.x = screen.x
     f.y = screen.y
-    f.w = screen.w * 0.5
+    f.w = screen.w * 0.55
     f.h = screen.h
     win:setFrame(f)
 end)
@@ -150,9 +150,9 @@ hs.hotkey.bind(hsModifier, ";", function()
     local f = win:frame()
     local screen = win:screen():frame()
 
-    f.x = screen.x  + screen.w * 0.5
+    f.x = screen.x  + screen.w * 0.55
     f.y = screen.y
-    f.w = screen.w * 0.5
+    f.w = screen.w * 0.45
     f.h = screen.h
     win:setFrame(f)
 end)
@@ -163,9 +163,7 @@ hs.hotkey.bind(hsModifier, "k", function()
     local f = win:frame()
     local screen = win:screen():frame()
 
-    f.x = screen.x
     f.y = screen.y + screen.h * 0.5
-    f.w = screen.w
     f.h = screen.h * 0.5
     win:setFrame(f)
 end)
@@ -175,9 +173,7 @@ hs.hotkey.bind(hsModifier, "l", function()
     local f = win:frame()
     local screen = win:screen():frame()
 
-    f.x = screen.x
     f.y = screen.y
-    f.w = screen.w
     f.h = screen.h * 0.5
     win:setFrame(f)
 end)
