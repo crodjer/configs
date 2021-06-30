@@ -123,6 +123,9 @@ nnoremap <leader>cs :so $MYVIMRC<CR>
 "close preview windows
 nnoremap <leader>pc :pclose<CR>
 
+"close preview windows
+nnoremap <leader>pm :set paste<CR>a
+
 "" Custom functions
 
 " Custom commands
