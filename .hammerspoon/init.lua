@@ -1,11 +1,14 @@
 -- Modifier to be used across Hammerspoon bindings.
 local hsModifier = { "ctrl", "alt" }
+local hsShift = { "ctrl", "alt", "shift" }
 local logger = hs.logger.new('init.lua', 'info')
+
+hs.window.animationDuration = 0
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
     Alacritty = { binding = "t" },
-    Peek = { binding = "p" },
+    Peek = { binding = "i" },
     ["Android Studio"] = { binding = "a" },
     qemu = { binding = "q" },
     ["IntelliJ IDEA"] = { binding = "e" },
@@ -17,6 +20,7 @@ local appList = {
     Firefox = { binding = "f" },
     Signal = { binding = "g" },
     Notes = { binding = "n" },
+    Mail = { binding = "9" },
     ["Google Chrome"]= { binding = "c" },
     Messages = {
         -- This is Google Messages
@@ -25,7 +29,7 @@ local appList = {
         bundleID ="com.brave.Browser.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
     ["Google Duo"] = {
-        binding = "9",
+        binding = "7",
         autoLaunch = true,
         bundleID ="com.brave.Browser.app.imgohncinckhbblnlmaedahepnnpmdma"
     },
@@ -43,6 +47,10 @@ end
 hs.loadSpoon("Caffeine")
 spoon.Caffeine:start()
 
+-- Cherry: Pomodoro Timer
+hs.loadSpoon("Cherry")
+spoon.Cherry:bindHotkeys({ start = { hsModifier, "=" }})
+
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
 spoon.WindowScreenLeftAndRight:bindHotkeys({
@@ -52,7 +60,10 @@ spoon.WindowScreenLeftAndRight:bindHotkeys({
 
 -- ReloadConfiguration: Auto reload configuration for Hammerspoon
 hs.loadSpoon("ReloadConfiguration")
-spoon.ReloadConfiguration.watch_paths = { hs.configdir, "~/Documents/configs/.hammerspoon" }
+spoon.ReloadConfiguration.watch_paths = { 
+    hs.configdir .. "/init.lua",
+    hs.configdir .. "/Spoons"
+}
 spoon.ReloadConfiguration:start()
 
 -- Seal: The awesome seal plugin, with pasteboard (pb) support.
@@ -67,13 +78,14 @@ spoon.Seal:bindHotkeys({
 spoon.Seal:start()
 
 -- Switcher
-hs.window.switcher.ui.titleBackgroundColor = {0, 0, 0, 0}
-hs.window.switcher.ui.fontName = 'Verdana'
-hs.window.switcher.ui.textSize = 12
-hs.window.switcher.ui.showThumbnails = false
-hs.window.switcher.ui.showSelectedThumbnail = false
-hs.hotkey.bind(hsModifier, 'tab', nil, hs.window.switcher.nextWindow)
-hs.hotkey.bind({ "shift", table.unpack(hsModifier)}, 'tab', nil, hs.window.switcher.previousWindow)
+switcher = hs.window.switcher
+switcher.ui.titleBackgroundColor = {0, 0, 0, 0}
+switcher.ui.fontName = 'Verdana'
+switcher.ui.textSize = 12
+switcher.ui.showThumbnails = false
+switcher.ui.showSelectedThumbnail = false
+hs.hotkey.bind(hsModifier, 'h', nil, switcher.previousWindow)
+hs.hotkey.bind(hsModifier, '\'', nil, switcher.nextWindow)
 
 hs.alert.defaultStyle.radius = 10
 hs.alert.defaultStyle.atScreenEdge = 2
@@ -119,17 +131,36 @@ for app, config in pairs(appList) do
     end
 end
 
-hs.window.animationDuration = 0
+
+-- function winLayout(layout)
+--     local win = hs.window.focusedWindow()
+--     local app = win:application()
+--     hs.layout.apply({{ app, win, nil, layout }})
+-- end
+-- 
+-- function bindLayout(key, layout)
+--     hs.hotkey.bind(hsModifier, key, function()
+--         winLayout(layout)
+--     end)
+-- end
+-- 
+-- bindLayout("m", hs.layout.maximized)
 
 hs.hotkey.bind(hsModifier, "m", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
     local screen = win:screen():frame()
 
+    -- If the window is full width, maximize it in vertical direction.
+    if f.w == screen.w then
+        f.y = screen.y
+        f.h = screen.h
+    end
+
+    -- Always maximize in width.
     f.x = screen.x
-    f.y = screen.y
     f.w = screen.w
-    f.h = screen.h
+
     win:setFrame(f)
 end)
 
@@ -139,9 +170,7 @@ hs.hotkey.bind(hsModifier, "j", function()
     local screen = win:screen():frame()
 
     f.x = screen.x
-    f.y = screen.y
-    f.w = screen.w * 0.55
-    f.h = screen.h
+    f.w = screen.w * 0.5
     win:setFrame(f)
 end)
 
@@ -150,21 +179,29 @@ hs.hotkey.bind(hsModifier, ";", function()
     local f = win:frame()
     local screen = win:screen():frame()
 
-    f.x = screen.x  + screen.w * 0.55
-    f.y = screen.y
-    f.w = screen.w * 0.45
-    f.h = screen.h
+    f.x = screen.x  + screen.w * 0.5
+    f.w = screen.w * 0.5
     win:setFrame(f)
 end)
 
+function vsplitHeight(screen)
+    if (screen.h > 3000) then
+        return screen.h / 3
+    else
+        return screen.h / 2
+    end
+end
 
 hs.hotkey.bind(hsModifier, "k", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
     local screen = win:screen():frame()
 
-    f.y = screen.y + screen.h * 0.5
-    f.h = screen.h * 0.5
+    f.h = vsplitHeight(screen)
+
+    newY = math.min(f.y + f.h, screen.y + screen.h - f.h)
+    f.y = newY
+
     win:setFrame(f)
 end)
 
@@ -172,8 +209,10 @@ hs.hotkey.bind(hsModifier, "l", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
     local screen = win:screen():frame()
+    vh = vsplitHeight(screen)
+    f.h = vh
+    newY = math.max(f.y - f.h, screen.y)
+    f.y = newY
 
-    f.y = screen.y
-    f.h = screen.h * 0.5
     win:setFrame(f)
 end)

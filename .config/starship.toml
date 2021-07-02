@@ -2,20 +2,20 @@
 disabled = true
 
 [battery]
-full_symbol = "🔋"
-charging_symbol = "⚡️"
-discharging_symbol = "⇣ "
+full_symbol = '🔋'
+charging_symbol = '⚡️'
+discharging_symbol = '⇣ '
 
-[[battery.display]]  # "bold red" style when capacity is between 0% and 10%
+[[battery.display]]
 threshold = 10
-style = "bold red"
+style = 'bold red'
 
-[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
+[[battery.display]]
 threshold = 30
-style = "bold yellow"
+style = 'bold yellow'
 
 [cmd_duration]
-min_time = 2_000
+min_time = 2000
 show_milliseconds = true
 
 [git_status]
@@ -25,6 +25,9 @@ disabled = true
 disabled = true
 
 [nodejs]
+disabled = true
+
+[gcloud]
 disabled = true
 
 [memory_usage]
