@@ -82,7 +82,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export NPM_PACKAGES="$HOME/.npm-packages"
 export MANPATH="$HOME/.npm-packages/share/man:$MANPATH"
 export GPODDER_HOME="$HOME/.gpodder"
-export GPG_TTY=$(tty)
 export BAT_THEME="Solarized (light)"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 
