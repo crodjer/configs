@@ -152,14 +152,14 @@ hs.hotkey.bind(hsModifier, "m", function()
     local screen = win:screen():frame()
 
     -- If the window is full width, maximize it in vertical direction.
-    if f.w == screen.w then
-        f.y = screen.y
-        f.h = screen.h
+    if f.h == screen.h then
+        f.x = screen.x
+        f.w = screen.w
     end
 
-    -- Always maximize in width.
-    f.x = screen.x
-    f.w = screen.w
+    -- Always maximize in height.
+    f.y = screen.y
+    f.h = screen.h
 
     win:setFrame(f)
 end)
