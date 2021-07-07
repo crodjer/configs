@@ -1,0 +1,46 @@
+theme = "solarized-dark"
+icons = "awesome5"
+
+[[block]]
+block = "focused_window"
+max_width = 100
+show_marks = "visible"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{mem_total_used_percents}"
+format_swap = "{swap_used_percents}"
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "temperature"
+collapsed = true
+interval = 10
+format = "{max}"
+
+[[block]]
+block = "networkmanager"
+primary_only = true
+ap_format ="{ssid} {strength}"
+device_format = "{icon}{ap}"
+interface_name_exclude = ["br\\-[0-9a-f]{12}"]
+interface_name_include = []
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "battery"
+allow_missing = true
+hide_missing = true
+interval = 10
+format = "{percentage} {time}"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"

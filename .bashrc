@@ -153,6 +153,9 @@ trap 'preexec_invoke_exec' DEBUG
 #-------------------------#
 [[ -s "$HOME/.config/profile.d/autojump.bash" ]] && source "$HOME/.config/profile.d/autojump.bash"
 
+# Get the correct GPG TTY
+export GPG_TTY=$(tty)
+
 # Initialize fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.skim/shell/key-bindings.bash ] && source ~/.skim/shell/key-bindings.bash

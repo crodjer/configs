@@ -6,16 +6,16 @@ if has('nvim')
 else
     let vim_config_dir = '~/.vim'
 endif
+
 let plug_path = join([vim_config_dir, 'autoload/plug.vim'], '/')
 let plug_source = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
 
 "" Basic behaviour
 set noswapfile              "disable swapfiles
 set hidden                  "hide buffers when not displayed
 set textwidth=80            "maximum width of text that can be inserted
 set nofoldenable            "don't fold by default
-set clipboard=unnamedplus   "use system clipboard
+set clipboard+=unnamedplus  "use system clipboard
 set mouse-=a
 set cursorline
 set signcolumn=yes:1
@@ -47,7 +47,6 @@ set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
 "" Looks
 set background=light
-colorscheme solarized
 set colorcolumn=+1                      "mark the ideal max text width
 set relativenumber                      "show relative line numbers
 set number                              "show absolute current line number
@@ -58,7 +57,7 @@ set ruler
 highlight Normal guibg=#fdf6e3 ctermbg=None
 highlight SpellBad cterm=underline gui=underline guisp=Grey
 highlight rubyDefine ctermbg=None
-" highlight ColorColumn ctermbg=240
+" highlight ColorColumn ctermbg=LightGrey
 highlight SignColumn ctermbg=None
 
 "display tabs and trailing spaces
@@ -72,7 +71,7 @@ augroup paste
 augroup END
 
 "" GUI
-set guifont=Ubuntu\ Mono:h15
+set guifont=SourceCodePro:h10
 
 "" Handling whitespace
 set expandtab                   "use spaces for tabs and set it to 4 spaces
@@ -142,9 +141,11 @@ silent! call plug#begin()
 " General plugins
 Plug 'itchyny/lightline.vim'
 Plug 'Raimondi/delimitMate'
-Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-Plug 'lotabout/skim.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'preservim/tagbar'
+Plug 'morhetz/gruvbox'
+
 if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
 else
@@ -165,6 +166,10 @@ Plug 'ledger/vim-ledger'             , { 'for': ['dat'] }
 call plug#end()
 
 "" Plugin configurations
+
+" Gruvbox
+let g:gruvbox_termcolors=16
+colorscheme gruvbox
 
 " Lightline
 let g:lightline = {}
