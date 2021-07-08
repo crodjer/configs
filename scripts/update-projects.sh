@@ -23,8 +23,8 @@ if [ -x "$(command -v cargo)" ]; then
   run_command "cargo install-update -a"  cargo-update
 fi
 
-if [ -d $HOME/projects/neovim/ ]; then
-  run_command "cd $HOME/projects/neovim && git pull && make install"  neovim-update
+if [ -d $HOME/projects/gnvim/ ]; then
+  run_command "cd $HOME/projects/gnvim && git pull && make"  neovim-update
 fi
 
 if [ -x "$(command -v autojump)" ]; then
