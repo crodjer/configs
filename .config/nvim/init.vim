@@ -144,6 +144,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/tagbar'
+Plug 'morhetz/gruvbox'
 
 if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig'
@@ -165,6 +166,10 @@ Plug 'ledger/vim-ledger'             , { 'for': ['dat'] }
 call plug#end()
 
 "" Plugin configurations
+
+" Gruvbox
+let g:gruvbox_termcolors=16
+colorscheme gruvbox
 
 " Lightline
 let g:lightline = {}
