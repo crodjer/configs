@@ -1,23 +1,15 @@
-hardstatus alwayslastline " %w"
-
-# terminfo and termcap for nice 256 color terminal
-# allow bold colors - necessary for some reason
 attrcolor b ".I"
 term alacritty
-termcapinfo xterm|rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # erase background with current bg color
 defbce "on"
 
 vbell "off"
 escape ^tT
-defscrollback 100000
 
 # Decrease maptimeout so that it works correctly with Vim/Tmux
 maptimeout 5
 
-caption always  " %d-%m %c:%s %?%F%{= Kk}%:%{=u kR}%?  %h %-024=%{+b} %C%a %D %d %M %Y%{= db}"
-caption always  "%{= db}%?%F%{= Wk}%:%{=u kw}%?%C %A %D, %d %M | %t"
-# caption always  "%C%a %D %d %M %{= db}%?%F%{= Kk}%:%{=u kR}%?  %h %-024=%{+b}"
-# hardstatus alwayslastline "%{= kR} %-Lw%{=b Kk} %n%f %t %{-}%+Lw %=%{= dd}"
+hardstatus alwayslastline
+hardstatus string " %w"
 
 bell_msg "Alert in window %n"
