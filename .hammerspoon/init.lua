@@ -13,7 +13,7 @@ local appList = {
     qemu = { binding = "q" },
     ["IntelliJ IDEA"] = { binding = "e" },
     ["Brave Browser"] = { binding = "b" },
-    ["zoom.us"] = { binding = "o", legacyActivate = true },
+    ["zoom.us"] = { binding = "o", legacyActivate = false },
     Slack = { binding = "s" },
     Postman = { binding = "r" },
     ["Amazon Music"]= { binding = "," },
