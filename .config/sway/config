@@ -1,5 +1,5 @@
 set $mod Mod4
-font pango:Monospace 9
+font pango:DejaVuSans 9
 
 floating_modifier $mod
 default_border pixel 2
