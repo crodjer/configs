@@ -18,7 +18,7 @@ interval = 1
 
 [[block]]
 block = "temperature"
-collapsed = true
+collapsed = false
 interval = 10
 format = "{max}"
 
