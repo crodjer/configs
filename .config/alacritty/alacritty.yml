@@ -69,7 +69,7 @@ schemes:
       magenta: '0x8f3f71'
       cyan:    '0x427b58'
       white:   '0x504945'
-  
+
     # Bright colors
     bright:
       black:   '0xbdae93'
