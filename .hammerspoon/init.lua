@@ -49,7 +49,19 @@ spoon.Caffeine:start()
 
 -- Cherry: Pomodoro Timer
 hs.loadSpoon("Cherry")
+spoon.Cherry.alertTextSize = 50
+spoon.Cherry.notification = hs.notify.new({ title = "Timer's up. Have some rest!", withdrawAfter = 10})
+spoon.Cherry.sound = hs.sound.getByFile("/System/Library/Sounds/Submarine.aiff")
 spoon.Cherry:bindHotkeys({ start = { hsModifier, "=" }})
+spoon.Cherry:start()
+
+-- Start cherry on unlock.
+cherryWatcher = hs.caffeinate.watcher.new(function(event) 
+    if event == hs.caffeinate.watcher.screensDidUnlock then
+        spoon.Cherry:start()
+    end
+end)
+cherryWatcher:start()
 
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
