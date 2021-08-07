@@ -19,13 +19,12 @@ if [ -x "$(command -v rustup)" ]; then
 fi
 
 if [ -x "$(command -v cargo)" ]; then
-  # run_command "cargo +nightly install-update racer"  racer-update
   run_command "cargo install-update -a"  cargo-update
 fi
 
-# if [ -d $HOME/projects/gnvim/ ]; then
-#   run_command "cd $HOME/projects/gnvim && git pull && make"  neovim-update
-# fi
+if [ -d $HOME/projects/gnvim/ ]; then
+  run_command "cd $HOME/projects/gnvim && git pull && make"  neovim-update
+fi
 
 if [ -x "$(command -v autojump)" ]; then
   run_command "$SCRIPTS_DIR/install-autojump.sh" autojump-update
