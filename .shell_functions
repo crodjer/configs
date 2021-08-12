@@ -140,4 +140,11 @@ function set_java_home() {
     export JAVA_HOME=$java_home
 }
 
+function colorize_ls() {
+    if [ "$TERM" = "alacritty" -a -z "$LS_COLORS" ]; then
+        eval $(env TERM=alacritty-color dircolors)
+    fi
+}
+
 set_nvim_listen_address
+colorize_ls
