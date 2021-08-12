@@ -141,7 +141,7 @@ function set_java_home() {
 }
 
 function colorize_ls() {
-    if [ "$TERM" = "alacritty" -a -z "$LS_COLORS" ]; then
+    if [ -z "$LS_COLORS" -a -n "$(command -v dircolors)" -a "$TERM" = "alacritty" ]; then
         eval $(env TERM=alacritty-color dircolors)
     fi
 }
