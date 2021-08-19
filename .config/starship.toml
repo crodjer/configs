@@ -35,5 +35,8 @@ disabled = true
 show_percentage = true
 threshold = 80
 
+[rust]
+disabled = true
+
 [time]
 disabled = false
