@@ -146,5 +146,11 @@ function colorize_ls() {
     fi
 }
 
+function git_branch() {
+    git symbolic-ref --short HEAD 2> /dev/null || {
+        git rev-list --max-count=1 1 HEAD 2>/dev/null | cut -c 1-8
+    }
+}
+
 set_nvim_listen_address
 colorize_ls
