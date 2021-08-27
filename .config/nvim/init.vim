@@ -150,13 +150,16 @@ Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 
 " Language plugins
-Plug 'plasticboy/vim-markdown'       , { 'for': ['markdown', 'md', 'mkd'] }
-Plug 'rust-lang/rust.vim'            , { 'for': ['rust']}
-Plug 'cespare/vim-toml'              , { 'for': ['toml']}
-Plug 'pangloss/vim-javascript'       , { 'for': ['js', 'jsx', 'json']}
-Plug 'ekalinin/Dockerfile.vim'       , { 'for': 'Dockerfile' }
-Plug 'Vimjas/vim-python-pep8-indent' , { 'for': 'python' }
-Plug 'ledger/vim-ledger'             , { 'for': ['dat'] }
+Plug 'plasticboy/vim-markdown'          , { 'for': 'markdown' }
+Plug 'rust-lang/rust.vim'               , { 'for': 'rust'}
+Plug 'cespare/vim-toml'                 , { 'for': 'toml'}
+Plug 'pangloss/vim-javascript'          , { 'for': ['js', 'jsx', 'json']}
+Plug 'ekalinin/Dockerfile.vim'          , { 'for': 'Dockerfile' }
+Plug 'Vimjas/vim-python-pep8-indent'    , { 'for': 'python' }
+Plug 'ledger/vim-ledger'                , { 'for': 'dat' }
+Plug 'guns/vim-sexp'                    , { 'for': 'clojure' }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
+Plug 'liquidz/vim-iced'                 , { 'for': 'clojure', 'branch': 'main' }
 
 " Done loading plugins
 call plug#end()
@@ -229,8 +232,9 @@ augroup javascript
 augroup END
 
 " Clojure
+let g:iced_enable_default_key_mappings = v:true
 augroup clojure
-    autocmd FileType clojure nnoremap <buffer> <leader>l :%Eval<cr>
+    autocmd FileType clojure nnoremap <buffer> <leader>ec :IcedInstantConnect babashka<cr>
 augroup END
 
 " Crontab
