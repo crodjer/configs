@@ -17,9 +17,11 @@ function debug_shell () {
 # BASE - PATH             #
 #-------------------------#
 debug_shell Profile: Path
+ICED_PATH="$HOME/.config/nvim/plugged/vim-iced/bin"
 export                        PATH="$HOME/.bin"
 [ -d "$HOME/.local" ]      && PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
 [ -d "$HOME/.cabal" ]      && PATH="$PATH:$HOME/.cabal/bin"
+[ -d "$ICED_PATH" ]        && PATH="$ICED_PATH"
 [ -d "/opt/local" ]        && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
 [ -d "/bin/vendor_perl" ]  && PATH="$PATH:/bin/vendor_perl"
 [ -d "/snap/bin" ]         && PATH="$PATH:/snap/bin"
