@@ -18,29 +18,15 @@ function debug_shell () {
 #-------------------------#
 debug_shell Profile: Path
 ICED_PATH="$HOME/.config/nvim/plugged/vim-iced/bin"
-export                        PATH="$HOME/.bin"
-[ -d "$HOME/.local" ]      && PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
-[ -d "$HOME/.cabal" ]      && PATH="$PATH:$HOME/.cabal/bin"
-[ -d "$ICED_PATH" ]        && PATH="$ICED_PATH"
-[ -d "/opt/local" ]        && PATH="$PATH:/opt/local/bin:/opt/local/sbin"
-[ -d "/bin/vendor_perl" ]  && PATH="$PATH:/bin/vendor_perl"
-[ -d "/snap/bin" ]         && PATH="$PATH:/snap/bin"
-                              PATH="$PATH:$HOME/.npm-packages/bin"
-                              PATH="$PATH:$HOME/.cargo/bin"
-                              PATH="$PATH:$HOME/.gem/ruby/bin"
+export                        PATH="$PATH:$HOME/.bin"
+                              PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
                               PATH="$PATH:$HOME/configs/scripts"
                               PATH="$PATH:$HOME/documents/configs/scripts"
-                              PATH="$PATH:$HOME/workspace/configs/scripts"
-                              PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/sbin"
-                              PATH="$PATH:/usr/games"
-                              PATH="$PATH:/usr/local/sbin:/usr/sbin"
+                              PATH="$PATH:$HOME/.cargo/bin"
+[ -d "$ICED_PATH" ]        && PATH="$PATH:$ICED_PATH"
 
 export                      MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "$HOME/.local" ]   &&  MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
-[ -d "$HOME/.cabal" ]   &&  MANPATH="$MANPATH:$HOME/.cabal/share/man"
-[ -d "$HOME/.npm-packages" ]   &&  MANPATH="$MANPATH:$HOME/.npm-packages/share/man"
-[ -d "/opt/local" ]     &&  MANPATH="$MANPATH:/opt/local/share/man:/opt/local/man"
-                            MANPATH="$MANPATH:/usr/share/man:/usr/man"
 
 # export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
 
