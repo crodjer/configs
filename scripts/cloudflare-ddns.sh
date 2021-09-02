@@ -30,6 +30,7 @@ do
      case $OPTION in
          h)
              usage
+             exit 0
              ;;
          d)
              DOMAIN=$OPTARG
@@ -87,14 +88,25 @@ fi
 log "Getting zone data..."
 ZONE_DATA=$(curl -sX GET "$API" -H "$CONTENT_TYPE" -H "$AUTH_HEADER")
 ZONE=$(echo $ZONE_DATA | jq '.result[0].id' -r)
-log "..done!"
+
+if [ -n "ZONE" ]; then
+    log "..done!"
+else
+    log "Failed to get zone data!"
+    exit 1
+fi
 
 # Find the record id for the domain.
 log "Getting record data..."
 RECORDS_DATA=$(curl -sX GET "$API/$ZONE/dns_records" -H "$CONTENT_TYPE" -H "$AUTH_HEADER")
 RECORD_DATA=$(echo $RECORDS_DATA | jq -c ".result[] | select(.name == \"$DOMAIN\")")
 RECORD=$(echo $RECORD_DATA | jq ".id" -r )
-log "..done!"
+if [ -n "RECORD" ]; then
+    log "..done!"
+else
+    log "Failed to get record data!"
+    exit 1
+fi
 
 NAME=$(echo $DOMAIN | cut -f 1 -d '.')
 EXISTING=$(echo $RECORD_DATA | jq ".content" -r )
@@ -106,7 +118,7 @@ fi
 
 DATA=$(cat <<EOF
 {
-    "type": "A",
+    "type": "$RECORD_TYPE",
     "name": "$NAME",
     "content": "$IP"
 }
