@@ -25,7 +25,7 @@ export                        PATH="$PATH:$HOME/.bin"
                               PATH="$PATH:$HOME/.cargo/bin"
 [ -d "$ICED_PATH" ]        && PATH="$PATH:$ICED_PATH"
 
-export                      MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
+export                      MANPATH="$MANPATH:$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "$HOME/.local" ]   &&  MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
 
 # export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
