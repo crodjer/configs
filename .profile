@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # POSIX Shell login script.
 #
@@ -29,6 +29,8 @@ export                      MANPATH="$MANPATH:$HOME/.man:/usr/local/share/man:/u
 [ -d "$HOME/.local" ]   &&  MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
 
 # export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
+
+export XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS
 
 #-------------------------#
 # BASE - Environment

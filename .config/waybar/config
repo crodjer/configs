@@ -1,0 +1,105 @@
+{
+    // "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode","sway/window"],
+    "modules-center": ["custom/media"],
+    "modules-right": ["idle_inhibitor", "network", "cpu", "memory", "temperature", "backlight", "battery", "pulseaudio", "tray", "custom/clock"],
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "custom/clock": {
+        "exec": "date '+%a %d %b %H:%M'",
+        "format": "  {}  ",
+        "interval": 5
+    },
+    "cpu": {
+        "format": "",
+        "tooltip": true,
+        "interval": 5,
+        "states": {
+            "normal": 15,
+            "medium": 50,
+            "high": 75
+        },
+    },
+    "memory": {
+        "format": "",
+        "interval": 5,
+        "states": {
+            "normal": 15,
+            "medium": 50,
+            "high": 75
+        },
+        "format-good": "good"
+    },
+    "temperature": {
+        "thermal-zone": 5,
+        "critical-threshold": 80,
+        "interval": 5,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", "", "", "", "", "", ""]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", ""],
+        "interval": 60
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 10
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "states": {
+            "good": 60,
+            "normal": 50,
+            "medium": 40,
+            "low": 30
+        }
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+}

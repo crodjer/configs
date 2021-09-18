@@ -82,6 +82,9 @@ fi
 
 alias cb='xclip -selection clipboard'
 alias k='kubectl'
+if [ -x "$(command -v iwctl)" ]; then
+    alias wifi="iwctl station $(iwctl device list | grep station | grep -Eo '\w+' | head -1)"
+fi
 
 debug_shell ZSH: Utility functions
 
