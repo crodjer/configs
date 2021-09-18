@@ -1,0 +1,163 @@
+/* Gruvbox Dark
+
+   bg       #282828 B
+   white    #d5c4a1 W
+   red      #cc241d R
+   green    #98971a G
+   yellow   #d79921 Y
+   blue     #458588 L
+   purple   #b16286 P
+   aqua     #689d68 A
+   gray     #a89984 E
+   darkgray #3f4243 D
+*/
+
+* {
+    border: none;
+    border-radius: 0;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: #282828;
+    color: #d5c4a1;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #d5c4a1;
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -3px #b16286;
+}
+
+#workspaces button.focused {
+    background-color: #d5c4a1;
+    color: #3f4243;
+    box-shadow: inset 0 -3px #b16286;
+}
+
+#workspaces button.urgent {
+    background-color: #cc241d;
+    color: #3f4243;
+}
+
+#mode {
+    background-color: #3f4243;
+    box-shadow: inset 0 -3px #b16286;
+}
+
+#window,
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor {
+    border-radius: 5px;
+    margin: 0.2em 0.2em;
+    padding: 0.2em;
+}
+
+#workspaces {
+    margin: 0 4px;
+}
+
+#window {
+    margin-left: 10px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+/* Generic state colors */
+.good {
+    /* Things are good, grab for no attention */
+}
+.normal {
+    /* Green */
+    color: #98971a;
+}
+.medium {
+    /* Yellow */
+    color: #d79921;
+}
+.high, .low {
+    /* Red. Based on the metric, low or high can be bad. */
+    color: #cc241d;
+}
+
+#battery.warning:not(.charging) {
+    color: #d79921;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #a89984;
+    color: #cc241d;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#network.disconnected {
+    color: #d79921;
+}
+
+#temperature.critical {
+    color: #cc241d;
+}
+
+#idle_inhibitor {
+    background-color: transparent;
+    color: #a89984;
+}
+
+#idle_inhibitor.activated {
+    background-color: #d5c4a1;
+    color: #282828;
+}
