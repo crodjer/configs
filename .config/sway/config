@@ -5,6 +5,10 @@ floating_modifier $mod
 default_border pixel 2
 hide_edge_borders smart
 
+exec swayidle -w \
+	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+	lock 'swaylock'
+
 # Colors
 set $bg #282828
 set $white #d5c4a1
@@ -125,7 +129,7 @@ bindsym $mod+F4 exec --no-startup-id pulsemixer --toggle-mute --id $(pulsemixer 
 bindsym $mod+Ctrl+Shift+p exec swayshot.sh
 
 # Lock screen
-bindsym $mod+x exec lock
+bindsym $mod+x exec swaylock
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # exit sway (logs you out of your X session)
