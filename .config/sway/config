@@ -1,5 +1,5 @@
 set $mod Mod4
-font pango:DejaVuSans 9
+font pango:DejaVuSans 15
 
 floating_modifier $mod
 default_border pixel 2
@@ -35,8 +35,8 @@ bindsym $mod+Shift+n exec nvim-server
 #Please provide the masala separately  kill focused window
 bindsym $mod+Shift+q kill
 
-# start bemenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn 'Monospace-20'
+# start yofi (a program launcher)
+bindsym $mod+d exec yofi
 
 # change focus
 focus_follows_mouse no
@@ -116,7 +116,7 @@ bindsym $mod+Shift+F12 exec  light -S 31
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 45 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 45 -5%
 bindsym $mod+F2 exec --no-startup-id pulsemixer --change-volume -5
-bindsym $mod+F3 exec --no-startup-id pulsemixer --change-volume +5 --max-volume 150 
+bindsym $mod+F3 exec --no-startup-id pulsemixer --change-volume +5 --max-volume 150
 
 bindsym $mod+F1 exec --no-startup-id pulsemixer --toggle-mute
 bindsym $mod+F4 exec --no-startup-id pulsemixer --toggle-mute --id $(pulsemixer --list-sources | grep Default | grep -Po "\d+" | head -1)

@@ -1,8 +1,7 @@
 {
     // "layer": "top", // Waybar at top layer
-    "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
+    "position": "top", // Waybar position (top|bottom|left|right)
+    // "height": 30, // Waybar height (to be removed for auto height)
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode","sway/window"],
     "modules-center": ["custom/media"],
@@ -53,9 +52,10 @@
         "format-icons": ["", "", "", "", "", "", "", ""]
     },
     "backlight": {
-        // "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "", ""],
+        "on-scroll-up": "light -A 0.05",
+        "on-scroll-down": "light -U 0.05",
         "interval": 60
     },
     "battery": {
@@ -73,16 +73,17 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "states": {
-            "good": 60,
-            "normal": 50,
-            "medium": 40,
-            "low": 30
+            "good": 50,
+            "normal": 40,
+            "medium": 30,
+            "low": 20
         }
     },
     "pulseaudio": {
@@ -100,6 +101,10 @@
             "portable": "",
             "car": "",
             "default": ["", "", ""]
-        }
+        },
+        "on-click": "pulsemixer --toggle-mute",
+        "on-scroll-up": "pulsemixer --change-volume -1",
+        "on-scroll-down": "pulsemixer --change-volume +1 --max-volume 150",
+        "smooth-scrolling-threshold": 1
     },
 }
