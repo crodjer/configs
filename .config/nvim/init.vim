@@ -71,7 +71,7 @@ augroup paste
 augroup END
 
 "" GUI
-set guifont=SourceCodePro:h10
+set guifont=Monospace:h11
 
 "" Handling whitespace
 set expandtab                   "use spaces for tabs and set it to 4 spaces
