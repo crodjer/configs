@@ -211,17 +211,18 @@ let g:lightline.component_expand = {
             \  'linter_ok': 'lightline#ale#ok',
             \ }
 let g:lightline.component_type = {
-            \     'linter_checking': 'raw',
-            \     'linter_infos': 'raw',
-            \     'linter_warnings': 'raw',
-            \     'linter_errors': 'raw',
-            \     'linter_ok': 'raw',
-            \ }
-let g:lightline#ale#indicator_checking = '⌛ '
-let g:lightline#ale#indicator_infos = 'ℹ️  '
-let g:lightline#ale#indicator_warnings = '⚠️  '
-let g:lightline#ale#indicator_errors = '❌ '
-let g:lightline#ale#indicator_ok = '✅ '
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'tabsel',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'tabsel',
+      \ }
+
+let g:lightline#ale#indicator_checking = ' '
+let g:lightline#ale#indicator_infos = '  '
+let g:lightline#ale#indicator_warnings = ' '
+let g:lightline#ale#indicator_errors = ' '
+let g:lightline#ale#indicator_ok = ' '
 
 "" Language configurations
 
