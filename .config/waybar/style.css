@@ -85,7 +85,7 @@ window#waybar.solo {
 #idle_inhibitor {
     border-radius: 5px;
     margin: 0.2em 0.2em;
-    padding: 0.2em;
+    padding: 0.2em 0.4em;
 }
 
 #workspaces {
@@ -117,7 +117,7 @@ window#waybar.solo {
 .good {
     /* Things are good, grab for no attention */
 }
-.normal {
+.normal, #battery.full {
     /* Green */
     color: #98971a;
 }
@@ -130,10 +130,13 @@ window#waybar.solo {
     color: #cc241d;
 }
 
+
+#battery.normal.charging,
 #battery.warning:not(.charging) {
     color: #d79921;
 }
 
+#battery.full.charging,
 #battery.critical:not(.charging) {
     background-color: #a89984;
     color: #cc241d;

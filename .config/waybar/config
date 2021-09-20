@@ -1,11 +1,14 @@
 {
     // "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
+    "position": "bottom", // Waybar position (top|bottom|left|right)
     // "height": 30, // Waybar height (to be removed for auto height)
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode","sway/window"],
     "modules-center": ["custom/media"],
     "modules-right": ["idle_inhibitor", "network", "cpu", "memory", "temperature", "backlight", "battery", "pulseaudio", "tray", "custom/clock"],
+    "sway/workspaces": {
+        "disable-scroll": true
+    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -60,9 +63,16 @@
     },
     "battery": {
         "states": {
-            // "good": 95,
+            // Aything above 90 should alert, if charging.
+            "full": 100,
+            // If aything below 90, should ideally stop charging.
+            "normal": 90,
+            // Anything between 30-80 is good.
+            "good": 80,
+            // Should plug in the charger below 30
             "warning": 30,
-            "critical": 10
+            // 15 is just too low!
+            "critical": 15
         },
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
