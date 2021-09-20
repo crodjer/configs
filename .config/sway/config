@@ -1,13 +1,19 @@
 set $mod Mod4
-font pango:DejaVuSans 15
+font DejaVuSans 15
 
 floating_modifier $mod
 default_border pixel 2
 hide_edge_borders smart
 
 exec swayidle -w \
-	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-	lock 'swaylock'
+    timeout 5 'pgrep -x swaylock -u $USER > /dev/null && swaymsg "output * dpms off"' \
+    timeout 180 'loginctl lock-session $XDG_SESSION_ID' \
+    timeout 190 'swaymsg "output * dpms off"'  \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+    lock 'pgrep -x swaylock -u $USER > /dev/null || swaylock -f'
+exec 'pgrep -f /usr/libexec/geoclue-2.0/demos/agent >/dev/null || /usr/libexec/geoclue-2.0/demos/agent'
+exec 'sleep 2 && redshift'
 
 # Colors
 set $bg #282828
@@ -161,6 +167,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+output "*" bg ~/.wallpaper fill #a89984
 output eDP-1 {
     scale 1
 }

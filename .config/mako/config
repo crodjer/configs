@@ -1,0 +1,11 @@
+font=DejaVuSans 15
+border-radius=10
+background-color=#282828EE
+border-color=#282828
+text-color=#d5c4a1FF
+progress-color=#d79921
+padding=20
+default-timeout=30000
+
+[mode=dnd]
+invisible=1
