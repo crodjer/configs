@@ -17,7 +17,7 @@ fi
 
 log "Backing up $DEVICE!"
 
-TARGET=/mnt/external/safe/backup/$DEVICE/
+TARGET=${TARGET:-/mnt/external/safe/backup/$DEVICE/}
 
 if [ -z "$SELF" ]; then
     ssh $DEVICE 'test -d /home/rohan/.ssh' || {
