@@ -6,13 +6,12 @@ default_border pixel 2
 hide_edge_borders smart
 
 exec swayidle -w \
-    timeout 5 'pgrep -x swaylock -u $USER > /dev/null && swaymsg "output * dpms off"' \
     timeout 180 'loginctl lock-session $XDG_SESSION_ID' \
     timeout 190 'swaymsg "output * dpms off"'  \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-    lock 'pgrep -x swaylock -u $USER > /dev/null || swaylock -f'
-exec 'pgrep -f /usr/libexec/geoclue-2.0/demos/agent >/dev/null || /usr/libexec/geoclue-2.0/demos/agent'
+    lock 'pgrep -x slock -u $USER > /dev/null || slock'
+exec '/usr/libexec/geoclue-2.0/demos/agent'
 exec 'sleep 2 && redshift'
 
 # Colors
@@ -135,7 +134,7 @@ bindsym $mod+F4 exec --no-startup-id pulsemixer --toggle-mute --id $(pulsemixer 
 bindsym $mod+Ctrl+Shift+p exec swayshot.sh
 
 # Lock screen
-bindsym $mod+x exec swaylock
+bindsym $mod+x exec slock
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # exit sway (logs you out of your X session)
