@@ -29,5 +29,5 @@ fi
 rsync -aAXH \
     --progress \
     --delete \
-    --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/var/log/*","/swapfile","/lost+found"} \
+    --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/var/log/*","/var/tmp/*","/swapfile","/lost+found"} \
     $SOURCE $TARGET
