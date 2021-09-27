@@ -6,6 +6,3 @@ text-color=#d5c4a1FF
 progress-color=#d79921
 padding=20
 default-timeout=30000
-
-[mode=dnd]
-invisible=1

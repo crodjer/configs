@@ -84,11 +84,13 @@
     },
     "network": {
         "format-wifi": "",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-ethernet": "",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ",
+        "format-disconnected": "",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
+        "interval": 5,
         "states": {
             "good": 50,
             "normal": 40,
