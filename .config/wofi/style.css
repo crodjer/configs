@@ -1,0 +1,40 @@
+window {
+    border-radius: 0.5em;
+    background: #282828;
+    margin: 0.5em;
+}
+
+#input {
+    border-radius: 0.5em;
+    border: none;
+    color: #282828;
+    background: #d5c4a1;
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+#inner-box {
+}
+
+#outer-box {
+}
+
+#scroll {
+}
+
+#entry {
+    padding: 0.5em;
+    color: #d5c4a1;
+}
+
+#text:selected {
+    color: #689d68;
+}
+
+#entry:selected {
+    background: #282828;
+}
+
+#img {
+    padding: 0.5em;
+}

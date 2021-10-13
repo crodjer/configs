@@ -1,0 +1,10 @@
+prompt=
+allow_images=true
+allow_markup=true
+key_up=Control_L-p
+key_down=Control_L-n
+key_right=Control_L-f
+key_left=Control_L-b
+halign=left
+dynamic_lines=true
+insensitive=true
