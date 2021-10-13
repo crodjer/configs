@@ -6,12 +6,13 @@ default_border pixel 2
 hide_edge_borders smart
 
 exec swayidle -dw \
-    timeout 5 'pgrep -x slock && slock' \
-    timeout 180 'slock' \
-    timeout 240 'swaymsg "output * dpms off"'  \
+    timeout 5 'pgrep -x slock && swaymsg "output * dpms off"' \
+    timeout 180 'loginctl lock-session $XDG_SESSION_ID' \
+    timeout 200 'swaymsg "output * dpms off"'  \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep 'slock' \
-    lock 'slock'
+    before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
+    lock 'pgrep -x slock || slock'
+exec 'pkill -f "clipman store"; wl-paste -t text --watch clipman store'
 
 exec 'pgrep -f /usr/libexec/geoclue-2.0/demos/agent || /usr/libexec/geoclue-2.0/demos/agent > /tmp/geoclue-agent.log'
 exec 'sleep 2 && pgrep -x redshift || redshift > /tmp/redshift.log'
@@ -48,8 +49,8 @@ bindsym $mod+Shift+n exec nvim-server
 #Please provide the masala separately  kill focused window
 bindsym $mod+Shift+q kill
 
-# start yofi (a program launcher)
-bindsym $mod+d exec yofi
+# start wofi (a program launcher)
+bindsym $mod+d exec wofi -S drun
 
 # change focus
 focus_follows_mouse no
@@ -122,8 +123,10 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Brightness Control
 bindsym $mod+F11 exec  light -U 1
 bindsym $mod+F12 exec  light -A 1
-bindsym $mod+Shift+F11 exec  light -S 11
-bindsym $mod+Shift+F12 exec  light -S 31
+bindsym $mod+Shift+F11 exec  light -U 10
+bindsym $mod+Shift+F12 exec  light -A 10
+# bindsym $mod+Shift+F11 exec  light -S 11
+# bindsym $mod+Shift+F12 exec  light -S 31
 
 # Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 45 +5%
@@ -189,4 +192,8 @@ input "type:touchpad" {
     natural_scroll enabled
     dwt enable
     scroll_factor 0.5
+}
+
+input "type:pointer" {
+    natural_scroll enabled
 }
