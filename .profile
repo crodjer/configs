@@ -28,8 +28,7 @@ fi
 
 export                        PATH="$PATH:$HOME/.bin"
                               PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
-                              PATH="$PATH:$HOME/configs/scripts"
-                              PATH="$PATH:$HOME/documents/configs/scripts"
+                              PATH="$PATH:$CONFIGS_SRC_DIR/scripts"
                               PATH="$PATH:$HOME/.cargo/bin"
 [ -d "$ICED_PATH" ]        && PATH="$PATH:$ICED_PATH"
 

@@ -335,6 +335,11 @@ augroup rust
     autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
 augroup END
 
+" XML
+augroup xml
+    autocmd FileType xml setlocal iskeyword+=.,-
+augroup END
+
 " YAML
 augroup yaml
     autocmd FileType yaml setlocal sw=2 sts=2
