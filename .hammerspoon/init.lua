@@ -10,7 +10,6 @@ local appList = {
     Alacritty = { binding = "t" },
     Peek = { binding = "i" },
     ["Android Studio"] = { binding = "a" },
-    qemu = { binding = "q" },
     ["IntelliJ IDEA"] = { binding = "e" },
     ["Brave Browser"] = { binding = "b" },
     ["zoom.us"] = { binding = "o", legacyActivate = false },
@@ -20,7 +19,7 @@ local appList = {
     Firefox = { binding = "f" },
     Signal = { binding = "g" },
     Notes = { binding = "n" },
-    Mail = { binding = "9" },
+    -- Mail = { binding = "9" },
     ["Google Chrome"]= { binding = "c" },
     Messages = {
         -- This is Google Messages
@@ -55,17 +54,16 @@ spoon.Cherry.notification = hs.notify.new({ title = "Timer's up. Have some rest!
 spoon.Cherry.sound = hs.sound.getByFile("/System/Library/Sounds/Submarine.aiff")
 spoon.Cherry:bindHotkeys({ start = { hsModifier, "=" }})
 spoon.Cherry:reset()
-spoon.Cherry:start()
+-- spoon.Cherry:start()
 
 -- Start cherry on unlock.
 cherryWatcher = hs.caffeinate.watcher.new(function(event) 
     if event == hs.caffeinate.watcher.screensDidUnlock then
         spoon.Cherry:reset()
         spoon.Cherry:start()
-        print("Restarted")
     end
 end)
-cherryWatcher:start()
+-- cherryWatcher:start()
 
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
@@ -94,6 +92,7 @@ spoon.Seal:bindHotkeys({
 spoon.Seal:start()
 
 -- Switcher
+hs.window.animationDuration = 0
 switcher = hs.window.switcher
 switcher.ui.titleBackgroundColor = {0, 0, 0, 0}
 switcher.ui.fontName = 'Verdana'
@@ -102,6 +101,8 @@ switcher.ui.showThumbnails = false
 switcher.ui.showSelectedThumbnail = false
 hs.hotkey.bind(hsModifier, 'h', nil, switcher.previousWindow)
 hs.hotkey.bind(hsModifier, '\'', nil, switcher.nextWindow)
+hs.hotkey.bind(hsShift, 'tab', nil, switcher.previousWindow)
+hs.hotkey.bind(hsModifier, 'tab', nil, switcher.nextWindow)
 
 hs.alert.defaultStyle.radius = 10
 hs.alert.defaultStyle.atScreenEdge = 2
@@ -186,7 +187,7 @@ hs.hotkey.bind(hsModifier, "j", function()
     local screen = win:screen():frame()
 
     f.x = screen.x
-    f.w = screen.w * 0.5
+    f.w = screen.w * 0.4
     win:setFrame(f)
 end)
 
@@ -195,8 +196,8 @@ hs.hotkey.bind(hsModifier, ";", function()
     local f = win:frame()
     local screen = win:screen():frame()
 
-    f.x = screen.x  + screen.w * 0.5
-    f.w = screen.w * 0.5
+    f.x = screen.x  + screen.w * 0.4
+    f.w = screen.w * 0.6
     win:setFrame(f)
 end)
 
