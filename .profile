@@ -28,9 +28,12 @@ export                        PATH="$PATH:$HOME/.bin"
 export                      MANPATH="$MANPATH:$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "$HOME/.local" ]   &&  MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
 
-# export LD_LIBRARY_PATH="$HOME/.local/lib/:$LD_LIBRARY_PATH"
-
-export XDG_DATA_DIRS=$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS
+if [ -d "/var/lib/flatpak/exports/share/applications" ]; then
+    if [ -z "$XDG_DATA_DIRS" ]; then
+        XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share
+    fi
+    export XDG_DATA_DIRS=/var/lib/flatpak/exports/share:$XDG_DATA_DIRS
+fi
 
 #-------------------------#
 # BASE - Environment

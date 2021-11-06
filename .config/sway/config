@@ -1,23 +1,26 @@
 set $mod Mod4
-font DejaVuSans 15
+font DejaVuSans 8
 
 floating_modifier $mod
 default_border pixel 2
 hide_edge_borders smart
 
-exec swayidle -dw \
-    timeout 5 'pgrep -x slock && swaymsg "output * dpms off"' \
-    timeout 180 'loginctl lock-session $XDG_SESSION_ID' \
-    timeout 200 'swaymsg "output * dpms off"'  \
+exec swayidle -w \
+    timeout 10 'pgrep -x slock && swaymsg "output * dpms off"' \
+    timeout 600 'loginctl lock-session $XDG_SESSION_ID' \
+    timeout 605 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-    lock 'pgrep -x slock || slock'
-exec 'pkill -f "clipman store"; wl-paste -t text --watch clipman store'
+    idlehint 30 \
+    lock 'swaylock -f'
+exec 'wl-paste -t text -w clipman store'
+# We manage this with systemd instead:
+# https://wiki.archlinux.org/title/redshift#Redshift_GDBus.Error:org.freedesktop.DBus.Error.AccessDenied_on_start
+# exec 'flock -Fn /tmp/geoclue-agent-sway.lock -c /usr/libexec/geoclue-2.0/demos/agent'
+exec 'redshift-gtk'
+exec 'pkill -x blueman-tray; blueman-tray'
 
-exec 'pgrep -f /usr/libexec/geoclue-2.0/demos/agent || /usr/libexec/geoclue-2.0/demos/agent > /tmp/geoclue-agent.log'
-exec 'sleep 2 && pgrep -x redshift || redshift > /tmp/redshift.log'
-
-for_window [app_id="firefox.*"] inhibit_idle fullscreen
+# for_window [app_id="firefox.*"] inhibit_idle fullscreen
 
 # Colors
 set $bg #282828
@@ -51,6 +54,10 @@ bindsym $mod+Shift+q kill
 
 # start wofi (a program launcher)
 bindsym $mod+d exec wofi -S drun
+bindsym $mod+Shift+d exec wofi -S run
+
+# show clipboard history
+bindsym $mod+p exec clipman pick
 
 # change focus
 focus_follows_mouse no
@@ -138,10 +145,11 @@ bindsym $mod+F1 exec --no-startup-id pulsemixer --toggle-mute
 bindsym $mod+F4 exec --no-startup-id pulsemixer --toggle-mute --id $(pulsemixer --list-sources | grep Default | grep -Po "\d+" | head -1)
 
 # Take screenshots
-bindsym $mod+Shift+p exec swayshot.sh
+bindsym $mod+Ctrl+p exec grim -g "$(slurp -d)" - | wl-copy
+bindsym $mod+Ctrl+Shift+p exec swayshot.sh
 
 # Lock screen
-bindsym $mod+x exec slock
+bindsym $mod+x exec swaylock
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # exit sway (logs you out of your X session)
@@ -177,6 +185,8 @@ output "*" bg ~/.wallpaper fill #a89984
 output eDP-1 {
     scale 1
 }
+output DP-2 pos 0 0 res 1920x1080@60Hz
+output eDP-1 pos 300 1080
 
 bar {
     font DejaVu Sans Mono, FontAwesome 20
