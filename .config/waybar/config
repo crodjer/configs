@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode","sway/window"],
     "modules-center": ["custom/media"],
-    "modules-right": ["idle_inhibitor", "network", "cpu", "memory", "temperature", "backlight", "battery", "pulseaudio", "tray", "custom/clock"],
+    "modules-right": ["idle_inhibitor", "network", "cpu", "memory", "temperature", "backlight", "battery", "pulseaudio", "custom/clock", "tray"],
     "sway/workspaces": {
         "disable-scroll": true
     },
@@ -20,7 +20,8 @@
         }
     },
     "tray": {
-        "spacing": 10
+        "icon-size": 24,
+        "spacing": 3
     },
     "custom/clock": {
         "exec": "date '+%a %d %b %H:%M'",
@@ -41,7 +42,7 @@
         "format": "",
         "interval": 5,
         "states": {
-            "normal": 15,
+            "normal": 25,
             "medium": 50,
             "high": 75
         },
@@ -90,7 +91,7 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
-        "interval": 5,
+        "interval": 2,
         "states": {
             "good": 50,
             "normal": 40,

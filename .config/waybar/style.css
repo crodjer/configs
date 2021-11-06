@@ -42,22 +42,22 @@ window#waybar.solo {
 */
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 0.2em;
     background-color: transparent;
     color: #d5c4a1;
     /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
+    box-shadow: inset 0 -0.2em transparent;
 }
 
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 -3px #b16286;
+    box-shadow: inset 0 -0.1em #b16286;
 }
 
 #workspaces button.focused {
     background-color: #d5c4a1;
     color: #3f4243;
-    box-shadow: inset 0 -3px #b16286;
+    box-shadow: inset 0 -0.1em #b16286;
 }
 
 #workspaces button.urgent {
@@ -67,7 +67,7 @@ window#waybar.solo {
 
 #mode {
     background-color: #3f4243;
-    box-shadow: inset 0 -3px #b16286;
+    box-shadow: inset 0 -0.1em #b16286;
 }
 
 #window,
@@ -83,17 +83,17 @@ window#waybar.solo {
 #tray,
 #mode,
 #idle_inhibitor {
-    border-radius: 5px;
+    border-radius: 0.2em;
     margin: 0.2em 0.2em;
     padding: 0.2em 0.4em;
 }
 
 #workspaces {
-    margin: 0 4px;
+    margin: 0 0.1em;
 }
 
 #window {
-    margin-left: 10px;
+    margin-left: 0.5em;
 }
 
 /* If workspaces is the leftmost module, omit left margin */

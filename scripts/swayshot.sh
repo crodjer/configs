@@ -2,4 +2,4 @@
 
 # Borrowed from: https://jolyonbrown.com/post/sway-screenshots/
 filename="screenshot-`date +%F-%T`"
-grim -g "$(slurp)" ~/downloads/$filename.png
+grim -g "$(slurp)" ~/downloads/screenshots/$filename.png

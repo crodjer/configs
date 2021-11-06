@@ -1,7 +1,8 @@
 window {
     border-radius: 0.5em;
     background: #282828;
-    margin: 0.5em;
+    margin: 0.2em;
+    font-size: 24px;
 }
 
 #input {
