@@ -2,7 +2,7 @@ set $mod Mod4
 font DejaVuSans 12
 
 floating_modifier $mod
-default_border pixel 3
+default_border pixel 4
 hide_edge_borders both
 smart_borders on
 
@@ -35,9 +35,9 @@ set $cyan #8ec07c
 set $gray #fbf1c7
 set $darkgray #665c54
 
-#----------------------.----------.----------.----------.----------.------------.
-# class                |border    |backgr    |text      |indicator |child_border|
-#----------------------.----------.----------.----------.----------.------------.
+#----------------------.----------.-----------.----------.----------.------------.
+# class                |border    |background |text      |indicator |child_border|
+#----------------------.----------.-----------.----------.----------.------------.
 client.focused          $black     $green     $black     $blue
 client.focused_inactive $black     $black     $yellow
 client.unfocused        $black     $black     $yellow
