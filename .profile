@@ -18,6 +18,14 @@ function debug_shell () {
 #-------------------------#
 debug_shell Profile: Path
 ICED_PATH="$HOME/.config/nvim/plugged/vim-iced/bin"
+
+if [ -z "$_ORIGINAL_PATH" ]; then
+    export _ORIGINAL_PATH=$PATH
+else
+    # We seem to be reloading .profile
+    PATH=$_ORIGINAL_PATH
+fi
+
 export                        PATH="$PATH:$HOME/.bin"
                               PATH="$PATH:$HOME/.local/bin:$HOME/.local/sbin"
                               PATH="$PATH:$HOME/configs/scripts"
@@ -25,14 +33,27 @@ export                        PATH="$PATH:$HOME/.bin"
                               PATH="$PATH:$HOME/.cargo/bin"
 [ -d "$ICED_PATH" ]        && PATH="$PATH:$ICED_PATH"
 
+if [ -z "$_ORIGINAL_MANPATH" ]; then
+    export _ORIGINAL_MANPATH=$MANPATH
+else
+    # We seem to be reloading .profile
+    MANPATH=$_ORIGINAL_MANPATH
+fi
 export                      MANPATH="$MANPATH:$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "$HOME/.local" ]   &&  MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
+
+if [ -z "$_ORIGINAL_XDG_DATA_DIRS" ]; then
+    export _ORIGINAL_XDG_DATA_DIRS=$XDG_DATA_DIRS
+else
+    # We seem to be reloading .profile
+    XDG_DATA_DIRS=$_ORIGINAL_XDG_DATA_DIRS
+fi
 
 if [ -d "/var/lib/flatpak/exports/share/applications" ]; then
     if [ -z "$XDG_DATA_DIRS" ]; then
         XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share
     fi
-    export XDG_DATA_DIRS=/var/lib/flatpak/exports/share:$XDG_DATA_DIRS
+    export XDG_DATA_DIRS=/home/$USER/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS
 fi
 
 #-------------------------#
