@@ -1,9 +1,10 @@
 set $mod Mod4
-font DejaVuSans 8
+font DejaVuSans 12
 
 floating_modifier $mod
-default_border pixel 2
-hide_edge_borders smart
+default_border pixel 3
+hide_edge_borders both
+smart_borders on
 
 exec swayidle -w \
     timeout 10 'pgrep -x slock && swaymsg "output * dpms off"' \
@@ -18,29 +19,29 @@ exec 'wl-paste -t text -w clipman store'
 # https://wiki.archlinux.org/title/redshift#Redshift_GDBus.Error:org.freedesktop.DBus.Error.AccessDenied_on_start
 # exec 'flock -Fn /tmp/geoclue-agent-sway.lock -c /usr/libexec/geoclue-2.0/demos/agent'
 exec 'redshift-gtk'
-exec 'pkill -x blueman-tray; blueman-tray'
+exec 'pkill -x blueman-applet; blueman-applet'
 
-# for_window [app_id="firefox.*"] inhibit_idle fullscreen
+assign [app_id="firefox.*"] workspace 2
 
 # Colors
-set $bg #282828
+set $black #282828
 set $white #d5c4a1
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
+set $red #fb4934
+set $green #b8bb26
+set $yellow #fabd2f
+set $blue #83a598
+set $purple #d3869b
+set $cyan #8ec07c
+set $gray #fbf1c7
+set $darkgray #665c54
 
 #----------------------.----------.----------.----------.----------.------------.
 # class                |border    |backgr    |text      |indicator |child_border|
 #----------------------.----------.----------.----------.----------.------------.
-client.focused          $green     $green     $darkgray  $purple    $darkgray
-client.focused_inactive $darkgray  $darkgray  $yellow    $purple    $darkgray
-client.unfocused        $darkgray  $darkgray  $yellow    $purple    $darkgray
-client.urgent           $red       $red       $white     $red       $red
+client.focused          $black     $green     $black     $blue
+client.focused_inactive $black     $black     $yellow
+client.unfocused        $black     $black     $yellow
+client.urgent           $black     $red       $black
 	
 
 # start a terminal
@@ -139,7 +140,7 @@ bindsym $mod+Shift+F12 exec  light -A 10
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 45 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 45 -5%
 bindsym $mod+F2 exec --no-startup-id pulsemixer --change-volume -5
-bindsym $mod+F3 exec --no-startup-id pulsemixer --change-volume +5 --max-volume 150
+bindsym $mod+F3 exec --no-startup-id pulsemixer --change-volume +5 --max-volume 100
 
 bindsym $mod+F1 exec --no-startup-id pulsemixer --toggle-mute
 bindsym $mod+F4 exec --no-startup-id pulsemixer --toggle-mute --id $(pulsemixer --list-sources | grep Default | grep -Po "\d+" | head -1)
