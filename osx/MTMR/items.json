@@ -1,4 +1,9 @@
 [
+  { "type": "dock",
+    "align": "left",
+    "filter": "(IntelliJ)|(Alacritty)|(Brave)|(Slack)|(Postman)|(Notes)|(zoom)|(Firefox)",
+    "width": 450
+  },
   {
     "type": "music",
     "align": "right",
