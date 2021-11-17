@@ -27,6 +27,11 @@ local appList = {
         autoLaunch = true,
         bundleID ="com.brave.Browser.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
+    YouTube = {
+        binding = "y",
+        autoLaunch = true,
+        bundleID ="com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml"
+    },
     ["Google Duo"] = {
         binding = "7",
         autoLaunch = true,
