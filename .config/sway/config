@@ -38,10 +38,10 @@ set $darkgray #665c54
 #----------------------.----------.-----------.----------.----------.------------.
 # class                |border    |background |text      |indicator |child_border|
 #----------------------.----------.-----------.----------.----------.------------.
-client.focused          $black     $green     $black     $blue
-client.focused_inactive $black     $black     $yellow
-client.unfocused        $black     $black     $yellow
-client.urgent           $black     $red       $black
+client.focused          $black     $green      $black     $blue
+client.focused_inactive $black     $black      $yellow
+client.unfocused        $black     $black      $yellow
+client.urgent           $black     $red        $black
 	
 
 # start a terminal
