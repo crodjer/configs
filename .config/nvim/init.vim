@@ -197,6 +197,8 @@ nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <leader>ah :ALEHover<cr>
 nmap <silent> <leader>ag :ALEGoToDefinition<cr>
 nmap <silent> <leader>ar :ALEFindReferences<cr>
+nmap <silent> <leader>aj :ALEImport<cr>
+nmap <silent> <leader>af :ALEFix<cr>
 
 augroup CloseLoclistWindowGroup
     autocmd!
@@ -333,6 +335,7 @@ let g:rustfmt_autosave = 1
 augroup rust
     autocmd FileType rust setlocal textwidth=80
     autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
+    autocmd FileType rust nmap <buffer> K :ALEHover<CR>
 augroup END
 
 " XML
