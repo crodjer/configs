@@ -95,8 +95,8 @@
         "states": {
             "good": 50,
             "normal": 40,
-            "medium": 30,
-            "low": 20
+            "medium": 25,
+            "low": 0
         }
     },
     "pulseaudio": {
