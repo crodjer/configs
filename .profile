@@ -13,6 +13,9 @@ function debug_shell () {
     fi
 }
 
+export PROFILE_SRC=$(readlink "$(readlink ~/.profile)" || readlink ~/.profile)
+export CONFIGS_SRC_DIR=$(dirname $PROFILE_SRC)
+
 #-------------------------#
 # BASE - PATH             #
 #-------------------------#
@@ -79,8 +82,6 @@ debug_shell Profile: Applications
 export LESS=" -R "
 command -v source-highlight-esc.sh > /dev/null && \
     LESSOPEN="| $(which source-highlight-esc.sh) %s 2> /dev/null"
-export PROFILE_SRC=$(readlink "$(readlink ~/.profile)" || readlink ~/.profile)
-export CONFIGS_SRC_DIR=$(dirname $PROFILE_SRC)
 export LESSOPEN
 export GREP_COLOR=31
 export PAGER=less
