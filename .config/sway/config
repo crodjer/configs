@@ -42,6 +42,9 @@ client.focused          $black     $green      $black     $blue
 client.focused_inactive $black     $black      $yellow
 client.unfocused        $black     $black      $yellow
 client.urgent           $black     $red        $black
+
+# Cursor config
+seat seat0 xcursor_theme default 36
 	
 
 # start a terminal
