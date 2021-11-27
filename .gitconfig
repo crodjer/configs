@@ -1,49 +1,16 @@
 [core]
 	whitespace = trailing-space,space-before-tab
-[apply]
-	whitespace = fix
 [user]
 	name = Rohan Jain
 	email = crodjer@pm.me
-[github]
-	user = crodjer
 [format]
 	signoff = true
-[sendemail]
-	smtpuser = crodjer@gmail.com
-	suppresscc = all
-	smtpserver = smtp.gmail.com
-	smtpserverport = 587
-	smtpencryption = tls
-	chainreplyto = false
 [core]
-	# editor = emacsclient -ct
 	excludesfile = /home/rohan/.gitignore
 [grep]
 	lineNumber = true
 [color]
 	ui = true
-[imap]
-	folder = "[Gmail]/Drafts"
-	host = imaps://imap.gmail.com
-	user = crodjer@gmail.com
-	port = 993
-	sslverify = false
-[instaweb]
-	browser = firefox
-	port = 4321
-[web]
-	browser = firefox
-[cola]
-	tabwidth = 4
-[alias]
-	lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(black)%s%C(reset) %C(bold black)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
-    	lg2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(black)%s%C(reset) %C(bold black)— %an%C(reset)' --abbrev-commit
-    	lg = !"git lg1"
-    	lh = log --pretty=oneline --abbrev-commit
-    	gerrit-merge-push = !sh -c 'git push $0 HEAD:refs/for/$1'
-[push]
-	default = simple
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
@@ -51,7 +18,7 @@
 [merge]
 	summary = true
 [diff]
-	tool = vimdiff
+    colorMoved = default
 [commit]
 	verbose = true
 	gpgsign = true
@@ -60,3 +27,6 @@
 [pull]
 	ff = only
 	rebase = false
+[include]
+    path = ~/.gitconfig.delta
+    path = ~/.gitconfig.local
