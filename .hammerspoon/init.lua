@@ -12,15 +12,16 @@ local appList = {
     ["Android Studio"] = { binding = "a" },
     ["IntelliJ IDEA"] = { binding = "e" },
     ["Brave Browser"] = { binding = "b" },
-    ["zoom.us"] = { binding = "o", legacyActivate = false },
+    ["zoom.us"] = { binding = "o" },
     Slack = { binding = "s" },
     Postman = { binding = "r" },
     ["Amazon Music"]= { binding = "," },
     Firefox = { binding = "f" },
     Signal = { binding = "g" },
     Notes = { binding = "n" },
-    -- Mail = { binding = "9" },
+    Bitwarden = { binding = "p", legacyActivate = true },
     ["Google Chrome"]= { binding = "c" },
+
     Messages = {
         -- This is Google Messages
         binding = "0",
