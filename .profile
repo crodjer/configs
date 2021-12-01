@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # POSIX Shell login script.
 #
@@ -7,11 +7,11 @@
 #
 # Borrowed from: http://stuff.lhunath.com/.profile
 
-function debug_shell () {
-    if [ "$DEBUG_SHELL" ]; then
-        echo "$(date +'%T-%N') $@"
-    fi
-}
+# function debug_shell () {
+#     if [ "$DEBUG_SHELL" ]; then
+#         echo "$(date +'%T-%N') $@"
+#     fi
+# }
 
 export PROFILE_SRC=$(readlink "$(readlink ~/.profile)" || readlink ~/.profile)
 export CONFIGS_SRC_DIR=$(dirname $PROFILE_SRC)
@@ -19,7 +19,7 @@ export CONFIGS_SRC_DIR=$(dirname $PROFILE_SRC)
 #-------------------------#
 # BASE - PATH             #
 #-------------------------#
-debug_shell Profile: Path
+# debug_shell Profile: Path
 ICED_PATH="$HOME/.config/nvim/plugged/vim-iced/bin"
 
 if [ -z "$_ORIGINAL_PATH" ]; then
@@ -61,7 +61,7 @@ fi
 #-------------------------#
 # BASE - Environment
 #-------------------------#
-debug_shell Profile: Environment
+# debug_shell Profile: Environment
 # [ -e /usr/share/zoneinfo/Asia/Kolkata ] && {
 #     export TZ="/usr/share/zoneinfo/Asia/Kolkata"
 # }
@@ -78,7 +78,7 @@ fi
 #-----------------------------#
 # ENVIRONMENT - APPLICATIONS  #
 #-----------------------------#
-debug_shell Profile: Applications
+# debug_shell Profile: Applications
 export LESS=" -R "
 command -v source-highlight-esc.sh > /dev/null && \
     LESSOPEN="| $(which source-highlight-esc.sh) %s 2> /dev/null"
@@ -112,9 +112,9 @@ command -v pyenv > /dev/null && {
 #-----------------------------#
 # ENVIRONMENT - LOCAL CONFIG  #
 #-----------------------------#
-debug_shell Profile: Local
+# debug_shell Profile: Local
 # shellcheck source=/dev/null
 [ -r "$HOME/.profile.local" ] && . "$HOME/.profile.local"
 
-debug_shell Profile: Done
+# debug_shell Profile: Done
 true # Exit status should be 0.
