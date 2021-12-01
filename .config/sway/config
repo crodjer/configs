@@ -44,11 +44,12 @@ client.unfocused        $black     $black      $yellow
 client.urgent           $black     $red        $black
 
 # Cursor config
-seat seat0 xcursor_theme default 36
+# seat seat0 xcursor_theme default 36
 	
 
 # start a terminal
 bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec foot
 
 # start the editor
 bindsym $mod+Shift+n exec nvim-server

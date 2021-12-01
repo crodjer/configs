@@ -39,7 +39,7 @@
         },
     },
     "memory": {
-        "format": "",
+        "format": "",
         "interval": 5,
         "states": {
             "normal": 25,
@@ -52,14 +52,14 @@
         "thermal-zone": 5,
         "critical-threshold": 80,
         "interval": 5,
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", "", "", "", "", "", ""]
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", "", ""]
     },
     "backlight": {
-        "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", ""],
-        "on-scroll-up": "light -A 0.05",
-        "on-scroll-down": "light -U 0.05",
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", "", ""],
+        "on-scroll-up": "light -A 0.2",
+        "on-scroll-down": "light -U 0.2",
         "interval": 60
     },
     "battery": {
@@ -71,13 +71,14 @@
             // Anything between 30-80 is good.
             "good": 80,
             // Should plug in the charger below 30
-            "warning": 30,
+            "warning": 35,
             // 15 is just too low!
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format": "{icon}",
+        "tooltip-format": "{timeTo} | {capacity}%",
+        "format-charging": "",
+        "format-plugged": "",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
@@ -85,8 +86,8 @@
     },
     "network": {
         "format-wifi": "",
-        "format-ethernet": "",
-        "format-linked": "{ifname} (No IP) ",
+        "format-ethernet": "⫘",
+        "format-linked": "{ifname} ",
         "format-disconnected": "",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
@@ -100,24 +101,25 @@
         }
     },
     "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format": "{icon} {format_source}",
+        "format-bluetooth": "{icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "hands-free": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": ["", "", "", ""]
         },
+        "tooltip-format": "{desc}\n{volume} {icon} {source_volume} ",
         "on-click": "pulsemixer --toggle-mute",
         "on-scroll-up": "pulsemixer --change-volume -1",
-        "on-scroll-down": "pulsemixer --change-volume +1 --max-volume 150",
+        "on-scroll-down": "pulsemixer --change-volume +1 --max-volume 125",
         "smooth-scrolling-threshold": 1
     },
 }
