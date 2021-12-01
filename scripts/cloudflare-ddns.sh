@@ -62,7 +62,7 @@ if [ "$USE_IPV6" == true ]; then
     if [ -z $INTERFACE ]; then
         INTERFACE=$(ip -6 route ls | grep default | head -1 | grep -Po '(?<=dev )(\S+)')
     fi
-    IP="$(ip -6 -br a show dev $INTERFACE scope global 2> /dev/null | awk '{ print $3 }' | cut -d / -f 1)"
+    IP="$(ip -6 -br a show dev $INTERFACE scope global 2> /dev/null | grep -Eo '(:|\w)+/64' | cut -d / -f 1)"
     RECORD_TYPE="AAAA"
 else
     IP=$(curl -s 'https://api.ipify.org')
@@ -87,7 +87,7 @@ fi
 # Find the Zone information.
 log "Getting zone data..."
 ZONE_DATA=$(curl -sX GET "$API" -H "$CONTENT_TYPE" -H "$AUTH_HEADER")
-ZONE=$(echo $ZONE_DATA | jq '.result[0].id' -r)
+ZONE=$(echo $ZONE_DATA | jq ".result[] | select(.name == \"${DOMAIN#*.}\") | .id" -r)
 
 if [ -n "ZONE" ]; then
     log "..done!"
@@ -101,7 +101,7 @@ log "Getting record data..."
 RECORDS_DATA=$(curl -sX GET "$API/$ZONE/dns_records" -H "$CONTENT_TYPE" -H "$AUTH_HEADER")
 RECORD_DATA=$(echo $RECORDS_DATA | jq -c ".result[] | select(.name == \"$DOMAIN\")")
 RECORD=$(echo $RECORD_DATA | jq ".id" -r )
-if [ -n "RECORD" ]; then
+if [ -n "$RECORD" ]; then
     log "..done!"
 else
     log "Failed to get record data!"
