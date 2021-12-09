@@ -25,14 +25,15 @@ unlock () {
     set -e
 
     local dir=$1
-    if unlocked $dir; then
-        return;
-    fi
-
     # Not a directory!
     if [ ! -d $dir ]; then
         return;
     fi
+
+    if unlocked $dir; then
+        return;
+    fi
+
 
     if [ -n "$remote_protector" -a -f "$key" ]; then
         run fscrypt unlock $dir --unlock-with=/:$remote_protector --key=$key
