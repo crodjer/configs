@@ -19,7 +19,7 @@ local appList = {
     Firefox = { binding = "f" },
     Signal = { binding = "g" },
     Notes = { binding = "n" },
-    Bitwarden = { binding = "p", legacyActivate = true },
+    Bitwarden = { binding = "w", legacyActivate = true, autoLaunch = true },
     ["Google Chrome"]= { binding = "c" },
 
     Messages = {
@@ -146,6 +146,7 @@ for app, config in pairs(appList) do
               activateApp(application, config)
           elseif config.autoLaunch then
               launchApp(app, config)
+              activateApp(application, config)
           else
              hs.alert.closeSpecific(appNotRunningAlertId, 0)
              appNotRunningAlertId = hs.alert(app .. " not running!", nil, nil, 1)
