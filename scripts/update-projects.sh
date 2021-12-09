@@ -10,10 +10,6 @@ function run_command {
 
 SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-if [ -x "$(command -v docker)" ]; then
-  run_command "docker container prune -f && docker image prune -af" docker-cleanup
-fi
-
 if [ -x "$(command -v rustup)" ]; then
   run_command "rustup update"  rustup-update
 fi
