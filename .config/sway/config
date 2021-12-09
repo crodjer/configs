@@ -6,6 +6,9 @@ default_border pixel 4
 hide_edge_borders both
 smart_borders on
 
+assign [class="Firefox"] workspace 2
+assign [class="Signal"] workspace 3
+
 exec swayidle -w \
     timeout 10 'pgrep -x slock && swaymsg "output * dpms off"' \
     timeout 600 'loginctl lock-session $XDG_SESSION_ID' \
@@ -20,8 +23,7 @@ exec 'wl-paste -t text -w clipman store'
 # exec 'flock -Fn /tmp/geoclue-agent-sway.lock -c /usr/libexec/geoclue-2.0/demos/agent'
 exec 'redshift-gtk'
 exec 'pkill -x blueman-applet; blueman-applet'
-
-assign [app_id="firefox.*"] workspace 2
+exec 'setsway.sh'
 
 # Colors
 set $black #282828

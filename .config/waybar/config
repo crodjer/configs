@@ -59,8 +59,7 @@
         "format": "{icon}",
         "format-icons": ["", "", "", "", "", "", "", "", "", ""],
         "on-scroll-up": "light -A 0.2",
-        "on-scroll-down": "light -U 0.2",
-        "interval": 60
+        "on-scroll-down": "light -U 0.2"
     },
     "battery": {
         "states": {
@@ -92,7 +91,7 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
-        "interval": 2,
+        "interval": 5,
         "states": {
             "good": 50,
             "normal": 40,
