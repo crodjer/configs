@@ -7,8 +7,8 @@ if [ -S $NVIM_LISTEN_ADDRESS ]; then
     rm $NVIM_LISTEN_ADDRESS
 fi
 
-if [ -n "$TMUX_VERSION" ]; then
-    nvim
-else
+if [ -n "$(command -v gnvim)" ]; then
     gnvim
+else
+    nvim
 fi
