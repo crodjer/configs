@@ -21,5 +21,5 @@ if [ -z $self ]; then
     $parent_dir/unlock-remote.sh $host $safe_dir
     autossh -M 0 -t $host -- tmux -u new -As "$host"
 else
-    tmux new -As $host
+    tmux -u new -As $host
 fi
