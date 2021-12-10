@@ -3,6 +3,8 @@
 set -e
 
 host=$1
+safe_dir=${2:-/mnt/external/safe}
+parent_dir=$(dirname $0)
 
 if [ -z $host ]; then
     self=true
@@ -15,12 +17,9 @@ title() {
 
 title $host
 
-if [ -f "$HOME/.keys/$host.key" -a -z "$self" ]; then
-    scp -q $HOME/.keys/$host.key $host:/tmp/
-fi
-
 if [ -z $self ]; then
-    autossh -M 0 -t $host peek.sh
+    $parent_dir/unlock-remote.sh $host $safe_dir
+    autossh -M 0 -t $host -- tmux -u new -As "$host"
 else
     tmux new -As $host
 fi
