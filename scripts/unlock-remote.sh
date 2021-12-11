@@ -28,8 +28,8 @@ function run {
 }
 
 if [ $script_name != "$remote_name" ]; then
-    scp -q $script_file $host_name:$remote_script
-    scp -q "$HOME/.keys/$host_name.key" $host_name:$remote_key
+    scp -q $script_file $host_name:$remote_script || exit 1
+    scp -q "$HOME/.keys/$host_name.key" $host_name:$remote_key || exit 1
     ssh $host_name -- $remote_script $host_name $safe_dir
     exit 0
 fi
