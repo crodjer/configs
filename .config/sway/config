@@ -9,6 +9,9 @@ smart_borders on
 assign [class="Firefox"] workspace 2
 assign [class="Signal"] workspace 3
 
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec foot -s
 exec mako
 exec swayidle -w \

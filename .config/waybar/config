@@ -29,7 +29,7 @@
         "interval": 5
     },
     "custom/wttr": {
-        "exec": "curl 'https://wttr.in/Bangalore?format=%c+%t\\n%l:+%c+%C,+feels+like+%f,+%h,+%w' | sed -s 's/+//g'",
+        "exec": "curl -s 'https://wttr.in/Bangalore?format=%c+%t\\n%l:+%c+%C,+feels+like+%f,+%h,+%w' | sed -s 's/+//g'",
         "tooltip": true,
         "format": " {} ",
         "interval": 120
@@ -80,9 +80,9 @@
             // 15 is just too low!
             "critical": 15
         },
-        "format": "{icon}",
+        "format": "{capacity}% {icon}",
         "tooltip-format": "{timeTo} | {capacity}%",
-        "format-charging": "",
+        "format-charging": "{capacity}% ",
         "format-plugged": "",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
@@ -90,7 +90,7 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "",
+        "format-wifi": "  {essid}",
         "format-ethernet": "⫘",
         "format-linked": "{ifname} ",
         "format-disconnected": "",
