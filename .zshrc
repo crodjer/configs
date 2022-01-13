@@ -80,6 +80,8 @@ else
     alias ls='ls --color=auto'
 fi
 
+alias exa='exa --icons'
+
 alias cb='xclip -selection clipboard'
 alias k='kubectl'
 if [ -x "$(command -v iwctl)" ]; then
@@ -149,6 +151,7 @@ debug_shell ZSH: Initializations
 
 # Initialize autojump
 [[ -s "$HOME/.config/profile.d/autojump.zsh" ]] && source "$HOME/.config/profile.d/autojump.zsh"
+[ -x $(command -v zoxide) ] && eval "$(zoxide init zsh)"
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
