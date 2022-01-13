@@ -8,6 +8,7 @@ smart_borders on
 
 assign [class="Firefox"] workspace 2
 assign [class="Signal"] workspace 3
+for_window [class="feh"] floating enable
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec dbus-update-activation-environment 2>/dev/null && \
