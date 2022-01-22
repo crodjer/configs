@@ -52,6 +52,7 @@ fi
 
 alias re='exec bash'
 alias aria2c='aria2c -j2 --seed-time 0 --max-upload-limit 1'
+alias exa='exa --icons'
 
 git-branch () {
     git branch | grep "\*" | cut -d " " -f 2
