@@ -53,12 +53,12 @@ schemes:
     primary:
       background: '0xfbf1c7'
       foreground: '0x504945'
-  
+
     # Colors the cursor will use if `custom_cursor_colors` is true
     cursor:
       text: '0xfbf1c7'
       cursor: '0x504945'
-  
+
     # Normal colors
     normal:
       black:   '0xfbf1c7'

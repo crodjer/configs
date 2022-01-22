@@ -45,7 +45,7 @@
         },
     },
     "memory": {
-        "format": "",
+        "format": "",
         "interval": 5,
         "states": {
             "normal": 25,
