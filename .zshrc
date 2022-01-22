@@ -151,7 +151,7 @@ debug_shell ZSH: Initializations
 
 # Initialize autojump
 [[ -s "$HOME/.config/profile.d/autojump.zsh" ]] && source "$HOME/.config/profile.d/autojump.zsh"
-[ -x $(command -v zoxide) ] && eval "$(zoxide init zsh)"
+test -n "$(command -v zoxide)" && eval "$(zoxide init zsh)"
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
