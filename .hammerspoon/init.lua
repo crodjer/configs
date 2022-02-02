@@ -16,7 +16,7 @@ local appList = {
     Slack = { binding = "s" },
     Postman = { binding = "r" },
     ["Amazon Music"]= { binding = "," },
-    Firefox = { binding = "f" },
+    Waterfox = { binding = "f" },
     Signal = { binding = "g" },
     Notes = { binding = "n" },
     Bitwarden = { binding = "w", legacyActivate = true, autoLaunch = true },
@@ -28,11 +28,11 @@ local appList = {
         autoLaunch = true,
         bundleID ="com.brave.Browser.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
-    YouTube = {
-        binding = "y",
-        autoLaunch = true,
-        bundleID ="com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml"
-    },
+    -- YouTube = {
+    --     binding = "y",
+    --     autoLaunch = true,
+    --     bundleID ="com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml"
+    -- },
     ["Google Duo"] = {
         binding = "7",
         autoLaunch = true,
