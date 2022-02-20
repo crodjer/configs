@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 DEVICE=$1
 
@@ -59,7 +58,7 @@ $HOME_DIR/.cargo/registry/*
 $HOME_DIR/.rustup/toolchains/*
 EOM
 
-sudo rsync -aAXH \
+rsync -aAXH \
     --progress \
     --delete \
     --delete-excluded \
