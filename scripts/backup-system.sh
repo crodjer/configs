@@ -26,8 +26,12 @@ if [ -z "$SELF" ]; then
         }
 fi
 
+EXTRA_ARGS=$(ssh $DEVICE -- cat /home/rohan/.backup-rsync-params 2> /dev/null | tr '\n' ' ' || echo "" )
+
 rsync -aAXH \
     --progress \
     --delete \
-    --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/var/log/*","/var/tmp/*","/swapfile","/lost+found","/home/rohan/services/photoprism/storage/cache"} \
+    --delete-excluded \
+    --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/var/log/*","/var/tmp/*","/swapfile","/lost+found"} \
+    $EXTRA_ARGS \
     $SOURCE $TARGET
