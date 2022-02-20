@@ -152,7 +152,7 @@ bindsym $mod+Shift+F12 exec  light -A 1
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 45 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 45 -5%
 bindsym $mod+F2 exec --no-startup-id pulsemixer --change-volume -5
-bindsym $mod+F3 exec --no-startup-id pulsemixer --change-volume +5 --max-volume 125
+bindsym $mod+F3 exec --no-startup-id pulsemixer --change-volume +5 --max-volume 120
 
 bindsym $mod+F1 exec --no-startup-id pulsemixer --toggle-mute
 bindsym $mod+F4 exec --no-startup-id pulsemixer --toggle-mute --id $(pulsemixer --list-sources | grep Default | grep -Po "\d+" | head -1)

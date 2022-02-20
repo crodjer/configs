@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode","sway/window"],
     "modules-center": [],
-    "modules-right": ["custom/wttr", "idle_inhibitor", "network", "cpu", "memory", "temperature", "backlight", "battery", "pulseaudio", "custom/clock", "tray"],
+    "modules-right": ["custom/wttr", "idle_inhibitor", "network", "cpu", "memory", "temperature", "backlight", "battery", "pulseaudio", "clock", "tray"],
     "sway/workspaces": {
         "disable-scroll": true
     },
@@ -23,10 +23,8 @@
         "icon-size": 24,
         "spacing": 3
     },
-    "custom/clock": {
-        "exec": "date '+%a %d %b %H:%M'",
-        "format": "  {}  ",
-        "interval": 5
+    "clock": {
+        "format": "{:%a %d %b %H:%M}",
     },
     "custom/wttr": {
         "exec": "curl -s 'https://wttr.in/Bangalore?format=%c+%t\\n%l:+%c+%C,+feels+like+%f,+%h,+%w' | sed -s 's/+//g'",
