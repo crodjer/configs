@@ -319,7 +319,7 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 let g:vim_markdown_new_list_item_indent = 2
 augroup markdown
     autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=0
-    autocmd FileType markdown,rst,text setlocal spell spelllang=en nowrap
+    autocmd FileType markdown,rst,text setlocal spell spelllang=en wrap
 augroup END
 
 " Python
