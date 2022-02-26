@@ -19,7 +19,7 @@ min_time = 2000
 show_milliseconds = true
 
 [git_status]
-disabled = true
+disabled = false
 
 [kubernetes]
 disabled = true
