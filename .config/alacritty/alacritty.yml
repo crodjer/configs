@@ -32,6 +32,7 @@ key_bindings:
   - { key: O,         mods: Alt|Shift,  chars: "\x1bO" }
   - { key: F,         mods: Alt|Shift,  chars: "\x1bF" }
   - { key: Z,         mods: Alt,        chars: "\x1bz" }
+  - { key: Backslash,  mods: Alt,        chars: "\x1b\\" }
   - { key: Key0,      mods: Alt,        chars: "\x1b0" }
   - { key: Key1,      mods: Alt,        chars: "\x1b1" }
   - { key: Key2,      mods: Alt,        chars: "\x1b2" }
