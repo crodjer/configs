@@ -117,7 +117,7 @@ gen-prompt () {
 
     # Render git info, if available, in the prompt.
     if [ "$git_branch" ]; then
-        local _git_status="$git_branch$([ "$(git status --porcelain)" ] && echo "*")"
+        local _git_status="$git_branch$([ "$(timeout 0.2s git status --porcelain)" ] && echo "*")"
         _line_1="$_line_1 %B%F{green}±%b %F{cyan}($_git_status)%f"
     fi
 
