@@ -21,11 +21,12 @@ local appList = {
     Notes = { binding = "n" },
     Bitwarden = { binding = "w", legacyActivate = true, autoLaunch = true },
     ["Google Chrome"]= { binding = "c" },
+    Obsidian = { binding = "2" },
 
     Messages = {
         -- This is Google Messages
         binding = "0",
-        autoLaunch = true,
+        autoLaunch = false,
         bundleID ="com.brave.Browser.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
     -- YouTube = {
