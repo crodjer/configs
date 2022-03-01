@@ -50,26 +50,26 @@ function renderTable(table)
 end
 
 -- Caffeine: A button in the menu bar.
-hs.loadSpoon("Caffeine")
-spoon.Caffeine:start()
+-- hs.loadSpoon("Caffeine")
+-- spoon.Caffeine:start()
 
 -- Cherry: Pomodoro Timer
-hs.loadSpoon("Cherry")
-spoon.Cherry.duration = 25
-spoon.Cherry.alertTextSize = 50
-spoon.Cherry.notification = hs.notify.new({ title = "Timer's up. Have some rest!", withdrawAfter = 10})
-spoon.Cherry.sound = hs.sound.getByFile("/System/Library/Sounds/Submarine.aiff")
-spoon.Cherry:bindHotkeys({ start = { hsModifier, "=" }})
-spoon.Cherry:reset()
+-- hs.loadSpoon("Cherry")
+-- spoon.Cherry.duration = 25
+-- spoon.Cherry.alertTextSize = 50
+-- spoon.Cherry.notification = hs.notify.new({ title = "Timer's up. Have some rest!", withdrawAfter = 10})
+-- spoon.Cherry.sound = hs.sound.getByFile("/System/Library/Sounds/Submarine.aiff")
+-- spoon.Cherry:bindHotkeys({ start = { hsModifier, "=" }})
+-- spoon.Cherry:reset()
 -- spoon.Cherry:start()
 
 -- Start cherry on unlock.
-cherryWatcher = hs.caffeinate.watcher.new(function(event) 
-    if event == hs.caffeinate.watcher.screensDidUnlock then
-        spoon.Cherry:reset()
-        spoon.Cherry:start()
-    end
-end)
+-- cherryWatcher = hs.caffeinate.watcher.new(function(event) 
+--     if event == hs.caffeinate.watcher.screensDidUnlock then
+--         spoon.Cherry:reset()
+--         spoon.Cherry:start()
+--     end
+-- end)
 -- cherryWatcher:start()
 
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
