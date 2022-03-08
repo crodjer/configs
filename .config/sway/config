@@ -9,6 +9,9 @@ smart_borders on
 assign [class="Firefox"] workspace 2
 assign [class="Signal"] workspace 3
 for_window [class="feh"] floating enable
+for_window [class="zoom"] floating enable
+for_window [title=".+[Ss]haring (Indicator|your screen)"] floating enable, nofocus, sticky enable, move to scratchpad #, move position 800 600
+for_window [app_id="firefox" title="^Picture-in-Picture$"] floating enable, sticky enable
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec dbus-update-activation-environment 2>/dev/null && \
@@ -30,6 +33,8 @@ exec 'wl-paste -t text -w clipman store'
 exec 'redshift-gtk'
 exec 'pkill -x blueman-applet; blueman-applet'
 exec 'setsway.sh'
+exec eval $(gnome-keyring-daemon --start)
+exec export SSH_AUTH_SOCK
 
 # Colors
 set $black #282828
@@ -141,8 +146,8 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Brightness Control
-bindsym $mod+F11 exec  light -U 5
-bindsym $mod+F12 exec  light -A 5
+bindsym $mod+F11 exec  light -U 2.5
+bindsym $mod+F12 exec  light -A 2.5
 bindsym $mod+Shift+F11 exec  light -U 1
 bindsym $mod+Shift+F12 exec  light -A 1
 # bindsym $mod+Shift+F11 exec  light -S 11

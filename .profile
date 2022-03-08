@@ -80,6 +80,9 @@ fi
 #-----------------------------#
 # debug_shell Profile: Applications
 export LESS=" -R "
+if [ -f /usr/share/source-highlight/src-hilite-lesspipe.sh ]; then
+    export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+fi
 command -v source-highlight-esc.sh > /dev/null && \
     LESSOPEN="| $(which source-highlight-esc.sh) %s 2> /dev/null"
 export LESSOPEN
