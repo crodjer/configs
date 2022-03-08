@@ -17,9 +17,6 @@ function make_home () {
         .zshrc
         .profile
         .zprofile
-        .inputrc
-        .bashrc
-        .bash_profile
         .gitconfig
         .gitignore
         .config/nvim/init.vim
@@ -35,10 +32,11 @@ function make_home () {
     local configs_src
     local config
 
-    if [ -d "$HOME/configs/" ]; then
-        configs_src="$HOME/configs"
+    if [ -n "$CONFIGS_SRC_DIR" -a -d $CONFIGS_SRC_DIR ]; then
+	configs_src="$CONFIGS_SRC_DIR"
     else
-        configs_src="$HOME"
+	echo "No config source directory!"
+	return 1
     fi
 
     while getopts "hr:c:x" opt; do
