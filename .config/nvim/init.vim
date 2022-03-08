@@ -187,7 +187,7 @@ let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace']
             \ }
 let g:ale_linters = {
-            \ 'python': ['pyls', 'pylint'],
+            \ 'python': ['pylsp', 'pylint'],
             \ 'rust': ['analyzer', 'rls', 'cargo'],
             \ }
 let g:ale_use_global_executables = 1
