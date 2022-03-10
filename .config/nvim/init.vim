@@ -19,6 +19,7 @@ set clipboard+=unnamedplus  "use system clipboard
 set mouse-=a
 set cursorline
 set signcolumn=yes:1
+set updatetime=500
 
 " Format options
 set formatoptions-=o    "disable auto comment leader insertion with o/O
@@ -179,6 +180,10 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '!'
 let g:ale_sign_column_always = 1
+let g:ale_hover_cursor=1
+let g:ale_set_balloons=1
+let g:ale_hover_to_floating_preview = 1
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
 
 set omnifunc=ale#completion#OmniFunc
 let g:ale_completion_enabled = 1
@@ -195,6 +200,7 @@ let g:ale_use_global_executables = 1
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <leader>ah :ALEHover<cr>
+nmap <silent> <leader>d :ALEHover<cr>
 nmap <silent> <leader>ag :ALEGoToDefinition<cr>
 nmap <silent> <leader>ar :ALEFindReferences<cr>
 nmap <silent> <leader>aj :ALEImport<cr>
