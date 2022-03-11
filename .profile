@@ -35,15 +35,6 @@ export                        PATH="$PATH:$HOME/.bin"
                               PATH="$PATH:$HOME/.cargo/bin"
 [ -d "$ICED_PATH" ]        && PATH="$PATH:$ICED_PATH"
 
-if [ -z "$_ORIGINAL_MANPATH" ]; then
-    export _ORIGINAL_MANPATH=$MANPATH
-else
-    # We seem to be reloading .profile
-    MANPATH=$_ORIGINAL_MANPATH
-fi
-export                      MANPATH="$MANPATH:$HOME/.man:/usr/local/share/man:/usr/local/man"
-[ -d "$HOME/.local" ]   &&  MANPATH="$MANPATH:$HOME/.local/share/man:$HOME/.local/man"
-
 if [ -z "$_ORIGINAL_XDG_DATA_DIRS" ]; then
     export _ORIGINAL_XDG_DATA_DIRS=$XDG_DATA_DIRS
 else
@@ -97,7 +88,6 @@ export AUTOSSH_POLL=60
 export SCIKIT_LEARN_DATA=~/.scikit_learn_data
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export NPM_PACKAGES="$HOME/.npm-packages"
-export MANPATH="$HOME/.npm-packages/share/man:$MANPATH"
 export GPODDER_HOME="$HOME/.gpodder"
 export BAT_THEME="Solarized (light)"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
