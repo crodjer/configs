@@ -101,14 +101,21 @@ gen-prompt () {
         user_color="red"
     fi
 
-    local host_color="green"
+    local host_color="gray"
 
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
         host_color="red"
     fi
 
+    local prompt_alias=~$USER/.prompt-user
     ## Generate a simple, informative multiline prompt.
-    local _line_1="%F{blue}┌─[%B%F{$user_color}%n%f%b@%F{${host_color}}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f"
+    if [ -f $prompt_alias ]; then
+        local user_name=$(cat $prompt_alias)
+    else
+        local user_name="$USER"
+    fi
+
+    local _line_1="%F{blue}┌─[%B%F{$user_color}${user_name}%f%b@%F{${host_color}}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f"
     local _line_2="%F{blue}└─%(!.#.>)%f "
 
     local git_branch=$(git symbolic-ref --short HEAD 2> /dev/null || {
