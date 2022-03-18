@@ -161,6 +161,7 @@ Plug 'ledger/vim-ledger'                , { 'for': 'dat' }
 Plug 'guns/vim-sexp'                    , { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'liquidz/vim-iced'                 , { 'for': 'clojure', 'branch': 'main' }
+Plug 'hashivim/vim-terraform'           , { 'for': 'tf' }
 
 " Done loading plugins
 call plug#end()
