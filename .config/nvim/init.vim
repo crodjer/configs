@@ -358,3 +358,10 @@ augroup END
 " Tagbar
 let g:tagbar_width = 30
 nnoremap <leader>t :TagbarToggle<CR>
+
+try 
+    " Load any local overrides, if any.
+    source ~/.local.vim
+catch
+    " No such file? No problem; just ignore it.
+endtry 
