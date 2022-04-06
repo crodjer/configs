@@ -149,6 +149,7 @@ if [ -x "$(command -v starship)" ] && \
 elif [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   USE_POWERLINE="true"
   source /usr/share/zsh/manjaro-zsh-prompt
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 else
     PROMPT='$(gen-prompt)'
     RPROMPT="%F{green}%~%f"
