@@ -146,10 +146,8 @@ debug_shell ZSH: Prompt
 if [ -x "$(command -v starship)" ] && \
     [ -f $HOME/.config/starship.toml ]; then
     eval "$(starship init zsh)"
-elif [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
-  USE_POWERLINE="true"
-  source /usr/share/zsh/manjaro-zsh-prompt
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+elif [[ -f ~/.p10k.zsh ]]; then
+    source ~/.p10k.zsh
 else
     PROMPT='$(gen-prompt)'
     RPROMPT="%F{green}%~%f"

@@ -8,18 +8,13 @@ hs.window.animationDuration = 0
 -- List of apps and their screeen / binding, configuration
 local appList = {
     Alacritty = { binding = "t" },
-    Peek = { binding = "i" },
     ["Android Studio"] = { binding = "a" },
     ["IntelliJ IDEA"] = { binding = "e" },
     ["Brave Browser"] = { binding = "b" },
     ["zoom.us"] = { binding = "o" },
     Slack = { binding = "s" },
     Postman = { binding = "r" },
-    ["Amazon Music"]= { binding = "," },
-    Waterfox = { binding = "f" },
-    Signal = { binding = "g" },
     Notes = { binding = "n" },
-    Bitwarden = { binding = "w", legacyActivate = true, autoLaunch = true },
     ["Google Chrome"]= { binding = "c" },
     Obsidian = { binding = "2" },
 
@@ -29,16 +24,11 @@ local appList = {
         autoLaunch = false,
         bundleID ="com.brave.Browser.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
-    -- YouTube = {
-    --     binding = "y",
-    --     autoLaunch = true,
-    --     bundleID ="com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml"
-    -- },
-    ["Google Duo"] = {
-        binding = "7",
+    YouTube = {
+        binding = "y",
         autoLaunch = true,
-        bundleID ="com.brave.Browser.app.imgohncinckhbblnlmaedahepnnpmdma"
-    },
+        bundleID ="com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml"
+    }
 }
 
 function renderTable(table)
@@ -50,8 +40,8 @@ function renderTable(table)
 end
 
 -- Caffeine: A button in the menu bar.
--- hs.loadSpoon("Caffeine")
--- spoon.Caffeine:start()
+hs.loadSpoon("Caffeine")
+spoon.Caffeine:start()
 
 -- Cherry: Pomodoro Timer
 -- hs.loadSpoon("Cherry")
@@ -90,7 +80,7 @@ spoon.ReloadConfiguration:start()
 -- Seal: The awesome seal plugin, with pasteboard (pb) support.
 hs.loadSpoon("Seal")
 spoon.Seal:loadPlugins({ "apps", "pasteboard" })
-spoon.Seal.plugins.pasteboard.historySize = 10
+spoon.Seal.plugins.pasteboard.historySize = 25
 spoon.Seal.plugins.pasteboard.saveHistory = false
 
 spoon.Seal:bindHotkeys({
