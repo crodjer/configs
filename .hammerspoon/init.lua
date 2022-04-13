@@ -125,6 +125,7 @@ function launchApp(app, config)
 end
 
 appNotRunningAlertId = nil
+lastNotRunningApp = nil
 
 -- Attach app bindings
 for app, config in pairs(appList) do
@@ -135,12 +136,14 @@ for app, config in pairs(appList) do
 
           if application then
               activateApp(application, config)
-          elseif config.autoLaunch then
+          elseif config.autoLaunch or lastNotRunningApp == app then
+              lastNotRunningApp = nil
               launchApp(app, config)
               activateApp(application, config)
           else
-             hs.alert.closeSpecific(appNotRunningAlertId, 0)
-             appNotRunningAlertId = hs.alert(app .. " not running!", nil, nil, 1)
+              hs.alert.closeSpecific(appNotRunningAlertId, 0)
+              appNotRunningAlertId = hs.alert(app .. " not running!", nil, nil, 1)
+              lastNotRunningApp = app
           end
        end)
     end
