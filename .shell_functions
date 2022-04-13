@@ -21,10 +21,9 @@ function make_home () {
         .gitignore
         .config/nvim/init.vim
         .config/nvim/colors
-        .config/alacritty/alacritty.yml
+        .config/alacritty
         .tmux.conf
         .toprc
-        .npmrc
     )
 
     local remote

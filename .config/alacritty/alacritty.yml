@@ -10,7 +10,6 @@ import:
 #   normal:
 #     family: "Menlo For Powerline"
 
-
 key_bindings:
   - { key: D,         mods: Alt,        chars: "\x1bd" }
   - { key: F,         mods: Alt,        chars: "\x1bf" }
