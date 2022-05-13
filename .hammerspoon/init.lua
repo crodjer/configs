@@ -26,7 +26,7 @@ local appList = {
     },
     YouTube = {
         binding = "y",
-        autoLaunch = true,
+        autoLaunch = false,
         bundleID ="com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml"
     }
 }
@@ -135,6 +135,7 @@ for app, config in pairs(appList) do
           application = hs.application.get(config.bundleID or app)
 
           if application then
+              lastNotRunningApp = nil
               activateApp(application, config)
           elseif config.autoLaunch or lastNotRunningApp == app then
               lastNotRunningApp = nil
