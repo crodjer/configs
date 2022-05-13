@@ -5,6 +5,8 @@ command -v sk > /dev/null && sk='sk' || {
     command -v fzf > /dev/null && sk='fzf'
 }
 
+export FZF_DEFAULT_COMMAND='fd --type f'
+
 if [  -z "$1" ]; then
     $remote $($sk)
 else
