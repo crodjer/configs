@@ -18,7 +18,6 @@ set nofoldenable            "don't fold by default
 set clipboard+=unnamedplus  "use system clipboard
 set mouse-=a
 set cursorline
-set signcolumn=yes:1
 set updatetime=500
 
 " Format options
@@ -180,7 +179,7 @@ let g:ale_lint_on_text_changed = 'never'
 " let g:ale_open_list = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '!'
-let g:ale_sign_column_always = 1
+let g:ale_sign_column_always = 0
 let g:ale_hover_cursor=1
 let g:ale_set_balloons=1
 let g:ale_hover_to_floating_preview = 1
