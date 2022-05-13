@@ -30,3 +30,5 @@
 [include]
     path = ~/.gitconfig.delta
     path = ~/.gitconfig.local
+[fetch]
+    prune = true
