@@ -143,9 +143,17 @@ debug_shell ZSH: Prompt
 #-------------------------#
 # Prompt
 #-------------------------#
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 if [ -x "$(command -v starship)" ] && \
     [ -f $HOME/.config/starship.toml ]; then
     eval "$(starship init zsh)"
+elif [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  USE_POWERLINE="true"
+  source /usr/share/zsh/manjaro-zsh-prompt
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 elif [[ -f ~/.p10k.zsh ]]; then
     source ~/.p10k.zsh
 else
