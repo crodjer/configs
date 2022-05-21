@@ -28,6 +28,13 @@ function run {
 }
 
 if [ $script_name != "$remote_name" ]; then
+    # Try reaching the remote host.
+    PING_OUTPUT=$(timeout 1 ping -c 1 $host_name | grep -E 'time=[0-9.]+')
+    if [ -z "$PING_OUTPUT" ]; then
+        echo "Can't ping $host_name from $(hostname)!"
+        exit 1
+    fi
+
     scp -q $script_file $host_name:$remote_script || exit 1
     scp -q "$HOME/.keys/$host_name.key" $host_name:$remote_key || exit 1
     ssh $host_name -- $remote_script $host_name $safe_dir
@@ -60,7 +67,6 @@ unlock () {
     if unlocked $dir; then
         return;
     fi
-
 
     if [ -n "$remote_protector" -a -f "$remote_key" ]; then
         run fscrypt unlock $dir --unlock-with=/:$remote_protector --key=$remote_key
