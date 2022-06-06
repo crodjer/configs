@@ -28,6 +28,11 @@ local appList = {
         binding = "y",
         autoLaunch = false,
         bundleID ="com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml"
+    },
+    ["Youtube Music"] = {
+        binding = ",",
+        autoLaunch = true,
+        bundleID ="com.brave.Browser.app.cinhimbnkkaeohfgghhklpknlkffjgod"
     }
 }
 
