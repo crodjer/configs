@@ -15,9 +15,14 @@ local appList = {
     Slack = { binding = "s" },
     Postman = { binding = "r" },
     Notes = { binding = "n" },
+    Firefox = { binding = "f" },
     ["Google Chrome"]= { binding = "c" },
     Obsidian = { binding = "2" },
-
+    Snapdrop = {
+        binding = 'd',
+        autoLaunch = true,
+        bundlid = "com.brave.Browser.app.ikpmlgdcejalmjnfbahhijemkcgljabf"
+    },
     Messages = {
         -- This is Google Messages
         binding = "0",
@@ -31,7 +36,7 @@ local appList = {
     },
     ["Youtube Music"] = {
         binding = ",",
-        autoLaunch = true,
+        autoLaunch = false,
         bundleID ="com.brave.Browser.app.cinhimbnkkaeohfgghhklpknlkffjgod"
     }
 }
@@ -85,8 +90,8 @@ spoon.ReloadConfiguration:start()
 -- Seal: The awesome seal plugin, with pasteboard (pb) support.
 hs.loadSpoon("Seal")
 spoon.Seal:loadPlugins({ "apps", "pasteboard" })
-spoon.Seal.plugins.pasteboard.historySize = 25
-spoon.Seal.plugins.pasteboard.saveHistory = false
+spoon.Seal.plugins.pasteboard.historySize = 100
+spoon.Seal.plugins.pasteboard.saveHistory = yes
 
 spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
