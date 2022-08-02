@@ -32,3 +32,5 @@
     path = ~/.gitconfig.local
 [fetch]
     prune = true
+[push]
+	autoSetupRemote = true
