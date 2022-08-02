@@ -15,7 +15,8 @@ local appList = {
     Slack = { binding = "s" },
     Postman = { binding = "r" },
     Notes = { binding = "n" },
-    Firefox = { binding = "f" },
+    Bitwarden = { binding = "w" },
+    Signal = { binding = "g" },
     ["Google Chrome"]= { binding = "c" },
     Obsidian = { binding = "2" },
     Snapdrop = {
