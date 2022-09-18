@@ -17,6 +17,8 @@ local appList = {
     Notes = { binding = "n" },
     Bitwarden = { binding = "w" },
     Signal = { binding = "g" },
+    LibreWolf = { binding = "f" },
+    UTM = { binding = "u" },
     ["Google Chrome"]= { binding = "c" },
     Obsidian = { binding = "2" },
     Snapdrop = {
@@ -245,4 +247,11 @@ hs.hotkey.bind(hsModifier, "l", function()
     f.y = newY
 
     win:setFrame(f)
+end)
+
+hs.hotkey.bind(hsShift, "w", function ()
+    local task = hs.task.new("/Users/rjain3/.local/bin/stew.sh", function (code, stdout, stderr)
+        hs.eventtap.keyStrokes(stdout)
+    end)
+    task:start()
 end)
