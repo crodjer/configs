@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-tmux new -As $(hostname)
+tmux -u new -As $(hostname)
