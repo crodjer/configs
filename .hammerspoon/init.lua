@@ -10,37 +10,31 @@ local appList = {
     Alacritty = { binding = "t" },
     ["Android Studio"] = { binding = "a" },
     ["IntelliJ IDEA"] = { binding = "e" },
-    ["Brave Browser"] = { binding = "b" },
-    ["zoom.us"] = { binding = "o" },
+    -- ["zoom.us"] = { binding = "o" },
     Slack = { binding = "s" },
     Postman = { binding = "r" },
     Notes = { binding = "n" },
     Bitwarden = { binding = "w" },
     Signal = { binding = "g" },
-    LibreWolf = { binding = "f" },
+    ["Firefox Developer Edition"] = { binding = "f" },
     UTM = { binding = "u" },
+    Peek = { binding = "p" },
     ["Google Chrome"]= { binding = "c" },
+    VLC = { binding = "v" },
     Obsidian = { binding = "2" },
-    Snapdrop = {
-        binding = 'd',
-        autoLaunch = true,
-        bundlid = "com.brave.Browser.app.ikpmlgdcejalmjnfbahhijemkcgljabf"
-    },
-    Messages = {
-        -- This is Google Messages
-        binding = "0",
-        autoLaunch = false,
-        bundleID ="com.brave.Browser.app.hpfldicfbfomlpcikngkocigghgafkph"
+    Zoom = {
+        binding = "o",
+        bundleId = "com.google.Chrome.app.gbmplfifepjenigdepeahbecfkcalfhg"
     },
     YouTube = {
         binding = "y",
         autoLaunch = false,
-        bundleID ="com.brave.Browser.app.agimnkijcaahngcdmfeangaknmldooml"
+        bundleID ="com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
     },
-    ["Youtube Music"] = {
+    ["Prime Video"] = {
         binding = ",",
         autoLaunch = false,
-        bundleID ="com.brave.Browser.app.cinhimbnkkaeohfgghhklpknlkffjgod"
+        bundleID ="com.google.Chrome.app.iimgojjpcnfmbcpgjdhpnihjkfaadcmg"
     }
 }
 
