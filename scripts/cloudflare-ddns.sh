@@ -59,12 +59,15 @@ CONTENT_TYPE='Content-Type:application/json'
 AUTH_HEADER="Authorization: Bearer $TOKEN"
 
 if [ "$USE_IPV6" == true ]; then
+    log "Processing IPv6 for: $DOMAIN..."
+
     if [ -z $INTERFACE ]; then
         INTERFACE=$(ip -6 route ls | grep default | head -1 | grep -Po '(?<=dev )(\S+)')
     fi
     IP="$(ip -6 -br a show dev $INTERFACE scope global | grep -Eo '\w+:(:|\w)+:\w+' | tail -1)"
     RECORD_TYPE="AAAA"
 else
+    log "Processing IPv4 for: $DOMAIN..."
     IP=$(curl -s 'https://api.ipify.org')
     RECORD_TYPE="A"
 fi
