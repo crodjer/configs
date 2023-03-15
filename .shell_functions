@@ -152,4 +152,4 @@ function git_branch() {
 set_nvim_listen_address
 colorize_ls
 
-alias ipa='ip -br -c a'
+alias ip='ip -br -c'
