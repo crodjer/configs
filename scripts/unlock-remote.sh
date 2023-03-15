@@ -38,6 +38,7 @@ if [ $script_name != "$remote_name" ]; then
     scp -q $script_file $host_name:$remote_script || exit 1
     scp -q "$HOME/.keys/$host_name.key" $host_name:$remote_key || exit 1
     ssh $host_name -- $remote_script $host_name $safe_dir
+    ssh $host_name -- rm $remote_script
     exit 0
 fi
 
@@ -84,7 +85,6 @@ unlock () {
 unlock $HOME $remote_key
 unlock $safe_dir $remote_key
 
-run rm $remote_script
 run rm $remote_key
 
 if [ -x "$on_unlock_script" ]; then
