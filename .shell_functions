@@ -149,6 +149,10 @@ function git_branch() {
     }
 }
 
+function expenses() {
+    ledger --depth ${2:-3} -M register ${1:-Expense:} ${@:3}
+}
+
 set_nvim_listen_address
 colorize_ls
 
