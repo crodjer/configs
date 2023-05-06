@@ -153,7 +153,6 @@ Plug 'maximbaz/lightline-ale'
 Plug 'plasticboy/vim-markdown'          , { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'               , { 'for': 'rust'}
 Plug 'cespare/vim-toml'                 , { 'for': 'toml'}
-Plug 'pangloss/vim-javascript'          , { 'for': ['js', 'jsx', 'json']}
 Plug 'ekalinin/Dockerfile.vim'          , { 'for': 'Dockerfile' }
 Plug 'Vimjas/vim-python-pep8-indent'    , { 'for': 'python' }
 Plug 'ledger/vim-ledger'                , { 'for': 'dat' }
@@ -191,11 +190,11 @@ let g:ale_completion_autoimport = 1
 let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace']
             \ }
-let g:ale_linters = {
-            \ 'python': ['pylsp', 'pylint'],
-            \ 'rust': ['analyzer', 'rls', 'cargo'],
-            \ }
-let g:ale_use_global_executables = 1
+" let g:ale_linters = {
+"             \ 'python': ['pylsp', 'pylint'],
+"             \ 'rust': ['analyzer', 'rls', 'cargo'],
+"             \ 'typescript': ['tsserver']
+"             \ }
 
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
@@ -235,7 +234,7 @@ let g:lightline#ale#indicator_ok = ' '
 "" Language configurations
 
 " JS/JSX
-let g:jsx_ext_required = 1
+" let g:jsx_ext_required = 1
 augroup javascript
     autocmd FileType javascript setlocal sw=2 sts=2 et
 augroup END
@@ -251,21 +250,6 @@ augroup crontab
     autocmd FileType crontab setlocal backupcopy=yes
 augroup END
 
-" Coffee
-augroup coffee
-    autocmd FileType coffee setlocal sw=2 sts=2 et
-    let g:tagbar_type_coffee = {
-        \ 'ctagstype' : 'coffee',
-        \ 'kinds'     : [
-            \ 'c:classes',
-            \ 'm:methods',
-            \ 'f:functions',
-            \ 'v:variables',
-            \ 'f:fields',
-        \ ]
-    \ }
-    autocmd FileType coffee setlocal sw=2 sts=2 et foldmethod=indent foldnestmax=3
-augroup END
 
 " FZF/Skim
 augroup fzf
