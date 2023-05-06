@@ -10,7 +10,6 @@ local appList = {
     Alacritty = { binding = "t" },
     ["Android Studio"] = { binding = "a" },
     ["IntelliJ IDEA"] = { binding = "e" },
-    -- ["zoom.us"] = { binding = "o" },
     Slack = { binding = "s" },
     Postman = { binding = "r" },
     Notes = { binding = "n" },
@@ -35,6 +34,16 @@ local appList = {
         binding = ",",
         autoLaunch = false,
         bundleID ="com.google.Chrome.app.iimgojjpcnfmbcpgjdhpnihjkfaadcmg"
+    },
+    Messages = {
+        binding = "0",
+        autoLaunch = false,
+        bundleID = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
+    },
+    Snapdrop = {
+        binding = ".",
+        autoLaunch = true,
+        bundleId = "com.google.Chrome.app.ikpmlgdcejalmjnfbahhijemkcgljabf"
     }
 }
 
