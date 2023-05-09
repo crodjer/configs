@@ -28,7 +28,7 @@ is_online() {
     ip=$1
     if ping -c 3 -i 0.2 -w 1 $1 >/dev/null 2>&1
     then
-        log $1 is online!
+        # log $1 is online!
         return 0
     else
         log $1 is offline!
