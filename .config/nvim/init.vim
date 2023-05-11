@@ -237,6 +237,7 @@ let g:lightline#ale#indicator_ok = ' '
 " let g:jsx_ext_required = 1
 augroup javascript
     autocmd FileType javascript setlocal sw=2 sts=2 et
+    autocmd FileType typescript* setlocal sw=2 sts=2 et
 augroup END
 
 " Clojure
