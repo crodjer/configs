@@ -39,18 +39,24 @@ is_online() {
 }
 
 if ! is_online $GATEWAY; then
-    log "Gateway doesn't match the expected IP"
+    log "Gateway is not accessible, not shutting down as a precaution!"
+    exit
+fi
+
+PREFIX="$(echo $GATEWAY | cut -d '.' -f -3)"
+if [ $? -ne 0 ] 
+then
+    log "Couldn't calculate prefix!"
     exit
 fi
 
 for device in "${DEVICES[@]}"; do
-    echo $device
-    if is_online $device; then
+    if is_online "$PREFIX.$device"; then
         SHUTDOWN=false
     fi
 done
 
 if $SHUTDOWN; then
     log "Power's likely out! Shutting down."
-    # sudo poweroff
+    sudo poweroff
 fi
