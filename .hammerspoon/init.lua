@@ -21,6 +21,7 @@ local appList = {
     ["Google Chrome"]= { binding = "c" },
     VLC = { binding = "v" },
     Obsidian = { binding = "2" },
+    -- ["zoom.us"] = { binding = "o" },
     Zoom = {
         binding = "o",
         bundleId = "com.google.Chrome.app.gbmplfifepjenigdepeahbecfkcalfhg"
@@ -103,6 +104,11 @@ spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
 })
 spoon.Seal:start()
+
+
+-- MicMute
+hs.loadSpoon("MicMute")
+spoon.MicMute:bindHotkeys({ toggle = {'ctrl', 'm'} }, 0.5)
 
 -- Switcher
 hs.window.animationDuration = 0
