@@ -33,7 +33,7 @@ schemes:
       magenta: '0x8f3f71'
       cyan:    '0x427b58'
       white:   '0x282828'
-  
+
     indexed_colors:
       - { index: 16, color: '0xaf3a03' }
       - { index: 17, color: '0xd65d0e' }
