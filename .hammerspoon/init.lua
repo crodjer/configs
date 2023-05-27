@@ -12,15 +12,14 @@ local appList = {
     ["IntelliJ IDEA"] = { binding = "e" },
     Slack = { binding = "s" },
     Postman = { binding = "r" },
-    Notes = { binding = "n" },
     Bitwarden = { binding = "w" },
     Signal = { binding = "g" },
     ["Firefox Developer Edition"] = { binding = "f" },
-    UTM = { binding = "u" },
+    UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     Peek = { binding = "p" },
     ["Google Chrome"]= { binding = "c" },
     VLC = { binding = "v" },
-    Obsidian = { binding = "2" },
+    Obsidian = { binding = "n" },
     -- ["zoom.us"] = { binding = "o" },
     Zoom = {
         binding = "o",
@@ -29,17 +28,17 @@ local appList = {
     YouTube = {
         binding = "y",
         autoLaunch = false,
-        bundleID ="com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
+        bundleId = "com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
     },
     ["Prime Video"] = {
-        binding = ",",
+        binding = "=",
         autoLaunch = false,
-        bundleID ="com.google.Chrome.app.iimgojjpcnfmbcpgjdhpnihjkfaadcmg"
+        bundleId = "com.google.Chrome.app.iimgojjpcnfmbcpgjdhpnihjkfaadcmg"
     },
     Messages = {
         binding = "0",
         autoLaunch = false,
-        bundleID = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
+        bundleId = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
     Snapdrop = {
         binding = ".",
@@ -48,10 +47,14 @@ local appList = {
     }
 }
 
-function renderTable(table)
+function render(object)
     rendered = ""
-    for k,v in pairs(table) do
-        rendered = rendered .. "\n" .. k .. " => " .. tostring(v)
+    if type(object) == 'table' then
+        for k,v in pairs(object) do
+            rendered = rendered .. "\n" .. k .. " => " .. tostring(v)
+        end
+    else
+        rendered = tostring(object)
     end
     print(rendered)
 end
@@ -97,6 +100,15 @@ spoon.ReloadConfiguration:start()
 -- Seal: The awesome seal plugin, with pasteboard (pb) support.
 hs.loadSpoon("Seal")
 spoon.Seal:loadPlugins({ "apps", "pasteboard" })
+spoon.Seal.plugins.apps.appSearchPaths = {
+   "/Applications",
+   "/System/Applications",
+   "~/Applications",
+   "/System/Library/PreferencePanes",
+   "/Library/PreferencePanes",
+   "/System/Library/CoreServices/Applications",
+}
+
 spoon.Seal.plugins.pasteboard.historySize = 100
 spoon.Seal.plugins.pasteboard.saveHistory = yes
 
@@ -108,7 +120,7 @@ spoon.Seal:start()
 
 -- MicMute
 hs.loadSpoon("MicMute")
-spoon.MicMute:bindHotkeys({ toggle = {'ctrl', 'm'} }, 0.5)
+spoon.MicMute:bindHotkeys({ toggle = {'ctrl', 'return'} }, 0.20)
 
 -- Switcher
 hs.window.animationDuration = 0
@@ -130,17 +142,30 @@ hs.alert.defaultStyle.textSize = 15
 hs.alert.defaultStyle.fadeInDuration = 0.1
 hs.alert.defaultStyle.fadeOutDuration = 0.1
 
+noWindowAlertId = nil
+
 function activateApp(application, config)
-    if config.legacyActivate then
-        hs.application.open(application:name())
+    if not application then
+        return
+    end
+
+    windows = application:allWindows()
+    focusedWindow = hs.window.focusedWindow()
+    window = windows[1]
+
+    if focusedWindow and focusedWindow:application() == application then
+        hs.eventtap.keyStroke({"cmd"}, "`")
+    elseif window then
+        window:focus()
     else
-        application:activate()
+        hs.alert.closeSpecific(noWindowAlertId, 0)
+        noWindowAlertId = hs.alert(application:name() .. " not in in current workspace!", nil, nil, 1)
     end
 end
 
 function launchApp(app, config)
-    if config.bundleID then
-        hs.application.launchOrFocusByBundleID(config.bundleID)
+    if config.bundleId then
+        hs.application.launchOrFocusByBundleID(config.bundleId)
     else
         hs.application.launchOrFocus(app)
     end
@@ -149,26 +174,29 @@ end
 appNotRunningAlertId = nil
 lastNotRunningApp = nil
 
+local wf = hs.window.filter
+
 -- Attach app bindings
 for app, config in pairs(appList) do
-    -- Bind the app 
+    config.filter = wf.new(app)
+    -- Bind the app
     if config.binding ~= nil then
-       hs.hotkey.bind(hsModifier, config.binding, function()
-          application = hs.application.get(config.bundleID or app)
+        hs.hotkey.bind(hsModifier, config.binding, function()
+            local application = hs.application.get(config.bundleId or app)
 
-          if application then
-              lastNotRunningApp = nil
-              activateApp(application, config)
-          elseif config.autoLaunch or lastNotRunningApp == app then
-              lastNotRunningApp = nil
-              launchApp(app, config)
-              activateApp(application, config)
-          else
-              hs.alert.closeSpecific(appNotRunningAlertId, 0)
-              appNotRunningAlertId = hs.alert(app .. " not running!", nil, nil, 1)
-              lastNotRunningApp = app
-          end
-       end)
+            if application then
+                lastNotRunningApp = nil
+                activateApp(application, config)
+            elseif config.autoLaunch or lastNotRunningApp == app then
+                lastNotRunningApp = nil
+                launchApp(app, config)
+                activateApp(application, config)
+            else
+                hs.alert.closeSpecific(appNotRunningAlertId, 0)
+                appNotRunningAlertId = hs.alert(app .. " not running!", nil, nil, 1)
+                lastNotRunningApp = app
+            end
+        end)
     end
 end
 
