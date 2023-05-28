@@ -22,4 +22,4 @@ do
     tmux split-window -c $1 -v
 done
 
-tmux select-layout main-vertical
+tmux select-layout main-horizontal

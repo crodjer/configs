@@ -224,7 +224,7 @@ hs.hotkey.bind(hsModifier, "j", function()
     local screen = win:screen():frame()
 
     f.x = screen.x
-    f.w = screen.w * 0.4
+    f.w = screen.w * 0.42
     win:setFrame(f)
 end)
 
@@ -233,8 +233,8 @@ hs.hotkey.bind(hsModifier, ";", function()
     local f = win:frame()
     local screen = win:screen():frame()
 
-    f.x = screen.x  + screen.w * 0.4
-    f.w = screen.w * 0.6
+    f.x = screen.x  + screen.w * 0.42
+    f.w = screen.w * 0.58
     win:setFrame(f)
 end)
 
