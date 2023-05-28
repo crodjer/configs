@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 directory=$1
 main_command=${2:-nvim-server}
-pane_count=${3:-3}
+pane_count=${3:-2}
 
 if [ ! -d "$1" ]; then
     >&2 echo "Target directory is missing/invalid."
@@ -19,7 +19,7 @@ tmux send-keys -t "${window}.0" "$main_command" Enter
 
 for run in $(seq 1 $pane_count)
 do
-    tmux split-window -c $1 -h
+    tmux split-window -c $1 -v
 done
 
 tmux select-layout main-vertical
