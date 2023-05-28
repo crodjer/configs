@@ -33,7 +33,7 @@ local appList = {
     ["Prime Video"] = {
         binding = "=",
         autoLaunch = false,
-        bundleId = "com.google.Chrome.app.iimgojjpcnfmbcpgjdhpnihjkfaadcmg"
+        bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
     },
     Messages = {
         binding = "0",
@@ -199,21 +199,6 @@ for app, config in pairs(appList) do
         end)
     end
 end
-
-
--- function winLayout(layout)
---     local win = hs.window.focusedWindow()
---     local app = win:application()
---     hs.layout.apply({{ app, win, nil, layout }})
--- end
--- 
--- function bindLayout(key, layout)
---     hs.hotkey.bind(hsModifier, key, function()
---         winLayout(layout)
---     end)
--- end
--- 
--- bindLayout("m", hs.layout.maximized)
 
 hs.hotkey.bind(hsModifier, "m", function()
     local win = hs.window.focusedWindow()
