@@ -11,9 +11,17 @@ if [ "$CONFIGS_SRC_DIR" ]; then
     source $CONFIGS_SRC_DIR/.shell_functions
 fi
 
+if [[ $(uname -a) =~ Darwin ]]; then
+    local MACOS=true
+fi
+
 debug_shell () {
     if [ "$DEBUG_SHELL" ]; then
-        echo "$(date +'%T-%N') $@"
+        if [[ "$MACOS"  ]]; then
+            echo "$(gdate +'%T-%N') $@"
+        else
+            echo "$(date +'%T-%N') $@"
+        fi
     fi
 }
 
@@ -34,10 +42,6 @@ bindkey -e
 autoload -U select-word-style
 select-word-style bash
 
-if [[ $(uname -a) =~ Darwin ]]; then
-    local MACOS=true
-fi
-
 debug_shell ZSH: Completion
 
 #-------------------------#
@@ -53,9 +57,10 @@ bindkey '^[n' expand-or-complete
 bindkey '^[p' reverse-menu-complete
 bindkey '^[[Z' reverse-menu-complete
 
-fpath+=~/.zfunc
-
+fpath+=$HOME/.config/zsh/functions
 autoload -Uz compinit
+compinit -u
+
 # Instead of having compinit happen on every prompt, use the cached version in
 # the prompt and have it re-load every 5 minutes via Cron
 # * * * * * zsh -i -c 'compinit'
@@ -143,10 +148,6 @@ debug_shell ZSH: Prompt
 #-------------------------#
 # Prompt
 #-------------------------#
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 if [ -x "$(command -v starship)" ] && \
     [ -f $HOME/.config/starship.toml ]; then
     eval "$(starship init zsh)"
@@ -169,6 +170,13 @@ debug_shell ZSH: Initializations
 # Initialize autojump
 [[ -s "$HOME/.config/profile.d/autojump.zsh" ]] && source "$HOME/.config/profile.d/autojump.zsh"
 test -n "$(command -v zoxide)" && eval "$(zoxide init zsh)"
+
+# Initialize zbell
+ZLONG_ALERT_FILE="$HOME/.config/zsh/zlong_alert.zsh"
+if [ ! -f "$ZLONG_ALERT_FILE" ]; then
+    curl -sfLo $ZLONG_ALERT_FILE --create-dirs "https://raw.githubusercontent.com/kevinywlui/zlong_alert.zsh/master/zlong_alert.zsh"
+fi
+source $ZLONG_ALERT_FILE
 
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
