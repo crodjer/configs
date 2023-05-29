@@ -32,11 +32,7 @@ filetype plugin on
 filetype indent on
 set autoindent
 set smartindent
-if has('nvim')
-    runtime plugins/matchit.vim
-else
-    runtime macros/matchit.vim
-end
+runtime plugins/matchit.vim
 
 "command line configuration
 set showcmd                 "display incomplete commands
@@ -70,9 +66,6 @@ augroup paste
   autocmd InsertLeave * set nopaste
 augroup END
 
-"" GUI
-set guifont=Monospace:h11
-
 "" Handling whitespace
 set expandtab                   "use spaces for tabs and set it to 4 spaces
 set tabstop=4
@@ -80,7 +73,6 @@ set softtabstop=4
 set shiftwidth=4
 set nowrap                      "don't wrap lines
 set backspace=indent,eol,start  "backspace through everything in insert mode
-
 
 "" Searching
 set hlsearch        "highlight search by default
@@ -122,12 +114,13 @@ nnoremap <leader>cs :so $MYVIMRC<CR>
 "close preview windows
 nnoremap <leader>pc :pclose<CR>
 
-"close preview windows
+"go into paste mode
 nnoremap <leader>pm :set paste<CR>a
 
 "" Custom functions
 
 " Custom commands
+" Strip white space!
 command! STW %s/\s\+$//e
 
 "" Load plugins
@@ -343,9 +336,9 @@ augroup END
 let g:tagbar_width = 30
 nnoremap <leader>t :TagbarToggle<CR>
 
-try 
+try
     " Load any local overrides, if any.
     source ~/.local.vim
 catch
     " No such file? No problem; just ignore it.
-endtry 
+endtry
