@@ -119,8 +119,32 @@ spoon.Seal:start()
 
 
 -- MicMute
-hs.loadSpoon("MicMute")
-spoon.MicMute:bindHotkeys({ toggle = {'ctrl', 'return'} }, 0.20)
+talkingAlert = nil
+unMuteDuration = 300
+
+function unMuteMic()
+    hs.alert.closeSpecific(talkingAlert, 0)
+    talkingAlert = hs.alert("🗣️", {
+        textSize = 32,
+        fillColor = { white = 0.8, alpha = 0.6 }
+    }, unMuteDuration)
+    hs.audiodevice.defaultInputDevice():setMuted(false)
+end
+function muteMic()
+    hs.alert.closeSpecific(talkingAlert, 0)
+    hs.audiodevice.defaultInputDevice():setMuted(true)
+end
+
+-- Unmute!
+hs.hotkey.bind(hsModifier, 'return', function ()
+    unMuteMic()
+    hs.timer.doAfter(unMuteDuration, muteMic)
+end)
+muteMic()
+
+-- Push to talk!
+hs.hotkey.bind({'ctrl'}, 'return', unMuteMic, muteMic)
+
 
 -- Switcher
 hs.window.animationDuration = 0
@@ -137,12 +161,13 @@ hs.hotkey.bind(hsModifier, 'tab', nil, switcher.nextWindow)
 
 hs.alert.defaultStyle.radius = 10
 hs.alert.defaultStyle.atScreenEdge = 2
-hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.5 }
+hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.6 }
 hs.alert.defaultStyle.textSize = 15
 hs.alert.defaultStyle.fadeInDuration = 0.1
 hs.alert.defaultStyle.fadeOutDuration = 0.1
 
 noWindowAlertId = nil
+lastNotInWorkspaceApp = nil
 
 function activateApp(application, config)
     if not application then
@@ -154,12 +179,18 @@ function activateApp(application, config)
     window = windows[1]
 
     if focusedWindow and focusedWindow:application() == application then
+        lastNotInWorkspaceApp = nil
         hs.eventtap.keyStroke({"cmd"}, "`")
     elseif window then
+        lastNotInWorkspaceApp = nil
         window:focus()
+    elseif lastNotInWorkspaceApp == application:name() then
+        lastNotInWorkspaceApp = nil
+        application:activate()
     else
         hs.alert.closeSpecific(noWindowAlertId, 0)
         noWindowAlertId = hs.alert(application:name() .. " not in in current workspace!", nil, nil, 1)
+        lastNotInWorkspaceApp = application:name()
     end
 end
 
@@ -174,11 +205,8 @@ end
 appNotRunningAlertId = nil
 lastNotRunningApp = nil
 
-local wf = hs.window.filter
-
 -- Attach app bindings
 for app, config in pairs(appList) do
-    config.filter = wf.new(app)
     -- Bind the app
     if config.binding ~= nil then
         hs.hotkey.bind(hsModifier, config.binding, function()
