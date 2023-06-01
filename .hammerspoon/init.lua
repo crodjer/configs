@@ -63,24 +63,6 @@ end
 hs.loadSpoon("Caffeine")
 spoon.Caffeine:start()
 
--- Cherry: Pomodoro Timer
--- hs.loadSpoon("Cherry")
--- spoon.Cherry.duration = 25
--- spoon.Cherry.alertTextSize = 50
--- spoon.Cherry.notification = hs.notify.new({ title = "Timer's up. Have some rest!", withdrawAfter = 10})
--- spoon.Cherry.sound = hs.sound.getByFile("/System/Library/Sounds/Submarine.aiff")
--- spoon.Cherry:bindHotkeys({ start = { hsModifier, "=" }})
--- spoon.Cherry:reset()
--- spoon.Cherry:start()
-
--- Start cherry on unlock.
--- cherryWatcher = hs.caffeinate.watcher.new(function(event) 
---     if event == hs.caffeinate.watcher.screensDidUnlock then
---         spoon.Cherry:reset()
---         spoon.Cherry:start()
---     end
--- end)
--- cherryWatcher:start()
 
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
@@ -108,6 +90,7 @@ spoon.Seal.plugins.apps.appSearchPaths = {
    "/Library/PreferencePanes",
    "/System/Library/CoreServices/Applications",
 }
+spoon.Seal.plugins.apps:restart()
 
 spoon.Seal.plugins.pasteboard.historySize = 100
 spoon.Seal.plugins.pasteboard.saveHistory = yes
@@ -135,15 +118,24 @@ function muteMic()
     hs.audiodevice.defaultInputDevice():setMuted(true)
 end
 
--- Unmute!
-hs.hotkey.bind(hsModifier, 'return', function ()
-    unMuteMic()
-    hs.timer.doAfter(unMuteDuration, muteMic)
-end)
-muteMic()
-
 -- Push to talk!
 hs.hotkey.bind({'ctrl'}, 'return', unMuteMic, muteMic)
+-- Toggle the Mic!
+-- `Ctrl-Enter` for PTT / Mute and `Ctrl+Alt+Enter` for just
+-- unmute does work. But one of my mice doesn't support tapping
+-- into key up/down events and hence can't PTT.
+-- So, Toggle with `Ctrl+Alt+Enter` allows me to use that Mouse
+-- as a mic control as well.
+hs.hotkey.bind(hsModifier, 'return', function ()
+    if(hs.audiodevice.defaultInputDevice():muted()) then
+        unMuteMic()
+        hs.timer.doAfter(unMuteDuration, muteMic)
+    else
+        muteMic()
+    end
+end)
+-- Mute by default!
+muteMic()
 
 
 -- Switcher
