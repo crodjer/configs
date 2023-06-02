@@ -103,7 +103,7 @@ spoon.Seal:start()
 
 -- MicMute
 talkingAlert = nil
-unMuteDuration = 300
+unMuteDuration = 600
 
 function unMuteMic()
     hs.alert.closeSpecific(talkingAlert, 0)
