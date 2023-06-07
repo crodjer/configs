@@ -153,6 +153,7 @@ Plug 'guns/vim-sexp'                    , { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'liquidz/vim-iced'                 , { 'for': 'clojure', 'branch': 'main' }
 Plug 'hashivim/vim-terraform'           , { 'for': 'tf' }
+Plug 'udalov/kotlin-vim'                , { 'for': 'kt' }
 
 " Done loading plugins
 call plug#end()
