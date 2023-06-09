@@ -323,6 +323,10 @@ augroup rust
     autocmd FileType rust nmap <buffer> K :ALEHover<CR>
 augroup END
 
+augroup java
+    autocmd FileType java setlocal sw=2 sts=2
+augroup END
+
 " XML
 augroup xml
     autocmd FileType xml setlocal iskeyword+=.,-
