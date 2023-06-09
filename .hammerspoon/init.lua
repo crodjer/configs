@@ -20,10 +20,10 @@ local appList = {
     ["Google Chrome"]= { binding = "c" },
     VLC = { binding = "v" },
     Obsidian = { binding = "n" },
-    -- ["zoom.us"] = { binding = "o" },
+    ["zoom.us"] = { binding = "o" },
     Hammerspoon = { binding = '2' },
     Zoom = {
-        binding = "o",
+        binding = "3",
         bundleId = "com.google.Chrome.app.gbmplfifepjenigdepeahbecfkcalfhg"
     },
     YouTube = {
