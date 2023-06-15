@@ -37,7 +37,7 @@ local appList = {
         bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
     },
     Messages = {
-        binding = "0",
+        binding = "8",
         autoLaunch = false,
         bundleId = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
