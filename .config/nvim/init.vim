@@ -105,17 +105,17 @@ vnoremap > >gv
 cmap w!! %!sudo tee > /dev/null %
 
 "toggle spell check
-nnoremap <leader>z :setlocal spell! spelllang=en<CR>
+nnoremap <leader>ms :setlocal spell! spelllang=en<CR>
 
 "edit re-load config file
 nnoremap <leader>ce :e $MYVIMRC<CR>
 nnoremap <leader>cs :so $MYVIMRC<CR>
 
 "close preview windows
-nnoremap <leader>pc :pclose<CR>
+nnoremap <leader>x :pclose<CR>
 
 "go into paste mode
-nnoremap <leader>pm :set paste<CR>a
+nnoremap <leader>mp :set paste<CR>a
 
 "" Custom functions
 
@@ -190,14 +190,13 @@ let g:ale_fixers = {
 "             \ 'typescript': ['tsserver']
 "             \ }
 
-nmap <silent> <leader>aj :ALENext<cr>
-nmap <silent> <leader>ak :ALEPrevious<cr>
-nmap <silent> <leader>ah :ALEHover<cr>
+nmap <silent> <leader>n :ALENext<cr>
+nmap <silent> <leader>p :ALEPrevious<cr>
 nmap <silent> <leader>d :ALEHover<cr>
-nmap <silent> <leader>ag :ALEGoToDefinition<cr>
-nmap <silent> <leader>ar :ALEFindReferences<cr>
-nmap <silent> <leader>aj :ALEImport<cr>
-nmap <silent> <leader>af :ALEFix<cr>
+nmap <silent> <leader>D :ALEGoToDefinition<cr>
+nmap <silent> <leader>r :ALEFindReferences<cr>
+nmap <silent> <leader>j :ALEImport<cr>
+nmap <silent> <leader>F :ALEFix<cr>
 
 augroup CloseLoclistWindowGroup
     autocmd!
@@ -237,7 +236,7 @@ augroup END
 " Clojure
 let g:iced_enable_default_key_mappings = v:true
 augroup clojure
-    autocmd FileType clojure nnoremap <buffer> <leader>ec :IcedInstantConnect babashka<cr>
+    autocmd FileType clojure nnoremap <buffer> <leader>C :IcedInstantConnect babashka<cr>
 augroup END
 
 " Crontab
@@ -321,10 +320,6 @@ augroup rust
     autocmd FileType rust setlocal textwidth=80
     autocmd FileType rust map <buffer> <leader>rt :RustTest<CR>
     autocmd FileType rust nmap <buffer> K :ALEHover<CR>
-augroup END
-
-augroup java
-    autocmd FileType java setlocal sw=2 sts=2
 augroup END
 
 " XML
