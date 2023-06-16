@@ -28,23 +28,23 @@ local appList = {
     },
     YouTube = {
         binding = "y",
-        autoLaunch = false,
         bundleId = "com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
     },
     ["Prime Video"] = {
         binding = "=",
-        autoLaunch = false,
         bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
     },
     Messages = {
         binding = "8",
-        autoLaunch = false,
         bundleId = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
     },
     Snapdrop = {
         binding = ".",
-        autoLaunch = true,
         bundleId = "com.google.Chrome.app.ikpmlgdcejalmjnfbahhijemkcgljabf"
+    },
+    Gmail = {
+        binding = "i",
+        bundleId = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm"
     }
 }
 
