@@ -1,3 +1,9 @@
 window:
    decorations: none
    startup_mode: maximized
+
+cursor:
+  style:
+    shape: Block
+    blinking: Always
+  blink_interval: 500
