@@ -161,7 +161,7 @@ call plug#end()
 "" Plugin configurations
 
 " Gruvbox
-let g:gruvbox_termcolors=16
+" let g:gruvbox_termcolors=16
 colorscheme gruvbox
 
 " Lightline
