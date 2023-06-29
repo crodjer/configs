@@ -41,8 +41,6 @@ set wildmenu                "enable C-n and C-p to scroll through matches
 "stuff to ignore when tab completing
 set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
-"" Looks
-set background=light
 set colorcolumn=+1                      "mark the ideal max text width
 set relativenumber                      "show relative line numbers
 set number                              "show absolute current line number
@@ -50,11 +48,17 @@ set showmode                            "show current mode down the bottom
 set laststatus=2
 
 set ruler
-highlight Normal guibg=#fdf6e3 ctermbg=None
-highlight SpellBad cterm=underline gui=underline guisp=Grey
-highlight rubyDefine ctermbg=None
-" highlight ColorColumn ctermbg=LightGrey
-highlight SignColumn ctermbg=None
+
+colorscheme tango " default / tango work well with the terminal colors.
+set background=light
+
+" Alternatives: 003, 202
+highlight Visual ctermbg=003 cterm=bold
+highlight Search ctermbg=003
+highlight CursorLine cterm=None
+highlight CursorLineNR cterm=standout
+highlight ColorColumn ctermbg=black
+highlight SpellBad ctermbg=black cterm=undercurl,italic
 
 "display tabs and trailing spaces
 set list
@@ -63,7 +67,7 @@ set listchars=tab:\ \ ,trail:⋅,nbsp:⋅
 "disable paste mode
 set nopaste
 augroup paste
-  autocmd InsertLeave * set nopaste
+    autocmd InsertLeave * set nopaste
 augroup END
 
 "" Handling whitespace
@@ -137,7 +141,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/tagbar'
-Plug 'morhetz/gruvbox'
 
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
@@ -159,10 +162,6 @@ Plug 'udalov/kotlin-vim'                , { 'for': 'kt' }
 call plug#end()
 
 "" Plugin configurations
-
-" Gruvbox
-" let g:gruvbox_termcolors=16
-colorscheme gruvbox
 
 " Lightline
 let g:lightline = {}
@@ -211,12 +210,12 @@ let g:lightline.component_expand = {
             \  'linter_ok': 'lightline#ale#ok',
             \ }
 let g:lightline.component_type = {
-      \     'linter_checking': 'right',
-      \     'linter_infos': 'tabsel',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'tabsel',
-      \ }
+            \     'linter_checking': 'right',
+            \     'linter_infos': 'tabsel',
+            \     'linter_warnings': 'warning',
+            \     'linter_errors': 'error',
+            \     'linter_ok': 'tabsel',
+            \ }
 
 let g:lightline#ale#indicator_checking = ' '
 let g:lightline#ale#indicator_infos = '  '
@@ -229,6 +228,7 @@ let g:lightline#ale#indicator_ok = ' '
 " JS/JSX
 " let g:jsx_ext_required = 1
 augroup javascript
+    autocmd FileType javascript setlocal sw=2 sts=2 et
     autocmd FileType javascript setlocal sw=2 sts=2 et
     autocmd FileType typescript* setlocal sw=2 sts=2 et
 augroup END
@@ -249,7 +249,7 @@ augroup END
 augroup fzf
     autocmd! FileType fzf
     autocmd  FileType fzf set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
 nnoremap <leader>s :GFiles<CR>
 nnoremap <leader>f :Files<CR>
@@ -286,13 +286,13 @@ augroup END
 
 " Lightline
 let g:lightline.active = {
-    \ 'left': [ [ 'mode', 'paste' ],
-	\           [ 'readonly', 'filename', 'modified' ] ],
-	\ 'right': [ [ 'lineinfo' ],
-	\            [ 'percent' ],
-	\            [ 'filetype' ],
-    \            [ 'linter_checking', 'linter_errors', 'linter_warnings',
-    \              'linter_infos', 'linter_ok' ]] }
+            \ 'left': [ [ 'mode', 'paste' ],
+            \           [ 'readonly', 'filename', 'modified' ] ],
+            \ 'right': [ [ 'lineinfo' ],
+            \            [ 'percent' ],
+            \            [ 'filetype' ],
+            \            [ 'linter_checking', 'linter_errors', 'linter_warnings',
+            \              'linter_infos', 'linter_ok' ]] }
 
 call lightline#init()
 call lightline#colorscheme()
