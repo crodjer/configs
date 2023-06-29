@@ -1,6 +1,7 @@
 import:
   - '~/.config/alacritty/window.yml'
-  - '~/.config/alacritty/theme.yml'
+  - '~/.config/alacritty/theme/gruvbox_light.yml'
+  - '~/.alacritty.theme.yml'
   - '~/.alacritty.local.yml'
 
 # Fonts to To be configured in ~/.alacritty.local.yml

@@ -12,40 +12,41 @@ local appList = {
     ["IntelliJ IDEA"] = { binding = "e" },
     Slack = { binding = "s" },
     Postman = { binding = "r" },
-    Bitwarden = { binding = "w" },
-    Signal = { binding = "g" },
-    ["Firefox Developer Edition"] = { binding = "f" },
-    UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
-    Peek = { binding = "p" },
     ["Google Chrome"]= { binding = "c" },
-    VLC = { binding = "v" },
     Obsidian = { binding = "n" },
     ["zoom.us"] = { binding = "o" },
-    Hammerspoon = { binding = '2' },
+    Gmail = {
+        binding = "i",
+        bundleId = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm"
+    },
+    UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     Zoom = {
         binding = "3",
         bundleId = "com.google.Chrome.app.gbmplfifepjenigdepeahbecfkcalfhg"
     },
-    YouTube = {
-        binding = "y",
-        bundleId = "com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
-    },
-    ["Prime Video"] = {
-        binding = "=",
-        bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
-    },
-    Messages = {
-        binding = "8",
-        bundleId = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
-    },
-    Snapdrop = {
-        binding = ".",
-        bundleId = "com.google.Chrome.app.ikpmlgdcejalmjnfbahhijemkcgljabf"
-    },
-    Gmail = {
-        binding = "i",
-        bundleId = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm"
-    }
+    -- Peek = { binding = "p" },
+    -- UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
+    -- Bitwarden = { binding = "w" },
+    -- Signal = { binding = "g" },
+    -- ["Firefox Developer Edition"] = { binding = "f" },
+    -- VLC = { binding = "v" },
+    -- YouTube = {
+    --     binding = "y",
+    --     bundleId = "com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
+    -- },
+    -- ["Prime Video"] = {
+    --     binding = "=",
+    --     bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
+    -- },
+    -- Messages = {
+    --     binding = "8",
+    --     bundleId = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
+    -- },
+    -- Snapdrop = {
+    --     binding = ".",
+    --     bundleId = "com.google.Chrome.app.ikpmlgdcejalmjnfbahhijemkcgljabf"
+    -- },
+    Hammerspoon = { binding = '2' },
 }
 
 function render(object)
@@ -92,9 +93,8 @@ spoon.Seal.plugins.apps.appSearchPaths = {
    "/System/Library/CoreServices/Applications",
 }
 spoon.Seal.plugins.apps:restart()
-
 spoon.Seal.plugins.pasteboard.historySize = 100
-spoon.Seal.plugins.pasteboard.saveHistory = yes
+spoon.Seal.plugins.pasteboard.saveHistory = no
 
 spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
@@ -109,10 +109,6 @@ switcher.ui.fontName = 'Verdana'
 switcher.ui.textSize = 12
 switcher.ui.showThumbnails = false
 switcher.ui.showSelectedThumbnail = false
-hs.hotkey.bind(hsModifier, 'h', nil, switcher.previousWindow)
-hs.hotkey.bind(hsModifier, '\'', nil, switcher.nextWindow)
-hs.hotkey.bind(hsShift, 'tab', nil, switcher.previousWindow)
-hs.hotkey.bind(hsModifier, 'tab', nil, switcher.nextWindow)
 
 hs.alert.defaultStyle.radius = 10
 hs.alert.defaultStyle.atScreenEdge = 2
@@ -120,9 +116,6 @@ hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.6 }
 hs.alert.defaultStyle.textSize = 15
 hs.alert.defaultStyle.fadeInDuration = 0.1
 hs.alert.defaultStyle.fadeOutDuration = 0.1
-
-noWindowAlertId = nil
-lastNotInWorkspaceApp = nil
 
 function activateApp(application, config)
     if not application then
@@ -134,18 +127,18 @@ function activateApp(application, config)
     window = windows[1]
 
     if focusedWindow and focusedWindow:application() == application then
-        lastNotInWorkspaceApp = nil
         hs.eventtap.keyStroke({"cmd"}, "`")
     elseif window then
-        lastNotInWorkspaceApp = nil
-        window:focus()
-    elseif lastNotInWorkspaceApp == application:name() then
-        lastNotInWorkspaceApp = nil
-        application:activate()
+        if (window:isMinimized()) then
+            hs.application.launchOrFocus(application:name())
+        else
+            window:focus()
+        end
     else
-        hs.alert.closeSpecific(noWindowAlertId, 0)
-        noWindowAlertId = hs.alert(application:name() .. " not in in current workspace!", nil, nil, 1)
-        lastNotInWorkspaceApp = application:name()
+        application:activate()
+        if not application:allWindows()[1] then
+            hs.application.launchOrFocus(application:name())
+        end
     end
 end
 
