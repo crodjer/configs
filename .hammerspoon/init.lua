@@ -8,28 +8,27 @@ hs.window.animationDuration = 0
 -- List of apps and their screeen / binding, configuration
 local appList = {
     Alacritty = { binding = "t" },
-    ["Android Studio"] = { binding = "a" },
     ["IntelliJ IDEA"] = { binding = "e" },
-    Slack = { binding = "s" },
-    Postman = { binding = "r" },
     ["Google Chrome"]= { binding = "c" },
     Obsidian = { binding = "n" },
-    ["zoom.us"] = { binding = "o" },
-    Gmail = {
-        binding = "i",
-        bundleId = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm"
-    },
-    UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
-    Zoom = {
-        binding = "3",
-        bundleId = "com.google.Chrome.app.gbmplfifepjenigdepeahbecfkcalfhg"
-    },
+    -- UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
+    -- Zoom = {
+    --     binding = "3",
+    --     bundleId = "com.google.Chrome.app.gbmplfifepjenigdepeahbecfkcalfhg"
+    -- },
+    -- ["zoom.us"] = { binding = "o" },
+    -- Postman = { binding = "r" },
+    -- Slack = { binding = "s" },
     -- Peek = { binding = "p" },
     -- UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     -- Bitwarden = { binding = "w" },
     -- Signal = { binding = "g" },
     -- ["Firefox Developer Edition"] = { binding = "f" },
     -- VLC = { binding = "v" },
+    -- Gmail = {
+    --     binding = "i",
+    --     bundleId = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm"
+    -- },
     -- YouTube = {
     --     binding = "y",
     --     bundleId = "com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
