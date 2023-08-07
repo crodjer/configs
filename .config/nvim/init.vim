@@ -267,6 +267,9 @@ augroup go
 augroup END
 
 " Java
+augroup java
+    autocmd FileType java setlocal sw=2 sts=2 et
+augroup END
 
 " HTML
 augroup html
