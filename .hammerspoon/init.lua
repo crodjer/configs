@@ -11,19 +11,15 @@ local appList = {
     ["IntelliJ IDEA"] = { binding = "e" },
     ["Google Chrome"]= { binding = "c" },
     Obsidian = { binding = "n" },
-    -- UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
-    -- Zoom = {
-    --     binding = "3",
-    --     bundleId = "com.google.Chrome.app.gbmplfifepjenigdepeahbecfkcalfhg"
-    -- },
-    -- ["zoom.us"] = { binding = "o" },
+    Notes = { binding = "i" },
+    ["zoom.us"] = { binding = "o" },
     -- Postman = { binding = "r" },
-    -- Slack = { binding = "s" },
+    Slack = { binding = "s" },
     -- Peek = { binding = "p" },
-    -- UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
+    UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     -- Bitwarden = { binding = "w" },
-    -- Signal = { binding = "g" },
-    -- ["Firefox Developer Edition"] = { binding = "f" },
+    Signal = { binding = "g" },
+    ["Firefox Developer Edition"] = { binding = "f" },
     -- VLC = { binding = "v" },
     -- Gmail = {
     --     binding = "i",
@@ -33,10 +29,10 @@ local appList = {
     --     binding = "y",
     --     bundleId = "com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
     -- },
-    -- ["Prime Video"] = {
-    --     binding = "=",
-    --     bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
-    -- },
+    --["Prime Video"] = {
+    --    binding = "=",
+    --    bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
+    --},
     -- Messages = {
     --     binding = "8",
     --     bundleId = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
@@ -45,7 +41,8 @@ local appList = {
     --     binding = ".",
     --     bundleId = "com.google.Chrome.app.ikpmlgdcejalmjnfbahhijemkcgljabf"
     -- },
-    Hammerspoon = { binding = '2' },
+    Hammerspoon = { binding = '9' },
+    ["Yi Home"] = { binding = '0' },
 }
 
 function render(object)
@@ -193,7 +190,7 @@ hs.hotkey.bind(hsModifier, "m", function()
     win:setFrame(f)
 end)
 
-hs.hotkey.bind(hsModifier, "j", function()
+hs.hotkey.bind(hsModifier, "h", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
     local screen = win:screen():frame()
@@ -203,7 +200,7 @@ hs.hotkey.bind(hsModifier, "j", function()
     win:setFrame(f)
 end)
 
-hs.hotkey.bind(hsModifier, ";", function()
+hs.hotkey.bind(hsModifier, "l", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
     local screen = win:screen():frame()
@@ -213,6 +210,14 @@ hs.hotkey.bind(hsModifier, ";", function()
     win:setFrame(f)
 end)
 
+function vsplitBreadth(screen)
+    if (screen.h > 3000) then
+        return screen.h / 3
+    else
+        return screen.h / 2
+    end
+end
+
 function vsplitHeight(screen)
     if (screen.h > 3000) then
         return screen.h / 3
@@ -221,7 +226,7 @@ function vsplitHeight(screen)
     end
 end
 
-hs.hotkey.bind(hsModifier, "k", function()
+hs.hotkey.bind(hsModifier, "j", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
     local screen = win:screen():frame()
@@ -234,7 +239,7 @@ hs.hotkey.bind(hsModifier, "k", function()
     win:setFrame(f)
 end)
 
-hs.hotkey.bind(hsModifier, "l", function()
+hs.hotkey.bind(hsModifier, "k", function()
     local win = hs.window.focusedWindow()
     local f = win:frame()
     local screen = win:screen():frame()
@@ -248,56 +253,67 @@ end)
 
 hs.hotkey.bind(hsShift, "w", function ()
     local task = hs.task.new("/Users/rjain3/.local/bin/stew.sh", function (code, stdout, stderr)
-        hs.eventtap.keyStrokes(stdout)
+        hs.eventtap.keyStrokes(stdout:gsub("[\n\r]", ""))
     end)
     task:start()
 end)
 
+for space_index=1, 7 do
+    function selectSpace()
+        current_spaces = hs.spaces.allSpaces()[hs.spaces.spaceDisplay(hs.spaces.focusedSpace())]
+        space = current_spaces[space_index]
+        if space then
+            hs.spaces.gotoSpace(space)
+        end
+    end
+    hs.hotkey.bind(hsModifier, tostring(space_index), selectSpace)
+end
+
 -- Mic Control
-talkingAlert = nil
-unMuteAlertDuration = 600
+-- talkingAlert = nil
+-- unMuteAlertDuration = 600
+-- 
+-- function unMuteAlert()
+--     hs.alert.closeSpecific(talkingAlert, 0)
+--     talkingAlert = hs.alert("🗣️", {
+--         textSize = 32,
+--         fillColor = { white = 0.8, alpha = 0.6 },
+--         fadeInDuration = 0,
+--         fadeOutDuration = 0
+--     }, unMuteAlertDuration)
+-- end
 
-function unMuteAlert()
-    hs.alert.closeSpecific(talkingAlert, 0)
-    talkingAlert = hs.alert("🗣️", {
-        textSize = 32,
-        fillColor = { white = 0.8, alpha = 0.6 },
-        fadeInDuration = 0,
-        fadeOutDuration = 0
-    }, unMuteAlertDuration)
-end
-
-function unMuteMic()
-    unMuteAlert()
-    hs.timer.doUntil(function ()
-         return hs.audiodevice.defaultInputDevice():muted()
-    end, unMuteAlert, unMuteAlertDuration / 2)
-
-    for _, device in pairs(hs.audiodevice.allInputDevices()) do
-        device:setMuted(false)
-    end
-end
-function muteMic()
-    hs.alert.closeSpecific(talkingAlert, 0)
-    for _, device in pairs(hs.audiodevice.allInputDevices()) do
-        device:setMuted(true)
-    end
-end
-
--- Push to talk!
-hs.hotkey.bind({'ctrl'}, 'space', unMuteMic, muteMic)
--- Toggle the Mic!
--- `Ctrl-Enter` for PTT / Mute and `Ctrl+Alt+Enter` for just
--- unmute does work. But one of my mice doesn't support tapping
--- into key up/down events and hence can't PTT.
--- So, Toggle with `Ctrl+Alt+Enter` allows me to use that Mouse
--- as a mic control as well.
-hs.hotkey.bind(hsModifier, 'space', function ()
-    if(hs.audiodevice.defaultInputDevice():muted()) then
-        unMuteMic()
-    else
-        muteMic()
-    end
-end)
+-- function unMuteMic()
+--     unMuteAlert()
+--     hs.timer.doUntil(function ()
+--          return hs.audiodevice.defaultInputDevice():muted()
+--     end, unMuteAlert, unMuteAlertDuration / 2)
+-- 
+--     for _, device in pairs(hs.audiodevice.allInputDevices()) do
+--         device:setMuted(false)
+--     end
+-- end
+-- function muteMic()
+--     hs.alert.closeSpecific(talkingAlert, 0)
+--     for _, device in pairs(hs.audiodevice.allInputDevices()) do
+--         device:setMuted(true)
+--     end
+-- end
+-- 
+-- -- Push to talk!
+-- hs.hotkey.bind({'ctrl'}, 'space', unMuteMic, muteMic)
+-- -- Toggle the Mic!
+-- -- `Ctrl-Enter` for PTT / Mute and `Ctrl+Alt+Enter` for just
+-- -- unmute does work. But one of my mice doesn't support tapping
+-- -- into key up/down events and hence can't PTT.
+-- -- So, Toggle with `Ctrl+Alt+Enter` allows me to use that Mouse
+-- -- as a mic control as well.
+-- hs.hotkey.bind(hsModifier, 'space', function ()
+--     if(hs.audiodevice.defaultInputDevice():muted()) then
+--         unMuteMic()
+--     else
+--         muteMic()
+--     end
+-- end)
 -- Mute by default!
-muteMic()
+-- muteMic()
