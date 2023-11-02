@@ -59,6 +59,7 @@ highlight CursorLine cterm=None
 highlight CursorLineNR cterm=standout
 highlight ColorColumn ctermbg=black
 highlight SpellBad ctermbg=black cterm=undercurl,italic
+highlight Pmenu ctermfg=15 ctermbg=225 guifg=#eeeeec guibg=#555753
 
 "display tabs and trailing spaces
 set list
