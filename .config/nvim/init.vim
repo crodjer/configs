@@ -53,9 +53,10 @@ colorscheme tango " default / tango work well with the terminal colors.
 set background=light
 
 " Alternatives: 003, 202
+highlight Normal ctermbg=None ctermfg=None
 highlight Visual ctermbg=003 cterm=bold
 highlight Search ctermbg=003
-highlight CursorLine cterm=None
+highlight CursorLine cterm=reverse
 highlight CursorLineNR cterm=standout
 highlight ColorColumn ctermbg=black
 highlight SpellBad ctermbg=black cterm=undercurl,italic
