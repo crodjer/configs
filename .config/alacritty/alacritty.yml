@@ -1,8 +1,7 @@
 import:
   - '~/.config/alacritty/window.yml'
   - '~/.config/alacritty/meta-bindings.yml'
-  - '~/.forks/alacritty-theme/themes/rose-pine-dawn.yaml'
-  - '~/.forks/alacritty-theme/themes/gruvbox_light.yaml'
+  - '~/.config/alacritty/theme/gruvbox_light.yaml'
   - '~/.alacritty.theme.yml'
   - '~/.alacritty.local.yml'
 
