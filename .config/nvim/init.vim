@@ -7,9 +7,6 @@ else
     let vim_config_dir = '~/.vim'
 endif
 
-let plug_path = join([vim_config_dir, 'autoload/plug.vim'], '/')
-let plug_source = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
 "" Basic behaviour
 set noswapfile              "disable swapfiles
 set hidden                  "hide buffers when not displayed
@@ -49,19 +46,12 @@ set laststatus=2
 
 set ruler
 
-colorscheme noctu " other themes that work well: tango
-
-"" For Tango:
-" set background=light
-" Alternatives: 003, 202
-" highlight Normal ctermbg=None ctermfg=None
-" highlight Visual ctermbg=003 cterm=bold
-" highlight Search ctermbg=003
-" highlight CursorLine cterm=reverse
-" highlight CursorLineNR cterm=standout
-" highlight ColorColumn ctermbg=black
-" highlight SpellBad ctermbg=black cterm=undercurl,italic
-" highlight Pmenu ctermfg=15 ctermbg=225 guifg=#eeeeec guibg=#555753
+try
+    colorscheme dim
+catch
+    colorscheme noctu
+endtry
+highlight ColorColumn cterm=reverse
 
 "display tabs and trailing spaces
 set list
@@ -131,6 +121,9 @@ nnoremap <leader>mp :set paste<CR>a
 command! STW %s/\s\+$//e
 
 "" Load plugins
+let plug_path = join([vim_config_dir, 'autoload/plug.vim'], '/')
+let plug_source = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
 if empty(glob(plug_path))
     echo 'Installing plug...'
     execute 'silent !curl -fLo ' . plug_path ' --create-dirs ' . plug_source
@@ -144,6 +137,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/tagbar'
+Plug 'jeffkreeftmeijer/vim-dim'
 
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
