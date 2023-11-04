@@ -15,7 +15,7 @@ local appList = {
     ["zoom.us"] = { binding = "o" },
     -- Postman = { binding = "r" },
     Slack = { binding = "s" },
-    -- Peek = { binding = "p" },
+    Peek = { binding = "p" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     -- Bitwarden = { binding = "w" },
     Signal = { binding = "g" },
