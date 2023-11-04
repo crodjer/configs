@@ -49,18 +49,19 @@ set laststatus=2
 
 set ruler
 
-colorscheme tango " default / tango work well with the terminal colors.
-set background=light
+colorscheme noctu " other themes that work well: tango
 
+"" For Tango:
+" set background=light
 " Alternatives: 003, 202
-highlight Normal ctermbg=None ctermfg=None
-highlight Visual ctermbg=003 cterm=bold
-highlight Search ctermbg=003
-highlight CursorLine cterm=reverse
-highlight CursorLineNR cterm=standout
-highlight ColorColumn ctermbg=black
-highlight SpellBad ctermbg=black cterm=undercurl,italic
-highlight Pmenu ctermfg=15 ctermbg=225 guifg=#eeeeec guibg=#555753
+" highlight Normal ctermbg=None ctermfg=None
+" highlight Visual ctermbg=003 cterm=bold
+" highlight Search ctermbg=003
+" highlight CursorLine cterm=reverse
+" highlight CursorLineNR cterm=standout
+" highlight ColorColumn ctermbg=black
+" highlight SpellBad ctermbg=black cterm=undercurl,italic
+" highlight Pmenu ctermfg=15 ctermbg=225 guifg=#eeeeec guibg=#555753
 
 "display tabs and trailing spaces
 set list
