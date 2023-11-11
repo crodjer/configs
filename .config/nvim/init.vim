@@ -141,6 +141,8 @@ Plug 'jeffkreeftmeijer/vim-dim'
 
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'pearofducks/ansible-vim'
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'          , { 'for': 'markdown' }
@@ -153,7 +155,7 @@ Plug 'guns/vim-sexp'                    , { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'liquidz/vim-iced'                 , { 'for': 'clojure', 'branch': 'main' }
 Plug 'hashivim/vim-terraform'           , { 'for': 'tf' }
-Plug 'udalov/kotlin-vim'                , { 'for': 'kt' }
+Plug 'cuducos/yaml.nvim'                , { 'for': 'yaml' }
 
 " Done loading plugins
 call plug#end()
@@ -221,6 +223,9 @@ let g:lightline#ale#indicator_errors = ' '
 let g:lightline#ale#indicator_ok = ' '
 
 "" Language configurations
+
+" Ansible
+au BufRead,BufNewFile */playbooks/*.yaml set filetype=yaml.ansible
 
 " JS/JSX
 " let g:jsx_ext_required = 1
