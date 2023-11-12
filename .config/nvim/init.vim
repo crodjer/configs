@@ -46,11 +46,7 @@ set laststatus=2
 
 set ruler
 
-try
-    colorscheme dim
-catch
-    colorscheme noctu
-endtry
+colorscheme noctu
 highlight ColorColumn cterm=reverse
 
 "display tabs and trailing spaces
@@ -137,7 +133,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/tagbar'
-Plug 'jeffkreeftmeijer/vim-dim'
 
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
@@ -188,8 +183,10 @@ let g:ale_fixers = {
 "             \ 'typescript': ['tsserver']
 "             \ }
 
-nmap <silent> <leader>n :ALENext<cr>
-nmap <silent> <leader>p :ALEPrevious<cr>
+nmap <silent> <leader>n <Plug>(ale_next)
+nmap <silent> <leader>p <Plug>(ale_previous)
+nmap <silent> <leader>N <Plug>(ale_next_wrap_error)
+nmap <silent> <leader>P <Plug>(ale_previous_wrap_error)
 nmap <silent> <leader>d :ALEHover<cr>
 nmap <silent> <leader>D :ALEGoToDefinition<cr>
 nmap <silent> <leader>r :ALEFindReferences<cr>
@@ -272,6 +269,7 @@ augroup END
 augroup java
     autocmd FileType java setlocal sw=2 sts=2 et
 augroup END
+let g:ale_java_checkstyle_config = '/checkstyle-rules.xml'
 
 " HTML
 augroup html
@@ -308,7 +306,7 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 let g:vim_markdown_new_list_item_indent = 2
 augroup markdown
     autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=0
-    autocmd FileType markdown,rst,text setlocal spell spelllang=en wrap
+    autocmd FileType markdown,rst,text setlocal spell spelllang=en
 augroup END
 
 " Python
