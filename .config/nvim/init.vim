@@ -313,11 +313,6 @@ augroup rust
     autocmd FileType rust nmap <buffer> K :ALEHover<CR>
 augroup END
 
-" XML
-augroup xml
-    autocmd FileType xml setlocal iskeyword+=.,-
-augroup END
-
 " Tagbar
 let g:tagbar_width = 30
 nnoremap <leader>t :TagbarToggle<CR>
@@ -328,3 +323,14 @@ try
 catch
     " No such file? No problem; just ignore it.
 endtry
+
+" XML
+augroup xml
+    autocmd FileType xml setlocal iskeyword+=.,-
+augroup END
+
+" YAML
+augroup filetype_yaml
+    autocmd!
+    autocmd BufEnter *.yaml,*.yml setlocal indentkeys-=0#
+augroup END
