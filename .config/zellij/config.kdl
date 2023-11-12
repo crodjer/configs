@@ -84,10 +84,8 @@ keybinds clear-defaults=true {
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
         bind "j" { ScrollDown; }
         bind "k" { ScrollUp; }
-        bind "Ctrl f" "l" { PageScrollDown; }
-        bind "Ctrl b" "h" { PageScrollUp; }
-        bind "d" { HalfPageScrollDown; }
-        bind "u" { HalfPageScrollUp; }
+        bind "Ctrl d" { HalfPageScrollDown; }
+        bind "Ctrl u" { HalfPageScrollUp; }
         bind "n" { Search "down"; }
         bind "p" { Search "up"; }
         bind "c" { SearchToggleOption "CaseSensitivity"; }
@@ -115,15 +113,26 @@ keybinds clear-defaults=true {
         bind "Alt g" { SwitchToMode "Locked"; }
         bind "Alt q" { Quit; }
         bind "Alt n" { NewPane; }
-        bind "Alt H" { MoveFocusOrTab "Left"; }
-        bind "Alt L" { MoveFocusOrTab "Right"; }
-        bind "Alt J" { MoveFocus "Down"; }
-        bind "Alt K" { MoveFocus "Up"; }
-        bind "Alt =" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
+        bind "Alt h" { MoveFocusOrTab "Left"; }
+        bind "Alt l" { MoveFocusOrTab "Right"; }
+        bind "Alt j" { MoveFocus "Down"; }
+        bind "Alt k" { MoveFocus "Up"; }
+        bind "Alt H" { Resize "Increase Left"; }
+        bind "Alt J" { Resize "Increase Down"; }
+        bind "Alt K" { Resize "Increase Up"; }
+        bind "Alt L" { Resize "Increase Right"; }
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
-        bind "Alt f" { ToggleFocusFullscreen; }
+        bind "Alt F" { ToggleFocusFullscreen; }
+        bind "Alt 1" { GoToTab 1; SwitchToMode "Normal"; }
+        bind "Alt 2" { GoToTab 2; SwitchToMode "Normal"; }
+        bind "Alt 3" { GoToTab 3; SwitchToMode "Normal"; }
+        bind "Alt 4" { GoToTab 4; SwitchToMode "Normal"; }
+        bind "Alt 5" { GoToTab 5; SwitchToMode "Normal"; }
+        bind "Alt 6" { GoToTab 6; SwitchToMode "Normal"; }
+        bind "Alt 7" { GoToTab 7; SwitchToMode "Normal"; }
+        bind "Alt 8" { GoToTab 8; SwitchToMode "Normal"; }
+        bind "Alt 9" { GoToTab 9; SwitchToMode "Normal"; }
     }
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
@@ -148,15 +157,9 @@ keybinds clear-defaults=true {
     }
 }
 
-plugins {
-    tab-bar { path "tab-bar"; }
-    status-bar { path "status-bar"; }
-    strider { path "strider"; }
-    compact-bar { path "compact-bar"; }
-}
-
 pane_frames false
-theme "gruvbox-dark"
 mouse_mode true
 scroll_buffer_size 50000
 copy_on_select true
+on_force_close "quit"
+default_layout "compact"
