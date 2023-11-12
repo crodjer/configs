@@ -1,0 +1,36 @@
+
+layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+    pane
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+
+    tab_template name="ui" {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    swap_tiled_layout name="tall" {
+        ui max_panes=7 {
+            pane size="60%"
+            pane split_direction="vertical" {
+                pane split_direction="horizontal" {
+                    pane
+                    pane
+                }
+                pane split_direction="horizontal" {
+                    pane
+                    pane
+                }
+            }
+        }
+    }
+}

@@ -194,6 +194,25 @@ if [ -e "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
 fi
 
+# Zellij pane/tab names
+# if [[ -n $ZELLIJ ]]; then
+#     zellij-pane-precmd () {
+#         local current_dir=$PWD
+#         if [[ $current_dir == $HOME ]]; then
+#             current_dir="~"
+#         else
+#             current_dir=${current_dir##*/}
+#         fi
+#         command nohup zellij action rename-pane $current_dir >/dev/null 2>&1
+#     }
+#     zellij-pane-preexec () {
+#         command nohup zellij action rename-pane $2 >/dev/null 2>&1
+#     }
+#     add-zsh-hook preexec zellij-pane-preexec
+#     add-zsh-hook precmd zellij-pane-precmd
+#     zellij-pane-precmd
+# fi
+
 debug_shell ZSH: Done
 
 # Exit with success

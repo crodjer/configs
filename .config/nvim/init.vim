@@ -27,6 +27,9 @@ set undofile
 syntax enable
 filetype plugin on
 filetype indent on
+set shiftwidth=2
+set tabstop=2
+set expandtab
 set autoindent
 set smartindent
 runtime plugins/matchit.vim
@@ -151,6 +154,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 Plug 'liquidz/vim-iced'                 , { 'for': 'clojure', 'branch': 'main' }
 Plug 'hashivim/vim-terraform'           , { 'for': 'tf' }
 Plug 'cuducos/yaml.nvim'                , { 'for': 'yaml' }
+Plug 'imsnif/kdl.vim'                   , { 'for': 'kdl' }
 
 " Done loading plugins
 call plug#end()
@@ -226,11 +230,6 @@ au BufRead,BufNewFile */playbooks/*.yaml set filetype=yaml.ansible
 
 " JS/JSX
 " let g:jsx_ext_required = 1
-augroup javascript
-    autocmd FileType javascript setlocal sw=2 sts=2 et
-    autocmd FileType javascript setlocal sw=2 sts=2 et
-    autocmd FileType typescript* setlocal sw=2 sts=2 et
-augroup END
 
 " Clojure
 let g:iced_enable_default_key_mappings = v:true
@@ -260,21 +259,10 @@ augroup git
     autocmd FileType gitcommit setlocal spell spelllang=en
 augroup END
 
-" Go
-augroup go
-    autocmd FileType go setlocal noet ts=2 sw=2 sts=2 ai
-augroup END
-
 " Java
-augroup java
-    autocmd FileType java setlocal sw=2 sts=2 et
-augroup END
 let g:ale_java_checkstyle_config = '/checkstyle-rules.xml'
 
 " HTML
-augroup html
-    autocmd FileType html* setlocal noet ts=2 sw=2 sts=2 ai
-augroup END
 
 "" Ledger
 let g:ledger_default_commodity = '₹ '
@@ -305,7 +293,7 @@ call lightline#update()
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 let g:vim_markdown_new_list_item_indent = 2
 augroup markdown
-    autocmd FileType markdown,rst setlocal sw=2 sts=2 et textwidth=70 conceallevel=0
+    autocmd FileType markdown,rst setlocal textwidth=70 conceallevel=0
     autocmd FileType markdown,rst,text setlocal spell spelllang=en
 augroup END
 
@@ -328,11 +316,6 @@ augroup END
 " XML
 augroup xml
     autocmd FileType xml setlocal iskeyword+=.,-
-augroup END
-
-" YAML
-augroup yaml
-    autocmd FileType yaml setlocal sw=2 sts=2
 augroup END
 
 " Tagbar
