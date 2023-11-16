@@ -23,8 +23,7 @@ layout {
             pane size="60%"
             pane split_direction="vertical" {
                 pane split_direction="horizontal" {
-                    pane
-                    pane
+                    children
                 }
                 pane split_direction="horizontal" {
                     pane
