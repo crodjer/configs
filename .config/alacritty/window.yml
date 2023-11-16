@@ -1,6 +1,9 @@
 window:
-   decorations: none
-   startup_mode: maximized
+  decorations: none
+  startup_mode: maximized
+  padding:
+    x: 5
+    y: 0
 
 cursor:
   style:

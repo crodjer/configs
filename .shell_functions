@@ -137,12 +137,6 @@ function set_java_home() {
     export JAVA_HOME=$java_home
 }
 
-function colorize_ls() {
-    if [ -z "$LS_COLORS" -a -n "$(command -v dircolors)" -a "$TERM" = "alacritty" ]; then
-        eval $(env TERM=alacritty-color dircolors)
-    fi
-}
-
 function git_branch() {
     git symbolic-ref --short HEAD 2> /dev/null || {
         git rev-list --max-count=1 1 HEAD 2>/dev/null | cut -c 1-8
@@ -153,6 +147,6 @@ function expenses() {
     ledger --depth ${2:-3} -M register ${1:-Expense:} ${@:3}
 }
 
-colorize_ls
+set_nvim_listen_address
 
 alias ip='ip -br -c'

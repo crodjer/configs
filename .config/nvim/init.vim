@@ -277,7 +277,7 @@ augroup git
 augroup END
 
 " Java
-let g:ale_java_checkstyle_config = '/checkstyle-rules.xml'
+let g:ale_java_checkstyle_config = 'checkstyle-rules.xml'
 
 " HTML
 
