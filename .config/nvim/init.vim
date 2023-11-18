@@ -11,8 +11,9 @@ endif
 set noswapfile              "disable swapfiles
 set hidden                  "hide buffers when not displayed
 set textwidth=80            "maximum width of text that can be inserted
-set nofoldenable            "don't fold by default
+" set nofoldenable            "don't fold by default
 set foldmethod=syntax       "syntax based folding
+set foldlevel=1
 set clipboard+=unnamedplus  "use system clipboard
 set mouse-=a
 set cursorline
@@ -347,7 +348,8 @@ augroup xml
 augroup END
 
 " YAML
-augroup filetype_yaml
+augroup yaml
     autocmd!
     autocmd BufEnter *.yaml,*.yml setlocal indentkeys-=0#
+    autocmd FileType yaml setlocal foldmethod=indent
 augroup END
