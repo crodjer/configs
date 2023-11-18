@@ -16,7 +16,8 @@ nvim-remote () {
 
 if command -v nvim > /dev/null; then
     NVIM_LISTEN_ADDRESS=
-    nvim_server=/tmp/nvim-$(basename $working_dir)-$(echo $working_dir | md5).sock
+    work_dir_hash=$(echo $working_dir | md5sum | cut -d ' ' -f 1)
+    nvim_server=/tmp/nvim-$(basename $working_dir)-$work_dir_hash.sock
 
     if [[ $cmd == es ]]; then
         rm -f $nvim_server
