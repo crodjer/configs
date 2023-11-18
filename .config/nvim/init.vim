@@ -36,9 +36,10 @@ set smartindent
 runtime plugins/matchit.vim
 
 "command line configuration
-set showcmd                 "display incomplete commands
-set wildmode=list           "make cmd line tab completion similar to bash
-set wildmenu                "enable C-n and C-p to scroll through matches
+set showcmd                     "display incomplete commands
+set wildmenu                    "enable C-n and C-p to scroll through matches
+set wildmode=full:lastused      "make cmd line tab completion similar to bash
+set wildoptions=fuzzy           "use fuzzy matching to find completions
 "stuff to ignore when tab completing
 set wildignore=*.o,*~,*.pyc,*.hi,*.class
 
