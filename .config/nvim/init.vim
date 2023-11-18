@@ -12,6 +12,7 @@ set noswapfile              "disable swapfiles
 set hidden                  "hide buffers when not displayed
 set textwidth=80            "maximum width of text that can be inserted
 set nofoldenable            "don't fold by default
+set foldmethod=syntax       "syntax based folding
 set clipboard+=unnamedplus  "use system clipboard
 set mouse-=a
 set cursorline
@@ -135,25 +136,20 @@ Plug 'itchyny/lightline.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/tagbar'
-
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'pearofducks/ansible-vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'          , { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'               , { 'for': 'rust'}
 Plug 'cespare/vim-toml'                 , { 'for': 'toml'}
 Plug 'ekalinin/Dockerfile.vim'          , { 'for': 'Dockerfile' }
-Plug 'Vimjas/vim-python-pep8-indent'    , { 'for': 'python' }
 Plug 'ledger/vim-ledger'                , { 'for': 'dat' }
-Plug 'guns/vim-sexp'                    , { 'for': 'clojure' }
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
-Plug 'liquidz/vim-iced'                 , { 'for': 'clojure', 'branch': 'main' }
-Plug 'hashivim/vim-terraform'           , { 'for': 'tf' }
 Plug 'cuducos/yaml.nvim'                , { 'for': 'yaml' }
+Plug 'pearofducks/ansible-vim'          , { 'for': 'yaml' }
 Plug 'imsnif/kdl.vim'                   , { 'for': 'kdl' }
 
 " Done loading plugins
@@ -231,6 +227,13 @@ au BufRead,BufNewFile */playbooks/*.yaml set filetype=yaml.ansible
 " JS/JSX
 " let g:jsx_ext_required = 1
 
+" Cmdline
+:cnoremap <C-A> <Home>
+:cnoremap <C-F> <Right>
+:cnoremap <C-B> <Left>
+:cnoremap <Esc>b <S-Left>
+:cnoremap <Esc>f <S-Right>
+
 " Clojure
 let g:iced_enable_default_key_mappings = v:true
 augroup clojure
@@ -253,6 +256,16 @@ nnoremap <leader>s :GFiles<CR>
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
+nnoremap <leader>c :Command<CR>
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Git commit
 augroup git
