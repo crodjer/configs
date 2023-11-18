@@ -133,7 +133,6 @@ silent! call plug#begin()
 
 " General plugins
 Plug 'itchyny/lightline.vim'
-Plug 'Raimondi/delimitMate'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -141,6 +140,8 @@ Plug 'preservim/tagbar'
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'pearofducks/ansible-vim'
+Plug 'jamessan/vim-gnupg'
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'          , { 'for': 'markdown' }
@@ -148,6 +149,7 @@ Plug 'rust-lang/rust.vim'               , { 'for': 'rust'}
 Plug 'cespare/vim-toml'                 , { 'for': 'toml'}
 Plug 'ekalinin/Dockerfile.vim'          , { 'for': 'Dockerfile' }
 Plug 'ledger/vim-ledger'                , { 'for': 'dat' }
+Plug 'hashivim/vim-terraform'           , { 'for': 'tf' }
 Plug 'cuducos/yaml.nvim'                , { 'for': 'yaml' }
 Plug 'pearofducks/ansible-vim'          , { 'for': 'yaml' }
 Plug 'imsnif/kdl.vim'                   , { 'for': 'kdl' }
@@ -245,6 +247,8 @@ augroup crontab
     autocmd FileType crontab setlocal backupcopy=yes
 augroup END
 
+" Folding
+noremap <leader>z zf%
 
 " FZF/Skim
 augroup fzf
