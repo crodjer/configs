@@ -146,7 +146,6 @@ Plug 'jamessan/vim-gnupg'
 " Language plugins
 Plug 'plasticboy/vim-markdown'          , { 'for': 'markdown' }
 Plug 'rust-lang/rust.vim'               , { 'for': 'rust'}
-Plug 'cespare/vim-toml'                 , { 'for': 'toml'}
 Plug 'ekalinin/Dockerfile.vim'          , { 'for': 'Dockerfile' }
 Plug 'ledger/vim-ledger'                , { 'for': 'dat' }
 Plug 'hashivim/vim-terraform'           , { 'for': 'tf' }
