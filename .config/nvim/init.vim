@@ -154,6 +154,7 @@ Plug 'hashivim/vim-terraform'           , { 'for': 'tf' }
 Plug 'cuducos/yaml.nvim'                , { 'for': 'yaml' }
 Plug 'pearofducks/ansible-vim'          , { 'for': 'yaml' }
 Plug 'imsnif/kdl.vim'                   , { 'for': 'kdl' }
+Plug 'Olical/conjure'                   , { 'for': ['clojure', 'guile', 'scheme'] }
 
 " Done loading plugins
 call plug#end()
