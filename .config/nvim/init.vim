@@ -226,7 +226,7 @@ let g:lightline#ale#indicator_ok = ' '
 "" Language configurations
 
 " Ansible
-au BufRead,BufNewFile */playbooks/*.yaml set filetype=yaml.ansible
+au BufRead,BufNewFile */plays/*.yaml set filetype=yaml.ansible
 
 " JS/JSX
 " let g:jsx_ext_required = 1
@@ -248,9 +248,6 @@ augroup END
 augroup crontab
     autocmd FileType crontab setlocal backupcopy=yes
 augroup END
-
-" Folding
-noremap <leader>z zf%
 
 " FZF/Skim
 augroup fzf
@@ -352,5 +349,5 @@ augroup END
 augroup yaml
     autocmd!
     autocmd BufEnter *.yaml,*.yml setlocal indentkeys-=0#
-    autocmd FileType yaml setlocal foldmethod=indent
+    autocmd FileType yaml setlocal foldmethod=indent foldlevel=2
 augroup END
