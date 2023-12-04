@@ -98,6 +98,14 @@ debug_shell ZSH: Utility functions
 #-------------------------#
 # Utility functions
 #-------------------------#
+git_branch () {
+    local git_branch=$(git symbolic-ref --short HEAD 2> /dev/null || {
+        git rev-list --max-count=1 HEAD 2>/dev/null | cut -c 1-8
+    })
+
+    echo $git_branch
+}
+    local git_branch=
 gen-prompt () {
     local prev_exit="$?"
     local user_color="green"
@@ -123,9 +131,7 @@ gen-prompt () {
     local _line_1="%F{blue}┌─[%B%F{$user_color}${user_name}%f%b@%F{${host_color}}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f"
     local _line_2="%F{blue}└─%(!.#.>)%f "
 
-    local git_branch=$(git symbolic-ref --short HEAD 2> /dev/null || {
-        git rev-list --max-count=1 HEAD 2>/dev/null | cut -c 1-8
-    })
+    git_branch=$(git_branch)
 
     # Render git info, if available, in the prompt.
     if [ "$git_branch" ]; then
