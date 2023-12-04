@@ -147,6 +147,7 @@ Plug 'jamessan/vim-gnupg'
 
 " Language plugins
 Plug 'plasticboy/vim-markdown'          , { 'for': 'markdown' }
+Plug 'Vimjas/vim-python-pep8-indent'    , { 'for': 'python'}
 Plug 'rust-lang/rust.vim'               , { 'for': 'rust'}
 Plug 'ekalinin/Dockerfile.vim'          , { 'for': 'Dockerfile' }
 Plug 'ledger/vim-ledger'                , { 'for': 'dat' }
@@ -309,7 +310,7 @@ call lightline#update()
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 let g:vim_markdown_new_list_item_indent = 2
 augroup markdown
-    autocmd FileType markdown,rst setlocal textwidth=70 conceallevel=0
+    autocmd FileType markdown,rst setlocal textwidth=70 conceallevel=0 nofoldenable
     autocmd FileType markdown,rst,text setlocal spell spelllang=en
 augroup END
 
