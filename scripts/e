@@ -12,7 +12,7 @@ nvim-listener () {
 }
 
 nvim-remote () {
-    nvim --server $nvim_server --remote $PWD/$1
+    nvim --server $nvim_server --remote "$(realpath $file)"
 }
 
 if command -v nvim > /dev/null; then
