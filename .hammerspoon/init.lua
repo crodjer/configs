@@ -19,7 +19,7 @@ local appList = {
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     -- Bitwarden = { binding = "w" },
     Signal = { binding = "g" },
-    ["Firefox Developer Edition"] = { binding = "f" },
+    -- ["Firefox Developer Edition"] = { binding = "f" },
     -- VLC = { binding = "v" },
     -- Gmail = {
     --     binding = "i",
