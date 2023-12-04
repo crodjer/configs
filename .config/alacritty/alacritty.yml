@@ -1,3 +1,4 @@
+---
 import:
   - '~/.config/alacritty/window.yml'
   - '~/.config/alacritty/meta-bindings.yml'
