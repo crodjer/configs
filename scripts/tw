@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 directory=$1
-main_command=${2:-es}
+main_command=${2:-nvim}
 pane_count=${3:-2}
 
 if [ ! -d "$1" ]; then
