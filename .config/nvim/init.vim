@@ -227,7 +227,9 @@ let g:lightline#ale#indicator_ok = ' '
 "" Language configurations
 
 " Ansible
-au BufRead,BufNewFile */plays/*.yaml set filetype=yaml.ansible
+augroup yaml.ansible
+    au BufRead,BufNewFile */plays/*.yaml set filetype=yaml.ansible
+augroup END
 
 " JS/JSX
 " let g:jsx_ext_required = 1
