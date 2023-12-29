@@ -258,17 +258,6 @@ hs.hotkey.bind(hsShift, "w", function ()
     task:start()
 end)
 
-for space_index=1, 7 do
-    function selectSpace()
-        current_spaces = hs.spaces.allSpaces()[hs.spaces.spaceDisplay(hs.spaces.focusedSpace())]
-        space = current_spaces[space_index]
-        if space then
-            hs.spaces.gotoSpace(space)
-        end
-    end
-    hs.hotkey.bind(hsModifier, tostring(space_index), selectSpace)
-end
-
 -- Mic Control
 -- talkingAlert = nil
 -- unMuteAlertDuration = 600
