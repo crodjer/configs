@@ -58,6 +58,10 @@ bindkey '^[p' reverse-menu-complete
 bindkey '^[[Z' reverse-menu-complete
 
 fpath+=$HOME/.config/zsh/functions
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 autoload -Uz compinit
 compinit -u
 
