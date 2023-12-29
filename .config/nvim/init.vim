@@ -54,6 +54,7 @@ set ruler
 
 colorscheme noctu
 highlight ColorColumn cterm=reverse
+highlight Pmenu cterm=bold,italic
 
 "display tabs and trailing spaces
 set list
