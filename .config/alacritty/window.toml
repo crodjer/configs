@@ -1,0 +1,14 @@
+[cursor]
+blink_interval = 500
+
+[cursor.style]
+blinking = "Always"
+shape = "Block"
+
+[window]
+decorations = "none"
+startup_mode = "maximized"
+
+[window.padding]
+x = 5
+y = 0
