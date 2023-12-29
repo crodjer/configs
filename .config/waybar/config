@@ -27,17 +27,17 @@
         "format": "{:%a %d %b %H:%M}",
     },
     "custom/wttr": {
-        "exec": "curl -s 'https://wttr.in/Bangalore?format=%c+%t\\n%l:+%c+%C,+feels+like+%f,+%h,+%w' | sed -s 's/+//g'",
+        "exec": "curl -s 'https://wttr.in/Jaipur?format=%c+%t\\n%l:+%c+%C,+feels+like+%f,+%h,+%w' | sed -s 's/+//g'",
         "tooltip": true,
         "format": " {} ",
         "interval": 120
     },
     "cpu": {
-        "format": "",
+        "format": " ",
         "tooltip": true,
         "interval": 5,
         "states": {
-            "normal": 15,
+            "normal": 25,
             "medium": 50,
             "high": 75
         },
@@ -46,8 +46,8 @@
         "format": "",
         "interval": 5,
         "states": {
-            "normal": 25,
-            "medium": 50,
+            "normal": 40,
+            "medium": 60,
             "high": 75
         },
         "format-good": "good"
@@ -61,37 +61,37 @@
     },
     "backlight": {
         "format": "{icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+        "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
         "on-scroll-up": "light -A 0.2",
         "on-scroll-down": "light -U 0.2"
     },
     "battery": {
         "states": {
             // Aything above 90 should alert, if charging.
-            "full": 100,
-            // If aything below 90, should ideally stop charging.
-            "normal": 90,
-            // Anything between 30-80 is good.
-            "good": 80,
+            "full": 90,
+            // Anything above 75 is good and shouldn't grab attention
+            "good": 75,
+            // Battery is nearing half, can plugin, but not urgent.
+            "normal": 60,
             // Should plug in the charger below 30
-            "warning": 35,
-            // 15 is just too low!
-            "critical": 15
+            "warning": 30,
+            // battery is too low!
+            "critical": 10
         },
-        "format": "{capacity}% {icon}",
+        "format": "{icon}",
         "tooltip-format": "{timeTo} | {capacity}%",
         "format-charging": "{capacity}% ",
-        "format-plugged": "",
+        "format-plugged": " ",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [" ", " ", " ", " ", " "]
     },
     "network": {
-        "format-wifi": "  {essid}",
-        "format-ethernet": "⫘",
-        "format-linked": "{ifname} ",
-        "format-disconnected": "",
+        "format-wifi": " ",
+        "format-ethernet": "⫘ ",
+        "format-linked": "{ifname}  ",
+        "format-disconnected": " ",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
@@ -111,18 +111,18 @@
         "format-source": "",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
             "phone": "",
             "portable": "",
-            "car": "",
-            "default": ["", "", "", ""]
+            "car": " ",
+            "default": ["", "", "", " "]
         },
-        "tooltip-format": "{desc}\n{volume} {icon} {source_volume} ",
+        "tooltip-format": "{desc}\n{icon}\t{volume}\n\t{source_volume}",
         "on-click": "pulsemixer --toggle-mute",
-        "on-scroll-up": "pulsemixer --change-volume -1",
-        "on-scroll-down": "pulsemixer --change-volume +1 --max-volume 125",
+        "on-scroll-up": "pulsemixer --change-volume -5",
+        "on-scroll-down": "pulsemixer --change-volume +5 --max-volume 100",
         "smooth-scrolling-threshold": 1
     },
 }
