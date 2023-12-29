@@ -1,40 +1,47 @@
 set $mod Mod4
-font DejaVuSans 15
+font DejaVuSans 10
 
 floating_modifier $mod
-default_border pixel 4
-hide_edge_borders --i3 both
+default_border pixel 2
+# hide_edge_borders --i3 both
 smart_borders on
 
-assign [class="Firefox"] workspace 2
+assign [app_id="firefox"] workspace 2
 assign [class="Signal"] workspace 3
 for_window [class="feh"] floating enable
 for_window [class="zoom"] floating enable
 for_window [title=".+[Ss]haring (Indicator|your screen)"] floating enable, nofocus, sticky enable, move to scratchpad #, move position 800 600
 for_window [app_id="firefox" title="^Picture-in-Picture$"] floating enable, sticky enable
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+set $laptop eDP-1
+exec_always --no-startup-id '~/.config/sway/scripts/lid-switch.sh'
+bindswitch lid:on output $laptop disable
+bindswitch lid:off output $laptop enable
+
+# exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+# exec dbus-update-activation-environment 2>/dev/null && \
+#      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec foot -s
 exec mako
+exec 'wl-paste -t text -w clipman store'
+exec /usr/lib/geoclue-2.0/demos/agent
+exec gammastep -t 5600K:3600K
+
 exec swayidle -w \
-    timeout 10 'pgrep -x slock && swaymsg "output * dpms off"' \
-    timeout 600 'loginctl lock-session $XDG_SESSION_ID' \
-    timeout 605 'swaymsg "output * dpms off"' \
+    timeout 100 'loginctl lock-session $XDG_SESSION_ID' \
+    timeout 101 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
+    after-resume '~/.config/sway/scripts/lid-switch.sh' \
     before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
     idlehint 30 \
     lock 'swaylock -f'
-exec 'wl-paste -t text -w clipman store'
-# We manage this with systemd instead:
-# https://wiki.archlinux.org/title/redshift#Redshift_GDBus.Error:org.freedesktop.DBus.Error.AccessDenied_on_start
-# exec 'flock -Fn /tmp/geoclue-agent-sway.lock -c /usr/libexec/geoclue-2.0/demos/agent'
-exec 'redshift-gtk'
-exec 'pkill -x blueman-applet; blueman-applet'
-exec 'setsway.sh'
-exec eval $(gnome-keyring-daemon --start)
-exec export SSH_AUTH_SOCK
+
+# exec 'setsway.sh'
+# exec eval $(gnome-keyring-daemon --start)
+# exec export SSH_AUTH_SOCK
+
+# Cursor config
+seat seat0 xcursor_theme default 24
 
 # Colors
 set $black #282828
@@ -56,18 +63,14 @@ client.focused_inactive $black     $black      $yellow
 client.unfocused        $black     $black      $yellow
 client.urgent           $black     $red        $black
 
-# Cursor config
-# seat seat0 xcursor_theme default 36
-	
-
 # start a terminal
 bindsym $mod+Return exec footclient
 bindsym $mod+Shift+Return exec alacritty
 
 # start the editor
-bindsym $mod+Shift+n exec nvim-server
+bindsym $mod+Shift+n exec nvim
 
-#Please provide the masala separately  kill focused window
+# kill focused window
 bindsym $mod+Shift+q kill
 
 # start wofi (a program launcher)
@@ -75,23 +78,23 @@ bindsym $mod+d exec wofi -S drun
 bindsym $mod+Shift+d exec wofi -S run
 
 # show clipboard history
-bindsym $mod+p exec clipman pick
+bindsym $mod+p exec clipman pick --tool wofi
 
 # change focus
 focus_follows_mouse no
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -181,16 +184,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 2 px or 2 ppt
-        bindsym k resize grow height 2 px or 2 ppt
-        bindsym l resize shrink height 2 px or 2 ppt
-        bindsym semicolon resize grow width 2 px or 2 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 2 px or 2 ppt
-        bindsym Down resize grow height 2 px or 2 ppt
-        bindsym Up resize shrink height 2 px or 2 ppt
-        bindsym Right resize grow width 2 px or 2 ppt
+        bindsym h resize shrink width 2 px or 2 ppt
+        bindsym j resize grow height 2 px or 2 ppt
+        bindsym k resize shrink height 2 px or 2 ppt
+        bindsym l resize grow width 2 px or 2 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -199,15 +196,21 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-output "*" bg ~/.wallpaper fill #a89984
+# output "*" bg ~/.wallpaper fill #a89984
 output eDP-1 {
-    scale 1
+    scale 1.75
 }
-output DP-2 pos 0 0 res 1920x1080@60Hz
-output eDP-1 pos 300 1080
+
+output "BNQ BenQ EX2710R ETN8M00455SL0" {
+    scale 1.2
+    scale_filter smart
+    # We run at 120Hz as we don't need 165 (the default) or 144.
+    mode 2560x1440@119.998Hz
+    adaptive_sync off
+    render_bit_depth 10
+}
 
 bar {
-    font DejaVu Sans Mono, FontAwesome 20
     swaybar_command waybar
 }
 

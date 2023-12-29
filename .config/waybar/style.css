@@ -16,8 +16,6 @@
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: sans-serif;
-    font-size: 22px;
     min-height: 0;
 }
 
@@ -117,7 +115,7 @@ window#waybar.solo {
 .good {
     /* Things are good, grab for no attention */
 }
-.normal, #battery.full {
+.normal {
     /* Green */
     color: #98971a;
 }
@@ -130,8 +128,6 @@ window#waybar.solo {
     color: #cc241d;
 }
 
-
-#battery.normal.charging,
 #battery.warning:not(.charging) {
     color: #d79921;
 }
