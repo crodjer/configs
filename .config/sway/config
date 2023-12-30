@@ -179,11 +179,6 @@ bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut.
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 2 px or 2 ppt
         bindsym j resize grow height 2 px or 2 ppt
         bindsym k resize shrink height 2 px or 2 ppt
