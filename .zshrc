@@ -188,6 +188,9 @@ if [ ! -f "$ZLONG_ALERT_FILE" ]; then
 fi
 source $ZLONG_ALERT_FILE
 
+# Initialize rtx
+test -n "$(command -v rtx)" && eval "$(rtx activate zsh)"
+
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.skim/shell/key-bindings.zsh ] && source ~/.skim/shell/key-bindings.zsh
