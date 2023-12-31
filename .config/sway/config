@@ -28,8 +28,8 @@ exec /usr/lib/geoclue-2.0/demos/agent
 exec gammastep -t 5600K:3600K
 
 exec swayidle -w \
-    timeout 100 'loginctl lock-session $XDG_SESSION_ID' \
-    timeout 101 'swaymsg "output * dpms off"' \
+    timeout 300 'loginctl lock-session $XDG_SESSION_ID' \
+    timeout 305 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     after-resume '~/.config/sway/scripts/lid-switch.sh' \
     before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
