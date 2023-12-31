@@ -265,6 +265,27 @@ if not package.loaded["lazy"] then
       version = "*"
     },
 
+    {
+      'ledger/vim-ledger',
+      version = "*",
+      lazy = true,
+      ft = 'ledger',
+      init = function ()
+        vim.g.ledger_default_commodity = '₹ '
+        -- autocmd FileType ledger inoremap <silent> <Tab> <C-R>=ledger#autocomplete_and_align()<CR>
+        -- autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
+        -- autocmd FileType ledger nnoremap <silent> <Tab> :LedgerAlign<CR>
+        -- autocmd FileType ledger noremap { ?^\d<CR>
+        -- autocmd FileType ledger noremap } /^\d<CR>
+      end,
+      config = function ()
+        vim.keymap.set('i', '<Tab>', [[<C-R>=ledger#autocomplete_and_align()<CR>]], { noremap = true, silent = true, })
+        vim.keymap.set('n', '<Tab>', [[:LedgerAlign<CR>]], { noremap = true, silent = true, })
+        vim.keymap.set('v', '<Tab>', [[:LedgerAlign<CR>]], { noremap = true, silent = true, })
+        vim.keymap.set('', '{', [[?^\d<CR>]], { noremap = true, silent = true, })
+        vim.keymap.set('', '}', [[/^\d<CR>]], { noremap = true, silent = true, })
+      end
+    }
 
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
     --       These are some example plugins that I've included in the kickstart repository.
@@ -315,8 +336,8 @@ vim.o.smartcase = true
 vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+vim.o.updatetime = 100
+vim.o.timeoutlen = 200
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -442,13 +463,13 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'ledger' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
 
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = { enable = true, disable = {"ledger",} },
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -631,6 +652,7 @@ mason_lspconfig.setup_handlers {
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+require("luasnip.loaders.from_snipmate").lazy_load()
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
