@@ -83,10 +83,6 @@ if not package.loaded["lazy"] then
       -- LSP Configuration & Plugins
       'neovim/nvim-lspconfig',
       dependencies = {
-        -- Automatically install LSPs to stdpath for neovim
-        { 'williamboman/mason.nvim', config = true },
-        'williamboman/mason-lspconfig.nvim',
-
         -- Useful status updates for LSP
         -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
         { 'j-hui/fidget.nvim', opts = {} },
@@ -114,7 +110,7 @@ if not package.loaded["lazy"] then
     },
 
     -- Useful plugin to show you pending keybinds.
-    { 'folke/which-key.nvim', opts = {} },
+    { 'folke/which-key.nvim',  opts = {} },
     {
       -- Adds git related signs to the gutter, as well as utilities for managing changes
       'lewis6991/gitsigns.nvim',
@@ -159,30 +155,33 @@ if not package.loaded["lazy"] then
 
           -- Actions
           -- visual mode
-          map('v', '<leader>hs', function()
+          require('which-key').register {
+            ['<leader>gh'] = { name = '[G]it [H]unk', _ = 'which_key_ignore' },
+          }
+          map('v', '<leader>ghs', function()
             gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
           end, { desc = 'stage git hunk' })
-          map('v', '<leader>hr', function()
+          map('v', '<leader>ghr', function()
             gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
           end, { desc = 'reset git hunk' })
           -- normal mode
-          map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
-          map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
-          map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
-          map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-          map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
-          map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
-          map('n', '<leader>hb', function()
+          map('n', '<leader>ghs', gs.stage_hunk, { desc = 'git stage hunk' })
+          map('n', '<leader>ghr', gs.reset_hunk, { desc = 'git reset hunk' })
+          map('n', '<leader>ghS', gs.stage_buffer, { desc = 'git Stage buffer' })
+          map('n', '<leader>ghu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+          map('n', '<leader>ghR', gs.reset_buffer, { desc = 'git Reset buffer' })
+          map('n', '<leader>ghp', gs.preview_hunk, { desc = 'preview git hunk' })
+          map('n', '<leader>ghb', function()
             gs.blame_line { full = false }
           end, { desc = 'git blame line' })
-          map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
-          map('n', '<leader>hD', function()
+          map('n', '<leader>ghd', gs.diffthis, { desc = 'git diff against index' })
+          map('n', '<leader>ghD', function()
             gs.diffthis '~'
           end, { desc = 'git diff against last commit' })
 
           -- Toggles
-          map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
-          map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle git show deleted' })
+          map('n', '<leader>gtb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
+          map('n', '<leader>gtd', gs.toggle_deleted, { desc = 'toggle git show deleted' })
 
           -- Text object
           map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
@@ -258,6 +257,7 @@ if not package.loaded["lazy"] then
     {
       'pearofducks/ansible-vim',
       build = 'UltiSnips/generate.sh',
+      ft = 'yaml'
     },
 
     {
@@ -270,15 +270,10 @@ if not package.loaded["lazy"] then
       version = "*",
       lazy = true,
       ft = 'ledger',
-      init = function ()
+      init = function()
         vim.g.ledger_default_commodity = '₹ '
-        -- autocmd FileType ledger inoremap <silent> <Tab> <C-R>=ledger#autocomplete_and_align()<CR>
-        -- autocmd FileType ledger vnoremap <silent> <Tab> :LedgerAlign<CR>
-        -- autocmd FileType ledger nnoremap <silent> <Tab> :LedgerAlign<CR>
-        -- autocmd FileType ledger noremap { ?^\d<CR>
-        -- autocmd FileType ledger noremap } /^\d<CR>
       end,
-      config = function ()
+      config = function()
         vim.keymap.set('i', '<Tab>', [[<C-R>=ledger#autocomplete_and_align()<CR>]], { noremap = true, silent = true, })
         vim.keymap.set('n', '<Tab>', [[:LedgerAlign<CR>]], { noremap = true, silent = true, })
         vim.keymap.set('v', '<Tab>', [[:LedgerAlign<CR>]], { noremap = true, silent = true, })
@@ -286,20 +281,6 @@ if not package.loaded["lazy"] then
         vim.keymap.set('', '}', [[/^\d<CR>]], { noremap = true, silent = true, })
       end
     }
-
-    -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-    --       These are some example plugins that I've included in the kickstart repository.
-    --       Uncomment any of the lines below to enable them.
-    -- require 'kickstart.plugins.autoformat',
-    -- require 'kickstart.plugins.debug',
-
-    -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-    --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-    --    up-to-date with whatever is in the kickstart repo.
-    --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-    --
-    --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-    -- { import = 'custom.plugins' },
   }, {})
 end
 
@@ -346,7 +327,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Show colorcolumn
-vim.o.textwidth=80
+vim.o.textwidth = 80
 vim.o.colorcolumn = "+1"
 
 -- [[ Basic Keymaps ]]
@@ -378,12 +359,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local actions = require("telescope.actions")
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        ["<esc>"] = actions.close,
       },
     },
   },
@@ -429,8 +410,9 @@ end
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>h', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>f', require('telescope.builtin').git_files, { desc = 'Search Git [F]iles' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -448,7 +430,6 @@ end
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>sc', require('telescope.builtin').command_history, { desc = '[S]earch [C]ommand history' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -469,7 +450,7 @@ vim.defer_fn(function()
     auto_install = true,
 
     highlight = { enable = true },
-    indent = { enable = true, disable = {"ledger",} },
+    indent = { enable = true, disable = { "ledger", } },
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -529,12 +510,6 @@ end, 0)
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -571,12 +546,38 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+-- Setup neovim lua configuration
+require('neodev').setup({
+  override = function(root_dir, library)
+    -- Since I symlink my init.lua, neodev doesn't detect this right.
+    if root_dir:sub(-#"nvim") == "nvim" then
+      library.enabled = true
+      library.plugins = true
+    end
+  end,
+})
+
+local lspconfig = require('lspconfig');
+local servers = {
+  ansiblels = {},
+  -- lua_ls = { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } },
+  lua_ls = {},
+  pyright = {},
+  rubocop = {},
+  rust_analyzer = {},
+  tsserver = {},
+}
+
+for server, config in pairs(servers) do
+  config.on_attach = on_attach
+  lspconfig[server].setup(config)
+end
+
 -- document existing key chains
 require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>$'] = { name = '[$]hell', _ = 'which_key_ignore' },
@@ -587,66 +588,11 @@ require('which-key').register {
 -- required for visual <leader>hs (hunk stage) to work
 require('which-key').register({
   ['<leader>'] = { name = 'VISUAL <leader>' },
-  ['<leader>h'] = { 'Git [H]unk' },
 }, { mode = 'v' })
-
--- mason-lspconfig requires that these setup functions are called in this order
--- before setting up the servers.
-require('mason').setup()
-require('mason-lspconfig').setup()
-
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
-local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  pyright = {},
-  rust_analyzer = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      -- diagnostics = { disable = { 'missing-fields' } },
-      diagnostics = { globals = { "vim" } }
-    },
-  },
-  ansiblels = {},
-  rubocop = {}
-}
-
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
-}
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -702,8 +648,8 @@ cmp.setup {
 }
 
 -- [[ Configure ansible patterns ]]
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = {"*/plays/*.yaml*"},
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*/plays/*.yaml*" },
   command = "set filetype=yaml.ansible",
 })
 
@@ -715,7 +661,7 @@ require('toggleterm').setup {
 }
 vim.keymap.set('n', '<C-Enter>', ':ToggleTerm size=25<CR>', { desc = 'Open terminal 1' })
 function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
+  local opts = { buffer = 0 }
   vim.keymap.set('n', 'q', ':hide<CR>', opts)
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', '<C-Enter>', [[<C-\><C-n>:hide<CR>]], opts)
@@ -725,27 +671,27 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-w>l', [[<C-\><C-n><C-w>l]], opts)
 end
 
-vim.api.nvim_create_autocmd({"BufEnter"}, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "term://*",
   command = "startinsert"
 })
 
-vim.api.nvim_create_autocmd({"TermOpen"}, {
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
   pattern = "term://*",
   command = "lua set_terminal_keymaps()"
 })
 
-local terminal  = require('toggleterm.terminal').Terminal
+local terminal     = require('toggleterm.terminal').Terminal
 local terminalApps = {
   bottom = {
     binding = "m",
-    terminal = { cmd = "btm", direction="float" },
+    terminal = { cmd = "btm --color nord-light", direction = "float" },
     desc = "System [M]onitor (using btm)"
   }
 }
 for _, config in pairs(terminalApps) do
   local app = terminal:new(config.terminal)
-  local handler = function ()
+  local handler = function()
     app:toggle()
   end
   vim.keymap.set("n", "<leader>$" .. config.binding, handler, {
