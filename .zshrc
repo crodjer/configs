@@ -226,11 +226,6 @@ fi
 #     zellij-pane-precmd
 # fi
 
-# Initialize atuin
-if [ -x "$(command -v atuin)" ]; then
-    eval "$(atuin init zsh)"
-fi
-
 debug_shell ZSH: Done
 
 # Exit with success
