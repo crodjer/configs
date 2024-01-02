@@ -1,7 +1,7 @@
 import = [
     "~/.config/alacritty/window.toml",
     "~/.config/alacritty/meta-bindings.toml",
-    "~/.config/alacritty/theme/gruvbox_light.toml",
+    "~/.config/alacritty/theme/catppuccin-latte.toml",
     "~/.alacritty.theme.toml",
     "~/.alacritty.local.toml"
 ]
