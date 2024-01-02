@@ -191,11 +191,11 @@ if not package.loaded["lazy"] then
     },
 
     {
-      'morhetz/gruvbox',
+      'catppuccin/nvim',
       priority = 1000,
       config = function()
         vim.o.background = 'light'
-        vim.cmd.colorscheme 'gruvbox'
+        vim.cmd.colorscheme 'catppuccin'
       end,
     },
 
@@ -620,7 +620,7 @@ local servers = {
     },
   },
   ansiblels = {},
-  ruby_ls = {}
+  rubocop = {}
 }
 
 -- Setup neovim lua configuration
