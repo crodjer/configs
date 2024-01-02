@@ -57,11 +57,6 @@ function render(object)
     print(rendered)
 end
 
--- Caffeine: A button in the menu bar.
-hs.loadSpoon("Caffeine")
-spoon.Caffeine:start()
-
-
 -- WindowScreenLeftAndRight: Shorcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
 spoon.WindowScreenLeftAndRight:bindHotkeys({
