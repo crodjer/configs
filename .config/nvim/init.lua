@@ -151,9 +151,10 @@ if not package.loaded["lazy"] then
       'catppuccin/nvim',
       priority = 1000,
       config = function()
-        vim.o.background = 'light'
         vim.cmd.colorscheme 'catppuccin'
+        require('auto-dark-mode').setup()
       end,
+      dependencies = { 'f-person/auto-dark-mode.nvim' }
     },
 
     {
@@ -164,8 +165,8 @@ if not package.loaded["lazy"] then
         options = {
           icons_enabled = true,
           theme = 'catppuccin',
-          -- component_separators = '|',
-          -- section_separators = '',
+          section_separators = { left = '', right = '' },
+          component_separators = { left = '', right = '' }
         },
       },
     },
