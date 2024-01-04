@@ -13,12 +13,12 @@ local appList = {
     Obsidian = { binding = "n" },
     Notes = { binding = "i" },
     ["zoom.us"] = { binding = "o" },
-    -- Postman = { binding = "r" },
     Slack = { binding = "s" },
-    Peek = { binding = "p" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     -- Bitwarden = { binding = "w" },
     Signal = { binding = "g" },
+    WezTerm = { binding = "w" },
+    qutebrowser = { binding = "q" },
     -- ["Firefox Developer Edition"] = { binding = "f" },
     -- VLC = { binding = "v" },
     -- Gmail = {
@@ -33,14 +33,10 @@ local appList = {
     --    binding = "=",
     --    bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
     --},
-    -- Messages = {
-    --     binding = "8",
-    --     bundleId = "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph"
-    -- },
-    -- Snapdrop = {
-    --     binding = ".",
-    --     bundleId = "com.google.Chrome.app.ikpmlgdcejalmjnfbahhijemkcgljabf"
-    -- },
+    Habitica = {
+        binding = "8",
+        bundleId = "com.google.Chrome.app.pdigihnmoiplkhocekidmdcmhchhdpjo"
+    },
     Hammerspoon = { binding = '9' },
     ["Yi Home"] = { binding = '0' },
 }
