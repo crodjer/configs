@@ -15,7 +15,7 @@ local appList = {
     ["zoom.us"] = { binding = "o" },
     Slack = { binding = "s" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
-    -- Bitwarden = { binding = "w" },
+    Bitwarden = { binding = "p" },
     Signal = { binding = "g" },
     WezTerm = { binding = "w" },
     qutebrowser = { binding = "q" },
