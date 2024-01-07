@@ -20,7 +20,6 @@
         }
     },
     "tray": {
-        "icon-size": 24,
         "spacing": 3
     },
     "clock": {
