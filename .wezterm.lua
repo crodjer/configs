@@ -4,16 +4,17 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 config.window_decorations = "NONE"
+config.hide_tab_bar_if_only_one_tab = true
 
 -- Split / Pane navigation bindings similar to my tmux bindings.
 config.keys = {
   {
-    key = '\\',
+    key = '\'',
     mods = 'ALT',
     action = act.SplitVertical { domain = 'CurrentPaneDomain' },
   },
   {
-    key = '\'',
+    key = '\\',
     mods = 'ALT',
     action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
   },
@@ -59,9 +60,13 @@ if is_darwin() then
 end
 
 if is_linux() then
+  config.font = wezterm.font_with_fallback {
+    "Hack"
+  }
   -- On my linux machine, its actually eco friendly to use it in light mode
   -- but with low brightness.
   config.color_scheme = "Catppuccin Latte"
+  config.font_size = 11
 end
 
 
