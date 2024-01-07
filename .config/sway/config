@@ -6,13 +6,13 @@ default_border pixel 2
 # hide_edge_borders --i3 both
 smart_borders on
 
-assign [app_id="firefox"] workspace 2
-assign [class="Signal"] workspace 3
-for_window [class="feh"] floating enable
-for_window [class="zoom"] floating enable
+# assign [app_id="firefox"] workspace 2
+# assign [class="Signal"] workspace 3
+for_window [app_id="imv"] floating enable
+# for_window [class="zoom"] floating enable
 for_window [app_id="pavucontrol"] floating enable
-for_window [title=".+[Ss]haring (Indicator|your screen)"] floating enable, nofocus, sticky enable, move to scratchpad #, move position 800 600
-for_window [app_id="firefox" title="^Picture-in-Picture$"] floating enable, sticky enable
+# for_window [title=".+[Ss]haring (Indicator|your screen)"] floating enable, nofocus, sticky enable, move to scratchpad #, move position 800 600
+# for_window [app_id="firefox" title="^Picture-in-Picture$"] floating enable, sticky enable
 
 set $laptop eDP-1
 exec_always --no-startup-id '~/.config/sway/scripts/lid-switch.sh'
@@ -22,15 +22,15 @@ bindswitch lid:off output $laptop enable
 # exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 # exec dbus-update-activation-environment 2>/dev/null && \
 #      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec foot -s
 exec mako
 exec 'wl-paste -t text -w clipman store'
 exec /usr/lib/geoclue-2.0/demos/agent
 exec gammastep -t 5600K:3600K
 
+# exec_always swayidle -w \
 exec swayidle -w \
-    timeout 300 'loginctl lock-session $XDG_SESSION_ID' \
-    timeout 305 'swaymsg "output * dpms off"' \
+    timeout 330 'loginctl lock-session $XDG_SESSION_ID' \
+    timeout 300 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     after-resume '~/.config/sway/scripts/lid-switch.sh' \
     before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
@@ -65,8 +65,7 @@ client.unfocused        $black     $black      $yellow
 client.urgent           $black     $red        $black
 
 # start a terminal
-bindsym $mod+Return exec footclient
-bindsym $mod+Shift+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 # start the editor
 bindsym $mod+Shift+n exec nvim
@@ -198,7 +197,7 @@ output eDP-1 {
 }
 
 output "BNQ BenQ EX2710R ETN8M00455SL0" {
-    scale 1.2
+    scale 1
     scale_filter smart
     # We run at 120Hz as we don't need 165 (the default) or 144.
     mode 2560x1440@119.998Hz
