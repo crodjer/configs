@@ -61,9 +61,6 @@ if not package.loaded["lazy"] then
         -- Adds LSP completion capabilities
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-path',
-
-        -- Adds a number of user-friendly snippets
-        'rafamadriz/friendly-snippets',
       },
     },
 
@@ -211,6 +208,12 @@ if not package.loaded["lazy"] then
         'nvim-treesitter/nvim-treesitter-textobjects',
       },
       build = ':TSUpdate',
+    },
+
+    {
+      'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      opts = {} -- this is equalent to setup({}) function
     },
 
     {
@@ -409,7 +412,7 @@ vim.defer_fn(function()
     auto_install = true,
 
     highlight = { enable = true },
-    indent = { enable = true, disable = { "ledger", } },
+    indent = { enable = true, disable = { "ledger", "ruby" } },
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -519,11 +522,11 @@ require('neodev').setup({
 local lspconfig = require('lspconfig');
 local servers = {
   ansiblels = {},
-  -- lua_ls = { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } },
   lua_ls = {},
   pyright = {},
-  rubocop = {},
+  -- rubocop = {},
   rust_analyzer = {},
+  solargraph = {},
   tsserver = {},
 }
 
@@ -557,7 +560,6 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require("luasnip.loaders.from_snipmate").lazy_load()
-require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 cmp.setup {
