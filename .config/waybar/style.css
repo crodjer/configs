@@ -15,9 +15,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: hack;
     /* `otf-font-awesome` is required to be installed for icons */
-    min-height: 0;
 }
 
 window#waybar {
@@ -83,8 +81,9 @@ window#waybar.solo {
 #mode,
 #idle_inhibitor {
     border-radius: 0.2em;
-    margin: 0em 0.5em;
-    padding: 0em 0em;
+    margin: 0em 0.4em;
+    padding: 0.2em 0.4em;
+    font-size: 1.2em;
 }
 
 #workspaces {
