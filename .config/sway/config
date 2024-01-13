@@ -15,6 +15,7 @@ for_window [app_id="pavucontrol"] floating enable
 # for_window [app_id="firefox" title="^Picture-in-Picture$"] floating enable, sticky enable
 
 set $laptop eDP-1
+exec_always --no-startup-id /usr/lib/xdg-desktop-portal-wlr -r
 exec_always --no-startup-id '~/.config/sway/scripts/lid-switch.sh'
 bindswitch lid:on output $laptop disable
 bindswitch lid:off output $laptop enable
@@ -193,7 +194,7 @@ bindsym $mod+r mode "resize"
 
 # output "*" bg ~/.wallpaper fill #a89984
 output eDP-1 {
-    scale 1.75
+    scale 1.5
 }
 
 output "BNQ BenQ EX2710R ETN8M00455SL0" {
