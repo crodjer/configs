@@ -193,6 +193,10 @@ if [ -n "$(command -v mise)" ]; then
     eval "$(mise activate zsh)"
 fi
 
+if [ -n "$(command -v rtx)" ]; then
+    eval "$(rtx activate zsh)"
+fi
+
 # Initialize fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.skim/shell/key-bindings.zsh ] && source ~/.skim/shell/key-bindings.zsh
