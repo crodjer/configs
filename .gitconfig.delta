@@ -7,7 +7,7 @@
 [interactive]
     diffFilter = delta --color-only --features=interactive
 [delta]
-    syntax-theme = base16
+    syntax-theme = GitHub
     side-by-side = true
     hunk-header-style = yellow line-number
     hunk-header-decoration-style = none
