@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 directory=$1
 main_command=${2:-nvim}
-pane_count=${3:-2}
+layout=${3:-main-vertical}
+pane_count=${4:-2}
 
 if [ ! -d "$1" ]; then
     >&2 echo "Target directory is missing/invalid."
@@ -14,12 +15,15 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-tmux new-window -c $1
-tmux send-keys -t "${window}.0" "$main_command" Enter
+if [ -f $directory/Pipfile ]; then
+    env_cmd="pipenv run"
+    shell_cmd="pipenv shell"
+fi
 
+tmux new-window -c $1 "$env_cmd $main_command"
 for run in $(seq 1 $pane_count)
 do
-    tmux split-window -c $1 -v
+    tmux split-window -c $1 -v $shell_cmd
 done
 
-tmux select-layout main-vertical
+tmux select-layout $layout
