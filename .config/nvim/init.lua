@@ -35,8 +35,6 @@ if not package.loaded["lazy"] then
     -- Detect tabstop and shiftwidth automatically
     'tpope/vim-sleuth',
 
-    -- NOTE: This is where your plugins related to LSP can be installed.
-    --  The configuration is done below. Search for lspconfig to find it below.
     {
       -- LSP Configuration & Plugins
       'neovim/nvim-lspconfig',
@@ -60,6 +58,30 @@ if not package.loaded["lazy"] then
         },
       },
     },
+
+    { 'nvim-treesitter', {{
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+      dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', },
+      config = function ()
+        local configs = require("nvim-treesitter.configs")
+
+        vim.defer_fn(function()
+          configs.setup({
+            ensure_installed = {
+              -- My primary languages.
+              "python", "ruby", "clojure", "rust", "lua", "bash",
+              -- Front-end
+              "javascript", "typescript", "tsx", "html", "xml",
+              "java", "go"
+            },
+            sync_install = false,
+            highlight = { enable = true },
+            indent = { enable = true, disable = { "ledger", "ruby" } },
+          })
+        end, 0)
+      end
+    }}},
 
     { 'folke/which-key.nvim',  opts = {} },
 
