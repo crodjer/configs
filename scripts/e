@@ -1,42 +1,10 @@
 #!/usr/bin/env bash
-
 set -e
 
-cmd=$(basename $0)
-working_dir=$(git rev-parse -q --show-toplevel 2> /dev/null || echo $PWD)
 file=$1
 
-nvim_server=$NVIM_LISTEN_ADDRESS
-nvim-listener () {
-    nvim --listen $nvim_server $@
-}
-
-nvim-remote () {
-    nvim --server $nvim_server --remote "$(realpath $file)"
-}
-
-if command -v nvim > /dev/null; then
-    # work_dir_hash=$(echo $working_dir | md5sum | cut -d ' ' -f 1)
-    # nvim_server=/tmp/nvim-$(basename $working_dir)-$work_dir_hash.sock
-
-    if [[ $cmd == es ]]; then
-        rm -f $nvim_server
-        no_search=true
-        editor=nvim-listener
-    else
-        editor=nvim-remote
-    fi
-else
-    editor=$EDITOR
-fi
-
 if [  -z "$file" ]; then
-    if [ -n "$no_search" ]; then
-        $editor
-    else
-        export FZF_DEFAULT_COMMAND='fd --type f'
-        $editor $(fzf)
-    fi
+    FZF_DEFAULT_COMMAND='fd --type f' nvr --remote-silent $(fzf)
 else
-    $editor $file
+    nvr --remote-silent $@
 fi

@@ -55,9 +55,48 @@ if is_darwin() then
   }
   -- Mac's handle dark screen well through dimming.
   config.color_scheme = "Catppuccin Mocha"
+
+  wezterm.on("gui-startup", function(cmd)
+      local tab, pane, window = mux.spawn_window(cmd or {})
+      window:gui_window():maximize()
+  end)
 end
 
 if is_linux() then
+  -- Split / Pane navigation bindings similar to my tmux bindings.
+  config.keys = {
+    {
+      key = '\'',
+      mods = 'ALT',
+      action = act.SplitVertical { domain = 'CurrentPaneDomain' },
+    },
+    {
+      key = '\\',
+      mods = 'ALT',
+      action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+    },
+    {
+      key = 'h',
+      mods = 'ALT',
+      action = act.ActivatePaneDirection 'Left',
+    },
+    {
+      key = 'l',
+      mods = 'ALT',
+      action = act.ActivatePaneDirection 'Right',
+    },
+    {
+      key = 'k',
+      mods = 'ALT',
+      action = act.ActivatePaneDirection 'Up',
+    },
+    {
+      key = 'j',
+      mods = 'ALT',
+      action = act.ActivatePaneDirection 'Down',
+    },
+  }
+
   config.font = wezterm.font_with_fallback {
     "Hack"
   }
