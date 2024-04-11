@@ -1,9 +1,0 @@
-tmp
-.cabal-sandbox
-cabal.sandbox.config
-xmonad/xmonad
-xmonad/xmonad.hi
-xmonad/xmonad.o
-xmonad/dist
-.idea
-.DS_Store
