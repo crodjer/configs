@@ -101,4 +101,7 @@ $env.NU_PLUGIN_DIRS = [
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
 const nu_config_dir = ($nu.config-path | path dirname)
+
 source $"($nu_config_dir)/carapace.nu"
+source $"($nu_config_dir)/mise.nu"
+source $"($nu_config_dir)/zoxide.nu"
