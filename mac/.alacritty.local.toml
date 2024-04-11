@@ -1,0 +1,9 @@
+import = [
+	"~/.config/alacritty/theme/catppuccin-mocha.toml",
+]
+
+[font]
+size = 14
+
+[font.normal]
+family = "SauceCodePro Nerd Font Mono"
