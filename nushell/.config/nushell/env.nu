@@ -21,7 +21,7 @@ def create_left_prompt [] {
         }
     )
 
-    let path_color = (if (is-admin) { ansi red_bold } else { ansi green_bold })
+    let path_color = (if (is-admin) { ansi light_red } else { ansi grey })
     let separator_color = (if (is-admin) { ansi light_red_bold } else { ansi light_green_bold })
     let path_segment = $"($path_color)($dir)"
 
@@ -33,7 +33,7 @@ def create_right_prompt [] {
     let time_segment = ([
         (ansi reset)
         (ansi magenta)
-        (date now | format date '%x %X %p') # try to respect user's locale
+        (date now | format date '%a, %-d %b %Y, %H:%M:%S') # try to respect user's locale
     ] | str join | str replace --regex --all "([/:])" $"(ansi green)${1}(ansi magenta)" |
         str replace --regex --all "([AP]M)" $"(ansi magenta_underline)${1}")
 
@@ -63,12 +63,12 @@ $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
 # This can be useful if you have a 2-line prompt and it's taking up a lot of space
 # because every command entered takes up 2 lines instead of 1. You can then uncomment
 # the line below so that previously entered commands show with a single `🚀`.
-# $env.TRANSIENT_PROMPT_COMMAND = {|| "🚀 " }
-# $env.TRANSIENT_PROMPT_INDICATOR = {|| "" }
-# $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = {|| "" }
-# $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = {|| "" }
-# $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = {|| "" }
-# $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| "" }
+$env.TRANSIENT_PROMPT_COMMAND = {|| "> " }
+$env.TRANSIENT_PROMPT_INDICATOR = {|| "" }
+$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = {|| "" }
+$env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = {|| "" }
+$env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = {|| "" }
+$env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| "" }
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
