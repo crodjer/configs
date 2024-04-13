@@ -56,3 +56,7 @@ mapl('f', MiniPick.builtin.files, "Search [F]iles")
 -- [[ Configure LSP ]]
 plugin('neovim/nvim-lspconfig')
 require('lsp')
+
+-- [[ Ledger ]]
+plugin('ledger/vim-ledger')
+require('ledger')
