@@ -17,7 +17,7 @@ if is_darwin() then
   config.font = wezterm.font_with_fallback {
     'Menlo',
   }
-  config.font_size = 13
+  config.font_size = 14
 
   wezterm.on("gui-startup", function()
     local tab, pane, window = mux.spawn_window{}
@@ -68,7 +68,7 @@ if is_linux() then
   config.font_size = 11
 end
 
-function scheme_for_appearance(appearance)
+local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
     return "Catppuccin Mocha"
   else
@@ -76,7 +76,7 @@ function scheme_for_appearance(appearance)
   end
 end
 
-wezterm.on("window-config-reloaded", function(window, pane)
+wezterm.on("window-config-reloaded", function(window, _)
   local overrides = window:get_config_overrides() or {}
   local appearance = window:get_appearance()
   local scheme = scheme_for_appearance(appearance)
