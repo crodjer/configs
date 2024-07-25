@@ -6,7 +6,7 @@
 [format]
 	signoff = true
 [core]
-	excludesfile = /home/rohan/.gitignore
+	excludesfile = ~/.gitignore
 [grep]
 	lineNumber = true
 [color]

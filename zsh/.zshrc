@@ -213,6 +213,9 @@ if [ -e "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
 fi
 
+# Direnv
+test -n "$(command -v direnv)" && eval "$(direnv hook zsh)"
+
 debug_shell ZSH: Done
 
 # Exit with success
