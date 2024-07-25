@@ -1,4 +1,5 @@
 tap "homebrew/bundle"
+brew "ansible"
 brew "bat"
 brew "bottom"
 brew "coreutils"
