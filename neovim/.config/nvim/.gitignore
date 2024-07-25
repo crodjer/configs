@@ -3,3 +3,4 @@ autoload
 plugged
 .init.vim-rplugin~
 spell
+lazy-lock.json

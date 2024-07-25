@@ -2,7 +2,7 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
-config.window_decorations = "NONE"
+config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 
 -- OS Specific Configuration
@@ -17,49 +17,14 @@ if is_darwin() then
   config.font = wezterm.font_with_fallback {
     'Menlo',
   }
-  config.font_size = 13.5
+  config.font_size = 13
 
-  -- Split / Pane navigation bindings similar to my tmux bindings.
-  local act = wezterm.action
-  config.keys = {
-    {
-      key = '\'',
-      mods = 'ALT',
-      action = act.SplitVertical { domain = 'CurrentPaneDomain' },
-    },
-    {
-      key = '\\',
-      mods = 'ALT',
-      action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
-    },
-    {
-      key = 'h',
-      mods = 'ALT',
-      action = act.ActivatePaneDirection 'Left',
-    },
-    {
-      key = 'l',
-      mods = 'ALT',
-      action = act.ActivatePaneDirection 'Right',
-    },
-    {
-      key = 'k',
-      mods = 'ALT',
-      action = act.ActivatePaneDirection 'Up',
-    },
-    {
-      key = 'j',
-      mods = 'ALT',
-      action = act.ActivatePaneDirection 'Down',
-    },
-  }
-  -- Mac's handle dark screen well through dimming.
-  config.color_scheme = "Catppuccin Mocha"
-
-  wezterm.on("gui-startup", function(cmd)
-      local tab, pane, window = mux.spawn_window(cmd or {})
-      window:gui_window():maximize()
+  wezterm.on("gui-startup", function()
+    local tab, pane, window = mux.spawn_window{}
+    window:mux_window():maximize()
+    window:gui_window():maximize()
   end)
+
 end
 
 if is_linux() then
@@ -100,11 +65,25 @@ if is_linux() then
   config.font = wezterm.font_with_fallback {
     "Hack"
   }
-  -- On my linux machine, its actually eco friendly to use it in light mode
-  -- but with low brightness.
-  config.color_scheme = "Catppuccin Latte"
   config.font_size = 11
 end
 
+function scheme_for_appearance(appearance)
+  if appearance:find("Dark") then
+    return "Catppuccin Mocha"
+  else
+    return "Catppuccin Latte"
+  end
+end
+
+wezterm.on("window-config-reloaded", function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  local appearance = window:get_appearance()
+  local scheme = scheme_for_appearance(appearance)
+  if overrides.color_scheme ~= scheme then
+    overrides.color_scheme = scheme
+    window:set_config_overrides(overrides)
+  end
+end)
 
 return config

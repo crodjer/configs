@@ -7,38 +7,19 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    Alacritty = { binding = "t" },
-    ["IntelliJ IDEA"] = { binding = "e" },
-    ["Google Chrome"]= { binding = "c" },
-    Obsidian = { binding = "n" },
-    Notes = { binding = "i" },
+    ["Google Chrome"] = { binding = "c" },
+    ["Notion Dev"] = { binding = "n", bundleId = "com.google.Chrome.app.obobbgiajhjgooapkdokmcmamagfngap" },
+    ["Notion Calendar"] = { binding = "0", autoLaunch = true  },
+    ["Visual Studio Code"] = { binding = "e", autoLaunch = true },
     ["zoom.us"] = { binding = "o" },
     Slack = { binding = "s" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     Bitwarden = { binding = "p" },
-    Signal = { binding = "g" },
-    WezTerm = { binding = "w" },
-    qutebrowser = { binding = "q" },
-    -- ["Firefox Developer Edition"] = { binding = "f" },
-    -- VLC = { binding = "v" },
-    -- Gmail = {
-    --     binding = "i",
-    --     bundleId = "com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm"
-    -- },
-    -- YouTube = {
-    --     binding = "y",
-    --     bundleId = "com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml"
-    -- },
-    --["Prime Video"] = {
-    --    binding = "=",
-    --    bundleId = "com.google.Chrome.app.igpjbmoihojghddcmflmgeeadjkanlij"
-    --},
-    Habitica = {
-        binding = "8",
-        bundleId = "com.google.Chrome.app.pdigihnmoiplkhocekidmdcmhchhdpjo"
-    },
-    Hammerspoon = { binding = '9' },
-    ["Yi Home"] = { binding = '0' },
+    Signal = { binding = "g", mayHide = true },
+    WezTerm = { binding = "t" },
+    Firefox = { binding = "f", mayHide = true  },
+    ["YouTube Music"] = { binding = "y" },
+    Hammerspoon = { binding = '9' }
 }
 
 function Render(object)
@@ -106,7 +87,8 @@ hs.alert.defaultStyle.textSize = 15
 hs.alert.defaultStyle.fadeInDuration = 0.1
 hs.alert.defaultStyle.fadeOutDuration = 0.1
 
-function ActivateApp(application, _)
+InvalidOpNotification = nil
+function ActivateApp(application, config)
     if not application then
         return
     end
@@ -114,6 +96,15 @@ function ActivateApp(application, _)
     local windows = application:allWindows()
     local focusedWindow = hs.window.focusedWindow()
     local window = windows[1]
+
+    if application:isHidden() and config.mayHide then
+        hs.alert.closeSpecific(InvalidOpNotification, 0)
+        InvalidOpNotification = hs.alert(" ! ", nil, nil, 1)
+        return
+    else
+        InvalidOpNotification = nil
+    end
+
 
     if focusedWindow and focusedWindow:application() == application then
         hs.eventtap.keyStroke({"cmd"}, "`")
@@ -245,7 +236,7 @@ hs.hotkey.bind(hsModifier, "k", function()
 end)
 
 hs.hotkey.bind(hsShift, "w", function ()
-    local task = hs.task.new("/Users/rjain3/.local/bin/stew.sh", function (_, stdout, _)
+    local task = hs.task.new("/Users/rohan/.local/bin/stew.sh", function (_, stdout, _)
         hs.eventtap.keyStrokes(stdout:gsub("[\n\r]", ""))
     end)
     task:start()
