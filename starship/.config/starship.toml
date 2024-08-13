@@ -1,0 +1,45 @@
+[aws]
+disabled = true
+
+[battery]
+full_symbol = '🔋'
+charging_symbol = '⚡️'
+discharging_symbol = '⇣ '
+
+[[battery.display]]
+threshold = 10
+style = 'bold red'
+
+[[battery.display]]
+threshold = 30
+style = 'bold yellow'
+
+[cmd_duration]
+min_time = 2000
+show_milliseconds = true
+
+[git_status]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[memory_usage]
+disabled = true
+show_percentage = true
+threshold = 80
+
+[rust]
+disabled = false
+
+[time]
+disabled = false
+
+[python]
+disabled = true
