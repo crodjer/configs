@@ -8,7 +8,7 @@ hs.window.animationDuration = 0
 -- List of apps and their screeen / binding, configuration
 local appList = {
     ["Google Chrome"] = { binding = "c" },
-    ["Notion Dev"] = { binding = "n", bundleId = "com.google.Chrome.app.obobbgiajhjgooapkdokmcmamagfngap" },
+    Obsidian = { binding = "n" },
     ["Notion Calendar"] = { binding = "0", autoLaunch = true  },
     ["Visual Studio Code"] = { binding = "e", autoLaunch = true },
     ["zoom.us"] = { binding = "o" },
