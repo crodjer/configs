@@ -190,28 +190,6 @@ if not package.loaded["lazy"] then
         vim.keymap.set('', '}', [[/^\d<CR>]], { noremap = true, silent = true, })
       end
     },
-
-    {
-      "nvim-neorg/neorg",
-      build = ":Neorg sync-parsers",
-      lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-      config = true,
-      opts = {
-        load = {
-          ["core.defaults"] = {},
-          ["core.concealer"] = {},
-          ["core.dirman"] = {
-            config = {
-              workspaces = {
-                notes = "~/documents/notes",
-              },
-              default_workspace="notes"
-            }
-          }
-        }
-      },
-      dependencies = { 'nvim-lua/plenary.nvim' },
-    }
   }, {})
 end
 
