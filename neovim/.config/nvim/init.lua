@@ -77,13 +77,27 @@ if not package.loaded["lazy"] then
             },
             sync_install = false,
             highlight = { enable = true },
-            indent = { enable = true, disable = { "ledger", "ruby" } },
+            indent = { enable = true, disable = { "ledger", "ruby", "typescript" } },
+            ignore_install = {},
+            modules = {},
+            auto_install = true,
           })
         end, 0)
+
+        vim.opt.foldmethod = "expr"
+        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+        vim.opt.foldenable = false
+        vim.opt.foldlevel = 2
       end
     }}},
 
-    { 'folke/which-key.nvim',  opts = {} },
+    {
+      'folke/which-key.nvim',
+      opts = {
+        preset = "modern",
+      },
+      dependencies = { 'echasnovski/mini.icons' },
+    },
 
     {
       -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -176,6 +190,28 @@ if not package.loaded["lazy"] then
         vim.keymap.set('', '}', [[/^\d<CR>]], { noremap = true, silent = true, })
       end
     },
+
+    {
+      "nvim-neorg/neorg",
+      build = ":Neorg sync-parsers",
+      lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+      config = true,
+      opts = {
+        load = {
+          ["core.defaults"] = {},
+          ["core.concealer"] = {},
+          ["core.dirman"] = {
+            config = {
+              workspaces = {
+                notes = "~/documents/notes",
+              },
+              default_workspace="notes"
+            }
+          }
+        }
+      },
+      dependencies = { 'nvim-lua/plenary.nvim' },
+    }
   }, {})
 end
 
@@ -247,7 +283,7 @@ local find_files = function()
 end
 
 local find_in_package = function()
-  interesting_files = {
+  local interesting_files = {
     'Cargo.toml',
     'Pipfile',
     'package.json',
@@ -256,7 +292,7 @@ local find_in_package = function()
   }
   local parent_dir = vim.fn.expand("%:p:h")
   for _, file in pairs(interesting_files) do
-    project_dir = vim.fs.dirname(vim.fs.find(file, {
+    local project_dir = vim.fs.dirname(vim.fs.find(file, {
       path = parent_dir,
       upward = true
     })[1])
@@ -345,20 +381,23 @@ for server, config in pairs(servers) do
 end
 
 -- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>$'] = { name = '[$]hell', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-}
--- register which-key VISUAL mode
--- required for visual <leader>hs (hunk stage) to work
-require('which-key').register({
-  ['<leader>'] = { name = 'VISUAL <leader>' },
-}, { mode = 'v' })
+local wk = require('which-key')
+wk.add {
+    { "<leader>$", group = "[$]hell" },
+    { "<leader>$_", hidden = true },
+    { "<leader>c", group = "[C]ode" },
+    { "<leader>c_", hidden = true },
+    { "<leader>d", group = "[D]ocument" },
+    { "<leader>d_", hidden = true },
+    { "<leader>g", group = "[G]it" },
+    { "<leader>g_", hidden = true },
+    { "<leader>s", group = "[S]earch" },
+    { "<leader>s_", hidden = true },
+    { "<leader>t", group = "[T]oggle" },
+    { "<leader>t_", hidden = true },
+    { "<leader>w", group = "[W]orkspace" },
+    { "<leader>w_", hidden = true },
+  }
 
 -- If custom overrides exist, load them.
 pcall(require, 'custom')
