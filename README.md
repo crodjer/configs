@@ -1,20 +1,20 @@
 # Configs
-Collection of my dotfiles and scripts, which allow me to get up and
-running on a new machine within a very short amount of time.
+Configuration files for the utilities I use. Managed by
+[stow](https://www.gnu.org/software/stow/).
 
-One way to set things up quickly:
+> I do have some repitition of configs in
+> [nixos-config](https://github.com/crodjer/nixos-config), but eventually I'll
+> be switching to one method.
 
-1. Clone this repo, creating the directory: `configs`.
-2. Source shell functions: `source configs/.shell_functions`
-3. Run: `make_home`. This will just be a dry run, listing the commands
-   to be executed.
-4. Run: `make_home -x` to actually do the symlinking of dotfiles in
-   the correct locations.
+## Setup
+1. Install `git`, `stow`.
+2. Clone this repo, creating the directory: `configs`.
+3. For each package / configuration that you want to install run `stow`. For
+   example for neovim:
+   ```
+   stow -t $HOME neovim
+   ```
 
-## Dotfiles
-
-Most of the configurations are present in the top level, as dotfiles.
-
-## Scripts
-The `scripts` directory consists of a set of scripts which I find
-useful on my Linux/Mac systems.
+## Mac
+For Mac, there is `Brewfile` which tracks all the packages needed. It is handy
+as a list of things I need for Linux too!
