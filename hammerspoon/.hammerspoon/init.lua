@@ -73,7 +73,7 @@ spoon.Seal:start()
 
 -- Switcher
 hs.window.animationDuration = 0
-Switcher = hs.window.switcher
+local Switcher = hs.window.switcher
 Switcher.ui.titleBackgroundColor = {0, 0, 0, 0}
 Switcher.ui.fontName = 'Verdana'
 Switcher.ui.textSize = 12
@@ -87,7 +87,7 @@ hs.alert.defaultStyle.textSize = 15
 hs.alert.defaultStyle.fadeInDuration = 0.1
 hs.alert.defaultStyle.fadeOutDuration = 0.1
 
-InvalidOpNotification = nil
+local InvalidOpNotification = nil
 function ActivateApp(application, config)
     if not application then
         return
@@ -109,7 +109,7 @@ function ActivateApp(application, config)
     if focusedWindow and focusedWindow:application() == application then
         hs.eventtap.keyStroke({"cmd"}, "`")
     elseif window then
-        if (window:isMinimized()) then
+        if window:isMinimized() then
             hs.application.launchOrFocus(application:name())
         else
             window:focus()
@@ -130,8 +130,8 @@ function LaunchApp(app, config)
     end
 end
 
-AppNotRunningAlertId = nil
-LastNotRunningApp = nil
+local AppNotRunningAlertId = nil
+local LastNotRunningApp = nil
 
 -- Attach app bindings
 for app, config in pairs(appList) do
@@ -195,7 +195,7 @@ hs.hotkey.bind(hsModifier, "l", function()
 end)
 
 function VsplitBreadth(screen)
-    if (screen.h > 3000) then
+    if screen.h > 3000 then
         return screen.h / 3
     else
         return screen.h / 2
@@ -203,7 +203,7 @@ function VsplitBreadth(screen)
 end
 
 function VsplitHeight(screen)
-    if (screen.h > 3000) then
+    if screen.h > 3000 then
         return screen.h / 3
     else
         return screen.h / 2
