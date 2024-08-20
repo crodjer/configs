@@ -4,6 +4,17 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
+-- Mapping function for easier normal mode leader mappings.
+local function nmap(binding, mapping, desc)
+  vim.keymap.set('n', binding, mapping, {
+    noremap = true, silent = true, desc = desc
+  })
+end
+
+local function nlmap(binding, mapping, desc)
+  nmap('<leader>' .. binding, mapping, desc)
+end
+
 if not package.loaded["lazy"] then
   -- [[ Install `lazy.nvim` plugin manager ]]
   --    https://github.com/folke/lazy.nvim
@@ -156,13 +167,22 @@ if not package.loaded["lazy"] then
         -- Configuration goes here.
         local g = vim.g
 
-        -- Change error signs
-        local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+
+        local signs = {
+          Error = '',
+          Warn = '',
+          Info = '',
+          Hint = '󰌵',
+        }
+
         for type, icon in pairs(signs) do
-          local hl = "LspDiagnosticsSign" .. type
-          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+          local hl = "DiagnosticSign" .. type
+          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
         end
+
         g.ale_ruby_rubocop_auto_correct_all = 1
+
+        nmap('K', '<plug>(ale_hover)', 'ALE - Symbol Information')
 
         vim.o.omnifunc = 'ale#completion#OmniFunc'
       end
@@ -238,13 +258,6 @@ vim.o.colorcolumn = "+1"
 -- [[ FZF Keymaps ]]
 local fzf = require('fzf-lua')
 
-local function map(binding, mapping, desc)
-  vim.keymap.set('n', '<leader>' .. binding, mapping, {
-    noremap = true, silent = true, desc = desc
-  })
-end
-
-
 local find_files = function()
   local git_dir = vim.fn.finddir('.git', vim.fn.getcwd() .. ";")
   if git_dir == '' then
@@ -279,13 +292,13 @@ local find_in_package = function()
   fzf.files({ cwd=parent_dir })
 end
 
-map('f', find_files, "Search [F]iles")
-map('e', find_in_package, "Search Files in packag[e].")
-map('b', fzf.buffers, "Search [B]uffers")
-map('h', fzf.oldfiles, "Search [H]istory")
-map('sl', fzf.live_grep, "[S]earch [L]ive Grep")
-map('sh', fzf.command_history, "[S]earch Command [H]istory")
-map('sc', fzf.commands, "[S]earch [C]ommands")
+nlmap('f', find_files, "Search [F]iles")
+nlmap('e', find_in_package, "Search Files in packag[e].")
+nlmap('b', fzf.buffers, "Search [B]uffers")
+nlmap('h', fzf.oldfiles, "Search [H]istory")
+nlmap('sl', fzf.live_grep, "[S]earch [L]ive Grep")
+nlmap('sh', fzf.command_history, "[S]earch Command [H]istory")
+nlmap('sc', fzf.commands, "[S]earch [C]ommands")
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -306,17 +319,6 @@ wk.add {
   }
 
 -- [[ Diagnostics ]]
-local signs = {
-  Error = '',
-  Warn = '',
-  Info = '',
-  Hint = '󰌵',
-}
-
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 
 -- If custom overrides exist, load them.
 pcall(require, 'custom')
