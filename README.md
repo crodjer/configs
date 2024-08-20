@@ -12,7 +12,7 @@ Configuration files for the utilities I use. Managed by
 3. For each package / configuration that you want to install run `stow`. For
    example for neovim:
    ```
-   stow -t $HOME neovim
+   stow --no-folding -t $HOME neovim
    ```
 
 ## Mac

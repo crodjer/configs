@@ -156,7 +156,15 @@ if not package.loaded["lazy"] then
         -- Configuration goes here.
         local g = vim.g
 
+        -- Change error signs
+        local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+        for type, icon in pairs(signs) do
+          local hl = "LspDiagnosticsSign" .. type
+          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+        end
         g.ale_ruby_rubocop_auto_correct_all = 1
+
+        vim.o.omnifunc = 'ale#completion#OmniFunc'
       end
     },
 
@@ -293,21 +301,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- document existing key chains
 local wk = require('which-key')
 wk.add {
-    { "<leader>$", group = "[$]hell" },
-    { "<leader>$_", hidden = true },
-    { "<leader>c", group = "[C]ode" },
-    { "<leader>c_", hidden = true },
-    { "<leader>d", group = "[D]ocument" },
-    { "<leader>d_", hidden = true },
-    { "<leader>g", group = "[G]it" },
-    { "<leader>g_", hidden = true },
     { "<leader>s", group = "[S]earch" },
     { "<leader>s_", hidden = true },
-    { "<leader>t", group = "[T]oggle" },
-    { "<leader>t_", hidden = true },
-    { "<leader>w", group = "[W]orkspace" },
-    { "<leader>w_", hidden = true },
   }
+
+-- [[ Diagnostics ]]
+local signs = {
+  Error = '',
+  Warn = '',
+  Info = '',
+  Hint = '󰌵',
+}
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 -- If custom overrides exist, load them.
 pcall(require, 'custom')
