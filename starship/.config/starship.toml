@@ -21,6 +21,9 @@ show_milliseconds = true
 [git_status]
 disabled = true
 
+[docker_context]
+disabled = true
+
 [kubernetes]
 disabled = true
 
@@ -42,4 +45,7 @@ disabled = false
 disabled = false
 
 [python]
+disabled = true
+
+[ruby]
 disabled = true
