@@ -1,0 +1,9 @@
+[selene]
+base = "lua51"
+name = "wezterm"
+
+[mux]
+any = true
+
+[act]
+any = true
