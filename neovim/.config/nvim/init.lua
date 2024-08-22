@@ -182,7 +182,7 @@ if not package.loaded["lazy"] then
 
         g.ale_ruby_rubocop_auto_correct_all = 1
 
-        nmap('K', '<plug>(ale_hover)', 'ALE - Symbol Information')
+        nmap('K', '<plug>(ale_detail)', 'ALE Detail')
 
         vim.o.omnifunc = 'ale#completion#OmniFunc'
       end
