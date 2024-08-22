@@ -7,12 +7,13 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    ["Google Chrome"] = { binding = "c" },
+    Arc = { binding = "a" },
+    -- ["Google Chrome"] = { binding = "c" },
     Obsidian = { binding = "n" },
-    ["Notion Calendar"] = { binding = "0", autoLaunch = true  },
+    -- ["Notion Calendar"] = { binding = "0" },
     ["Visual Studio Code"] = { binding = "e", autoLaunch = true },
-    ["zoom.us"] = { binding = "o" },
-    Slack = { binding = "s" },
+    -- ["zoom.us"] = { binding = "o" },
+    -- Slack = { binding = "s" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     Bitwarden = { binding = "p" },
     Signal = { binding = "g", mayHide = true },
@@ -21,7 +22,7 @@ local appList = {
     ["YouTube Music"] = { binding = "y" },
     Hammerspoon = { binding = '9' }
 }
-
+ 
 function Render(object)
     local rendered = ""
     if type(object) == 'table' then
