@@ -7,13 +7,11 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    Arc = { binding = "a" },
-    -- ["Google Chrome"] = { binding = "c" },
+    ["Google Chrome"] = { binding = "c" },
     Obsidian = { binding = "n" },
-    -- ["Notion Calendar"] = { binding = "0" },
     ["Visual Studio Code"] = { binding = "e", autoLaunch = true },
-    -- ["zoom.us"] = { binding = "o" },
-    -- Slack = { binding = "s" },
+    ["zoom.us"] = { binding = "o" },
+    Slack = { binding = "s" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     Bitwarden = { binding = "p" },
     Signal = { binding = "g", mayHide = true },
