@@ -216,6 +216,11 @@ fi
 # Direnv
 test -n "$(command -v direnv)" && eval "$(direnv hook zsh)"
 
+# Rust
+if [ -e "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
+
 debug_shell ZSH: Done
 
 # Exit with success
