@@ -8,8 +8,10 @@ hs.window.animationDuration = 0
 -- List of apps and their screeen / binding, configuration
 local appList = {
     ["Google Chrome"] = { binding = "c" },
-    Obsidian = { binding = "n" },
-    ["Visual Studio Code"] = { binding = "e", autoLaunch = true },
+    ["Notion Dev"] = { binding = "n" },
+    -- Obsidian = { binding = "n" },
+    -- ["Visual Studio Code"] = { binding = "e", autoLaunch = true },
+    Cursor = { binding = "e", autoLaunch = true },
     ["zoom.us"] = { binding = "o" },
     Slack = { binding = "s" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
