@@ -253,7 +253,12 @@ vim.o.termguicolors = true
 vim.o.textwidth = 80
 vim.o.colorcolumn = "+1"
 
--- [[ Basic Keymaps ]]
+-- [[ Globals ]]
+vim.g.netrw_banner = 0 -- Hide banner
+vim.g.netrw_altv = 1
+vim.g.netrw_liststyle = 3 -- Tree-style view
+vim.g.netrw_list_hide = ([[,\(^\|\s\s\)\zs\.\S\+]])
+
 
 -- [[ FZF Keymaps ]]
 local fzf = require('fzf-lua')
