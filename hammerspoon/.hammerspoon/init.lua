@@ -8,7 +8,7 @@ hs.window.animationDuration = 0
 -- List of apps and their screeen / binding, configuration
 local appList = {
     ["Google Chrome"] = { binding = "c" },
-    ["Notion Dev"] = { binding = "n" },
+    -- ["Notion Dev"] = { binding = "n" },
     -- Obsidian = { binding = "n" },
     -- ["Visual Studio Code"] = { binding = "e", autoLaunch = true },
     Cursor = { binding = "e", autoLaunch = true },
@@ -159,6 +159,9 @@ end
 
 hs.hotkey.bind(hsModifier, "m", function()
     local win = hs.window.focusedWindow()
+    if not win then
+        return
+    end
     local f = win:frame()
     local screen = win:screen():frame()
 
@@ -177,6 +180,9 @@ end)
 
 hs.hotkey.bind(hsModifier, "h", function()
     local win = hs.window.focusedWindow()
+    if not win then
+        return
+    end
     local f = win:frame()
     local screen = win:screen():frame()
 
@@ -187,6 +193,9 @@ end)
 
 hs.hotkey.bind(hsModifier, "l", function()
     local win = hs.window.focusedWindow()
+    if not win then
+        return
+    end
     local f = win:frame()
     local screen = win:screen():frame()
 
@@ -213,6 +222,9 @@ end
 
 hs.hotkey.bind(hsModifier, "j", function()
     local win = hs.window.focusedWindow()
+    if not win then
+        return
+    end
     local f = win:frame()
     local screen = win:screen():frame()
 
@@ -226,6 +238,9 @@ end)
 
 hs.hotkey.bind(hsModifier, "k", function()
     local win = hs.window.focusedWindow()
+    if not win then
+        return
+    end
     local f = win:frame()
     local screen = win:screen():frame()
     local vh = VsplitHeight(screen)
