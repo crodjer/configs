@@ -155,7 +155,7 @@ if not package.loaded["lazy"] then
       ft = 'yaml',
       config = function()
         vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-          pattern = { "*/plays/*.yaml*" },
+          pattern = { "*/plays/*.yaml" },
           command = "set filetype=yaml.ansible",
         })
       end
