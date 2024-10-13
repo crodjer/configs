@@ -83,6 +83,10 @@ debug_shell ZSH: Aliases
 #-------------------------#
 alias re='exec zsh'
 
+if [ -x "$(command -v fdfind)" ]; then
+    alias fd="fdfind"
+fi
+
 if [ -n "$MACOS" ]; then
     alias ls='ls -G'
 else
