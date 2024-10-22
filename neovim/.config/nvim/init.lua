@@ -45,7 +45,29 @@ if not package.loaded["lazy"] then
 
     -- Detect tabstop and shiftwidth automatically
     'tpope/vim-sleuth',
+    {
+      -- LSP Configuration & Plugins
+      'neovim/nvim-lspconfig',
+      dependencies = {
+        -- Useful status updates for LSP
+        { 'j-hui/fidget.nvim', opts = {} },
 
+        -- Additional lua configuration, makes nvim stuff amazing!
+        {
+          'folke/neodev.nvim',
+          filetype = 'lua',
+          opts = {
+            override = function(root_dir, library)
+              -- Since I symlink my init.lua, neodev doesn't detect this right.
+              if root_dir:sub(- #"nvim") == "nvim" then
+                library.enabled = true
+                library.plugins = true
+              end
+            end
+          },
+        },
+      },
+    },
     { 'nvim-treesitter', {{
       "nvim-treesitter/nvim-treesitter",
       build = ":TSUpdate",
@@ -162,30 +184,13 @@ if not package.loaded["lazy"] then
     },
 
     {
-      'dense-analysis/ale',
-      config = function()
-        -- Configuration goes here.
-        local g = vim.g
-
-
-        local signs = {
-          Error = '',
-          Warn = '',
-          Info = '',
-          Hint = '󰌵',
+      "pmizio/typescript-tools.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+      opts = {
+        settings = {
+          tsserver_max_memory = 20480
         }
-
-        for type, icon in pairs(signs) do
-          local hl = "DiagnosticSign" .. type
-          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-        end
-
-        g.ale_ruby_rubocop_auto_correct_all = 1
-
-        nmap('K', '<plug>(ale_detail)', 'ALE Detail')
-
-        vim.o.omnifunc = 'ale#completion#OmniFunc'
-      end
+      },
     },
 
     {
@@ -305,6 +310,12 @@ nlmap('sl', fzf.live_grep, "[S]earch [L]ive Grep")
 nlmap('sh', fzf.command_history, "[S]earch Command [H]istory")
 nlmap('sc', fzf.commands, "[S]earch [C]ommands")
 
+--- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { desc = 'Op en diagnostics list' })
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -316,6 +327,45 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- [[ Configure LSP ]]
+--  This function gets run when an LSP connects to a particular buffer.
+local on_attach = function(_, bufnr)
+  nmap('<leader>cr', vim.lsp.buf.rename, 'LSP: [C]ode [R]ename')
+  nmap('<leader>ca', vim.lsp.buf.code_action, 'LSP: [C]ode [A]ction')
+
+  -- See `:help K` for why this keymap
+  nmap('K', vim.lsp.buf.hover, 'LSP: Hover Documentation')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'LSP: Signature Documentation')
+
+  -- Lesser used LSP functionality
+  nmap('gD', vim.lsp.buf.declaration, 'LSP: [G]oto [D]eclaration')
+  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, 'LSP: [W]orkspace [A]dd Folder')
+  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, 'LSP: [W]orkspace [R]emove Folder')
+  nmap('<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, 'LSP: [W]orkspace [L]ist Folders')
+
+  -- Create a command `:Format` local to the LSP buffer
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.lsp.buf.format()
+  end, { desc = 'Format current buffer with LSP' })
+end
+
+local lspconfig = require('lspconfig');
+local servers = {
+  ansiblels = {},
+  -- lua_ls = {},
+  pyright = {},
+  -- rubocop = {},
+  rust_analyzer = {},
+  solargraph = {},
+}
+
+for server, config in pairs(servers) do
+  config.on_attach = on_attach
+  lspconfig[server].setup(config)
+end
+
 -- document existing key chains
 local wk = require('which-key')
 wk.add {
@@ -323,7 +373,8 @@ wk.add {
     { "<leader>s_", hidden = true },
   }
 
--- [[ Diagnostics ]]
+-- [[ Rust ]]
+vim.g.rust_recommended_style = 0
 
 -- If custom overrides exist, load them.
 pcall(require, 'custom')
