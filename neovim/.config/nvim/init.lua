@@ -203,6 +203,7 @@ if not package.loaded["lazy"] then
       end,
       config = function()
         vim.keymap.set('i', '<Tab>', [[<C-R>=ledger#autocomplete_and_align()<CR>]], { noremap = true, silent = true, })
+        vim.keymap.set('i', '<Esc>', [[<Esc>:LedgerAlign<CR>]], { noremap = true, silent = true, })
         vim.keymap.set('n', '<Tab>', [[:LedgerAlign<CR>]], { noremap = true, silent = true, })
         vim.keymap.set('v', '<Tab>', [[:LedgerAlign<CR>]], { noremap = true, silent = true, })
         vim.keymap.set('', '{', [[?^\d<CR>]], { noremap = true, silent = true, })
@@ -249,7 +250,7 @@ vim.o.updatetime = 100
 vim.o.timeoutlen = 200
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menuone,preview'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
