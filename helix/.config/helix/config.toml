@@ -3,6 +3,10 @@ theme = "base16_transparent"
 [editor]
 line-number = "relative"
 
+[editor.indent-guides]
+render = true
+skip-levels = 1
+
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
