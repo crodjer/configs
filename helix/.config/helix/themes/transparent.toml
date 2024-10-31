@@ -4,7 +4,7 @@
 "ui.background" = { fg = "white"}
 "ui.background.separator" = { fg = "black" }
 "ui.text" = { fg = "gray" }
-"ui.text.focus" = { fg = "white" }
+"ui.text.focus" = { fg = "light-gray", bg = "black" }
 "ui.menu" = { fg = "black", bg = "white" }
 "ui.menu.selected" = { modifiers = ["reversed"] }
 "ui.menu.scroll" = { fg = "gray" }
