@@ -49,6 +49,9 @@ if not package.loaded["lazy"] then
       -- LSP Configuration & Plugins
       'neovim/nvim-lspconfig',
       dependencies = {
+        { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+        'williamboman/mason-lspconfig.nvim',
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
         -- Useful status updates for LSP
         { 'j-hui/fidget.nvim', opts = {} },
 
@@ -236,14 +239,7 @@ if not package.loaded["lazy"] then
 
     {
       'pearofducks/ansible-vim',
-      build = 'UltiSnips/generate.sh',
-      ft = 'yaml',
-      config = function()
-        vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-          pattern = { "*/plays/*.yaml" },
-          command = "set filetype=yaml.ansible",
-        })
-      end
+      ft = { 'yaml.ansible' },
     },
 
     {
@@ -355,7 +351,6 @@ local find_in_package = function()
       path = parent_dir,
       upward = true
     })[1])
-    print(project_dir)
 
     if project_dir then
       fzf.files({ cwd=project_dir })
@@ -415,19 +410,18 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
-local lspconfig = require('lspconfig');
 local servers = {
   ansiblels = {},
-  eslint = {},
-  -- lua_ls = {},
-  pyright = {},
-  -- rubocop = {},
+  lua_ls = {},
   rust_analyzer = {},
-  solargraph = {},
 }
 
+local lspconfig = require('lspconfig')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 for server, config in pairs(servers) do
   config.on_attach = on_attach
+  config.on_attach = on_attach
+  config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
   lspconfig[server].setup(config)
 end
 
@@ -440,6 +434,13 @@ wk.add {
 
 -- [[ Rust ]]
 vim.g.rust_recommended_style = 0
+
+-- [[ Ansible ]]
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*/plays/*.yaml", "*/plays/*.yml" },
+  command = "set filetype=yaml.ansible",
+})
+
 
 -- If custom overrides exist, load them.
 pcall(require, 'custom')
