@@ -226,6 +226,9 @@ if [ -e "$HOME/.cargo/env" ]; then
     source "$HOME/.cargo/env"
 fi
 
+# Go
+export GOPATH=~/.local/share/go
+
 debug_shell ZSH: Done
 
 # Exit with success
