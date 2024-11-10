@@ -1,7 +1,9 @@
 theme = "absolved"
 
 [editor]
+color-modes = true
 line-number = "relative"
+rulers = [80, 100]
 
 [editor.indent-guides]
 render = true
@@ -16,3 +18,16 @@ select = "underline"
 hidden = false
 ignore = true
 git-ignore = true
+
+[editor.whitespace.render]
+tab = "all"
+nbsp = "all"
+nnbsp = "all"
+newline = "none"
+
+[keys.normal]
+"#" = [
+  "move_next_word_end",
+  "move_prev_word_start",
+  "search_selection",
+]
