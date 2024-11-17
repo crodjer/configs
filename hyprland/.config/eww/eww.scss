@@ -1,0 +1,128 @@
+* {
+  all: unset; // Unsets everything so you can style everything from scratch
+}
+
+/*
+*
+* Catppuccin Latte palette
+* Maintainer: rubyowo
+*
+*/
+
+$base: #eff1f5;
+$mantle: #e6e9ef;
+$crust: #dce0e8;
+
+$text: #4c4f69;
+$subtext0: #6c6f85;
+$subtext1: #5c5f77;
+
+$surface0: #ccd0da;
+$surface1: #bcc0cc;
+$surface2: #acb0be;
+
+$overlay0: #9ca0b0;
+$overlay1: #8c8fa1;
+$overlay2: #7c7f93;
+
+$blue: #1e66f5;
+$lavender: #7287fd;
+$sapphire: #209fb5;
+$sky: #04a5e5;
+$teal: #179299;
+$green: #40a02b;
+$yellow: #df8e1d;
+$peach: #fe640b;
+$maroon: #e64553;
+$red: #d20f39;
+$mauve: #8839ef;
+$pink: #ea76cb;
+$flamingo: #dd7878;
+$rosewater: #dc8a78;
+
+$padding: 5px 10px;
+
+// Global Styles
+.bar {
+  background: $base;
+  color: $text;
+  border-radius: 3px;
+  font-size: small;
+}
+
+// Styles on classes (see eww.yuck for more information)
+
+.sidestuff {
+  padding-left: 10px;
+}
+
+.sidestuff slider {
+  all: unset;
+  color: #ffd5cd;
+}
+
+.metric-tooltip {
+  color: $crust;
+  background: $text;
+  padding: $padding;
+  border-radius: 3px;
+}
+
+.metric scale trough highlight {
+  all: unset;
+  background-color: #D35D6E;
+  color: #000000;
+  border-radius: 10px;
+}
+
+.metric scale trough {
+  all: unset;
+  background-color: #4e4e4e;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.metric .label{
+  font-size: large;
+}
+
+.workspaces {
+  background: $base;
+}
+
+.workspaces label {
+  padding: $padding;
+}
+
+.workspaces button:hover {
+  background: $overlay1;
+  color: $base;
+}
+
+.workspaces .empty {
+  color: $surface0;
+}
+
+.workspaces .current {
+  background: $overlay1;
+  color: $base;
+}
+
+.workspaces .urgent {
+  background: $rosewater;
+  color: $text;
+}
+
+.window-name {
+  // border-left: 3px solid $crust;
+  margin-left: 0;
+  padding: $padding;
+}
+
+.sidestuff .systray {
+  background: $overlay1;
+  padding: $padding;
+}

@@ -1,0 +1,129 @@
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
+(deflisten urgent_workspace :initial "..." "bash ~/.config/eww/scripts/get-urgent-workspaces")
+
+(deflisten window :initial "..." "sh ~/.config/eww/scripts/get-window-title")
+(defwidget window_w []
+  (box
+    :class "window-name"
+    :halign "left"
+    (label :text "${window}")
+  ))
+
+(defwidget window-manager []
+  (box
+    :class "window-manager"
+    :orientation "h"
+    :space-evenly false
+    :halign "start"
+    (box
+      :class "workspaces"
+      :orientation "h"
+      :space-evenly true
+      :halign "start"
+      :spacing 0
+      (label :text "${current_workspace}${urgent_workspace}" :visible false)
+      (for workspace in workspaces
+        (button
+          :onclick "hyprctl dispatch workspace ${workspace.id}"
+          :class "${workspace.windows > 0 ? "occupied" : "empty"}"
+          (label :text "${workspace.id}"
+            :class "${workspace.id == current_workspace ? "current" : ""}  ${workspace.id == urgent_workspace ? "urgent" : ""}" )
+        )
+      ))
+    (window_w)
+  )
+  
+)
+
+(defpoll volume :interval "1s"
+  "wpctl get-volume @DEFAULT_SINK@ | grep -v MUTED | cut -d ' ' -f 2")
+
+(defpoll time :interval "10s"
+  "date '+%a, %e %b %Y, %H:%M'")
+
+(deflisten ping :initial ""
+  `ping-monitor`)
+
+(defwidget metric [label value onchange ?onclick ?min ?max ?tooltip]
+  (tooltip 
+    (label
+      :text {tooltip ?: "${value} %"}
+      :class "metric-tooltip")
+    (box :orientation "h"
+      :class "metric"
+      :space-evenly false
+      (button
+        :onclick onclick
+        :class "label" label)
+      (scale :min {min ?:  0}
+        :max {max ?: 101}
+        :active {onchange != ""}
+        :value value
+        :onchange onchange))
+  ))
+
+(defwidget sidestuff []
+  (box
+    :class "sidestuff"
+    :orientation "h"
+    :spacing 5
+    :space-evenly false
+    :halign "end"
+    (metric :label " "
+            :value {jq(EWW_TEMPS, "map(.) | max | tonumber")}
+            :onchange ""
+            :tooltip "${jq(EWW_TEMPS, "map(.) | max | tonumber")} °C"
+            :min 30
+            :max 95)
+    (metric :label " "
+            :value {jq(EWW_CPU.cores, "map(.usage) | max")}
+            :tooltip "${round(jq(EWW_CPU.cores, "map(.freq) | max")/1000, 1)} GHz"
+            :onchange "")
+    (metric :label "󰲝 "
+            :value ping
+            :tooltip "Ping: ${ping} ms"
+            :onchange "")
+    (metric :label " "
+            :value {round(EWW_RAM.used_mem_perc, 1)}
+            :onchange "")
+    (metric :label " "
+            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+            :onchange "")
+    (metric :label {
+              jq(EWW_BATTERY, '[.[] | select (. | type == "object") | select (.status == "Charging")] | length') >= 1 ? "󰢟" :
+              jq(EWW_BATTERY, '[.[] | select (. | type == "object") | select (.status == "Discharging")] | length') >= 1 ? "󰁾" :
+              "󰁹"
+            }
+            :value {jq(EWW_BATTERY, '[.[] | select (. | type == "object")] | map(.capacity) | max')}
+            :tooltip {jq(EWW_BATTERY, '.[] | select (. | type == "object")')}
+            ; :tooltip {jq(EWW_BATTERY, '[.[] | select (. | type == "object")] | map((.capacity | tostring) + "%, " +  (.status)) | join("\n")')}
+            :onchange "")
+    (metric
+      :label { volume == "" ? " ":" "}
+      :value {volume * 100}
+      :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
+      :onchange "wpctl set-volume @DEFAULT_SINK@ {}%")
+    time
+    (systray
+      :class "systray"
+      :spacing 10
+      :space-evenly true
+      :icon-size 18)))
+
+(defwidget bar []
+  (centerbox :orientation "h"
+    (window-manager)
+    ""
+    (sidestuff)))
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  (bar))
