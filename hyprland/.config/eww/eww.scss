@@ -2,46 +2,35 @@
   all: unset; // Unsets everything so you can style everything from scratch
 }
 
-/*
-*
-* Catppuccin Latte palette
-* Maintainer: rubyowo
-*
-*/
-
-$base: #eff1f5;
-$mantle: #e6e9ef;
-$crust: #dce0e8;
-
-$text: #4c4f69;
-$subtext0: #6c6f85;
-$subtext1: #5c5f77;
-
-$surface0: #ccd0da;
-$surface1: #bcc0cc;
-$surface2: #acb0be;
-
-$overlay0: #9ca0b0;
-$overlay1: #8c8fa1;
-$overlay2: #7c7f93;
-
-$blue: #1e66f5;
-$lavender: #7287fd;
-$sapphire: #209fb5;
-$sky: #04a5e5;
-$teal: #179299;
-$green: #40a02b;
-$yellow: #df8e1d;
-$peach: #fe640b;
-$maroon: #e64553;
-$red: #d20f39;
-$mauve: #8839ef;
-$pink: #ea76cb;
-$flamingo: #dd7878;
-$rosewater: #dc8a78;
+$rosewater: #f2d5cf;
+$flamingo: #eebebe;
+$pink: #f4b8e4;
+$mauve: #ca9ee6;
+$red: #e78284;
+$maroon: #ea999c;
+$peach: #ef9f76;
+$yellow: #e5c890;
+$green: #a6d189;
+$teal: #81c8be;
+$sky: #99d1db;
+$sapphire: #85c1dc;
+$blue: #8caaee;
+$lavender: #babbf1;
+$text: #c6d0f5;
+$subtext1: #b5bfe2;
+$subtext0: #a5adce;
+$overlay2: #949cbb;
+$overlay1: #838ba7;
+$overlay0: #737994;
+$surface2: #626880;
+$surface1: #51576d;
+$surface0: #414559;
+$base: #303446;
+$mantle: #292c3c;
+$crust: #232634;
 
 $padding: 5px 10px;
-$border-right: 0.25px solid $overlay1;
+$border-right: 0.5px solid $overlay1;
 
 // Global Styles
 .bar {
@@ -112,7 +101,7 @@ $border-right: 0.25px solid $overlay1;
 }
 
 .workspaces button:hover {
-  background: $overlay1;
+  background: $lavender;
   color: $base;
 }
 
@@ -121,12 +110,16 @@ $border-right: 0.25px solid $overlay1;
 }
 
 .workspaces .empty {
-  color: $surface0;
+  // Blend the empty workspaces in the UI, to not call attention.
+  color: $surface1;
+}
+
+.workspaces .occupied {
 }
 
 .workspaces .current {
-  background: $overlay1;
-  color: $yellow;
+  background: $lavender;
+  color: $base;
 }
 
 .workspaces .urgent {
@@ -141,6 +134,5 @@ $border-right: 0.25px solid $overlay1;
 }
 
 .sidestuff .systray {
-  background: $overlay1;
   padding: $padding;
 }
