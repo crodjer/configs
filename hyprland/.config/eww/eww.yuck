@@ -43,7 +43,7 @@
   "light -G")
 
 (defpoll time :interval "10s"
-  "date '+%a, %e %b %Y, %H:%M'")
+  "date '+%a, %e %b, %H:%M'")
 
 (deflisten ping :initial ""
   `ping-monitor`)
