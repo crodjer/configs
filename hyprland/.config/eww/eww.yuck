@@ -39,6 +39,9 @@
 (defpoll volume :interval "1s"
   "wpctl get-volume @DEFAULT_SINK@ | grep -v MUTED | cut -d ' ' -f 2")
 
+(defpoll brightness :interval "1s"
+  "light -G")
+
 (defpoll time :interval "10s"
   "date '+%a, %e %b %Y, %H:%M'")
 
@@ -116,6 +119,12 @@
             :max 100
             ; :tooltip {jq(EWW_BATTERY, '[.[] | select (. | type == "object")] | map((.capacity | tostring) + "%, " +  (.status)) | join("\n")')}
             :onchange "")
+    (metric :label "󰃞 "
+            :value brightness
+            :min 0
+            :max 101
+            :highlight true
+            :onchange "light -S {}%")
     (metric :label { volume == "" ? " ":" "}
             :value {volume * 100}
             :min 0
