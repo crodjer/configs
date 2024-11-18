@@ -41,12 +41,12 @@ $flamingo: #dd7878;
 $rosewater: #dc8a78;
 
 $padding: 5px 10px;
+$border-right: 0.25px solid $overlay1;
 
 // Global Styles
 .bar {
   background: $base;
   color: $text;
-  border-radius: 3px;
   font-size: small;
 }
 
@@ -68,21 +68,35 @@ $padding: 5px 10px;
   border-radius: 3px;
 }
 
+.metric {
+  border-right: $border-right;
+  padding: 0 5px;
+}
+
 .metric scale trough highlight {
   all: unset;
-  background-color: #D35D6E;
+  background-color: $green;
   color: #000000;
   border-radius: 10px;
 }
 
+.metric.warn scale trough highlight {
+  background: $yellow;
+}
+
+.metric.critical scale trough highlight {
+  background: $red;
+}
+
+
 .metric scale trough {
   all: unset;
-  background-color: #4e4e4e;
+  background-color: $mantle;
+  border: 1px solid $surface2;
   border-radius: 50px;
-  min-height: 3px;
+  min-height: 4px;
   min-width: 50px;
-  margin-left: 10px;
-  margin-right: 20px;
+  margin-left: 5px;
 }
 
 .metric .label{
@@ -102,13 +116,17 @@ $padding: 5px 10px;
   color: $base;
 }
 
+.workspace {
+  border-right: $border-right;
+}
+
 .workspaces .empty {
   color: $surface0;
 }
 
 .workspaces .current {
   background: $overlay1;
-  color: $base;
+  color: $yellow;
 }
 
 .workspaces .urgent {

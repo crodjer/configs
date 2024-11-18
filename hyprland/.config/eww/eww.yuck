@@ -26,7 +26,7 @@
       (for workspace in workspaces
         (button
           :onclick "hyprctl dispatch workspace ${workspace.id}"
-          :class "${workspace.windows > 0 ? "occupied" : "empty"}"
+          :class "workspace ${workspace.windows > 0 ? "occupied" : "empty"}"
           (label :text "${workspace.id}"
             :class "${workspace.id == current_workspace ? "current" : ""}  ${workspace.id == urgent_workspace ? "urgent" : ""}" )
         )
@@ -45,19 +45,21 @@
 (deflisten ping :initial ""
   `ping-monitor`)
 
-(defwidget metric [label value onchange ?onclick ?min ?max ?tooltip]
+(defwidget metric [label value onchange min max ?onclick ?tooltip ?highlight]
   (tooltip 
     (label
       :text {tooltip ?: "${value} %"}
       :class "metric-tooltip")
-    (box :orientation "h"
-      :class "metric"
+    (box
+      :orientation "h"
+      :class "metric ${highlight?:false ? (value > 3 * (max + min) / 4 ? 'critical' : (value  > (min + max) / 2 ? 'warn' : '')) : ''}"
       :space-evenly false
       (button
         :onclick onclick
         :class "label" label)
-      (scale :min {min ?:  0}
-        :max {max ?: 101}
+      (scale
+        :min min
+        :max max
         :active {onchange != ""}
         :value value
         :onchange onchange))
@@ -70,25 +72,38 @@
     :spacing 5
     :space-evenly false
     :halign "end"
-    (metric :label " "
+    (metric :label ""
             :value {jq(EWW_TEMPS, "map(.) | max | tonumber")}
             :onchange ""
             :tooltip "${jq(EWW_TEMPS, "map(.) | max | tonumber")} °C"
+            :highlight true
             :min 30
             :max 95)
     (metric :label " "
             :value {jq(EWW_CPU.cores, "map(.usage) | max")}
             :tooltip "${round(jq(EWW_CPU.cores, "map(.freq) | max")/1000, 1)} GHz"
+            :highlight true
+            :min 0
+            :max 100
             :onchange "")
     (metric :label "󰲝 "
             :value ping
             :tooltip "Ping: ${ping} ms"
+            :highlight true
+            :min 10
+            :max 200
             :onchange "")
     (metric :label " "
             :value {round(EWW_RAM.used_mem_perc, 1)}
+            :highlight true
+            :min 0
+            :max 100
             :onchange "")
     (metric :label " "
             :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+            :highlight true
+            :min 0
+            :max 100
             :onchange "")
     (metric :label {
               jq(EWW_BATTERY, '[.[] | select (. | type == "object") | select (.status == "Charging")] | length') >= 1 ? "󰢟" :
@@ -97,19 +112,23 @@
             }
             :value {jq(EWW_BATTERY, '[.[] | select (. | type == "object")] | map(.capacity) | max')}
             :tooltip {jq(EWW_BATTERY, '.[] | select (. | type == "object")')}
+            :min 0
+            :max 100
             ; :tooltip {jq(EWW_BATTERY, '[.[] | select (. | type == "object")] | map((.capacity | tostring) + "%, " +  (.status)) | join("\n")')}
             :onchange "")
-    (metric
-      :label { volume == "" ? " ":" "}
-      :value {volume * 100}
-      :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
-      :onchange "wpctl set-volume @DEFAULT_SINK@ {}%")
+    (metric :label { volume == "" ? " ":" "}
+            :value {volume * 100}
+            :min 0
+            :max 101
+            :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
+            :onchange "wpctl set-volume @DEFAULT_SINK@ {}%")
     time
     (systray
       :class "systray"
       :spacing 10
       :space-evenly true
       :icon-size 18)))
+    
 
 (defwidget bar []
   (centerbox :orientation "h"
