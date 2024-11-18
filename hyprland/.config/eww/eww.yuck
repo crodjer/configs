@@ -7,7 +7,7 @@
   (box
     :class "window-name"
     :halign "left"
-    (label :text "${window}")
+    (label :text {strlength(window) > 100? "${substring(window, 0, 100)}..." : window})
   ))
 
 (defwidget window-manager []
@@ -48,7 +48,7 @@
 (deflisten ping :initial ""
   `ping-monitor`)
 
-(defwidget metric [label value onchange min max ?onclick ?tooltip ?highlight]
+(defwidget metric [label value onchange min max ?onclick ?tooltip ?highlight ?bar]
   (tooltip 
     (label
       :text {tooltip ?: "${value} %"}
@@ -61,12 +61,12 @@
         :onclick onclick
         :class "label" label)
       (scale
-        :min min
-        :max max
-        :active {onchange != ""}
-        :value value
-        :onchange onchange))
-  ))
+          :visible {bar?:false}
+          :min min
+          :max max
+          :active {onchange != ""}
+          :value value :onchange onchange)
+    )))
 
 (defwidget sidestuff []
   (box
@@ -115,6 +115,7 @@
             }
             :value {jq(EWW_BATTERY, '[.[] | select (. | type == "object")] | map(.capacity) | max')}
             :tooltip {jq(EWW_BATTERY, '.[] | select (. | type == "object")')}
+            :bar true
             :min 0
             :max 100
             ; :tooltip {jq(EWW_BATTERY, '[.[] | select (. | type == "object")] | map((.capacity | tostring) + "%, " +  (.status)) | join("\n")')}
@@ -123,12 +124,14 @@
             :value brightness
             :min 0
             :max 101
+            :bar true
             :highlight true
             :onchange "light -S {}%")
     (metric :label { volume == "" ? " ":" "}
             :value {volume * 100}
             :min 0
             :max 101
+            :bar true
             :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
             :onchange "wpctl set-volume @DEFAULT_SINK@ {}%")
     time
