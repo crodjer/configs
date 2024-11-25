@@ -1,5 +1,5 @@
 -------------------------------------------------------
---- Base Config
+
 -------------------------------------------------------
 
 
@@ -135,7 +135,7 @@ mini('bracketed')
 local find_files = function()
   local git_dir = vim.fn.finddir('.git', vim.fn.getcwd() .. ";")
   if git_dir == '' then
-    MiniPick.builtin.files()
+    MiniExtra.pickers.explorer()
   else
     MiniExtra.pickers.git_files()
   end
