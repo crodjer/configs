@@ -10,7 +10,6 @@ local appList = {
     ["Google Chrome"] = { binding = "c" },
     ["Notion Dev"] = { binding = "n" },
     -- Obsidian = { binding = "n" },
-    -- ["Visual Studio Code"] = { binding = "e", autoLaunch = true },
     -- Zed = { binding = "e", autoLaunch = true },
     Cursor = { binding = "e", autoLaunch = true },
     ["zoom.us"] = { binding = "o" },
@@ -23,7 +22,7 @@ local appList = {
     ["YouTube Music"] = { binding = "y" },
     Hammerspoon = { binding = '9' }
 }
- 
+
 function Render(object)
     local rendered = ""
     if type(object) == 'table' then
@@ -258,52 +257,3 @@ hs.hotkey.bind(hsShift, "w", function ()
     end)
     task:start()
 end)
-
--- Mic Control
--- talkingAlert = nil
--- unMuteAlertDuration = 600
--- 
--- function unMuteAlert()
---     hs.alert.closeSpecific(talkingAlert, 0)
---     talkingAlert = hs.alert("🗣️", {
---         textSize = 32,
---         fillColor = { white = 0.8, alpha = 0.6 },
---         fadeInDuration = 0,
---         fadeOutDuration = 0
---     }, unMuteAlertDuration)
--- end
-
--- function unMuteMic()
---     unMuteAlert()
---     hs.timer.doUntil(function ()
---          return hs.audiodevice.defaultInputDevice():muted()
---     end, unMuteAlert, unMuteAlertDuration / 2)
--- 
---     for _, device in pairs(hs.audiodevice.allInputDevices()) do
---         device:setMuted(false)
---     end
--- end
--- function muteMic()
---     hs.alert.closeSpecific(talkingAlert, 0)
---     for _, device in pairs(hs.audiodevice.allInputDevices()) do
---         device:setMuted(true)
---     end
--- end
--- 
--- -- Push to talk!
--- hs.hotkey.bind({'ctrl'}, 'space', unMuteMic, muteMic)
--- -- Toggle the Mic!
--- -- `Ctrl-Enter` for PTT / Mute and `Ctrl+Alt+Enter` for just
--- -- unmute does work. But one of my mice doesn't support tapping
--- -- into key up/down events and hence can't PTT.
--- -- So, Toggle with `Ctrl+Alt+Enter` allows me to use that Mouse
--- -- as a mic control as well.
--- hs.hotkey.bind(hsModifier, 'space', function ()
---     if(hs.audiodevice.defaultInputDevice():muted()) then
---         unMuteMic()
---     else
---         muteMic()
---     end
--- end)
--- Mute by default!
--- muteMic()
