@@ -65,11 +65,9 @@ if not vim.loop.fs_stat(mini_path) then
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
-local Mini = {}
 local function mini(plugin_name, config)
   local plugin = require('mini.' .. plugin_name)
   plugin.setup(config)
-  Mini[plugin_name] = plugin
   return plugin
 end
 
@@ -93,8 +91,6 @@ mini('statusline')			        -- A bit nicer status line.
 mini('pairs')				            -- Auto Pairs
 mini('surround')			          -- Surround tricks
 mini('trailspace') 			        -- Show trailing whitespace
-mini('pick')				            -- Picker
-mini('extra')				            -- Extra pickers and goodies
 mini('comment')				          -- Comments: `gc`, `gcc`
 mini('align')                   -- Align text, `ga` / `gA`
 mini('completion')              -- Autocompletion
@@ -136,70 +132,49 @@ mini('bracketed')
 -----------------------------
 --- File Picker
 -----------------------------
-local dir_files = function()
+--- I tried using mini.pick and mini.extra for this, but fzf is just better
+add_plugin('ibhagwan/fzf-lua')
+local fzf = require('fzf-lua')
+if (vim.fn.executable('sk')) then
+  -- Prefer skim if available.
+  fzf.setup({'skim'})
+end
+
+local find_files = function()
   local git_dir = vim.fn.finddir('.git', vim.fn.getcwd() .. ";")
-  if git_dir == '' then
-    Mini.extra.pickers.explorer()
-  else
-    Mini.extra.pickers.git_files()
+  if git_dir == '' then fzf.files()
+  else fzf.git_files()
   end
 end
-
-local find_files_with_cmd = function(command)
-  -- My cusotm files implementation which allows hidden files with rg/fd.
-  local find_files = function(cwd)
-    local show = function(buf_id, items, query)
-      MiniPick.default_show(buf_id, items, query, { show_icons = true })
-    end
-    local opts = { source = { show = show, cwd = cwd } }
-
-    return MiniPick.builtin.cli(
-      { command = command },
-      opts
-    )
-  end
-
-  return find_files
-end
-
-Mini.pick.registry.files_rg = find_files_with_cmd(
-  { 'rg', '--files', '--no-follow', '--color=never', '--hidden' }
-)
 
 local package_files = function()
-  local interesting_files = {
-    'Cargo.toml',
-    'Pipfile',
-    'package.json',
-    '.git',
-    'shell.nix'
+  local package_indicators = {
+    'Cargo.toml', 'Pipfile', 'Gemfile', 'package.json', '.git', 'shell.nix'
   }
-
-  -- Get current file's absolute path.
-  local file_path = vim.fn.resolve(vim.fn.expand("%:p"))
-  local parent_dir = vim.fs.dirname(file_path)
-  for _, file in pairs(interesting_files) do
+  local parent_dir = vim.fs.dirname(vim.fn.resolve(vim.fn.expand("%:p")))
+  for _, file in pairs(package_indicators) do
     local project_dir = vim.fs.dirname(vim.fs.find(file, {
       path = parent_dir,
       upward = true
     })[1])
 
     if project_dir then
-      Mini.pick.registry.files_rg(project_dir)
+      fzf.files({ cwd= project_dir })
       return
     end
   end
 
-  Mini.pick.registry.files_rg(parent_dir)
+  fzf.files({ cwd = parent_dir })
 end
 
-nlmap('f', dir_files, "Search [F]iles")
+nlmap('f', find_files, "Search [F]iles")
 nlmap('e', package_files, "Search Files in packag[e].")
-nlmap('b', Mini.pick.builtin.buffers, "Search [B]uffers")
-nlmap('h', Mini.extra.pickers.oldfiles, "Search [H]istory")
-nlmap('sl', Mini.pick.builtin.grep_live, "[S]earch [L]ive Grep")
-nlmap('sh', Mini.extra.pickers.history, "[S]earch Command [H]istory")
-nlmap('sc', Mini.extra.pickers.commands, "[S]earch [C]ommands")
+nlmap('b', fzf.buffers, "Search [B]uffers")
+nlmap('h', fzf.oldfiles, "Search [H]istory")
+nlmap('sl', fzf.live_grep, "[S]earch [L]ive Grep")
+nlmap('sh', fzf.command_history, "[S]earch Command [H]istory")
+nlmap('sc', fzf.commands, "[S]earch [C]ommands")
+
 
 -----------------------------
 --- LSP
@@ -224,7 +199,6 @@ local servers = {
       end
 
       client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-        -- Make the server aware of Neovim runtime files
         workspace = {
           checkThirdParty = false,
           library = vim.api.nvim_get_runtime_file("", true)
