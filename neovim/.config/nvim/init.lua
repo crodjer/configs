@@ -136,7 +136,7 @@ mini('bracketed')
 -----------------------------
 --- File Picker
 -----------------------------
-local find_files = function()
+local dir_files = function()
   local git_dir = vim.fn.finddir('.git', vim.fn.getcwd() .. ";")
   if git_dir == '' then
     Mini.extra.pickers.explorer()
@@ -145,7 +145,28 @@ local find_files = function()
   end
 end
 
-local find_in_package = function()
+local find_files_with_cmd = function(command)
+  -- My cusotm files implementation which allows hidden files with rg/fd.
+  local find_files = function(cwd)
+    local show = function(buf_id, items, query)
+      MiniPick.default_show(buf_id, items, query, { show_icons = true })
+    end
+    local opts = { source = { show = show, cwd = cwd } }
+
+    return MiniPick.builtin.cli(
+      { command = command },
+      opts
+    )
+  end
+
+  return find_files
+end
+
+Mini.pick.registry.files_rg = find_files_with_cmd(
+  { 'rg', '--files', '--no-follow', '--color=never', '--hidden' }
+)
+
+local package_files = function()
   local interesting_files = {
     'Cargo.toml',
     'Pipfile',
@@ -153,7 +174,10 @@ local find_in_package = function()
     '.git',
     'shell.nix'
   }
-  local parent_dir = vim.fn.expand("%:p:h")
+
+  -- Get current file's absolute path.
+  local file_path = vim.fn.resolve(vim.fn.expand("%:p"))
+  local parent_dir = vim.fs.dirname(file_path)
   for _, file in pairs(interesting_files) do
     local project_dir = vim.fs.dirname(vim.fs.find(file, {
       path = parent_dir,
@@ -161,16 +185,16 @@ local find_in_package = function()
     })[1])
 
     if project_dir then
-      Mini.pick.start({ source = { items = vim.fn.readdir(project_dir) } })
+      Mini.pick.registry.files_rg(project_dir)
       return
     end
   end
 
-  Mini.pick.start({ source = { items = vim.fn.readdir(parent_dir) } })
+  Mini.pick.registry.files_rg(parent_dir)
 end
 
-nlmap('f', find_files, "Search [F]iles")
-nlmap('e', find_in_package, "Search Files in packag[e].")
+nlmap('f', dir_files, "Search [F]iles")
+nlmap('e', package_files, "Search Files in packag[e].")
 nlmap('b', Mini.pick.builtin.buffers, "Search [B]uffers")
 nlmap('h', Mini.extra.pickers.oldfiles, "Search [H]istory")
 nlmap('sl', Mini.pick.builtin.grep_live, "[S]earch [L]ive Grep")
@@ -251,7 +275,7 @@ require('nvim-treesitter.configs').setup {
     "gitignore", "git_config", "gitcommit", "gitattributes"
   },
   highlight = { enable = true },
-  indent = { enable = true, disable = { "ledger", "ruby", "typescript" } },
+  indent = { enable = true, disable = { "ledger", "typescript" } },
   ignore_install = {},
   modules = {},
   sync_install = false,
