@@ -52,7 +52,7 @@ end
 -------------------------------------------------------
 local path_package = vim.fn.stdpath('data') .. '/site/'
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
-if not vim.loop.fs_stat(mini_path) then
+if vim.fn.isdirectory(mini_path) == 0 then
   -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps',
   -- if it doesn't exist.
   vim.cmd('echo "Installing `mini.nvim`" | redraw')
@@ -135,7 +135,7 @@ mini('bracketed')
 --- I tried using mini.pick and mini.extra for this, but fzf is just better
 add_plugin('ibhagwan/fzf-lua')
 local fzf = require('fzf-lua')
-if (vim.fn.executable('sk')) then
+if (vim.fn.executable('sk') == 1) then
   -- Prefer skim if available.
   fzf.setup({'skim'})
 end
@@ -193,7 +193,8 @@ local servers = {
     on_init = function(client)
       if client.workspace_folders then
         local path = client.workspace_folders[1].name
-        if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+        if vim.fn.filereadable(path..'/.luarc.json') == 1 or
+          vim.fn.filereadable(path..'/.luarc.jsonc') == 1 then
           return
         end
       end
