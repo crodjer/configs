@@ -1,8 +1,8 @@
 [core]
 	whitespace = trailing-space,space-before-tab
 [user]
-	name = Rohan Jain
-	email = crodjer@pm.me
+	name = Rohan
+	email = code@rohanjain.in
 [format]
 	signoff = true
 [core]
