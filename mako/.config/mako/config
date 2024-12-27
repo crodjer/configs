@@ -1,0 +1,9 @@
+font=DejaVuSans 8
+border-radius=5
+background-color=#282828EE
+border-color=#282828
+text-color=#d5c4a1FF
+progress-color=#d79921
+padding=20
+width=300
+default-timeout=5000
