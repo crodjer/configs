@@ -24,6 +24,8 @@
       "ctrl-[": ["workspace::SendKeystrokes", "escape"],
       "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"],
       "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
+      "alt-f": ["terminal::SendKeystroke", "alt-f"],
+      "alt-b": ["terminal::SendKeystroke", "alt-b"],
 
       // Vim Pane navigation, with all the context (for instance Dock i.e. Terminal
       "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],

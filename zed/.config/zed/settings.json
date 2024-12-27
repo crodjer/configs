@@ -8,13 +8,21 @@
 {
   "assistant": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
+      "provider": "ollama",
+      "model": "codestral:22b-v0.1-q6_K"
     },
     "version": "2"
   },
+  "language_models": {
+    "ollama": {
+      "api_url": "http://192.168.13.240:11434"
+    }
+  },
   "vim_mode": true,
-  "ui_font_size": 14,
+  "ui_font_family": "Zed Plex Mono",
+  "ui_font_size": 15,
+  "ui_font_weight": 700,
+  "buffer_font_family": "Zed Plex Mono",
   "buffer_font_size": 15,
   "theme": {
     "mode": "system",
@@ -26,6 +34,7 @@
     "catppuccin": true,
     "html": true,
     "markdown-oxide": true,
-    "nix": true
+    "nix": true,
+    "ruby": true
   }
 }
