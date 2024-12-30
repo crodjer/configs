@@ -29,7 +29,7 @@ debug_shell ZSH: Options
 #-------------------------#
 # Options
 #-------------------------#
-HISTFILE=~/.histfile
+HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=100000
 REPORTTIME=3

@@ -7,19 +7,17 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    ["Google Chrome"] = { binding = "c" },
-    ["Notion Dev"] = { binding = "n" },
-    -- Obsidian = { binding = "n" },
-    -- Zed = { binding = "e", autoLaunch = true },
-    Cursor = { binding = "e", autoLaunch = true },
-    ["zoom.us"] = { binding = "o" },
+    -- ["Google Chrome"] = { binding = "c" },
+    Safari = { binding = "c" },
+    Zed = { binding = "e", autoLaunch = true },
     Slack = { binding = "s" },
+    Slab = { binding = "n" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     Bitwarden = { binding = "p" },
     Signal = { binding = "g", mayHide = true },
     WezTerm = { binding = "t" },
     Firefox = { binding = "f", mayHide = true  },
-    ["YouTube Music"] = { binding = "y" },
+    DuckDuckGo = { binding = "d", mayHide = true  },
     Hammerspoon = { binding = '9' }
 }
 
