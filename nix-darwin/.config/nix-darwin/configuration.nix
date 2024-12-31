@@ -129,7 +129,6 @@
     keyboard = {
       enableKeyMapping = true;
       remapCapsLockToControl = true;
-      swapLeftCommandAndLeftAlt = true;
     };
   };
 
