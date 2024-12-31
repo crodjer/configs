@@ -8,14 +8,14 @@
 {
   "assistant": {
     "default_model": {
-      "provider": "ollama",
-      "model": "codestral:22b-v0.1-q6_K"
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-latest"
     },
     "version": "2"
   },
   "language_models": {
     "ollama": {
-      "api_url": "http://192.168.13.240:11434"
+      "api_url": "http://192.168.13.4:11434"
     }
   },
   "vim_mode": true,

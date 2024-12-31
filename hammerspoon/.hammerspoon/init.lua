@@ -70,6 +70,10 @@ spoon.Seal:bindHotkeys({
 })
 spoon.Seal:start()
 
+
+-- Caffine
+hs.loadSpoon("Caffine")
+
 -- Switcher
 hs.window.animationDuration = 0
 local Switcher = hs.window.switcher

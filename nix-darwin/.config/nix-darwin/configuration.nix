@@ -6,15 +6,14 @@
   environment = {
     systemPackages = with pkgs; [
       bottom
-      coreutils
       dust
       fd
       fzf
       git
+      gnupg
       neovim
-      ollama
       ripgrep
-      tmux
+      starship
       stow
       zoxide
     ];
@@ -26,8 +25,6 @@
     nerd-fonts.hack
   ];
 
-  # Enable alternative shell support in nix-darwin.
-  # programs.fish.enable = true;
   programs = {
     direnv = {
       enable = true;
@@ -56,9 +53,12 @@
 
   homebrew = {
     enable = true;
+    brews = [
+      { name = "syncthing"; start_service = true; }
+      "ollama"
+    ];
     casks  = [
       "duckduckgo"
-      "ferdium"
       "firefox"
       "hammerspoon"
       "localsend"
@@ -70,6 +70,9 @@
     ];
     masApps = {
     };
+    taps = [
+      "homebrew/services"
+    ];
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";
