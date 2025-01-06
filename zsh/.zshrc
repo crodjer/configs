@@ -114,77 +114,29 @@ git_branch () {
     echo $git_branch
 }
 
-function set-nvim-listen-address {
+set-nvim-listen-address () {
     local server_name="default"
+
     if [ "$TMUX" ]; then
         local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
         server_name="tmux-$tmux_window"
-        return
-    fi
-    local sway_ws=$(swaymsg -t  get_workspaces 2> /dev/null | \
-       jq -r "map(select(.focused == true)) | map(.name) | first")
-    local i3_ws=$(i3-msg -t  get_workspaces 2> /dev/null | \
-       jq -r "map(select(.focused == true)) | map(.name) | first")
-
-    if [ "$sway_ws" ]; then
+    else
+      local sway_ws=$(swaymsg -t  get_workspaces 2> /dev/null | \
+        jq -r "map(select(.focused == true)) | map(.name) | first")
+      if [ "$sway_ws" ]; then
         server_name="sway-$sway_ws"
-    elif [ "$i3_ws" ]; then
-        server_name="i3-$i3_ws"
+      fi
     fi
 
     # Set the NVIM listen address. Works for the server (launched via `nvim`)
     # and client (launched via `nvr`).
     export NVIM_LISTEN_ADDRESS="/tmp/nvim-${server_name:-$1}.sock"
 }
-autoload -U add-zsh-hook
+
+autoload -Uz add-zsh-hook
 add-zsh-hook chpwd set-nvim-listen-address
 set-nvim-listen-address
 
-gen-prompt () {
-    local prev_exit="$?"
-    local user_color="green"
-
-    if [ $prev_exit -eq 1 ]; then
-        user_color="red"
-    fi
-
-    local host_color="gray"
-
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        host_color="red"
-    fi
-
-    local prompt_alias=~$USER/.prompt-user
-    ## Generate a simple, informative multiline prompt.
-    if [ -f $prompt_alias ]; then
-        local user_name=$(cat $prompt_alias)
-    else
-        local user_name="$USER"
-    fi
-
-    local _line_1="%F{blue}┌─[%B%F{$user_color}${user_name}%f%b@%F{${host_color}}%m%f%F{blue}]-[%F{yellow}%*%f%F{blue}]%f"
-    local _line_2="%F{blue}└─%(!.#.>)%f "
-
-    git_branch=$(git_branch)
-
-    # Render git info, if available, in the prompt.
-    if [ "$git_branch" ]; then
-        local _git_status="$git_branch$([ "$(git status --porcelain -uno)" ] && echo "*")"
-        _line_1="$_line_1 %B%F{green}±%b %F{cyan}($_git_status)%f"
-    fi
-
-    # Render python virtual env info, if available, in the prompt.
-    if [[ -n "$VIRTUAL_ENV" ]];then
-        local _venv_prompt=""
-        _line_1="$_line_1 %F{blue}($(basename "$VIRTUAL_ENV"))%f"
-    fi
-
-    local _newline=$'\n'
-
-    echo "$_line_1$_newline$_line_2"
-}
-
-debug_shell ZSH: Prompt
 #-------------------------#
 # Prompt
 #-------------------------#
@@ -197,9 +149,6 @@ elif [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 elif [[ -f ~/.p10k.zsh ]]; then
     source ~/.p10k.zsh
-else
-    PROMPT='$(gen-prompt)'
-    RPROMPT="%F{green}%~%f"
 fi
 
 debug_shell ZSH: Initializations
