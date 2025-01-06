@@ -113,7 +113,33 @@ git_branch () {
 
     echo $git_branch
 }
-    local git_branch=
+
+function set-nvim-listen-address {
+    local server_name="default"
+    if [ "$TMUX" ]; then
+        local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
+        server_name="tmux-$tmux_window"
+        return
+    fi
+    local sway_ws=$(swaymsg -t  get_workspaces 2> /dev/null | \
+       jq -r "map(select(.focused == true)) | map(.name) | first")
+    local i3_ws=$(i3-msg -t  get_workspaces 2> /dev/null | \
+       jq -r "map(select(.focused == true)) | map(.name) | first")
+
+    if [ "$sway_ws" ]; then
+        server_name="sway-$sway_ws"
+    elif [ "$i3_ws" ]; then
+        server_name="i3-$i3_ws"
+    fi
+
+    # Set the NVIM listen address. Works for the server (launched via `nvim`)
+    # and client (launched via `nvr`).
+    export NVIM_LISTEN_ADDRESS="/tmp/nvim-${server_name:-$1}.sock"
+}
+autoload -U add-zsh-hook
+add-zsh-hook chpwd set-nvim-listen-address
+set-nvim-listen-address
+
 gen-prompt () {
     local prev_exit="$?"
     local user_color="green"
@@ -191,7 +217,6 @@ if [ ! -f "$ZLONG_ALERT_FILE" ]; then
     curl -sfLo $ZLONG_ALERT_FILE --create-dirs "https://raw.githubusercontent.com/kevinywlui/zlong_alert.zsh/master/zlong_alert.zsh"
 fi
 source $ZLONG_ALERT_FILE
-
 # Initialize mise
 if [ -n "$(command -v mise)" ]; then
     eval "$(mise activate zsh)"
@@ -217,6 +242,9 @@ fi
 if [ -e "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
 fi
+
+# PATH
+export PATH=$PATH:$HOME/.local/bin
 
 # Direnv
 test -n "$(command -v direnv)" && eval "$(direnv hook zsh)"

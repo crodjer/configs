@@ -11,11 +11,17 @@
       fzf
       git
       gnupg
-      neovim
+      mise
+      neovim neovim-remote
+      python3
       ripgrep
       starship
       stow
+      yazi
       zoxide
+
+      # LSPs and Linters
+      lua-language-server ruff ruff-lsp vscode-langservers-extracted vtsls
     ];
 
     darwinConfig = "$HOME/.config/nix-darwin/configuration.nix";
@@ -54,17 +60,29 @@
   homebrew = {
     enable = true;
     brews = [
+      "deno"
+      { name = "gmic"; args = ["with-gimp"]; }
       { name = "syncthing"; start_service = true; }
       "ollama"
+
+      # Work
+      # { name = "postgresql"; start_service = true; }
+      # { name = "redis"; start_service = true; }
+      # { name = "elastic/tap/elasticsearch-full"; start_service = true; }
+      { name = "colima"; start_service = true; }
+      "imagemagick" "libpq" "libyaml" "puma/puma/puma-dev" "vips"
+      "docker" "docker-compose"
     ];
     casks  = [
       "duckduckgo"
-      "firefox"
+      "gimp"
+      "google-chrome"
       "hammerspoon"
       "localsend"
       "signal"
       "wezterm"
 
+      "Gather"
       "Slack"
       "zed"
     ];

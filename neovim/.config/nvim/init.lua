@@ -213,6 +213,9 @@ local servers = {
   nil_ls = {},
   rust_analyzer = {},
   solargraph = {},
+  denols = {
+    root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+  },
   vtsls = {
     settings = {
       typescript = {
@@ -220,13 +223,17 @@ local servers = {
           maxTsServerMemory = 20480
         }
       }
-    }
+    },
+    root_dir = lspconfig.util.root_pattern("package.json"),
+    single_file_support = false
   }
 }
 
 for server, config in pairs(servers) do
   lspconfig[server].setup(config)
 end
+
+
 
 -----------------------------
 --- Tree-sitter
@@ -283,3 +290,6 @@ auto_dark_mode.setup({
 		vim.api.nvim_set_option_value('background', 'light', {})
 	end,
 })
+
+-- Ember handlebars
+add_plugin("joukevandermaas/vim-ember-hbs")

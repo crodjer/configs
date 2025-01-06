@@ -7,9 +7,8 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    -- ["Google Chrome"] = { binding = "c" },
-    Safari = { binding = "c" },
-    Zed = { binding = "e", autoLaunch = true },
+    [ "Google Chrome" ] = { binding = "c" },
+    WezTerm = { binding = "e", autoLaunch = true },
     Slack = { binding = "s" },
     Slab = { binding = "n" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },

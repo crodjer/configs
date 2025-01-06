@@ -8,8 +8,8 @@
 {
   "assistant": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
+      "provider": "ollama",
+      "model": "llama3.3:70b-instruct-q4_K_M"
     },
     "version": "2"
   },
