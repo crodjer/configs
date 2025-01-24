@@ -6,6 +6,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "features": {
+    "inline_completion_provider": "none"
+  },
   "assistant": {
     "default_model": {
       "provider": "zed.dev",
@@ -15,7 +18,19 @@
   },
   "language_models": {
     "ollama": {
-      "api_url": "http://192.168.13.4:11434"
+      "api_url": "https://intler.test",
+      "available_models": [
+        {
+          "name": "phi-4",
+          "display_name": "Phi 4",
+          "max_tokens": 16384
+        },
+        {
+          "name": "r1-qwen",
+          "display_name": "R1 Qwen",
+          "max_tokens": 131072
+        }
+      ]
     }
   },
   "vim_mode": true,
@@ -35,9 +50,42 @@
   "auto_install_extensions": {
     "ansible": true,
     "catppuccin": true,
+    "deno": true,
     "html": true,
     "markdown-oxide": true,
     "nix": true,
     "ruby": true
+  },
+  "lsp": {
+    "deno": {
+      "settings": {
+        "deno": {
+          "enable": true
+        }
+      }
+    }
+  },
+  "languages": {
+    "Ruby": {
+      "language_servers": ["ruby-lsp", "!solargraph", "!rubocop"]
+    },
+    "TypeScript": {
+      "language_servers": [
+        "deno",
+        "!typescript-language-server",
+        "!vtsls",
+        "!eslint"
+      ],
+      "formatter": "language_server"
+    },
+    "TSX": {
+      "language_servers": [
+        "deno",
+        "!typescript-language-server",
+        "!vtsls",
+        "!eslint"
+      ],
+      "formatter": "language_server"
+    }
   }
 }

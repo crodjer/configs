@@ -74,7 +74,6 @@ spoon.Seal:start()
 hs.loadSpoon("Caffine")
 
 -- Switcher
-hs.window.animationDuration = 0
 local Switcher = hs.window.switcher
 Switcher.ui.titleBackgroundColor = {0, 0, 0, 0}
 Switcher.ui.fontName = 'Verdana'
@@ -157,6 +156,10 @@ for app, config in pairs(appList) do
         end)
     end
 end
+
+-- hs.window Configuration
+hs.window.animationDuration = 0
+hs.window.setFrameCorrectness = true
 
 hs.hotkey.bind(hsModifier, "m", function()
     local win = hs.window.focusedWindow()

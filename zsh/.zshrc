@@ -180,6 +180,8 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.skim/shell/key-bindings.zsh ] && source ~/.skim/shell/key-bindings.zsh
 
+export FZF_DEFAULT_OPTS="-e"
+
 # Get the correct GPG TTY
 export GPG_TTY=$(tty)
 
@@ -204,7 +206,10 @@ if [ -e "$HOME/.cargo/env" ]; then
 fi
 
 # Go
-export GOPATH=~/.local/share/go
+export GOPATH=$HOME/.local/share/go
+
+# Hugging Face
+export HF_HOME=$HOME/.local/share/huggingface
 
 debug_shell ZSH: Done
 

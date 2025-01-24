@@ -14,15 +14,16 @@ vim.o.undofile = true			              -- Save undo history!
 vim.o.ignorecase = true			            -- Case-insensitive searching unless
 vim.o.smartcase = true			            -- \C or capital in search
 vim.wo.signcolumn = 'yes' 		          -- Keep signcolumn on by default
-vim.o.updatetime = 100 			            -- Decrease update time
-vim.o.timeoutlen = 300
+vim.o.updatetime = 300 			            -- Decrease update time
+vim.o.timeoutlen = 500
 vim.o.textwidth = 80			              -- Color Column
 vim.o.colorcolumn = "+1"
 vim.o.expandtab = true                  -- Spaces for tabs
 vim.o.tabstop  = 2                      -- Two spaces for tabstops
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
-
+vim.o.formatoptions = "jcroql"          -- Default format options, without the
+                                        -- `t` (text)
 
 -- Globals
 vim.g.netrw_banner = 0 			            -- Hide banner
@@ -171,9 +172,22 @@ nlmap('f', find_files, "Search [F]iles")
 nlmap('e', package_files, "Search Files in packag[e].")
 nlmap('b', fzf.buffers, "Search [B]uffers")
 nlmap('h', fzf.oldfiles, "Search [H]istory")
+nlmap('k', fzf.keymaps, "Search [K]ey Maps")
+nlmap('st', fzf.treesitter, "[S]earch [T]reesitter Symbols")
 nlmap('sl', fzf.live_grep, "[S]earch [L]ive Grep")
 nlmap('sh', fzf.command_history, "[S]earch Command [H]istory")
 nlmap('sc', fzf.commands, "[S]earch [C]ommands")
+
+nlmap('ca', fzf.lsp_code_actions, "LSP [C]ode [A]actions")
+nlmap('ci', fzf.lsp_implementations, "[C]ode LSP [I]mplementations")
+nlmap('cr', fzf.lsp_references, "[C]ode LSP [R]eferences")
+nlmap('cf', fzf.lsp_finder, "LSP [C]ode [F]inder")
+nlmap('cdf', fzf.lsp_definitions, "LSP [C]ode [D]e[F]initions")
+nlmap('cdc', fzf.lsp_declarations, "LSP [C]ode [D]e[C]larations")
+nlmap('csd', fzf.lsp_document_symbols, "LSP [D]ocument [S]ymbols")
+nlmap('csd', fzf.lsp_workspace_symbols, "LSP [W]orkspace [S]ymbols")
+nlmap('cci', fzf.lsp_incoming_calls, "[C]ode LSP [C]alls [I]ncoming")
+nlmap('cco', fzf.lsp_outgoing_calls, "[C]ode LSP [C]alls [O]utgoing")
 
 
 -----------------------------
@@ -182,6 +196,7 @@ nlmap('sc', fzf.commands, "[S]earch [C]ommands")
 add_plugin({
   source = "neovim/nvim-lspconfig",
 })
+
 local lspconfig = require('lspconfig');
 local servers = {
   ansiblels = {},
@@ -210,9 +225,10 @@ local servers = {
       Lua = {}
     }
   },
-  nil_ls = {},
+  jedi_language_server = {},
+  ruby_lsp = {},
+  ruff = {},
   rust_analyzer = {},
-  solargraph = {},
   denols = {
     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
   },
@@ -272,6 +288,20 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
+
+-----------------------------
+--- Which Key
+-----------------------------
+add_plugin("folke/which-key.nvim")
+local wk = require("which-key")
+wk.add({
+  { "<leader>s", group = "Search" },
+  { "<leader>c", group = "Code" },
+  { "<leader>cd", group = "Def/Dec" },
+  { "<leader>cs", group = "Symbols" },
+  { "<leader>cc", group = "Calls" },
+})
+
 
 -----------------------------
 --- Other plugins

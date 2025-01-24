@@ -1,27 +1,35 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
+  imports = [
+  ]
+  ++ lib.optional (builtins.pathExists /opt/nix/local.nix) /opt/nix/local.nix;
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment = {
     systemPackages = with pkgs; [
-      bottom
+      asitop bottom
       dust
       fd
+      ffmpeg
       fzf
       git
       gnupg
       mise
       neovim neovim-remote
-      python3
       ripgrep
+      rsync
       starship
       stow
+      watch
       yazi
       zoxide
 
-      # LSPs and Linters
-      lua-language-server ruff ruff-lsp vscode-langservers-extracted vtsls
+      # Languages
+      deno
+      python312 pipx ruff ruff-lsp
+      lua-language-server
     ];
 
     darwinConfig = "$HOME/.config/nix-darwin/configuration.nix";
@@ -60,21 +68,17 @@
   homebrew = {
     enable = true;
     brews = [
-      "deno"
-      { name = "gmic"; args = ["with-gimp"]; }
+      "batt"
       { name = "syncthing"; start_service = true; }
-      "ollama"
 
       # Work
-      # { name = "postgresql"; start_service = true; }
-      # { name = "redis"; start_service = true; }
-      # { name = "elastic/tap/elasticsearch-full"; start_service = true; }
-      { name = "colima"; start_service = true; }
+      { name = "colima"; start_service = false; }
       "imagemagick" "libpq" "libyaml" "puma/puma/puma-dev" "vips"
       "docker" "docker-compose"
     ];
     casks  = [
-      "duckduckgo"
+      "chromedriver"
+      "firefox"
       "gimp"
       "google-chrome"
       "hammerspoon"
