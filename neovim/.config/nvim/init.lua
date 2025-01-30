@@ -323,3 +323,6 @@ auto_dark_mode.setup({
 
 -- Ember handlebars
 add_plugin("joukevandermaas/vim-ember-hbs")
+
+-- If custom overrides exist, load them.
+pcall(require, 'custom')

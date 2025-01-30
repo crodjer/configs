@@ -49,45 +49,9 @@ spoon.ReloadConfiguration.watch_paths = {
 }
 spoon.ReloadConfiguration:start()
 
--- Seal: The awesome seal plugin, with pasteboard (pb) support.
-hs.loadSpoon("Seal")
-spoon.Seal:loadPlugins({ "apps", "pasteboard" })
-spoon.Seal.plugins.apps.appSearchPaths = {
-   "/Applications",
-   "/System/Applications",
-   "~/Applications",
-   "/System/Library/PreferencePanes",
-   "/Library/PreferencePanes",
-   "/System/Library/CoreServices/Applications",
-}
-spoon.Seal.plugins.apps:restart()
-spoon.Seal.plugins.pasteboard.historySize = 100
-spoon.Seal.plugins.pasteboard.saveHistory = true
-
-spoon.Seal:bindHotkeys({
-    toggle = { {"cmd"}, "space" }
-})
-spoon.Seal:start()
-
-
--- Caffine
-hs.loadSpoon("Caffine")
-
--- Switcher
-local Switcher = hs.window.switcher
-Switcher.ui.titleBackgroundColor = {0, 0, 0, 0}
-Switcher.ui.fontName = 'Verdana'
-Switcher.ui.textSize = 12
-Switcher.ui.showThumbnails = false
-Switcher.ui.showSelectedThumbnail = false
-
-hs.alert.defaultStyle.radius = 10
-hs.alert.defaultStyle.atScreenEdge = 2
-hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.6 }
-hs.alert.defaultStyle.textSize = 15
-hs.alert.defaultStyle.fadeInDuration = 0.1
-hs.alert.defaultStyle.fadeOutDuration = 0.1
-
+----------------------------
+-- App and Window Management
+----------------------------
 local InvalidOpNotification = nil
 function ActivateApp(application, config)
     if not application then
@@ -261,3 +225,51 @@ hs.hotkey.bind(hsShift, "w", function ()
     end)
     task:start()
 end)
+
+----------------------------
+-- Spoons
+----------------------------
+-- Seal: The awesome seal plugin, with pasteboard (pb) support.
+hs.loadSpoon("Seal")
+spoon.Seal:loadPlugins({ "apps", "pasteboard" })
+spoon.Seal.plugins.apps.appSearchPaths = {
+   "/Applications",
+   "/System/Applications",
+   "~/Applications",
+   "/System/Library/PreferencePanes",
+   "/Library/PreferencePanes",
+   "/System/Library/CoreServices/Applications",
+}
+spoon.Seal.plugins.apps:restart()
+spoon.Seal.plugins.pasteboard.historySize = 100
+spoon.Seal.plugins.pasteboard.saveHistory = true
+
+spoon.Seal:bindHotkeys({
+    toggle = { {"cmd"}, "space" }
+})
+spoon.Seal:start()
+
+-- Cherry
+local Cherry = hs.loadSpoon("Cherry")
+Cherry:bindHotkeys({
+  start = { hsShift, "t" }
+})
+
+-- Caffeine
+local Caffeine= hs.loadSpoon("Caffeine")
+Caffeine:start()
+
+-- Switcher
+local Switcher = hs.window.switcher
+Switcher.ui.titleBackgroundColor = {0, 0, 0, 0}
+Switcher.ui.fontName = 'Verdana'
+Switcher.ui.textSize = 12
+Switcher.ui.showThumbnails = false
+Switcher.ui.showSelectedThumbnail = false
+
+hs.alert.defaultStyle.radius = 10
+hs.alert.defaultStyle.atScreenEdge = 2
+hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.6 }
+hs.alert.defaultStyle.textSize = 15
+hs.alert.defaultStyle.fadeInDuration = 0.1
+hs.alert.defaultStyle.fadeOutDuration = 0.1

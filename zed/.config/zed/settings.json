@@ -11,26 +11,14 @@
   },
   "assistant": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
+      "provider": "ollama",
+      "model": "llama3:latest"
     },
     "version": "2"
   },
   "language_models": {
     "ollama": {
-      "api_url": "https://intler.test",
-      "available_models": [
-        {
-          "name": "phi-4",
-          "display_name": "Phi 4",
-          "max_tokens": 16384
-        },
-        {
-          "name": "r1-qwen",
-          "display_name": "R1 Qwen",
-          "max_tokens": 131072
-        }
-      ]
+      "api_url": "https://intler.test"
     }
   },
   "vim_mode": true,

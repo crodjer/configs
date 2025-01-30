@@ -80,6 +80,7 @@
       "chromedriver"
       "firefox"
       "gimp"
+      "ghostty"
       "google-chrome"
       "hammerspoon"
       "localsend"

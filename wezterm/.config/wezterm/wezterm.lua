@@ -19,54 +19,58 @@ if is_darwin() then
   }
   config.font_size = 14
 
-  wezterm.on("gui-startup", function()
-    local tab, pane, window = mux.spawn_window{}
-    window:mux_window():maximize()
-    window:gui_window():maximize()
+  local mux = wezterm.mux
+
+  wezterm.on("gui-startup", function(cmd)
+    -- Pick the active screen to maximize into, there are also other options, see the docs.
+    local active = wezterm.gui.screens().active
+    local _, _, window = mux.spawn_window(cmd or {})
+    window:gui_window():set_position(active.x, active.y)
+    window:gui_window():set_inner_size(active.width, active.height)
   end)
 
-end
-
-if is_linux() then
-  -- Split / Pane navigation bindings similar to my tmux bindings.
-  config.keys = {
-    {
-      key = '\'',
-      mods = 'ALT',
-      action = act.SplitVertical { domain = 'CurrentPaneDomain' },
-    },
-    {
-      key = '\\',
-      mods = 'ALT',
-      action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
-    },
-    {
-      key = 'h',
-      mods = 'ALT',
-      action = act.ActivatePaneDirection 'Left',
-    },
-    {
-      key = 'l',
-      mods = 'ALT',
-      action = act.ActivatePaneDirection 'Right',
-    },
-    {
-      key = 'k',
-      mods = 'ALT',
-      action = act.ActivatePaneDirection 'Up',
-    },
-    {
-      key = 'j',
-      mods = 'ALT',
-      action = act.ActivatePaneDirection 'Down',
-    },
-  }
-
+elseif is_linux() then
   config.font = wezterm.font_with_fallback {
     "Hack"
   }
   config.font_size = 11
 end
+
+
+local act = wezterm.action
+-- Split / Pane navigation bindings similar to my tmux bindings.
+config.keys = {
+  {
+    key = '\'',
+    mods = 'ALT',
+    action = act.SplitVertical { domain = 'CurrentPaneDomain' },
+  },
+  {
+    key = '\\',
+    mods = 'ALT',
+    action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+  },
+  {
+    key = 'h',
+    mods = 'ALT',
+    action = act.ActivatePaneDirection 'Left',
+  },
+  {
+    key = 'l',
+    mods = 'ALT',
+    action = act.ActivatePaneDirection 'Right',
+  },
+  {
+    key = 'k',
+    mods = 'ALT',
+    action = act.ActivatePaneDirection 'Up',
+  },
+  {
+    key = 'j',
+    mods = 'ALT',
+    action = act.ActivatePaneDirection 'Down',
+  },
+}
 
 local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
