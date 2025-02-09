@@ -118,8 +118,10 @@ set-nvim-listen-address () {
     local server_name="default"
 
     if [ "$TMUX" ]; then
-        local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
-        server_name="tmux-$tmux_window"
+      local tmux_window=$(tmux display-message -p '#S-#I' 2> /dev/null)
+      server_name="tmux-$tmux_window"
+    elif [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
+      server_name="$(git rev-parse --show-toplevel | sed -e 's/^\///g' -e  's/\//-/g')"
     else
       local sway_ws=$(swaymsg -t  get_workspaces 2> /dev/null | \
         jq -r "map(select(.focused == true)) | map(.name) | first")

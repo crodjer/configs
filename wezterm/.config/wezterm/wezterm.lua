@@ -43,13 +43,21 @@ config.keys = {
   {
     key = '\'',
     mods = 'ALT',
-    action = act.SplitVertical { domain = 'CurrentPaneDomain' },
+    action = act.SplitPane {
+      direction = 'Down',
+      size = { Percent = 40 },
+    }
   },
   {
     key = '\\',
     mods = 'ALT',
-    action = act.SplitHorizontal { domain = 'CurrentPaneDomain' },
+    action = act.SplitPane {
+      direction = 'Right',
+      size = { Percent = 40 },
+    }
   },
+  { key = 'o', mods = 'ALT', action = act.RotatePanes 'Clockwise' },
+  { key = 'o', mods = 'ALT|SHIFT', action = act.RotatePanes 'CounterClockwise' },
   {
     key = 'h',
     mods = 'ALT',
@@ -69,6 +77,11 @@ config.keys = {
     key = 'j',
     mods = 'ALT',
     action = act.ActivatePaneDirection 'Down',
+  },
+  {
+    key = 'f',
+    mods = 'ALT|SHIFT',
+    action = act.TogglePaneZoomState,
   },
 }
 

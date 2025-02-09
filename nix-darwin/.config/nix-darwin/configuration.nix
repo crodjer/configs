@@ -9,6 +9,7 @@
   # $ nix-env -qaP | grep wget
   environment = {
     systemPackages = with pkgs; [
+      aria2
       asitop bottom
       dust
       fd
@@ -69,6 +70,7 @@
     enable = true;
     brews = [
       "batt"
+      "gsed"
       { name = "syncthing"; start_service = true; }
 
       # Work
@@ -115,6 +117,9 @@
 
   security = {
     pam.enableSudoTouchIdAuth = true;
+    sudo.extraConfig = ''
+    rohan ALL=(ALL:ALL) NOPASSWD: /run/current-system/sw/bin/darwin-rebuild, /run/current-system/sw/bin/nix-env, /run/current-system/sw/bin/nix-build, /bin/launchctl, /run/current-system/sw/bin/ln, /nix/store/*/activate
+    '';
   };
 
   services = {

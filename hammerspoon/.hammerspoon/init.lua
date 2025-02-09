@@ -8,13 +8,13 @@ hs.window.animationDuration = 0
 -- List of apps and their screeen / binding, configuration
 local appList = {
     [ "Google Chrome" ] = { binding = "c" },
-    WezTerm = { binding = "e", autoLaunch = true },
+    Zed = { binding = "e", autoLaunch = true },
     Slack = { binding = "s" },
     Slab = { binding = "n" },
     UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
     Bitwarden = { binding = "p" },
     Signal = { binding = "g", mayHide = true },
-    WezTerm = { binding = "t" },
+    Ghostty = { binding = "t" },
     Firefox = { binding = "f", mayHide = true  },
     DuckDuckGo = { binding = "d", mayHide = true  },
     Hammerspoon = { binding = '9' }
@@ -45,7 +45,7 @@ spoon.WindowScreenLeftAndRight:bindHotkeys({
 hs.loadSpoon("ReloadConfiguration")
 spoon.ReloadConfiguration.watch_paths = {
     hs.configdir .. "/init.lua",
-    hs.configdir .. "/Spoons"
+    hs.configdir .. "/Spoons",
 }
 spoon.ReloadConfiguration:start()
 
@@ -241,8 +241,10 @@ spoon.Seal.plugins.apps.appSearchPaths = {
    "/System/Library/CoreServices/Applications",
 }
 spoon.Seal.plugins.apps:restart()
-spoon.Seal.plugins.pasteboard.historySize = 100
-spoon.Seal.plugins.pasteboard.saveHistory = true
+
+local pb = spoon.Seal.plugins.pasteboard
+pb.historySize = 100
+pb.saveHistory = true
 
 spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
