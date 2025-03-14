@@ -7,18 +7,18 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "features": {
-    "inline_completion_provider": "none"
+    "edit_prediction_provider": "zed"
   },
   "assistant": {
     "default_model": {
-      "provider": "ollama",
-      "model": "phi4:latest"
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest"
     },
     "version": "2"
   },
   "language_models": {
     "ollama": {
-      "api_url": "https://intler.test"
+      "api_url": "http://localhost:11434"
     }
   },
   "vim_mode": true,
@@ -55,7 +55,7 @@
   },
   "languages": {
     "Ruby": {
-      "language_servers": ["ruby-lsp", "!solargraph", "!rubocop"]
+      "language_servers": ["solargraph", "!rubocop"]
     },
     "TypeScript": {
       "language_servers": [

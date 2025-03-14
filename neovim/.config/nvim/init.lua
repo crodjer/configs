@@ -168,8 +168,14 @@ local package_files = function()
   fzf.files({ cwd = parent_dir })
 end
 
+local directory_files = function()
+  local parent_dir = vim.fs.dirname(vim.fn.resolve(vim.fn.expand("%:p")))
+  fzf.files({ cwd = parent_dir })
+end
+
 nlmap('f', find_files, "Search [F]iles")
-nlmap('e', package_files, "Search Files in packag[e].")
+nlmap('d', directory_files, "Search Files in [D]irectory.")
+nlmap('p', package_files, "Search Files in [P]ackage.")
 nlmap('b', fzf.buffers, "Search [B]uffers")
 nlmap('h', fzf.oldfiles, "Search [H]istory")
 nlmap('k', fzf.keymaps, "Search [K]ey Maps")
@@ -226,7 +232,7 @@ local servers = {
     }
   },
   jedi_language_server = {},
-  ruby_lsp = {},
+  solargraph = {},
   ruff = {},
   rust_analyzer = {},
   denols = {
@@ -289,6 +295,9 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
 -----------------------------
 --- Which Key
 -----------------------------
@@ -302,6 +311,13 @@ wk.add({
   { "<leader>cc", group = "Calls" },
 })
 
+-----------------------------
+--- Codium
+-----------------------------
+add_plugin("Exafunction/codeium.vim")
+vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+vim.keymap.set('i', '<c-g>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 
 -----------------------------
 --- Other plugins

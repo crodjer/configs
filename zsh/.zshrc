@@ -217,3 +217,5 @@ debug_shell ZSH: Done
 
 # Exit with success
 true
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit

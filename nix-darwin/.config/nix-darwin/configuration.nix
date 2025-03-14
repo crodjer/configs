@@ -12,12 +12,15 @@
       aria2
       asitop bottom
       dust
+      inetutils
       fd
       ffmpeg
       fzf
       git
       gnupg
+      helix
       mise
+      mosh
       neovim neovim-remote
       ripgrep
       rsync
@@ -79,18 +82,20 @@
       "docker" "docker-compose"
     ];
     casks  = [
-      "chromedriver"
+      "brave-browser"
       "firefox"
       "gimp"
       "ghostty"
       "google-chrome"
       "hammerspoon"
       "localsend"
+      "obsidian"
       "signal"
-      "wezterm"
+      "stats"
+      "thunderbird"
 
-      "Gather"
-      "Slack"
+      # Work
+      "chromedriver"
       "zed"
     ];
     masApps = {
@@ -105,18 +110,8 @@
     };
   };
 
-  # networking = {
-  #   Need to configure: networking.knownNetworkServices
-  #   dns = [
-  #     "8.8.8.8"
-  #     "8.8.4.4"
-  #     "2001:4860:4860::8888"
-  #     "2001:4860:4860::8844"
-  #   ];
-  # };
-
   security = {
-    pam.enableSudoTouchIdAuth = true;
+    pam.services.sudo_local.touchIdAuth = true;
     sudo.extraConfig = ''
     rohan ALL=(ALL:ALL) NOPASSWD: /run/current-system/sw/bin/darwin-rebuild, /run/current-system/sw/bin/nix-env, /run/current-system/sw/bin/nix-build, /bin/launchctl, /run/current-system/sw/bin/ln, /nix/store/*/activate
     '';
@@ -135,14 +130,13 @@
       dock = {
         autohide = true;
         magnification = true;
-        largesize = 50;
+        largesize = 96;
         persistent-apps = [
-          "/Applications/Safari.app"
-          "/Applications/Slack.app"
-          "/Applications/WezTerm.app"
+          "/Applications/Firefox.app"
+          "/Applications/Ghostty.app"
         ];
         orientation = "bottom";
-        tilesize = 24;
+        tilesize = 64;
       };
       finder = {
         QuitMenuItem = true;

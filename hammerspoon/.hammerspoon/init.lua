@@ -7,11 +7,20 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screeen / binding, configuration
 local appList = {
-    [ "Google Chrome" ] = { binding = "c" },
-    Zed = { binding = "e", autoLaunch = true },
-    Slack = { binding = "s" },
-    Slab = { binding = "n" },
-    UTM = { binding = "u", bundleId = "com.utmapp.UTM" },
+    -- [ "Google Chrome" ] = { binding = "c" },
+    [ "Brave Browser" ] = { binding = "b" },
+    Slack = {
+      binding = "s",
+      bundleId = "com.brave.Browser.app.jgpdjcfalkicbmohfcjeoienjaliomeb"
+    },
+    Zoom = {
+      binding = "o",
+      bundleId = "com.brave.Browser.app.fdbibeljcgcjkpedilpdafnjdmbjjjep",
+      mayHide = true,
+    },
+    Windsurf = { binding = "e"  },
+    -- Zed = { binding = "e", autoLaunch = true },
+    Obsidian = { binding = "n" },
     Bitwarden = { binding = "p" },
     Signal = { binding = "g", mayHide = true },
     Ghostty = { binding = "t" },
