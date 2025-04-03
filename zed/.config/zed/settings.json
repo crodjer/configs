@@ -42,7 +42,8 @@
     "html": true,
     "markdown-oxide": true,
     "nix": true,
-    "ruby": true
+    "ruby": true,
+    "toml": true
   },
   "lsp": {
     "deno": {
