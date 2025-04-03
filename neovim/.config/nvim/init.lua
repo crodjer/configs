@@ -237,17 +237,6 @@ local servers = {
   rust_analyzer = {},
   denols = {
     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-  },
-  vtsls = {
-    settings = {
-      typescript = {
-        tsserver = {
-          maxTsServerMemory = 20480
-        }
-      }
-    },
-    root_dir = lspconfig.util.root_pattern("package.json"),
-    single_file_support = false
   }
 }
 
@@ -276,7 +265,7 @@ require('nvim-treesitter.configs').setup {
     "javascript", "typescript", "tsx", "elixir", "java", "go", "vim",
 
     "html", "xml", "yaml", "css", "xml", "json", "terraform", "toml", "ledger",
-    "gitignore", "git_config", "gitcommit", "gitattributes"
+    "gitignore", "git_config", "gitcommit", "gitattributes", "diff", "git_rebase"
   },
   highlight = { enable = true },
   indent = { enable = true, disable = { "ledger", "typescript" } },
@@ -297,6 +286,7 @@ require('nvim-treesitter.configs').setup {
 
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldlevelstart = 10
 
 -----------------------------
 --- Which Key
@@ -309,6 +299,17 @@ wk.add({
   { "<leader>cd", group = "Def/Dec" },
   { "<leader>cs", group = "Symbols" },
   { "<leader>cc", group = "Calls" },
+})
+
+-----------------------------
+--- Aerial
+-----------------------------
+add_plugin("stevearc/aerial.nvim")
+local aerial = require("aerial")
+aerial.setup({
+  on_attach = function(bufnr)
+    vim.keymap.set("n", "<leader>a", aerial.toggle, { buffer = bufnr })
+  end
 })
 
 -----------------------------
