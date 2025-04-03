@@ -19,9 +19,7 @@
       git
       gnupg
       helix
-      mise
       mosh
-      neovim neovim-remote
       ripgrep
       rsync
       starship
@@ -31,7 +29,6 @@
       zoxide
 
       # Languages
-      deno
       python312 pipx ruff ruff-lsp
       lua-language-server
     ];
@@ -73,7 +70,12 @@
     enable = true;
     brews = [
       "batt"
+      "deno"
+      "invoice"
       "gsed"
+      "mise"
+      "neovim" "neovim-remote"
+      "nushell"
       { name = "syncthing"; start_service = true; }
 
       # Work
@@ -95,6 +97,7 @@
       "thunderbird"
 
       # Work
+      "adobe-acrobat-pro"
       "chromedriver"
       "zed"
     ];
@@ -112,8 +115,14 @@
 
   security = {
     pam.services.sudo_local.touchIdAuth = true;
-    sudo.extraConfig = ''
-    rohan ALL=(ALL:ALL) NOPASSWD: /run/current-system/sw/bin/darwin-rebuild, /run/current-system/sw/bin/nix-env, /run/current-system/sw/bin/nix-build, /bin/launchctl, /run/current-system/sw/bin/ln, /nix/store/*/activate
+    sudo.extraConfig = let
+      commands = [
+        "/run/current-system/sw/bin/darwin-rebuild"
+        "/run/current-system/sw/bin/nix*"
+      ];
+      commandsString = builtins.concatStringsSep ", " commands;
+    in ''
+      %admin ALL=(ALL:ALL) NOPASSWD: ${commandsString}
     '';
   };
 
