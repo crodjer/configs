@@ -7,9 +7,9 @@
 " Colors
 """""""""
 set notermguicolors
+autocmd ColorScheme default highlight LineNr ctermfg=6
+autocmd ColorScheme default highlight ColorColumn ctermfg=8
 colorscheme default
-highlight LineNr ctermfg=6
-highlight ColorColumn ctermfg=8
 
 " Options
 """"""""""
