@@ -1,4 +1,8 @@
-theme = dark:catppuccin-mocha,light:catppuccin-latte
+# Options:
+# Dark: Solarized Dark Higher Contrast, Peppermint
+# Light: Builtin Solarized Light, ayu_light, flexoki-light
+
+theme = dark:Solarized Dark Higher Contrast,light:flexoki-light
 
 adjust-cursor-thickness = 3
 unfocused-split-opacity = 0.90
