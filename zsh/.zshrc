@@ -136,8 +136,8 @@ set-nvim-listen-address () {
 }
 
 autoload -Uz add-zsh-hook
-add-zsh-hook chpwd set-nvim-listen-address
-set-nvim-listen-address
+# add-zsh-hook chpwd set-nvim-listen-address
+# set-nvim-listen-address
 
 #-------------------------#
 # Prompt
