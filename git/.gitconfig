@@ -11,15 +11,10 @@
 	lineNumber = true
 [color]
 	ui = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
 [merge]
 	summary = true
 [diff]
-    colorMoved = default
+  colorMoved = default
 [commit]
 	verbose = true
 	gpgsign = true
@@ -40,15 +35,21 @@
 [alias]
 # Add files using FZF
 a = "!git ls-files --deleted --modified --other --exclude-standard | fzf -0 -m --preview 'git diff --color=always {-1}' | xargs -r git add"
+
 # Add files using FZF in interactive patch mode.
 ap = "!git ls-files --deleted --modified --exclude-standard | fzf -0 -m --preview 'git diff --color=always {-1}' | xargs -r -o git add -p"
+
 # Checkout branch using FZF
 b = "!git branch --all | grep -v '^[*+]' | awk '{print $1}' | fzf -0 --preview 'git show --color=always {-1}' | sed 's/remotes\\/origin\\///g' | xargs -r git checkout"
+
 # Search stash using FZF and pop it.
 sp = "!git stash list | fzf -0 --preview 'git show --pretty=oneline --color=always --patch \"$(echo {} | cut -d: -f1)\"' | cut -d: -f1 | xargs -r git stash pop"
+
 # Search modified files using FZF and edit them.
 edit = "!git ls-files --modified --other --exclude-standard | sort -u | fzf -0 --multi --preview 'git diff --color {}' | xargs -r $EDITOR -p"
+
 # Search previous commits using FZF and create a fixup.
 fixup = "!git log --oneline --no-decorate --no-merges | fzf -0 --preview 'git show --color=always --format=oneline {1}' | awk '{print $1}' | xargs -r git commit --fixup"
+
 # Search staged files using FZF and reset the selected ones.
 resetm = "!git diff --name-only --cached | fzf -0 -m --preview 'git diff --color=always {-1}' | xargs -r git reset"
