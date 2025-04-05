@@ -21,6 +21,8 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 " File path. Use LineNr highlight group.
 set statusline=%#LineNr#\ %f%m\ %=
+" LSP
+set statusline+=%{luaeval('vim.lsp.status()')}
 " File type, percentage in file, lines/total lines:column
 set statusline+=\ %Y\ \ %p%%\ \ %l/%L:%c\ 
 
@@ -93,3 +95,10 @@ vim.lsp.config('*', {
   root_markers = { '.git' },
 })
 END
+
+augroup LspStatuslineUpdate
+    autocmd!
+    autocmd User LspProgressUpdate redrawstatus!
+    autocmd User LspAttach redrawstatus!
+    autocmd User LspDetach redrawstatus!
+augroup END
