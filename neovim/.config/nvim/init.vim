@@ -44,6 +44,8 @@ nnoremap <Leader>$ :source $MYVIMRC<CR>"
 " :b                => Buffers search
 " Ctrl ^ or Ctrl 6  => Previous File (like :b#)
 
+autocmd TermOpen * startinsert
+
 " Files and Commands
 """"""""""""""""""""
 " Use `Quickfix` for looking at file history and searching through files /
@@ -68,7 +70,6 @@ function! FdFilesInQuickfix(args) abort
   copen
 endfunction
 command! -nargs=* -complete=file Fd call FdFilesInQuickfix(<q-args>)
-nnoremap <silent> <leader>f :Fd<Space>
 
 " Oldfiles
 function! OldfilesInQuickfix() abort
@@ -85,6 +86,59 @@ nnoremap <silent> <leader>s :Rg<Space>
 
 " Trailing Whitespaces
 command! Trw execute '%s/\s\+$//e'
+
+" Interactive Terminal Commands
+"""""""""""""""""""""""""""""""
+" Function to process the terminal buffer when it closes.
+function! OnTermCloseHandler()
+  " Only act if the current buffer has the marker variable.
+  if !exists("b:should_open_file") || !b:should_open_file
+    return
+  endif
+
+  " Retrieve all lines from the buffer.
+  let l:lines = getbufline(bufnr('%'), 1, '$')
+
+  " The Terminal is done, lets remove it from existance.
+  execute 'bwipeout! '
+
+  " Find the first non-empty line backwards.
+  for l:i in reverse(range(0, len(l:lines)-1))
+    let l:line = trim(l:lines[l:i])
+    if !empty(l:line) && isdirectory(fnamemodify(l:line, ':p:h'))
+      call timer_start(10, { -> execute('edit ' . fnameescape(l:line)) })
+      return
+    endif
+  endfor
+
+  echom "No files found!"
+endfunction
+
+" Create an autocommand group for handling the special terminal.
+augroup TerminalResultHandler
+  autocmd!
+  " When any terminal buffer closes, call our handler.
+  autocmd TermClose * call OnTermCloseHandler()
+augroup END
+
+" Fzf
+" Open a new terminal running fzf and mark it with a buffer-local variable.
+function! OpenFromTerminal(cmd)
+  " Open a terminal running fzf.
+  execute 'terminal ' . a:cmd
+  " Set the buffer-local marker for the current buffer.
+  let b:should_open_file = 1
+endfunction
+
+command! -nargs=+ Fzf call OpenFromTerminal("fzf --walker-root=<args>")
+nnoremap <silent> <leader>e :Fzf <C-R>=expand('%:p:h')<CR><CR>
+nnoremap <silent> <leader>f :Fzf <C-R>=getcwd()<CR><CR>
+
+command! GitFiles call OpenFromTerminal("git ls-files --cached --modified --others -x '.DS_Store'| fzf")
+nnoremap <silent> <leader>g :GitFiles<CR>
+
+command! GitModified call OpenFromTerminal("git diff --name-only --cached | fzf")
+nnoremap <silent> <leader>m :GitModified<CR>
 
 " Lua Configuration
 """""""""""""""""""

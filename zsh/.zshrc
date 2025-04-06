@@ -57,7 +57,10 @@ bindkey '^[n' expand-or-complete
 bindkey '^[p' reverse-menu-complete
 bindkey '^[[Z' reverse-menu-complete
 
+
+fpath+=~/.zfunc
 fpath+=$HOME/.config/zsh/functions
+
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -217,5 +220,3 @@ debug_shell ZSH: Done
 
 # Exit with success
 true
-
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
