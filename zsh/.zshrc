@@ -176,16 +176,16 @@ if [ -n "$(command -v mise)" ]; then
     eval "$(mise activate zsh)"
 fi
 
-if [ -n "$(command -v rtx)" ]; then
-    eval "$(rtx activate zsh)"
-fi
-
 # Initialize fzf
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.skim/shell/key-bindings.zsh ] && source ~/.skim/shell/key-bindings.zsh
 
-export FZF_DEFAULT_OPTS="-e"
+export FZF_DEFAULT_OPTS="-e --preview-window=up"
+
+test -n "$(command -v bat)" && {
+  # Render the file in preview if its a file, else just echo the result
+  export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --preview 'test -f {} &> /dev/null && bat {} -p --color=always || echo {}'"
+}
 
 # Get the correct GPG TTY
 export GPG_TTY=$(tty)
