@@ -10,7 +10,9 @@
   environment = {
     systemPackages = with pkgs; [
       aria2
-      asitop bottom
+      asitop
+      bat
+      bottom
       dust
       inetutils
       fd
@@ -99,7 +101,9 @@
       # Work
       "adobe-acrobat-pro"
       "chromedriver"
+      "cursor"
       "zed"
+      "windsurf"
     ];
     masApps = {
     };
