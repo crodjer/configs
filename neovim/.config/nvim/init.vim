@@ -7,8 +7,7 @@
 " Colors
 """""""""
 set notermguicolors
-autocmd ColorScheme default highlight LineNr ctermfg=6
-autocmd ColorScheme default highlight ColorColumn ctermfg=8
+set background=light
 colorscheme default
 
 " Options
@@ -20,9 +19,9 @@ set textwidth=80 colorcolumn=+1
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 " File path. Use LineNr highlight group.
-set statusline=%#LineNr#\ %f%m\ %=
+set statusline=\ %f%m\ %=
 " LSP
-set statusline+=%{luaeval('vim.lsp.status()')}
+set statusline+=%{luaeval('vim.lsp.status()')}\ 
 " File type, percentage in file, lines/total lines:column
 set statusline+=\ %Y\ \ %p%%\ \ %l/%L:%c\ 
 
