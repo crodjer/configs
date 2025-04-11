@@ -1,5 +1,5 @@
 vim.lsp.config.solargraph = {
-  cmd = { 'solargraph', 'stdio' },
+  cmd = { 'ruby-lsp' },
   filetypes = { 'ruby' },
   root_markers = { 'Gemfile', '.git' }
 }
