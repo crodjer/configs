@@ -90,7 +90,6 @@
       "firefox"
       "gimp"
       "ghostty"
-      "google-chrome"
       "hammerspoon"
       "localsend"
       "obsidian"
@@ -99,7 +98,6 @@
       "thunderbird"
 
       # Work
-      "adobe-acrobat-pro"
       "chromedriver"
       "cursor"
       "zed"
