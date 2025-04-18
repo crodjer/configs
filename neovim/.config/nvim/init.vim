@@ -25,6 +25,9 @@ set statusline+=%{luaeval('vim.lsp.status()')}\
 " File type, percentage in file, lines/total lines:column
 set statusline+=\ %Y\ \ %p%%\ \ %l/%L:%c\ 
 
+" Allow custom configuration per directory (.nvimrc, .nvim.lua)
+set exrc secure
+
 " File Types
 """"""""""""
 filetype indent plugin on
@@ -155,3 +158,15 @@ augroup LspStatuslineUpdate
     autocmd User LspAttach redrawstatus!
     autocmd User LspDetach redrawstatus!
 augroup END
+
+
+" Plugin Configurations
+"""""""""""""""""""""""
+" Configuration for some plugins which may be relevant if installed.
+
+" Codium
+" Install: git clone https://github.com/Exafunction/windsurf.vim ~/.config/nvim/pack/plugins/start/windsurf.vim
+if !exists('g:codeium_manual')
+  " Unless Codium is explictly set (likely via .nvimrc), disable it.
+  let g:codeium_manual = v:true
+endif
