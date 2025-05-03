@@ -33,6 +33,7 @@
 [init]
 	defaultBranch = main
 [alias]
+l = "log --name-only"
 # Add files using FZF
 a = "!git ls-files --deleted --modified --other --exclude-standard | fzf -0 -m --preview 'git diff --color=always {-1}' | xargs -r git add"
 
@@ -49,7 +50,7 @@ sp = "!git stash list | fzf -0 --preview 'git show --pretty=oneline --color=alwa
 edit = "!git ls-files --modified --other --exclude-standard | sort -u | fzf -0 --multi --preview 'git diff --color {}' | xargs -r $EDITOR -p"
 
 # Search previous commits using FZF and create a fixup.
-fixup = "!git log --oneline --no-decorate --no-merges | fzf -0 --preview 'git show --color=always --format=oneline {1}' | awk '{print $1}' | xargs -r git commit --fixup"
+fx = "!git log --oneline --no-decorate --no-merges | fzf -0 --preview 'git show --color=always --format=oneline {1}' | awk '{print $1}' | xargs -r git commit --fixup"
 
 # Search staged files using FZF and reset the selected ones.
-resetm = "!git diff --name-only --cached | fzf -0 -m --preview 'git diff --color=always {-1}' | xargs -r git reset"
+rs = "!git diff --name-only --cached | fzf -0 -m --preview 'git diff --color=always {-1}' | xargs -r git reset"
