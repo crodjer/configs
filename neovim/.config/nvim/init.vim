@@ -8,7 +8,7 @@
 """""""""
 set notermguicolors
 set background=light
-colorscheme default
+colorscheme vim
 
 " Options
 """"""""""
