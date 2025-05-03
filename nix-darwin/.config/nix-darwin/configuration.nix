@@ -73,7 +73,6 @@
     brews = [
       "batt"
       "deno"
-      "invoice"
       "gsed"
       "mise"
       "neovim" "neovim-remote"
@@ -94,7 +93,6 @@
       "localsend"
       "obsidian"
       "signal"
-      "stats"
       "thunderbird"
 
       # Work
