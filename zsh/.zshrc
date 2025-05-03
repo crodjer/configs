@@ -96,6 +96,8 @@ else
     alias ls='ls --color=auto'
 fi
 
+alias rm='rm -i'
+
 alias exa='exa --icons'
 
 alias cb='xclip -selection clipboard'
