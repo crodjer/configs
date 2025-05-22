@@ -5,7 +5,7 @@ local hsShift = { "ctrl", "alt", "shift" }
 
 hs.window.animationDuration = 0
 
--- List of apps and their screeen / binding, configuration
+-- List of apps and their screen / binding, configuration
 local appList = {
     -- [ "Google Chrome" ] = { binding = "c" },
     [ "Brave Browser" ] = { binding = "b" },
@@ -18,8 +18,8 @@ local appList = {
       bundleId = "com.brave.Browser.app.fdbibeljcgcjkpedilpdafnjdmbjjjep",
       mayHide = true,
     },
-    -- Windsurf = { binding = "e"  },
-    Cursor = { binding = "e"  },
+    Windsurf = { binding = "e"  },
+    -- Cursor = { binding = "e"  },
     -- Zed = { binding = "e", autoLaunch = true },
     Obsidian = { binding = "n" },
     Bitwarden = { binding = "p" },
@@ -44,7 +44,7 @@ end
 
 hs.loadSpoon("EmmyLua")
 
--- WindowScreenLeftAndRight: Shorcut to move windows through screens.
+-- WindowScreenLeftAndRight: Shortcut to move windows through screens.
 hs.loadSpoon("WindowScreenLeftAndRight")
 spoon.WindowScreenLeftAndRight:bindHotkeys({
    screen_left = { hsModifier, "[" },
