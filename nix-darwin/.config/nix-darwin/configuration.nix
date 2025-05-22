@@ -31,11 +31,11 @@
       zoxide
 
       # Languages
-      python312 pipx ruff ruff-lsp
+      python312 pipx
       lua-language-server
     ];
 
-    darwinConfig = "$HOME/.config/nix-darwin/configuration.nix";
+    darwinConfig = "/Users/rohan/.config/nix-darwin/configuration.nix";
   };
 
   fonts.packages = with pkgs; [
@@ -161,6 +161,7 @@
       enableKeyMapping = true;
       remapCapsLockToControl = true;
     };
+    primaryUser = "rohan";
   };
 
   # Used for backwards compatibility, please read the changelog before changing.
