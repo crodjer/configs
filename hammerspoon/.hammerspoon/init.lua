@@ -7,17 +7,7 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screen / binding, configuration
 local appList = {
-    -- [ "Google Chrome" ] = { binding = "c" },
     [ "Brave Browser" ] = { binding = "b" },
-    Slack = {
-      binding = "s",
-      bundleId = "com.brave.Browser.app.jgpdjcfalkicbmohfcjeoienjaliomeb"
-    },
-    Zoom = {
-      binding = "o",
-      bundleId = "com.brave.Browser.app.fdbibeljcgcjkpedilpdafnjdmbjjjep",
-      mayHide = true,
-    },
     Windsurf = { binding = "e"  },
     -- Cursor = { binding = "e"  },
     -- Zed = { binding = "e", autoLaunch = true },
@@ -26,7 +16,7 @@ local appList = {
     Signal = { binding = "g", mayHide = true },
     Ghostty = { binding = "t" },
     Firefox = { binding = "f", mayHide = true  },
-    DuckDuckGo = { binding = "d", mayHide = true  },
+    Ferdium = { binding = "d", mayHide = true  },
     Hammerspoon = { binding = '9' }
 }
 
