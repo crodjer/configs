@@ -30,8 +30,8 @@ debug_shell ZSH: Options
 # Options
 #-------------------------#
 HISTFILE=~/.zsh_history
-HISTSIZE=50000
-SAVEHIST=100000
+HISTSIZE=1000000
+SAVEHIST=1000000
 REPORTTIME=3
 setopt hist_ignore_all_dups hist_ignore_space share_history extended_history
 setopt hist_expire_dups_first
@@ -203,6 +203,10 @@ fi
 
 # PATH
 export PATH=$PATH:$HOME/.local/bin
+
+if [ -d $HOME/.deno/bin ]; then
+  export PATH=$PATH:$HOME/.deno/bin
+fi
 
 # Direnv
 test -n "$(command -v direnv)" && eval "$(direnv hook zsh)"
