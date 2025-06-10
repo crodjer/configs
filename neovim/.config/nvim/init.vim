@@ -45,16 +45,6 @@ nnoremap <Leader>$ :source $MYVIMRC<CR>"
 autocmd TermOpen * startinsert
 command! Trw execute '%s/\s\+$//e'
 
-function! s:Capture(cmd)
-  let message = execute(a:cmd)
-  new
-  setlocal buftype=nofile bufhidden=hide noswapfile
-  call append('.', split(message, '\r\?\n'))
-  redraw!
-endfunction
-
-command! -nargs=+ -complete=command Capture call <SID>Capture(<q-args>)
-
 " Plugins Configurations
 """""""""""""""""""""""
 " Fzf
@@ -89,11 +79,3 @@ augroup LspStatuslineUpdate
   autocmd User LspAttach redrawstatus!
   autocmd User LspDetach redrawstatus!
 augroup END
-
-
-" Codium (now Windsurf)
-if !exists('g:codeium_manual')
-  " Unless explictly overridden (perhaps via .nvimrc), disable Codium
-  " completion.
-  let g:codeium_manual = v:true
-endif
