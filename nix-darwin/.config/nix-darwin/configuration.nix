@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 
-{
+let 
+  update-system = pkgs.writeShellScriptBin "update" (builtins.readFile ./scripts/update.sh);
+  cleanup-system = pkgs.writeShellScriptBin "clean-os" (builtins.readFile ./scripts/cleanup.sh);
+in {
   imports = [
   ]
   ++ lib.optional (builtins.pathExists /opt/nix/local.nix) /opt/nix/local.nix;
@@ -13,6 +16,7 @@
       asitop
       bat
       bottom
+      cleanup-system
       dust
       inetutils
       fd
@@ -21,11 +25,29 @@
       git
       gnupg
       helix
+      jq
+      moreutils
       mosh
+      (neovim.override {
+       configure = {
+         customRC = ''
+         let $MYVIMRC = expand('~/.config/nvim/init.vim')
+         silent! source $MYVIMRC
+         '';
+         packages.myVimPackages = with pkgs.vimPlugins; {
+           start = with vimPlugins; [
+             fzf-vim
+             nvim-lspconfig
+           ];
+         };
+       };
+      })
+      neovim-remote
       ripgrep
       rsync
       starship
       stow
+      update-system
       watch
       yazi
       zoxide
@@ -60,7 +82,6 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      # enableFastSyntaxHighlighting = true;
       enableFzfCompletion = true;
       enableFzfHistory = true;
       enableGlobalCompInit = true;
@@ -75,7 +96,6 @@
       "deno"
       "gsed"
       "mise"
-      "neovim" "neovim-remote"
       "nushell"
       { name = "syncthing"; start_service = true; }
 
@@ -86,6 +106,7 @@
     ];
     casks  = [
       "brave-browser"
+      "ferdium"
       "firefox"
       "gimp"
       "ghostty"
@@ -141,8 +162,6 @@
         magnification = true;
         largesize = 96;
         persistent-apps = [
-          "/Applications/Firefox.app"
-          "/Applications/Ghostty.app"
         ];
         orientation = "bottom";
         tilesize = 64;
