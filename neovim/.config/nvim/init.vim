@@ -3,7 +3,6 @@
 " A minimalist Neovim configuration, primarily in Vimscript.
 " For simple configuration, Vimscript is simply much more ergonomic than Lua.
 
-
 " Colors
 """""""""
 set notermguicolors
@@ -14,6 +13,7 @@ colorscheme vim
 """"""""""
 set number relativenumber
 set clipboard=unnamedplus
+set undofile
 
 set textwidth=80 colorcolumn=+1
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
@@ -70,6 +70,14 @@ vim.keymap.set(
   vim.diagnostic.open_float(nil, opts)
   end,
   { noremap = true, silent = true, desc = "Show line diagnostics" }
+)
+vim.keymap.set(
+  "n", "<leader>ca", vim.lsp.buf.code_action,
+  { noremap = true, silent = true, desc = "LSP Code Actions" }
+)
+vim.keymap.set(
+  "n", "<leader>cf", vim.lsp.buf.format,
+  { noremap = true, silent = true, desc = "LSP Formatting" }
 )
 END
 
