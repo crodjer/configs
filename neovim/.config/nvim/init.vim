@@ -15,6 +15,8 @@ set number relativenumber
 set clipboard=unnamedplus
 set undofile
 
+set spelllang=en
+
 set textwidth=80 colorcolumn=+1
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
@@ -92,9 +94,20 @@ function lspStatus()
 end
 END
 
+" Autocommands
+""""""""""""""
+
+" LSP
 augroup LspStatuslineUpdate
   autocmd!
   autocmd User LspProgressUpdate redrawstatus!
   autocmd User LspAttach redrawstatus!
   autocmd User LspDetach redrawstatus!
+augroup END
+
+" Spell Check
+augroup SpellCheck
+  autocmd FileType markdown setlocal spell
+  autocmd FileType gitcommit setlocal spell
+  autocmd FileType text setlocal spell
 augroup END
