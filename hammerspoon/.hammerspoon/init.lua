@@ -7,17 +7,24 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screen / binding, configuration
 local appList = {
-    [ "Brave Browser" ] = { binding = "b" },
-    Windsurf = { binding = "e"  },
-    -- Cursor = { binding = "e"  },
-    -- Zed = { binding = "e", autoLaunch = true },
-    Obsidian = { binding = "n" },
-    Bitwarden = { binding = "p" },
-    Signal = { binding = "g", mayHide = true },
-    Ghostty = { binding = "t" },
-    Firefox = { binding = "f", mayHide = true  },
-    Ferdium = { binding = "d", mayHide = true  },
-    Hammerspoon = { binding = '9' }
+  Slack = {
+    binding = "s",
+    bundleId = "com.brave.Browser.app.jgpdjcfalkicbmohfcjeoienjaliomeb"
+  },
+  Actual = {
+    binding = "a",
+    bundleId = "com.brave.Browser.app.abdhopggbjbkmdnkdpnpongfehffagnc"
+  },
+  [ "Brave Browser" ] = { binding = "b" },
+  Windsurf = { binding = "e"  },
+  Zed = { binding = "d"  },
+  Cursor = { binding = "c"  },
+  Obsidian = { binding = "n" },
+  Bitwarden = { binding = "p" },
+  Signal = { binding = "g", mayHide = true },
+  Ghostty = { binding = "t" },
+  Firefox = { binding = "f", mayHide = true  },
+  Hammerspoon = { binding = '9' }
 }
 
 function Render(object)
