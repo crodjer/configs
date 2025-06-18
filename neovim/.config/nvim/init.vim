@@ -21,7 +21,7 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " File path. Use LineNr highlight group.
 set statusline=\ %f%m\ %=
 " LSP
-set statusline+=%{luaeval('vim.lsp.status()')}
+set statusline+=%{luaeval('lspStatus()')}
 " File type, percentage in file, lines/total lines:column
 set statusline+=\ \ %Y\ \ %p%%\ \ %l/%L:%c\      " Don't trim space on end.
 
@@ -66,8 +66,8 @@ vim.lsp.enable('lua-language-server')
 -- Show diagnostics for the current line
 vim.keymap.set(
   "n", "<leader>d", function ()
-  local opts = { focusable = true, border = "single", source = "always" }
-  vim.diagnostic.open_float(nil, opts)
+    local opts = { focusable = true, border = "single", source = "always" }
+    vim.diagnostic.open_float(nil, opts)
   end,
   { noremap = true, silent = true, desc = "Show line diagnostics" }
 )
@@ -79,6 +79,17 @@ vim.keymap.set(
   "n", "<leader>cf", vim.lsp.buf.format,
   { noremap = true, silent = true, desc = "LSP Formatting" }
 )
+
+function lspStatus()
+  local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+  if #clients == 0 then
+    return ""
+  end
+
+  return vim.iter(clients):map(function(c) 
+    return c.server_info.name
+  end):join(", ")
+end
 END
 
 augroup LspStatuslineUpdate

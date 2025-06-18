@@ -15,7 +15,6 @@ in {
       aria2
       asitop
       bat
-      bottom
       cleanup-system
       dust
       inetutils
@@ -26,6 +25,7 @@ in {
       gnupg
       helix
       jq
+      mactop
       moreutils
       mosh
       (neovim.override {
@@ -38,6 +38,7 @@ in {
            start = with vimPlugins; [
              fzf-vim
              nvim-lspconfig
+             windsurf-vim           # Needed for work.
            ];
          };
        };
@@ -92,6 +93,7 @@ in {
   homebrew = {
     enable = true;
     brews = [
+      "coreutils"
       "batt"
       "deno"
       "gsed"
@@ -106,7 +108,6 @@ in {
     ];
     casks  = [
       "brave-browser"
-      "ferdium"
       "firefox"
       "gimp"
       "ghostty"
@@ -140,6 +141,7 @@ in {
       commands = [
         "/run/current-system/sw/bin/darwin-rebuild"
         "/run/current-system/sw/bin/nix*"
+        "/run/current-system/sw/bin/mactop"
       ];
       commandsString = builtins.concatStringsSep ", " commands;
     in ''
