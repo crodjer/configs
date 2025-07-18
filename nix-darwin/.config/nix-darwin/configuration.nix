@@ -13,6 +13,7 @@ in {
   environment = {
     systemPackages = with pkgs; [
       aria2
+      ansible
       asitop
       bat
       cleanup-system
@@ -25,6 +26,7 @@ in {
       gnupg
       helix
       jq
+      jujutsu
       mactop
       moreutils
       mosh
@@ -44,10 +46,13 @@ in {
        };
       })
       neovim-remote
+      pandoc
+      pass
       ripgrep
       rsync
       starship
       stow
+      typst
       update-system
       watch
       yazi
@@ -56,6 +61,7 @@ in {
       # Languages
       python312 pipx
       lua-language-server
+      ansible-language-server ansible-lint
     ];
 
     darwinConfig = "/Users/rohan/.config/nix-darwin/configuration.nix";
