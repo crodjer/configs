@@ -9,16 +9,33 @@
   "features": {
     "edit_prediction_provider": "zed"
   },
-  "assistant": {
+  "agent": {
+    "play_sound_when_agent_done": true,
+    "always_allow_tool_actions": true,
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
-    },
-    "version": "2"
+      "provider": "openai",
+      "model": "Qwen 3"
+    }
   },
   "language_models": {
-    "ollama": {
-      "api_url": "http://localhost:11434"
+    "openai": {
+      "api_url": "http://localhost:7171/v1",
+      "available_models": [
+        {
+          "name": "Gemma 3",
+          "display_name": "Gemma 3",
+          "max_tokens": 131072
+        },
+        {
+          "name": "Qwen 3",
+          "max_tokens": 131072
+        },
+        {
+          "name": "Devstral",
+          "display_name": "Devstral",
+          "max_tokens": 131072
+        }
+      ]
     }
   },
   "vim_mode": true,
