@@ -105,6 +105,7 @@ alias k='kubectl'
 if [ -x "$(command -v iwctl)" ]; then
     alias wifi="iwctl station $(iwctl device list | grep station | grep -Eo '\w+' | head -1)"
 fi
+alias rg='rg --color=always'
 
 debug_shell ZSH: Utility functions
 
@@ -200,6 +201,9 @@ fi
 if [ -e "$HOME/.zshrc.local" ]; then
     source "$HOME/.zshrc.local"
 fi
+
+# Less
+LESS="-R"
 
 # PATH
 export PATH=$PATH:$HOME/.local/bin
