@@ -61,9 +61,10 @@ nmap <leader>ss :History/<CR>
 " LSP
 lua << END
 vim.lsp.enable('denols')
+vim.lsp.enable('lua-language-server')
+vim.lsp.enable('pyright')
 vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('rust_analyzer')
-vim.lsp.enable('lua-language-server')
 
 -- Show diagnostics for the current line
 vim.keymap.set(
