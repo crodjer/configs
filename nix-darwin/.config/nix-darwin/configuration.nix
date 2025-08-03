@@ -59,7 +59,7 @@ in {
       zoxide
 
       # Languages
-      python312 pipx
+      python312 pipx pyright ruff uv
       lua-language-server
       ansible-language-server ansible-lint
     ];
@@ -108,6 +108,7 @@ in {
       { name = "syncthing"; start_service = true; }
 
       # Work
+      "awscli"
       { name = "colima"; start_service = false; }
       "imagemagick" "libpq" "libyaml" "puma/puma/puma-dev" "vips"
       "docker" "docker-compose"
@@ -132,7 +133,6 @@ in {
     masApps = {
     };
     taps = [
-      "homebrew/services"
     ];
     onActivation = {
       autoUpdate = true;
