@@ -16,9 +16,9 @@ local appList = {
     bundleId = "com.brave.Browser.app.abdhopggbjbkmdnkdpnpongfehffagnc"
   },
   [ "Brave Browser" ] = { binding = "b" },
-  Windsurf = { binding = "e"  },
+  -- Windsurf = { binding = "e"  },
   Zed = { binding = "d"  },
-  Cursor = { binding = "c"  },
+  Cursor = { binding = "e"  },
   Obsidian = { binding = "n" },
   Bitwarden = { binding = "p" },
   Signal = { binding = "g", mayHide = true },
