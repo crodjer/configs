@@ -13,10 +13,10 @@ in {
   environment = {
     systemPackages = with pkgs; [
       aria2
-      ansible
       asitop
       bat
       cleanup-system
+      delta
       dust
       inetutils
       fd
@@ -61,7 +61,6 @@ in {
       # Languages
       python312 pipx pyright ruff uv
       lua-language-server
-      ansible-language-server ansible-lint
     ];
 
     darwinConfig = "/Users/rohan/.config/nix-darwin/configuration.nix";
@@ -99,6 +98,7 @@ in {
   homebrew = {
     enable = true;
     brews = [
+      "ansible" "ansible-lint" "ansible-language-server"
       "coreutils"
       "batt"
       "deno"

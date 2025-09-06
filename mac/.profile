@@ -6,3 +6,8 @@ fi
 if [ -e "$HOME/.profile.local" ]; then
     source "$HOME/.profile.local"
 fi
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/rohan/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+

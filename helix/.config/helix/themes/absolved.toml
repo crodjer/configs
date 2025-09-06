@@ -10,7 +10,7 @@ inherits = "base16_default"
  
 "ui.gutter" = { fg = "gray" }
 
-"ui.virtual.ruler" = { modifiers = ["reversed"] }
+"ui.virtual.ruler" = { bg = "gray" }
 
 [palette]
 white = "#cfcfcf"

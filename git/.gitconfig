@@ -1,12 +1,11 @@
 [core]
 	whitespace = trailing-space,space-before-tab
+	excludesfile = ~/.gitignore
 [user]
 	name = Rohan
 	email = code@rohanjain.in
 [format]
 	signoff = true
-[core]
-	excludesfile = ~/.gitignore
 [grep]
 	lineNumber = true
 [color]
