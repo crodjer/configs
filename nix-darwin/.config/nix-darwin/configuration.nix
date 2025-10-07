@@ -38,6 +38,7 @@ in {
          '';
          packages.myVimPackages = with pkgs.vimPlugins; {
            start = with vimPlugins; [
+             ansible-vim
              fzf-vim
              nvim-lspconfig
              windsurf-vim           # Needed for work.
@@ -46,6 +47,7 @@ in {
        };
       })
       neovim-remote
+      nh
       pandoc
       pass
       ripgrep
@@ -106,6 +108,7 @@ in {
       "mise"
       "nushell"
       { name = "syncthing"; start_service = true; }
+      "terminal-notifier"
 
       # Work
       "awscli"
@@ -116,13 +119,13 @@ in {
     casks  = [
       "brave-browser"
       "firefox"
+      "firefox@developer-edition"
       "gimp"
       "ghostty"
       "hammerspoon"
       "localsend"
       "obsidian"
       "signal"
-      "thunderbird"
 
       # Work
       "chromedriver"

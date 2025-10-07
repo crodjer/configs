@@ -60,8 +60,8 @@ nmap <leader>ss :History/<CR>
 
 " LSP
 lua << END
+vim.lsp.enable('ansiblels')
 vim.lsp.enable('denols')
-vim.lsp.enable('lua-language-server')
 vim.lsp.enable('pyright')
 vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('rust_analyzer')
@@ -112,3 +112,6 @@ augroup SpellCheck
   autocmd FileType gitcommit setlocal spell
   autocmd FileType text setlocal spell
 augroup END
+
+" Ansible
+au BufRead,BufNewFile */plays/**.yml set filetype=yaml.ansible

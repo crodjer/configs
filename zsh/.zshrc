@@ -107,6 +107,8 @@ if [ -x "$(command -v iwctl)" ]; then
 fi
 alias rg='rg --color=always'
 
+alias b='biip'
+
 debug_shell ZSH: Utility functions
 
 #-------------------------#

@@ -7,15 +7,11 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screen / binding, configuration
 local appList = {
-  Slack = {
-    binding = "s",
-    bundleId = "com.brave.Browser.app.jgpdjcfalkicbmohfcjeoienjaliomeb"
-  },
   Actual = {
     binding = "a",
     bundleId = "com.brave.Browser.app.abdhopggbjbkmdnkdpnpongfehffagnc"
   },
-  [ "Brave Browser" ] = { binding = "b" },
+  [ "Firefox Developer Edition" ] = { binding = "b" },
   -- Windsurf = { binding = "e"  },
   Zed = { binding = "d"  },
   Cursor = { binding = "e"  },
@@ -23,7 +19,7 @@ local appList = {
   Bitwarden = { binding = "p" },
   Signal = { binding = "g", mayHide = true },
   Ghostty = { binding = "t" },
-  Firefox = { binding = "f", mayHide = true  },
+  Firefox = { binding = "f", mayHide = true, bundleId = "org.mozilla.firefox" },
   Hammerspoon = { binding = '9' }
 }
 
@@ -260,9 +256,15 @@ spoon.Seal:start()
 
 -- Cherry
 local Cherry = hs.loadSpoon("Cherry")
+Cherry.alertDuration = 5
+Cherry.alwaysShow = false
+Cherry.duration = 10
+Cherry.sound = hs.sound.getByFile("/System/Library/Sounds/Glass.aiff")
+Cherry.alertTextSize = 60
 Cherry:bindHotkeys({
   start = { hsShift, "t" }
 })
+Cherry:reset()
 
 -- Caffeine
 local Caffeine= hs.loadSpoon("Caffeine")
