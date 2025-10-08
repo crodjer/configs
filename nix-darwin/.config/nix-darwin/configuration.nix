@@ -11,9 +11,27 @@ in {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment = {
+    darwinConfig = "/Users/rohan/.config/nix-darwin/configuration.nix";
+
+    interactiveShellInit = ''
+    export GPG_TTY=`tty`
+    '';
+
+
+    shellAliases = {
+      b = "biip";  # My PII Stripping tool!
+      mactop = "sudo mactop";
+      re = "exec $SHELL";
+      rm = "rm -i";
+    };
+
+    shells = [
+      pkgs.fish
+      pkgs.zsh
+    ];
+
     systemPackages = with pkgs; [
       aria2
-      asitop
       bat
       cleanup-system
       delta
@@ -23,11 +41,11 @@ in {
       ffmpeg
       fzf
       git
-      gnupg
       helix
       jq
       jujutsu
       mactop
+      mise
       moreutils
       mosh
       (neovim.override {
@@ -61,11 +79,20 @@ in {
       zoxide
 
       # Languages
+      ansible ansible-lint
       python312 pipx pyright ruff uv
       lua-language-server
     ];
 
-    darwinConfig = "/Users/rohan/.config/nix-darwin/configuration.nix";
+    systemPath =  [
+      "/opt/homebrew/bin"
+      "~/.cargo/bin"
+    ];
+
+    variables = {
+      EDITOR = "nvim";
+      LESS = "-R";
+    };
   };
 
   fonts.packages = with pkgs; [
@@ -80,6 +107,33 @@ in {
     };
 
     nix-index.enable = true;
+
+    fish = {
+      enable = true;
+      shellInit = ''
+      set -U fish_greeting
+      set -g fish_transient_prompt 1
+
+      ${pkgs.mise}/bin/mise activate fish | source
+      ${pkgs.direnv}/bin/direnv hook fish | source
+      ${pkgs.zoxide}/bin/zoxide init fish | source
+      eval (${pkgs.starship}/bin/starship init fish)
+
+      if test -f ~/.local.fish
+        source ~/.local.fish
+      end
+      '';
+    };
+
+    gnupg = {
+      agent = {
+        enable = true;
+        enableSSHSupport = true;
+      };
+    };
+
+    info.enable = true;
+    man.enable = true;
 
     tmux = {
       enable = true;
@@ -100,24 +154,14 @@ in {
   homebrew = {
     enable = true;
     brews = [
-      "ansible" "ansible-lint" "ansible-language-server"
+      "ansible-language-server"
       "coreutils"
       "batt"
-      "deno"
       "gsed"
-      "mise"
-      "nushell"
       { name = "syncthing"; start_service = true; }
       "terminal-notifier"
-
-      # Work
-      "awscli"
-      { name = "colima"; start_service = false; }
-      "imagemagick" "libpq" "libyaml" "puma/puma/puma-dev" "vips"
-      "docker" "docker-compose"
     ];
     casks  = [
-      "brave-browser"
       "firefox"
       "firefox@developer-edition"
       "gimp"
@@ -126,13 +170,8 @@ in {
       "localsend"
       "obsidian"
       "signal"
-
-      # Work
-      "chromedriver"
-      "cursor"
-      "zed"
-      "windsurf"
     ];
+    # greedyCasks = true;
     masApps = {
     };
     taps = [
@@ -144,13 +183,19 @@ in {
     };
   };
 
+  launchd = {
+    user.envVariables = {
+    };
+  };
+
   security = {
     pam.services.sudo_local.touchIdAuth = true;
     sudo.extraConfig = let
       commands = [
         "/run/current-system/sw/bin/darwin-rebuild"
-        "/run/current-system/sw/bin/nix*"
         "/run/current-system/sw/bin/mactop"
+        "/run/current-system/sw/bin/nix-channel"
+        "/run/current-system/sw/bin/nix-collect-garbage"
       ];
       commandsString = builtins.concatStringsSep ", " commands;
     in ''

@@ -7,11 +7,11 @@ charging_symbol = '⚡️'
 discharging_symbol = '⇣ '
 
 [[battery.display]]
-threshold = 10
+threshold = 20
 style = 'bold red'
 
 [[battery.display]]
-threshold = 30
+threshold = 50
 style = 'bold yellow'
 
 [cmd_duration]
@@ -19,16 +19,16 @@ min_time = 2000
 show_milliseconds = true
 
 [git_status]
-disabled = true
+disabled = false
 
 [docker_context]
-disabled = true
+disabled = false
 
 [kubernetes]
 disabled = true
 
 [nodejs]
-disabled = true
+disabled = false
 
 [gcloud]
 disabled = true
@@ -45,7 +45,7 @@ disabled = false
 disabled = false
 
 [python]
-disabled = true
+disabled = false
 
 [ruby]
-disabled = true
+disabled = false

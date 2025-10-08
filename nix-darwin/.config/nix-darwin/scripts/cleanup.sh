@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-HOME=/var/root sudo bash -c 'nix-collect-garbage -d'
+HOME=/var/root sudo nix-collect-garbage -d
 nix-collect-garbage -d
 brew cleanup --prune=all
