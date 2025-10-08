@@ -18,6 +18,7 @@ local appList = {
   Obsidian = { binding = "n" },
   Bitwarden = { binding = "p" },
   Signal = { binding = "g", mayHide = true },
+  Safari = { binding = "s" },
   Ghostty = { binding = "t" },
   Firefox = { binding = "f", mayHide = true, bundleId = "org.mozilla.firefox" },
   Hammerspoon = { binding = '9' }
@@ -91,11 +92,11 @@ function ActivateApp(application, config)
 end
 
 function LaunchApp(app, config)
-    if config.bundleId then
-        hs.application.launchOrFocusByBundleID(config.bundleId)
-    else
-        hs.application.launchOrFocus(app)
-    end
+  if config.bundleId then
+      hs.application.launchOrFocusByBundleID(config.bundleId)
+  else
+      hs.application.launchOrFocus(app)
+  end
 end
 
 local AppNotRunningAlertId = nil
@@ -284,3 +285,9 @@ hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.6 }
 hs.alert.defaultStyle.textSize = 15
 hs.alert.defaultStyle.fadeInDuration = 0.1
 hs.alert.defaultStyle.fadeOutDuration = 0.1
+
+-- Tweaks
+
+-- This is to ensure Firefox isn't launched in Safe Mode!
+-- https://github.com/Hammerspoon/hammerspoon/issues/514#issuecomment-886339180
+hs.execute [["export" "MOZ_DISABLE_SAFE_MODE_KEY" "1"]]

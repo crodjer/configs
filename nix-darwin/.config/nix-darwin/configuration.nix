@@ -3,13 +3,12 @@
 let 
   update-system = pkgs.writeShellScriptBin "update" (builtins.readFile ./scripts/update.sh);
   cleanup-system = pkgs.writeShellScriptBin "clean-os" (builtins.readFile ./scripts/cleanup.sh);
+  initialize = pkgs.writeShellScriptBin "initialize" (builtins.readFile ./scripts/initialize.sh);
 in {
   imports = [
   ]
   ++ lib.optional (builtins.pathExists /opt/nix/local.nix) /opt/nix/local.nix;
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
   environment = {
     darwinConfig = "/Users/rohan/.config/nix-darwin/configuration.nix";
 
@@ -17,10 +16,9 @@ in {
     export GPG_TTY=`tty`
     '';
 
-
     shellAliases = {
       b = "biip";  # My PII Stripping tool!
-      mactop = "sudo mactop";
+      mactop = "TERM=xterm sudo mactop";
       re = "exec $SHELL";
       rm = "rm -i";
     };
@@ -184,7 +182,19 @@ in {
   };
 
   launchd = {
-    user.envVariables = {
+    user = {
+      envVariables = {
+      };
+      agents."initialize" = {
+        # `initialize` is a custom script which run at login on mac.
+        command = "${initialize}/bin/initialize";
+        path = [];
+        serviceConfig = {
+          Label = "environment";
+          RunAtLoad = true;
+          KeepAlive = false;
+        };
+      };
     };
   };
 
@@ -222,11 +232,13 @@ in {
         orientation = "bottom";
         tilesize = 64;
       };
+
       finder = {
         QuitMenuItem = true;
         ShowPathbar = true;
         ShowStatusBar = true;
       };
+
       trackpad = {
         Clicking = true;
         Dragging = true;
