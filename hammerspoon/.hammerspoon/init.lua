@@ -7,20 +7,21 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screen / binding, configuration
 local appList = {
-  Actual = {
-    binding = "a",
-    bundleId = "com.brave.Browser.app.abdhopggbjbkmdnkdpnpongfehffagnc"
-  },
+  Ghostty = { binding = "t" },
+  Windsurf = { binding = "e", modifier = hsShift, mayHide = true },
+  Zed = { binding = "d", mayHide = true },
+  Cursor = { binding = "e",
+             bundleId = "com.todesktop.230313mzl4w4u92",
+           },
+
+  Firefox = { binding = "f", mayHide = true, bundleId = "org.mozilla.firefox" },
   [ "Firefox Developer Edition" ] = { binding = "b" },
-  -- Windsurf = { binding = "e"  },
-  Zed = { binding = "d"  },
-  Cursor = { binding = "e"  },
+  Safari = { binding = "s" },
+
   Obsidian = { binding = "n" },
   Bitwarden = { binding = "p" },
   Signal = { binding = "g", mayHide = true },
-  Safari = { binding = "s" },
-  Ghostty = { binding = "t" },
-  Firefox = { binding = "f", mayHide = true, bundleId = "org.mozilla.firefox" },
+
   Hammerspoon = { binding = '9' }
 }
 
@@ -106,7 +107,8 @@ local LastNotRunningApp = nil
 for app, config in pairs(appList) do
     -- Bind the app
     if config.binding ~= nil then
-        hs.hotkey.bind(hsModifier, config.binding, function()
+        local modifier = config.modifier or hsModifier
+        hs.hotkey.bind(modifier or hsModifier, config.binding, function()
             local application = hs.application.get(config.bundleId or app)
 
             if application then
