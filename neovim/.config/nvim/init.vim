@@ -9,6 +9,16 @@ set notermguicolors
 set background=light
 colorscheme vim
 
+" We don't need a highlight on the SignColumn
+highlight SignColumn ctermbg=none cterm=bold
+highlight ColorColumn ctermbg=116
+
+" The floating hint highlight is too light. Match with `Info` instead.
+highlight link DiagnosticFloatingHint DiagnosticFloatingInfo
+" This is a nicer color for menu highlights.
+highlight Pmenu ctermbg=116
+highlight PmenuSel ctermbg=0 ctermfg=116 cterm=bold
+
 " Options
 """"""""""
 set number relativenumber
@@ -114,4 +124,4 @@ augroup SpellCheck
 augroup END
 
 " Ansible
-au BufRead,BufNewFile */plays/**.yml set filetype=yaml.ansible
+au BufRead,BufNewFile */plays/**.y*ml set filetype=yaml.ansible
