@@ -35,11 +35,13 @@ in {
       delta
       dust
       inetutils
+      entr
       fd
       ffmpeg
       fzf
       git
       helix
+      immich-cli
       jq
       jujutsu
       mactop
