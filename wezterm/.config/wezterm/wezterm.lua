@@ -17,7 +17,7 @@ if is_darwin() then
   config.font = wezterm.font_with_fallback {
     'Menlo',
   }
-  config.font_size = 14
+  config.font_size = 13
 
   local mux = wezterm.mux
 
@@ -79,17 +79,46 @@ config.keys = {
     action = act.ActivatePaneDirection 'Down',
   },
   {
+    key = 'h',
+    mods = 'ALT|SHIFT',
+    action = act.AdjustPaneSize {'Left', 1},
+  },
+  {
+    key = 'l',
+    mods = 'ALT|SHIFT',
+    action = act.AdjustPaneSize {'Right', 1},
+  },
+  {
+    key = 'k',
+    mods = 'ALT|SHIFT',
+    action = act.AdjustPaneSize {'Up', 1},
+  },
+  {
+    key = 'j',
+    mods = 'ALT|SHIFT',
+    action = act.AdjustPaneSize {'Down', 1},
+  },
+  {
     key = 'f',
     mods = 'ALT|SHIFT',
     action = act.TogglePaneZoomState,
   },
+  {
+    key = 't',
+    mods = 'ALT|SHIFT',
+    action = act.SpawnCommandInNewTab { cwd = wezterm.home_dir }
+  }
 }
 
 local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
-    return "Catppuccin Mocha"
+    -- `CutiePro`
+    -- `Bitmute (terminal.sexy)`
+    return "Bitmute (terminal.sexy)"
   else
-    return "Catppuccin Latte"
+    -- `dayfox`
+    -- `Ef-Cyprus`
+    return "dayfox"
   end
 end
 

@@ -23,6 +23,7 @@ highlight PmenuSel ctermbg=0 ctermfg=116 cterm=bold
 """"""""""
 set number relativenumber
 set clipboard=unnamedplus
+set ignorecase smartcase
 set undofile
 
 set spelllang=en
@@ -125,3 +126,9 @@ augroup END
 
 " Ansible
 au BufRead,BufNewFile */plays/**.y*ml set filetype=yaml.ansible
+
+" Rust
+let g:rustfmt_autosave = 1
+augroup rust
+  autocmd FileType rust set tw=80
+augroup END

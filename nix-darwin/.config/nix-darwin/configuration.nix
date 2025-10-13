@@ -86,6 +86,7 @@ in {
 
     systemPath =  [
       "/opt/homebrew/bin"
+      "~/.local/bin"
       "~/.cargo/bin"
     ];
 
@@ -170,6 +171,7 @@ in {
       "localsend"
       "obsidian"
       "signal"
+      "wezterm"
     ];
     # greedyCasks = true;
     masApps = {
