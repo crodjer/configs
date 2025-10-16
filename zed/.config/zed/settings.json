@@ -6,25 +6,54 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "context_servers": {
+    "duckduckgo": {
+      "source": "custom",
+      "enabled": true,
+      "command": "/Users/rohan/.local/bin/duckduckgo-mcp-server",
+      "args": [],
+      "env": {}
+    }
+  },
+  "agent_buffer_font_size": 13.0,
   "features": {
     "edit_prediction_provider": "zed"
   },
   "agent": {
-    "play_sound_when_agent_done": true,
+    "play_sound_when_agent_done": false,
     "always_allow_tool_actions": true,
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
-    }
+      "provider": "Local LLMs",
+      "model": "GPT OSS 20B"
+    },
+    "model_parameters": []
   },
   "language_models": {
+    "openai_compatible": {
+      "Local LLMs": {
+        "api_url": "http://localhost:7171/v1",
+        "available_models": [
+          {
+            "name": "GPT OSS 20B",
+            "display_name": "GPT OSS 20B",
+            "max_tokens": 131072,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false
+            }
+          }
+        ]
+      }
+    }
   },
   "vim_mode": true,
   "ui_font_family": "Zed Plex Mono",
-  "ui_font_size": 12,
-  "ui_font_weight": 700,
+  "ui_font_size": 13.0,
+  "ui_font_weight": 700.0,
   "buffer_font_family": "Zed Plex Mono",
-  "buffer_font_size": 13,
+  "buffer_font_size": 13.0,
   "theme": {
     "mode": "system",
     "light": "Catppuccin Latte",
