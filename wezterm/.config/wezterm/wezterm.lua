@@ -4,6 +4,7 @@ local config = wezterm.config_builder()
 
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = true
 
 -- OS Specific Configuration
 local is_linux = function()
@@ -121,6 +122,14 @@ local function scheme_for_appearance(appearance)
     return "dayfox"
   end
 end
+
+-- Inactive Pane
+config.inactive_pane_hsb = {
+  -- Keep saturation same
+  saturation = 1,
+  -- Just reduce the brightness slightly
+  brightness = 0.95,
+}
 
 wezterm.on("window-config-reloaded", function(window, _)
   local overrides = window:get_config_overrides() or {}
