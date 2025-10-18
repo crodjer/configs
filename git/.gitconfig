@@ -32,6 +32,30 @@
 [init]
 	defaultBranch = main
 [alias]
+  # Get the current branch (or ref)
+  current-branch = "rev-parse --abbrev-ref HEAD"
+
+  # Rebase while cleaning up the timestamps (perhaps, due to amends)
+  clean-cd = "rebase --committer-date-is-author-date"
+  # Rebase while cleaning timestamps, relative to `origin`
+  o-clean-cd = "!git clean-cd origin/$(git current-branch)"
+
+  # Abort current rebase
+  rb-a = "rebase --abort"
+  # Continue current rebase
+  rb-c = "rebase --continue"
+
+  # Abort current cherry-pick
+  chp-a = "cherry-pick --abort"
+  # Continue current cherry-pick
+  chp-c = "cherry-pick --continue"
+
+  # Get origin's main branch name
+  # Fetch origin's main/master branch
+  main-branch = "symbolic-ref refs/remotes/origin/HEAD --short"
+  main-branch-name = "!git main-branch | cut -d '/' -f 2"
+  rbm = "!git fetch origin $(git main-branch-name) && git rebase $(git main-branch)"
+
   l = "log --name-only"
   lf = "log --show-signature --format=fuller"
   s = "show --name-only"
