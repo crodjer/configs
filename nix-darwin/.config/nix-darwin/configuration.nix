@@ -21,6 +21,8 @@ in {
       mactop = "TERM=xterm sudo mactop";
       re = "exec $SHELL";
       rm = "rm -i";
+      t = "timew";
+      tw = "task";
     };
 
     shells = [
@@ -72,6 +74,8 @@ in {
       rsync
       starship
       stow
+      taskwarrior3
+      timewarrior
       typst
       update-system
       watch

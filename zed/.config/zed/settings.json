@@ -23,8 +23,8 @@
     "play_sound_when_agent_done": false,
     "always_allow_tool_actions": true,
     "default_model": {
-      "provider": "Local LLMs",
-      "model": "GPT OSS 20B"
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-5"
     },
     "model_parameters": []
   },
