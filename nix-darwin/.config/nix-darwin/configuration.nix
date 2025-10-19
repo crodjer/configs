@@ -74,8 +74,7 @@ in {
       rsync
       starship
       stow
-      taskwarrior3
-      timewarrior
+      taskwarrior3 timewarrior vit
       typst
       update-system
       watch
