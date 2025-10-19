@@ -46,7 +46,7 @@ config.keys = {
     mods = 'ALT',
     action = act.SplitPane {
       direction = 'Down',
-      size = { Percent = 40 },
+      size = { Percent = 45 },
     }
   },
   {
@@ -54,7 +54,7 @@ config.keys = {
     mods = 'ALT',
     action = act.SplitPane {
       direction = 'Right',
-      size = { Percent = 40 },
+      size = { Percent = 45 },
     }
   },
   { key = 'o', mods = 'ALT', action = act.RotatePanes 'Clockwise' },
