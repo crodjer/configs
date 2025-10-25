@@ -213,6 +213,8 @@ in {
         "/run/current-system/sw/bin/mactop"
         "/run/current-system/sw/bin/nix-channel"
         "/run/current-system/sw/bin/nix-collect-garbage"
+        "/sbin/mount"
+        "/sbin/umount"
       ];
       commandsString = builtins.concatStringsSep ", " commands;
     in ''
