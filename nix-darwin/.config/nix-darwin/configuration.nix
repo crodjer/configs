@@ -46,6 +46,7 @@ in {
       immich-cli
       jq
       jujutsu
+      jrnl
       mactop
       mise
       moreutils
@@ -117,6 +118,9 @@ in {
       shellInit = ''
       set -U fish_greeting
       set -g fish_transient_prompt 1
+
+      abbr --add j " jrnl"
+      abbr --add jw " jrnl work"
 
       ${pkgs.mise}/bin/mise activate fish | source
       ${pkgs.direnv}/bin/direnv hook fish | source
