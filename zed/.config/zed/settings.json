@@ -6,6 +6,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "enable_language_server": true,
   "context_servers": {
     "duckduckgo": {
       "source": "custom",
@@ -20,23 +21,36 @@
     "edit_prediction_provider": "zed"
   },
   "agent": {
+    "default_profile": "write",
     "play_sound_when_agent_done": false,
     "always_allow_tool_actions": true,
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4-5"
+      "provider": "Home LLMs",
+      "model": "gpt-oss"
     },
     "model_parameters": []
   },
   "language_models": {
     "openai_compatible": {
-      "Local LLMs": {
-        "api_url": "http://localhost:7171/v1",
+      "Home LLMs": {
+        // LLMs running on my home network.
+        "api_url": "http://laml:7171/v1",
         "available_models": [
           {
-            "name": "GPT OSS 20B",
+            "name": "gpt-oss",
             "display_name": "GPT OSS 20B",
             "max_tokens": 131072,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false
+            }
+          },
+          {
+            "name": "glm",
+            "display_name": "GLM Air",
+            "max_tokens": 32768,
             "capabilities": {
               "tools": true,
               "images": false,
