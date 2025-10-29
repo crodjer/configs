@@ -250,8 +250,8 @@ spoon.Seal.plugins.apps.appSearchPaths = {
 spoon.Seal.plugins.apps:restart()
 
 local pb = spoon.Seal.plugins.pasteboard
-pb.historySize = 100
-pb.saveHistory = true
+pb.historySize = 10
+pb.saveHistory = false
 
 spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
@@ -288,6 +288,21 @@ hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.6 }
 hs.alert.defaultStyle.textSize = 15
 hs.alert.defaultStyle.fadeInDuration = 0.1
 hs.alert.defaultStyle.fadeOutDuration = 0.1
+
+-- ClipboardTool
+local ClipboardTool = hs.loadSpoon("ClipboardTool")
+ClipboardTool.deduplicate = true
+ClipboardTool.ignoredIdentifiers["com.github.wez.wezterm"] = true
+ClipboardTool.honor_ignoredidentifiers = true
+ClipboardTool.show_copied_alert = false
+ClipboardTool.show_in_menubar = false
+ClipboardTool:bindHotkeys({
+  show_clipboard = { hsModifier, "v" }
+})
+ClipboardTool:start()
+hs.hotkey.bind(hsShift, "v", function ()
+  ClipboardTool:clearAll()
+end)
 
 -- Tweaks
 
