@@ -45,7 +45,6 @@ in {
       helix
       immich-cli
       jq
-      jujutsu
       jrnl
       mactop
       mise
@@ -178,6 +177,7 @@ in {
       "localsend"
       "obsidian"
       "signal"
+      "stats"
       "wezterm"
     ];
     # greedyCasks = true;
@@ -214,9 +214,12 @@ in {
     sudo.extraConfig = let
       commands = [
         "/run/current-system/sw/bin/darwin-rebuild"
-        "/run/current-system/sw/bin/mactop"
         "/run/current-system/sw/bin/nix-channel"
         "/run/current-system/sw/bin/nix-collect-garbage"
+
+        "/run/current-system/sw/bin/mactop"
+        "/run/current-system/sw/bin/rsync"
+
         "/sbin/mount"
         "/sbin/umount"
       ];
