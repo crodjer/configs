@@ -27,6 +27,7 @@ set ignorecase smartcase
 set undofile
 
 set spelllang=en
+set spellfile=~/.config/nvim/spell/en.utf-8.add
 
 set textwidth=80 colorcolumn=+1
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab

@@ -238,7 +238,7 @@ end)
 ----------------------------
 -- Seal: The awesome seal plugin, with pasteboard (pb) support.
 hs.loadSpoon("Seal")
-spoon.Seal:loadPlugins({ "apps", "pasteboard" })
+spoon.Seal:loadPlugins({ "apps" })
 spoon.Seal.plugins.apps.appSearchPaths = {
    "/Applications",
    "/System/Applications",
@@ -248,10 +248,6 @@ spoon.Seal.plugins.apps.appSearchPaths = {
    "/System/Library/CoreServices/Applications",
 }
 spoon.Seal.plugins.apps:restart()
-
-local pb = spoon.Seal.plugins.pasteboard
-pb.historySize = 10
-pb.saveHistory = false
 
 spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
