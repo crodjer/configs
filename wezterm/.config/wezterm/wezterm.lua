@@ -80,6 +80,11 @@ config.keys = {
     action = act.ActivatePaneDirection 'Down',
   },
   {
+    key = 'z',
+    mods = 'ALT',
+    action = act.ActivateLastTab,
+  },
+  {
     key = 'h',
     mods = 'ALT|SHIFT',
     action = act.AdjustPaneSize {'Left', 1},
@@ -110,6 +115,15 @@ config.keys = {
     action = act.SpawnCommandInNewTab { cwd = wezterm.home_dir }
   }
 }
+
+for i = 1, 9 do
+  -- CTRL+ALT + number to activate that tab
+  table.insert(config.keys, {
+    key = tostring(i),
+    mods = 'ALT',
+    action = act.ActivateTab(i - 1),
+  })
+end
 
 local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
