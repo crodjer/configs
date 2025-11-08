@@ -8,7 +8,7 @@ hs.window.animationDuration = 0
 -- List of apps and their screen / binding, configuration
 local appList = {
   Ghostty = { binding = "t" },
-  Wezterm = { binding = "w" },
+  Wezterm = { binding = "w", mayHide = true },
   Windsurf = { binding = "e", modifier = hsShift, mayHide = true },
   Zed = { binding = "d", mayHide = true },
   Cursor = { binding = "e",
@@ -18,8 +18,6 @@ local appList = {
   Firefox = { binding = "f", mayHide = true, bundleId = "org.mozilla.firefox" },
   [ "Firefox Developer Edition" ] = { binding = "b" },
   Safari = { binding = "s" },
-
-  Obsidian = { binding = "n" },
   Bitwarden = { binding = "p" },
   Signal = { binding = "g", mayHide = true },
 

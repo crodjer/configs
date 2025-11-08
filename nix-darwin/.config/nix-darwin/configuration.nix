@@ -175,7 +175,6 @@ in {
       "ghostty"
       "hammerspoon"
       "localsend"
-      "obsidian"
       "signal"
       "stats"
       "wezterm"
