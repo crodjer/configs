@@ -12,6 +12,9 @@ colorscheme vim
 " We don't need a highlight on the SignColumn
 highlight SignColumn ctermbg=none cterm=bold
 highlight ColorColumn ctermbg=116
+highlight Error ctermbg=none cterm=undercurl
+highlight SpellBad ctermbg=none cterm=undercurl
+highlight SpellRare ctermbg=none cterm=underdotted
 
 " The floating hint highlight is too light. Match with `Info` instead.
 highlight link DiagnosticFloatingHint DiagnosticFloatingInfo
@@ -133,3 +136,9 @@ let g:rustfmt_autosave = 1
 augroup rust
   autocmd FileType rust set tw=80
 augroup END
+
+" Jrnl
+autocmd BufNewFile,BufReadPre *.jrnl
+      \ setlocal filetype=gitcommit |   " Mail like editor with spell check!
+      \ setlocal shada= noswapfile noundofile nobackup nowritebackup |
+      \ setlocal noshelltemp history=0 nomodeline secure
