@@ -40,90 +40,91 @@ end
 
 local act = wezterm.action
 -- Split / Pane navigation bindings similar to my tmux bindings.
-config.keys = {
-  {
-    key = '\'',
-    mods = 'ALT',
-    action = act.SplitPane {
-      direction = 'Down',
-      size = { Percent = 45 },
-    }
-  },
-  {
-    key = '\\',
-    mods = 'ALT',
-    action = act.SplitPane {
-      direction = 'Right',
-      size = { Percent = 45 },
-    }
-  },
-  { key = 'o', mods = 'ALT', action = act.RotatePanes 'Clockwise' },
-  { key = 'o', mods = 'ALT|SHIFT', action = act.RotatePanes 'CounterClockwise' },
-  {
-    key = 'h',
-    mods = 'ALT',
-    action = act.ActivatePaneDirection 'Left',
-  },
-  {
-    key = 'l',
-    mods = 'ALT',
-    action = act.ActivatePaneDirection 'Right',
-  },
-  {
-    key = 'k',
-    mods = 'ALT',
-    action = act.ActivatePaneDirection 'Up',
-  },
-  {
-    key = 'j',
-    mods = 'ALT',
-    action = act.ActivatePaneDirection 'Down',
-  },
-  {
-    key = 'z',
-    mods = 'ALT',
-    action = act.ActivateLastTab,
-  },
-  {
-    key = 'h',
-    mods = 'ALT|SHIFT',
-    action = act.AdjustPaneSize {'Left', 1},
-  },
-  {
-    key = 'l',
-    mods = 'ALT|SHIFT',
-    action = act.AdjustPaneSize {'Right', 1},
-  },
-  {
-    key = 'k',
-    mods = 'ALT|SHIFT',
-    action = act.AdjustPaneSize {'Up', 1},
-  },
-  {
-    key = 'j',
-    mods = 'ALT|SHIFT',
-    action = act.AdjustPaneSize {'Down', 1},
-  },
-  {
-    key = 'f',
-    mods = 'ALT|SHIFT',
-    action = act.TogglePaneZoomState,
-  },
-  {
-    key = 't',
-    mods = 'ALT|SHIFT',
-    action = act.SpawnCommandInNewTab { cwd = wezterm.home_dir }
-  }
-}
-
-for i = 1, 9 do
-  -- CTRL+ALT + number to activate that tab
-  table.insert(config.keys, {
-    key = tostring(i),
-    mods = 'ALT',
-    action = act.ActivateTab(i - 1),
-  })
-end
+-- Disabled as I am using `tmux` for now.
+--
+-- config.keys = {
+--   {
+--     key = '\'',
+--     mods = 'ALT',
+--     action = act.SplitPane {
+--       direction = 'Down',
+--       size = { Percent = 45 },
+--     }
+--   },
+--   {
+--     key = '\\',
+--     mods = 'ALT',
+--     action = act.SplitPane {
+--       direction = 'Right',
+--       size = { Percent = 45 },
+--     }
+--   },
+--   { key = 'o', mods = 'ALT', action = act.RotatePanes 'Clockwise' },
+--   { key = 'o', mods = 'ALT|SHIFT', action = act.RotatePanes 'CounterClockwise' },
+--   {
+--     key = 'h',
+--     mods = 'ALT',
+--     action = act.ActivatePaneDirection 'Left',
+--   },
+--   {
+--     key = 'l',
+--     mods = 'ALT',
+--     action = act.ActivatePaneDirection 'Right',
+--   },
+--   {
+--     key = 'k',
+--     mods = 'ALT',
+--     action = act.ActivatePaneDirection 'Up',
+--   },
+--   {
+--     key = 'j',
+--     mods = 'ALT',
+--     action = act.ActivatePaneDirection 'Down',
+--   },
+--   {
+--     key = 'z',
+--     mods = 'ALT',
+--     action = act.ActivateLastTab,
+--   },
+--   {
+--     key = 'h',
+--     mods = 'ALT|SHIFT',
+--     action = act.AdjustPaneSize {'Left', 1},
+--   },
+--   {
+--     key = 'l',
+--     mods = 'ALT|SHIFT',
+--     action = act.AdjustPaneSize {'Right', 1},
+--   },
+--   {
+--     key = 'k',
+--     mods = 'ALT|SHIFT',
+--     action = act.AdjustPaneSize {'Up', 1},
+--   },
+--   {
+--     key = 'j',
+--     mods = 'ALT|SHIFT',
+--     action = act.AdjustPaneSize {'Down', 1},
+--   },
+--   {
+--     key = 'f',
+--     mods = 'ALT|SHIFT',
+--     action = act.TogglePaneZoomState,
+--   },
+--   {
+--     key = 't',
+--     mods = 'ALT|SHIFT',
+--     action = act.SpawnCommandInNewTab { cwd = wezterm.home_dir }
+--   }
+-- }
+-- for i = 1, 9 do
+--   -- CTRL+ALT + number to activate that tab
+--   table.insert(config.keys, {
+--     key = tostring(i),
+--     mods = 'ALT',
+--     action = act.ActivateTab(i - 1),
+--   })
+-- end
 
 local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
