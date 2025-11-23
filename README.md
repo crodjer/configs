@@ -10,11 +10,22 @@ Configuration files for the utilities I use. Managed by
 1. Install `git`, `stow`.
 2. Clone this repo, creating the directory: `configs`.
 3. For each package / configuration that you want to install run `stow`. For
-   example for neovim:
+   example for a healthy basic system:
    ```
    stow --no-folding -t $HOME neovim
+   stow --no-folding -t $HOME fish
+   stow --no-folding -t $HOME tmux
+   stow --no-folding -t $HOME git
+   stow --no-folding -t $HOME starship
    ```
 
 ## Mac
-For Mac, there is `Brewfile` which tracks all the packages needed. It is handy
-as a list of things I need for Linux too!
+For Mac, use `nix-darwin/` to setup a nix based system.
+
+## Debian
+For debian, there's `packages.txt` which can be used for quickly installing the
+basic required packages.
+
+```
+cat packges.txt | xargs sudo apt install
+```
