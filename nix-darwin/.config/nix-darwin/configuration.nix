@@ -61,7 +61,6 @@ in {
              ansible-vim
              fzf-vim
              nvim-lspconfig
-             windsurf-vim           # Needed for work.
            ];
          };
        };

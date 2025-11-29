@@ -9,11 +9,9 @@ hs.window.animationDuration = 0
 local appList = {
   Ghostty = { binding = "t" },
   Wezterm = { binding = "w", mayHide = true },
-  Windsurf = { binding = "e", modifier = hsShift, mayHide = true },
+  Windsurf = { binding = "e", mayHide = true },
   Zed = { binding = "d", mayHide = true },
-  Cursor = { binding = "e",
-             bundleId = "com.todesktop.230313mzl4w4u92",
-           },
+  Cursor = { binding = "e", modifier = hsShift, bundleId = "com.todesktop.230313mzl4w4u92", },
 
   Firefox = { binding = "f", mayHide = true, bundleId = "org.mozilla.firefox" },
   [ "Firefox Developer Edition" ] = { binding = "b" },
