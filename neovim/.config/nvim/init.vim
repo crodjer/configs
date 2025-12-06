@@ -77,6 +77,11 @@ nmap <leader>ss :History/<CR>
 lua << END
 vim.lsp.enable('ansiblels')
 vim.lsp.enable('denols')
+vim.lsp.config('vtsls', {
+    cmd = { 'bun', 'vtsls', '--stdio' },
+    root_markers = {"package.json"},
+})
+vim.lsp.enable('vtsls')
 vim.lsp.enable('pyright')
 vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('rust_analyzer')
