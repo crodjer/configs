@@ -28,6 +28,7 @@ set number relativenumber
 set clipboard=unnamedplus
 set ignorecase smartcase
 set undofile
+set list
 
 set spelllang=en
 set spellfile=~/.config/nvim/spell/en.utf-8.add

@@ -1,6 +1,8 @@
 if status is-interactive
   set -U fish_greeting
   set -g fish_transient_prompt 1
+
+  set -gx GO_PATH "$HOME/.local/share/go"
   
   abbr --add j " jrnl"
   abbr --add ts "tmux -u new -As $hostname"
@@ -23,6 +25,7 @@ if status is-interactive
   alias rm 'rm -i'
   alias t timew
   alias tw task
+  alias bun 'firejail --whitelist=$(which bun) --whitelist=$PWD $(which bun)'
 
   if type -q starship
     eval (starship init fish)
