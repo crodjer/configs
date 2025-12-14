@@ -32,7 +32,6 @@ DENO_CACHE=$HOME/.cache/deno
 MISE_DIR=$HOME/.local/share/mise
 
 ACCESSIBLE_DIRS="$PWD,$GEMINI_HOME,$DENO_CACHE,$MISE_DIR"
-DENO_ENV="DENO*,NODE*,TERM*,DEV,TF_*,CI,TEAMCITY*,COLORTERM*,GOOGLE*,WS*,__IS*"
 
 # Configure more complex firejail profile in `~/.config/firejail/deno.profile`
 DENO_COMPAT=1 firejail \
@@ -42,8 +41,7 @@ DENO_COMPAT=1 firejail \
   --whitelist=$GEMINI_HOME \
   $DENO \
   --allow-sys=osRelease,homedir,uid --allow-read \
-  --deny-env="*KEY,*SECRET" \
-  --allow-env="$DENO_ENV" \
-  --allow-run=/bin/sh,$DENO \
+  --deny-env="*KEY,*SECRET" --allow-env \
+  --allow-run \
   --allow-write=$ACCESSIBLE_DIRS \
   $GEMINI_JS
