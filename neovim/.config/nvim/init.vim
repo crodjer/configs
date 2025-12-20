@@ -12,7 +12,7 @@ colorscheme vim
 " We don't need a highlight on the SignColumn
 highlight SignColumn ctermbg=none cterm=bold
 highlight ColorColumn ctermbg=116
-highlight Error ctermbg=none cterm=undercurl
+" highlight Error cterm=undercurl ctermbg=none ctermfg=red
 highlight SpellBad ctermbg=none cterm=undercurl
 highlight SpellRare ctermbg=none cterm=underdotted
 
