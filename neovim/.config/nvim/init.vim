@@ -82,10 +82,12 @@ vim.lsp.config('vtsls', {
     cmd = { 'bun', 'vtsls', '--stdio' },
     root_markers = {"package.json"},
 })
+vim.lsp.enable('ty')
 vim.lsp.enable('vtsls')
-vim.lsp.enable('pyright')
 vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('clojure_lsp')
+vim.lsp.enable('gleam')
 
 -- Show diagnostics for the current line
 vim.keymap.set(
