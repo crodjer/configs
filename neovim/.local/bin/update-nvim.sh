@@ -22,8 +22,3 @@ if [ -n "$ARCHIVE" -a "$INSTALLED_VERSION" != "$LATEST_VERSION" ]; then
   ln -sf $HOME/.local/$ARCHIVE/bin/nvim $HOME/.local/bin/nvim
   echo "..done!"
 fi
-
-PLUGINS_DIR="$HOME/.config/nvim/pack/vendor/start"
-echo "Updating plugins..."
-ls -d $PLUGINS_DIR/* | xargs -P10 -I{} git -C {} pull -q
-echo "..done!"

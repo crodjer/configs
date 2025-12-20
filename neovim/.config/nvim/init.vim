@@ -3,6 +3,25 @@
 " A minimalist Neovim configuration, primarily in Vimscript.
 " For simple configuration, Vimscript is simply much more ergonomic than Lua.
 
+" Plugins
+"""""""""
+" Initialization of the core (and only) plugins
+let s:plugins = ['junegunn/fzf', 'junegunn/fzf.vim', 'neovim/nvim-lspconfig']
+let s:plugins_path = stdpath('config') . '/pack/vendor/start'
+
+for s:repo in s:plugins
+  let s:name = fnamemodify(s:repo, ':t')
+  let s:dest = s:plugins_path . '/' . s:name
+  if !isdirectory(s:dest)
+    execute '!git clone --depth 1 https://github.com/' . s:repo . ' ' . s:dest
+  endif
+endfor
+
+" Update plugins
+command! PlugUpdate for d in split(glob(s:plugins_path . '/*'), '\n') |
+                  \   execute '!git -C ' . d . ' pull -q' |
+                  \ endfor
+
 " Colors
 """""""""
 set notermguicolors
