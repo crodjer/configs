@@ -31,7 +31,6 @@ in {
     ];
 
     systemPackages = with pkgs; [
-      aria2
       bat
       cleanup-system
       delta
@@ -45,8 +44,6 @@ in {
       helix
       immich-cli
       jq
-      jrnl
-      mactop
       mise
       moreutils
       mosh
@@ -161,19 +158,26 @@ in {
     enable = true;
     brews = [
       "ansible-language-server"
-      "coreutils"
+      "aria2"
       "batt"
+      "coreutils"
       "gsed"
+      "jrnl"
+      "mactop"
       { name = "syncthing"; start_service = true; }
       "terminal-notifier"
     ];
     casks  = [
       "firefox"
       "firefox@developer-edition"
+      "freecad"
       "gimp"
       "ghostty"
       "hammerspoon"
       "localsend"
+      "maccy"
+      "openscad@snapshot"
+      "prusaslicer"
       "signal"
       "stats"
       "wezterm"
