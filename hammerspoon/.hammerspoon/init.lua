@@ -7,6 +7,7 @@ hs.window.animationDuration = 0
 
 -- List of apps and their screen / binding, configuration
 local appList = {
+  Notes = { binding = "n" },
   Ghostty = { binding = "t" },
   Wezterm = { binding = "w", mayHide = true },
   Windsurf = { binding = "e", mayHide = true },
@@ -283,14 +284,20 @@ hs.alert.defaultStyle.fadeOutDuration = 0.1
 
 -- ClipboardTool
 local ClipboardTool = hs.loadSpoon("ClipboardTool")
+originalShouldBeStore = ClipboardTool.shouldBeStored
+function ClipboardTool:shouldBeStored()
+  Render(hs.application.frontmostApplication())
+  return originalShouldBeStore(ClipboardTool)
+end
+
 ClipboardTool.deduplicate = true
-ClipboardTool.ignoredIdentifiers["com.github.wez.wezterm"] = true
+-- ClipboardTool.ignoredIdentifiers["public.utf8-plain-text"] = true
 ClipboardTool.honor_ignoredidentifiers = true
 ClipboardTool.show_copied_alert = false
 ClipboardTool.show_in_menubar = false
-ClipboardTool:bindHotkeys({
-  show_clipboard = { hsModifier, "v" }
-})
+-- ClipboardTool:bindHotkeys({
+--   show_clipboard = { hsModifier, "v" }
+-- })
 ClipboardTool:start()
 hs.hotkey.bind(hsShift, "v", function ()
   ClipboardTool:clearAll()
