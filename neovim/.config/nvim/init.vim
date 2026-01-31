@@ -103,6 +103,7 @@ vim.lsp.config('vtsls', {
 })
 vim.lsp.enable('ty')
 vim.lsp.enable('vtsls')
+vim.lsp.enable('rubocop')
 vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clojure_lsp')
