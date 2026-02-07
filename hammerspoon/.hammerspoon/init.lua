@@ -15,6 +15,7 @@ local appList = {
   Cursor = { binding = "e", modifier = hsShift, bundleId = "com.todesktop.230313mzl4w4u92", },
 
   Firefox = { binding = "f", mayHide = true, bundleId = "org.mozilla.firefox" },
+  Vivadi = { binding = "v", mayHide = true, bundleId = "com.vivaldi.Vivaldi" },
   [ "Firefox Developer Edition" ] = { binding = "b" },
   Safari = { binding = "s" },
   Bitwarden = { binding = "p" },
@@ -233,7 +234,7 @@ end)
 ----------------------------
 -- Spoons
 ----------------------------
--- Seal: The awesome seal plugin, with pasteboard (pb) support.
+-- Seal
 hs.loadSpoon("Seal")
 spoon.Seal:loadPlugins({ "apps" })
 spoon.Seal.plugins.apps.appSearchPaths = {
@@ -281,27 +282,6 @@ hs.alert.defaultStyle.fillColor = { white = 0, alpha = 0.6 }
 hs.alert.defaultStyle.textSize = 15
 hs.alert.defaultStyle.fadeInDuration = 0.1
 hs.alert.defaultStyle.fadeOutDuration = 0.1
-
--- ClipboardTool
-local ClipboardTool = hs.loadSpoon("ClipboardTool")
-originalShouldBeStore = ClipboardTool.shouldBeStored
-function ClipboardTool:shouldBeStored()
-  Render(hs.application.frontmostApplication())
-  return originalShouldBeStore(ClipboardTool)
-end
-
-ClipboardTool.deduplicate = true
--- ClipboardTool.ignoredIdentifiers["public.utf8-plain-text"] = true
-ClipboardTool.honor_ignoredidentifiers = true
-ClipboardTool.show_copied_alert = false
-ClipboardTool.show_in_menubar = false
--- ClipboardTool:bindHotkeys({
---   show_clipboard = { hsModifier, "v" }
--- })
-ClipboardTool:start()
-hs.hotkey.bind(hsShift, "v", function ()
-  ClipboardTool:clearAll()
-end)
 
 -- Tweaks
 
