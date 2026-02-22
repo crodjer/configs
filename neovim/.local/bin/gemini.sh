@@ -51,11 +51,5 @@ DENO_COMPAT=1 exec firejail \
   --whitelist="$MISE_DIR" \
   --whitelist="$DENO_CACHE" \
   --whitelist="$GEMINI_HOME" \
-  "$DENO" run \
-  --allow-sys=osRelease,homedir,uid,hostname,gid,userInfo,cpus,systemMemoryInfo \
-  --allow-read \
-  --deny-env="*KEY,*SECRET" --allow-env \
-  --allow-run \
-  --allow-net \
-  --allow-write="$ACCESSIBLE_DIRS" \
+  "$DENO" run -A \
   "$GEMINI_WRAPPER" "$@"
