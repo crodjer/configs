@@ -177,6 +177,7 @@ in {
       "localsend"
       "maccy"
       "openscad@snapshot"
+      "orcaslicer"
       "prusaslicer"
       "signal"
       "stats"
