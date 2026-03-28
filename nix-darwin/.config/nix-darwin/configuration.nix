@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let 
+let
   update-system = pkgs.writeShellScriptBin "update" (builtins.readFile ./scripts/update.sh);
   cleanup-system = pkgs.writeShellScriptBin "clean-os" (builtins.readFile ./scripts/cleanup.sh);
   initialize = pkgs.writeShellScriptBin "initialize" (builtins.readFile ./scripts/initialize.sh);
@@ -79,7 +79,7 @@ in {
 
       # Languages
       ansible ansible-lint
-      python312 pipx pyright ruff uv
+      python312 pipx ruff uv
       lua-language-server
     ];
 
@@ -269,6 +269,15 @@ in {
     };
     primaryUser = "rohan";
   };
+
+
+  nixpkgs.overlays = [
+    (final: prev: {
+     direnv = prev.direnv.overrideAttrs (old: {
+         env = (old.env or { }) // { CGO_ENABLED = 1; };
+         });
+     })
+  ];
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
