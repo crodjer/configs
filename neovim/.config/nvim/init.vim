@@ -6,7 +6,11 @@
 " Plugins
 """""""""
 " Initialization of the core (and only) plugins
-let s:plugins = ['junegunn/fzf', 'junegunn/fzf.vim', 'neovim/nvim-lspconfig']
+let s:plugins = [
+      \ 'junegunn/fzf', 'junegunn/fzf.vim',
+      \ 'neovim/nvim-lspconfig',
+      \ 'jiangmiao/auto-pairs'
+      \ ]
 let s:plugins_path = stdpath('config') . '/pack/vendor/start'
 
 for s:repo in s:plugins
