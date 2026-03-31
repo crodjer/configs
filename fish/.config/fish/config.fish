@@ -3,7 +3,8 @@ if status is-interactive
   set -g fish_transient_prompt 1
 
   set -gx GO_PATH "$HOME/.local/share/go"
-  
+  set -gx NPM_CONFIG_IGNORE_SCRIPTS "true"
+
   abbr --add j " jrnl"
   abbr --add ts "tmux -u new -As $hostname"
 
