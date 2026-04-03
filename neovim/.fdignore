@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Rust
+target/
+
+# Ruby
+vendor/bundle/
+.bundle/
+
+# Clojure
+.cpcache/
+.shadow-cljs/
+
+# Gleam
+build/
+
+# Node
+node_modules/
+
+# Go
+vendor/
+
+# Zig
+zig-cache/
+zig-out/
+
+# Git
+.git
+_context/archive
+tmp/archive

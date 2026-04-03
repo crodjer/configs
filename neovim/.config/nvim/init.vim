@@ -89,6 +89,8 @@ command! Trw execute '%s/\s\+$//e'
 " Plugins Configurations
 """""""""""""""""""""""
 " Fzf
+let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden'
+
 nmap <leader>b :Buffers<CR>
 nmap <leader>f :Files<CR>
 nmap <leader>g :GFiles<CR>
