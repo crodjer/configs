@@ -176,7 +176,6 @@ in {
       "ghostty"
       "hammerspoon"
       "localsend"
-      "maccy"
       "openscad@snapshot"
       "orcaslicer"
       "prusaslicer"

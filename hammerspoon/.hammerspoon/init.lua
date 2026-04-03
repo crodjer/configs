@@ -235,7 +235,7 @@ end)
 ----------------------------
 -- Seal
 hs.loadSpoon("Seal")
-spoon.Seal:loadPlugins({ "apps" })
+spoon.Seal:loadPlugins({ "apps", "pasteboard" })
 spoon.Seal.plugins.apps.appSearchPaths = {
    "/Applications",
    "/System/Applications",
@@ -245,6 +245,7 @@ spoon.Seal.plugins.apps.appSearchPaths = {
    "/System/Library/CoreServices/Applications",
 }
 spoon.Seal.plugins.apps:restart()
+spoon.Seal.plugins.pasteboard.historySize = 100
 
 spoon.Seal:bindHotkeys({
     toggle = { {"cmd"}, "space" }
@@ -264,8 +265,26 @@ Cherry:bindHotkeys({
 Cherry:reset()
 
 -- Caffeine
-local Caffeine= hs.loadSpoon("Caffeine")
-Caffeine:start()
+hs.loadSpoon("Caffeine"):start()
+
+-- ClipboardTool
+local ClipboardTool = hs.loadSpoon("ClipboardTool")
+ClipboardTool.show_copied_alert = false
+ClipboardTool:bindHotkeys({
+  show_clipboard = { hsShift, "C" }
+})
+ClipboardTool:start()
+
+hs.hotkey.bind(hsShift, "p", function ()
+  -- Clear pasteboard.
+  spoon.Seal.plugins.pasteboard.choices = {}
+  -- Clear Clipboard Tool
+  spoon.ClipboardTool:clearAll()
+end)
+
+
+-- HoldToQuit
+hs.loadSpoon("HoldToQuit"):start()
 
 -- Switcher
 local Switcher = hs.window.switcher
