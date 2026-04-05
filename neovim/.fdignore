@@ -15,6 +15,7 @@ vendor/bundle/
 # Clojure
 .cpcache/
 .shadow-cljs/
+.clj-kondo
 
 # Gleam
 build/
@@ -29,7 +30,8 @@ vendor/
 zig-cache/
 zig-out/
 
-# Git
+# General
 .git
+.lsp
 _context/archive
 tmp/archive
