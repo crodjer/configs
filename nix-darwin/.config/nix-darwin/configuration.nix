@@ -56,7 +56,6 @@ in {
          '';
          packages.myVimPackages = with pkgs.vimPlugins; {
            start = with vimPlugins; [
-             ansible-vim
              fzf-vim
              nvim-lspconfig
            ];
@@ -79,7 +78,6 @@ in {
       zoxide
 
       # Languages
-      ansible ansible-lint
       python312 pipx ruff uv
       lua-language-server
     ];
@@ -158,7 +156,6 @@ in {
   homebrew = {
     enable = true;
     brews = [
-      "ansible-language-server"
       "aria2"
       "batt"
       "coreutils"
