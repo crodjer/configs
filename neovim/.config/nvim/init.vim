@@ -97,7 +97,7 @@ nmap <leader>g :GFiles<CR>
 nmap <leader>h :History<CR>
 nmap <leader>m :Marks<CR>
 " Look in the same directory as the current file.
-nmap <leader>F :execute 'Files' expand('%:p:h')<CR>
+nmap <leader>d :execute 'Files' expand('%:p:h')<CR>
 " Look in the parent directory of the directory the current file is in.
 nmap <leader>P :execute 'Files' expand('%:p:h:h')<CR>
 nmap <leader>sl :Rg<CR>
