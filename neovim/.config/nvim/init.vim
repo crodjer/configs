@@ -98,6 +98,7 @@ nmap <leader>h :History<CR>
 nmap <leader>m :Marks<CR>
 nmap <leader>sl :Rg<CR>
 nmap <leader>ss :History/<CR>
+nmap <leader>F :execute 'Files' expand('%:p:h')<CR>
 
 " LSP
 lua << END
