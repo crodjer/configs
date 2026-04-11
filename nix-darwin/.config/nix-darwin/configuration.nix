@@ -19,7 +19,6 @@ in {
 
     shellAliases = {
       b = "biip";  # My PII Stripping tool!
-      mactop = "TERM=xterm sudo mactop";
       re = "exec $SHELL";
       rm = "rm -i";
       t = "timew";
