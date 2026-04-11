@@ -78,7 +78,7 @@ in {
       zoxide
 
       # Languages
-      python312 pipx ruff uv
+      python312 ruff uv
       lua-language-server
     ];
 
