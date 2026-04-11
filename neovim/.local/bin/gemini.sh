@@ -53,7 +53,7 @@ fi
 
 if [ "$VERSION" != "$CURRENT_VERSION" ]; then
   curl -fsL $DOWNLOAD_URL -o $TMP_GEMINI_ZIP
-  unzip -ud $GEMINI_CLI_DIR /tmp/gemini.zip
+  unzip -qquod $GEMINI_CLI_DIR /tmp/gemini.zip
 fi
 
 gemini-wrapped $@
