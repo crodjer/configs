@@ -1,17 +1,84 @@
-inherits = "base16_default" 
+# Author: Rohan
+# A minimalist theme based on Vim's default light theme, using native terminal colors
+# so it seamlessly adapts when the terminal switches between light and dark profiles.
 
 "ui.background" = {}
+"ui.text" = "default"
+"ui.text.focus" = { modifiers = ["reversed"] }
+"ui.text.inactive" = { fg = "gray" }
 
-"ui.linenr" = {}
-"ui.linenr.selected" = { fg="black", bg="gray", modifiers = ["bold"] }
- 
-"ui.selection" = { fg="black", bg="cyan", modifiers = [ "bold" ] }
-"ui.selection.primary" = { fg="black", bg="magenta", modifiers = [ "bold" ] }
- 
-"ui.gutter" = { fg = "gray" }
+"ui.cursor" = { modifiers = ["reversed"] }
+"ui.cursor.match" = { bg = "yellow", fg = "white" }
+"ui.cursorline.primary" = { bg = "gray" }
 
-"ui.virtual.ruler" = { bg = "gray" }
+"ui.selection" = { fg = "white", bg = "blue" }
+"ui.selection.primary" = { fg = "white", bg = "magenta" }
 
-[palette]
-white = "#cfcfcf"
-black = "#303030"
+"ui.highlight" = { fg = "black", bg = "magenta" }
+
+"ui.gutter" = { bg = "default" }
+"ui.linenr" = { fg = "gray" }
+"ui.linenr.selected" = { fg = "default", modifiers = ["bold"] }
+
+"ui.statusline" = { modifiers = ["reversed"] }
+"ui.statusline.inactive" = { fg = "gray", bg = "default", modifiers = ["reversed"] }
+"ui.statusline.normal" = { fg = "default", bg = "default", modifiers = ["reversed", "bold"] }
+"ui.statusline.insert" = { fg = "green", bg = "default", modifiers = ["reversed", "bold"] }
+"ui.statusline.select" = { fg = "magenta", bg = "default", modifiers = ["reversed", "bold"] }
+
+"ui.popup" = { modifiers = ["reversed"] }
+"ui.window" = { fg = "gray" }
+"ui.help" = { modifiers = ["reversed"] }
+
+"ui.menu" = { modifiers = ["reversed"] }
+"ui.menu.selected" = { fg = "blue", modifiers = ["reversed", "bold"] }
+"ui.menu.scroll" = { fg = "gray", bg = "light-gray" }
+
+"ui.virtual.ruler" = { bg = "light-gray" }
+"ui.virtual.whitespace" = { fg = "gray" }
+"ui.virtual.indent-guide" = { fg = "light-gray" }
+"ui.virtual.jump-label" = { fg = "red", modifiers = ["bold"] }
+
+"diagnostic.error" = { underline = { style = "curl", color = "red" } }
+"diagnostic.warning" = { underline = { style = "curl", color = "yellow" } }
+"diagnostic.info" = { underline = { style = "dotted", color = "blue" } }
+"diagnostic.hint" = { underline = { style = "dotted", color = "blue" } }
+
+"warning" = "yellow"
+"error" = "red"
+"info" = "blue"
+"hint" = "blue"
+
+"comment" = "blue"
+"constant" = "magenta"
+"constant.character.escape" = "magenta"
+"string" = "magenta"
+"variable" = "default"
+"variable.other.member" = "default"
+"keyword" = "yellow"
+"keyword.directive" = "magenta"
+"operator" = "yellow"
+"function" = "cyan"
+"type" = "green"
+"tag" = "cyan"
+"attribute" = "cyan"
+"label" = "red"
+"namespace" = "cyan"
+"punctuation" = "default"
+"special" = "magenta"
+"constructor" = "default"
+"module" = "default"
+
+"markup.heading" = { fg = "magenta", modifiers = ["bold"] }
+"markup.list" = "magenta"
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+"markup.link.url" = { fg = "blue", modifiers = ["underlined"] }
+"markup.link.text" = "magenta"
+"markup.quote" = "blue"
+"markup.raw" = "green"
+
+"diff.plus" = "green"
+"diff.delta" = "yellow"
+"diff.minus" = "red"
