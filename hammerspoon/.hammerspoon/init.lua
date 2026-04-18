@@ -283,9 +283,6 @@ hs.hotkey.bind(hsShift, "p", function ()
 end)
 
 
--- HoldToQuit
-hs.loadSpoon("HoldToQuit"):start()
-
 -- Switcher
 local Switcher = hs.window.switcher
 Switcher.ui.titleBackgroundColor = {0, 0, 0, 0}
