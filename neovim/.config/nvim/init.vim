@@ -3,13 +3,15 @@
 " A minimalist Neovim configuration, primarily in Vimscript.
 " For simple configuration, Vimscript is simply much more ergonomic than Lua.
 
-" Plugins
+
+" Load Plugins
 """""""""
 " Initialization of the core (and only) plugins
 let s:plugins = [
       \ 'junegunn/fzf', 'junegunn/fzf.vim',
       \ 'neovim/nvim-lspconfig',
-      \ 'jiangmiao/auto-pairs'
+      \ 'jiangmiao/auto-pairs',
+      \ 'Olical/conjure'
       \ ]
 let s:plugins_path = stdpath('config') . '/pack/vendor/start'
 
@@ -83,11 +85,22 @@ let maplocalleader = ","
 
 nnoremap <Leader>$ :source $MYVIMRC<CR>"
 
+" Allow undoing just a <CR>
+" inoremap <CR> <C-g>u<CR>
+
 autocmd TermOpen * startinsert
 command! Trw execute '%s/\s\+$//e'
 
+" Delete till this line twice.
+" Useful to undo an accidental newline without having `u` undo all that was
+" typed.
+inoremap <M-BS> <C-u><C-u>
+
 " Plugins Configurations
 """""""""""""""""""""""
+" Autopairs
+" let g:AutoPairsMapBS = 0
+
 " Fzf
 let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden'
 
@@ -166,6 +179,19 @@ augroup END
 
 " Ansible
 au BufRead,BufNewFile */plays/**.y*ml set filetype=yaml.ansible
+
+" Clojure
+augroup clojure
+  autocmd!
+  autocmd FileType clojure let b:AutoPairs = copy(g:AutoPairs)
+    \ | call remove(b:AutoPairs, "'")
+    \ | call remove(b:AutoPairs, '`')
+augroup END
+
+let g:conjure#mapping#doc_word = v:false
+
+" Vim
+autocmd FileType vim let b:AutoPairs = copy(g:AutoPairs)  | call remove(b:AutoPairs, "\"")
 
 " Rust
 let g:rustfmt_autosave = 1
