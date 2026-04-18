@@ -20,12 +20,14 @@ for s:repo in s:plugins
   let s:dest = s:plugins_path . '/' . s:name
   if !isdirectory(s:dest)
     execute '!git clone --depth 1 https://github.com/' . s:repo . ' ' . s:dest
+    silent! execute 'helptags ' . s:dest . '/doc'
   endif
 endfor
 
 " Update plugins
 command! PlugUpdate for d in split(glob(s:plugins_path . '/*'), '\n') |
                   \   execute '!git -C ' . d . ' pull -q' |
+                  \   silent! execute 'helptags ' . d . '/doc' |
                   \ endfor
 
 " Initialize plugins
