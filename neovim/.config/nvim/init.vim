@@ -4,16 +4,16 @@
 " For simple configuration, Vimscript is simply much more ergonomic than Lua.
 
 
-" Load Plugins
+" Plugins
 """""""""
-" Initialization of the core (and only) plugins
+" Install plugins
 let s:plugins = [
       \ 'junegunn/fzf', 'junegunn/fzf.vim',
       \ 'neovim/nvim-lspconfig',
       \ 'jiangmiao/auto-pairs',
       \ 'Olical/conjure'
       \ ]
-let s:plugins_path = stdpath('config') . '/pack/vendor/start'
+let s:plugins_path = stdpath('data') . '/site/pack/vendor/opt'
 
 for s:repo in s:plugins
   let s:name = fnamemodify(s:repo, ':t')
@@ -27,6 +27,12 @@ endfor
 command! PlugUpdate for d in split(glob(s:plugins_path . '/*'), '\n') |
                   \   execute '!git -C ' . d . ' pull -q' |
                   \ endfor
+
+" Initialize plugins
+packadd fzf
+packadd fzf.vim
+packadd auto-pairs
+packadd nvim-lspconfig
 
 " Colors
 """""""""
@@ -98,8 +104,6 @@ inoremap <M-BS> <C-u><C-u>
 
 " Plugins Configurations
 """""""""""""""""""""""
-" Autopairs
-" let g:AutoPairsMapBS = 0
 
 " Fzf
 let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden'
@@ -183,6 +187,7 @@ au BufRead,BufNewFile */plays/**.y*ml set filetype=yaml.ansible
 " Clojure
 augroup clojure
   autocmd!
+  autocmd FileType clojure,fennel packadd conjure
   autocmd FileType clojure let b:AutoPairs = copy(g:AutoPairs)
     \ | call remove(b:AutoPairs, "'")
     \ | call remove(b:AutoPairs, '`')
@@ -191,7 +196,7 @@ augroup END
 let g:conjure#mapping#doc_word = v:false
 
 " Vim
-autocmd FileType vim let b:AutoPairs = copy(g:AutoPairs)  | call remove(b:AutoPairs, "\"")
+" autocmd FileType vim let b:AutoPairs = copy(g:AutoPairs)  | call remove(b:AutoPairs, "\"")
 
 " Rust
 let g:rustfmt_autosave = 1
