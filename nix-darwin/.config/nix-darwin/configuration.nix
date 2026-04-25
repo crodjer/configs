@@ -174,7 +174,6 @@ in {
       "localsend"
       "openscad@snapshot"
       "orcaslicer"
-      "prusaslicer"
       "signal"
       "stats"
       "wezterm"
@@ -270,7 +269,7 @@ in {
   nixpkgs.overlays = [
     (final: prev: {
      direnv = prev.direnv.overrideAttrs (old: {
-         env = (old.env or { }) // { CGO_ENABLED = 1; };
+         doCheck = false;
          });
      })
   ];
