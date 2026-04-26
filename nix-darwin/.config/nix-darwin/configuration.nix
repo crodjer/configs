@@ -69,8 +69,6 @@ in {
       rsync
       starship
       stow
-      taskwarrior3 timewarrior vit
-      typst
       update-system
       watch
       yazi
@@ -140,15 +138,6 @@ in {
       enable = true;
       enableFzf = true;
       enableVim = true;
-    };
-
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      enableFzfCompletion = true;
-      enableFzfHistory = true;
-      enableGlobalCompInit = true;
-      enableSyntaxHighlighting = true;
     };
   };
 
