@@ -13,7 +13,7 @@ GEMINI_CLI_DIR=$GEMINI_HOME/cli
 TMP_GEMINI_ZIP=/tmp/gemini.zip
 
 RELEASE_PAGE="https://api.github.com/repos/google-gemini/gemini-cli/releases/latest"
-DOWNLOAD_URL="https://github.com/google-gemini/gemini-cli/releases/latest/download/gemini-cli-bundle.zip"
+DOWNLOAD_URL="https://api.github.com/repos/google-gemini/gemini-cli/zipball/latest"
 
 VERSION="none"
 

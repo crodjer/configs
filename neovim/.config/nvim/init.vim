@@ -196,6 +196,7 @@ augroup clojure
 augroup END
 
 let g:conjure#mapping#doc_word = v:false
+let g:conjure#client#clojure#nrepl#connection#auto_repl#enabled = v:false
 
 " Vim
 autocmd FileType vim let b:AutoPairs = copy(g:AutoPairs)  | call remove(b:AutoPairs, "\"")
