@@ -42,6 +42,10 @@ if status is-interactive
     mise activate fish | source
   end
 
+  function clip
+    base64 | tr -d '\n' | xargs -I{} printf '\033Ptmux;\033\033]52;c;{}\007\033\\'
+  end
+
   if test -f ~/.local.fish
     source ~/.local.fish
   end
