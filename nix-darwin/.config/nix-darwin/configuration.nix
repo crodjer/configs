@@ -65,11 +65,13 @@ in {
       nh
       pandoc
       pass
+      rename
       ripgrep
       rsync
       starship
       stow
       update-system
+      visidata
       watch
       yazi
       zoxide

@@ -1,3 +1,5 @@
+set PATH ~/.local/bin ~/.cargo/bin $PATH
+
 if status is-interactive
   set -U fish_greeting
   set -g fish_transient_prompt 1

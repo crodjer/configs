@@ -11,8 +11,11 @@ case $ARCH in
       ;;
 esac
 
-INSTALLED_VERSION=$(nvim --version | grep -Eo 'v[[:digit:].]+$')
-LATEST_VERSION=$(curl -s https://api.github.com/repos/neovim/neovim/releases/tags/nightly | grep tag_name | grep -Eo 'v[[:digit:].]+')
+if command -v nvim >/dev/null 2>&1
+then
+  INSTALLED_VERSION=$(command -v nvim && nvim --version | grep -Eo 'v[[:digit:].]+$')
+fi
+LATEST_VERSION=$(curl https://api.github.com/repos/neovim/neovim/releases/latest | grep tag_name | grep -Eo 'v[[:digit:].]+')
 
 if [ -n "$ARCHIVE" -a "$INSTALLED_VERSION" != "$LATEST_VERSION" ]; then
   TARBALL_URL="https://github.com/neovim/neovim/releases/download/nightly/$ARCHIVE.tar.gz"

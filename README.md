@@ -19,6 +19,11 @@ Configuration files for the utilities I use. Managed by
    stow --no-folding -t $HOME starship
    ```
 
+   Or:
+   ```
+   stow --no-folding -t $HOME {neovim,tmux,fish,git,starship,gnupg}
+   ```
+
 ## Mac
 For Mac, use `nix-darwin/` to setup a nix based system.
 

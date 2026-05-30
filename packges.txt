@@ -1,5 +1,5 @@
 Core:
-git starship fish jq fzf fd-find ripgrep stow tmux direnv moreutils zoxide
+git starship fish jq gnupg fzf fd-find ripgrep stow tmux direnv moreutils zoxide
 
 Optional:
-ansible ansible-lint syncthing gnupg pass build-essential entr
+ansible ansible-lint syncthing pass build-essential entr
