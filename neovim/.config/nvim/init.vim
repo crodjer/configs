@@ -137,6 +137,7 @@ vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('clojure_lsp')
 vim.lsp.enable('gleam')
+vim.lsp.enable('zls')
 
 -- Show diagnostics for the current line
 vim.keymap.set(
