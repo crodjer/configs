@@ -31,7 +31,6 @@ in {
     ];
 
     systemPackages = with pkgs; [
-      bat
       cleanup-system
       delta
       dust
@@ -112,13 +111,9 @@ in {
       set -U fish_greeting
       set -g fish_transient_prompt 1
 
-      abbr --add j " jrnl"
-      abbr --add jw " jrnl work"
-
       ${pkgs.mise}/bin/mise activate fish | source
       ${pkgs.direnv}/bin/direnv hook fish | source
       ${pkgs.zoxide}/bin/zoxide init fish | source
-      eval (${pkgs.starship}/bin/starship init fish)
 
       if test -f ~/.local.fish
         source ~/.local.fish
