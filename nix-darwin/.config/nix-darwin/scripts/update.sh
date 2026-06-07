@@ -18,4 +18,5 @@ fi
 
 if [ -d /opt/homebrew/opt/socket_vmnet/ ]; then
   sudo rsync -aAHX  --delete /opt/homebrew/opt/socket_vmnet/ /opt/socket_vmnet/
+  sudo chown -R root /opt/socket_vmnet
 fi
