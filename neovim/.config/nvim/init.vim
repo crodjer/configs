@@ -11,7 +11,8 @@ let s:plugins = [
       \ 'junegunn/fzf', 'junegunn/fzf.vim',
       \ 'neovim/nvim-lspconfig',
       \ 'jiangmiao/auto-pairs',
-      \ 'Olical/conjure'
+      \ 'Olical/conjure',
+      \ 'elixir-editors/vim-elixir'
       \ ]
 let s:plugins_path = stdpath('data') . '/site/pack/vendor/opt'
 
@@ -198,6 +199,16 @@ augroup END
 
 let g:conjure#mapping#doc_word = v:false
 let g:conjure#client#clojure#nrepl#connection#auto_repl#enabled = v:false
+
+" Elixir
+augroup elixir
+  autocmd!
+  autocmd FileType elixir packadd vim-elixir
+augroup END
+
+let g:conjure#mapping#doc_word = v:false
+let g:conjure#client#clojure#nrepl#connection#auto_repl#enabled = v:false
+
 
 " Vim
 autocmd FileType vim let b:AutoPairs = copy(g:AutoPairs)  | call remove(b:AutoPairs, "\"")

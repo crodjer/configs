@@ -31,8 +31,13 @@ zig-cache/
 zig-out/
 .zig-cache
 
+# Elixir
+_build/
+deps/
+
 # General
 .git
 .lsp
 _context/archive
 tmp/archive
+*.db
