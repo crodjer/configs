@@ -14,6 +14,11 @@ if status is-interactive
   alias re 'exec $SHELL'
   alias rm 'rm -i'
 
+  if type -q timew
+    alias tt='timew'
+    alias tts='timew summary'
+  end
+
   if type -q direnv
     direnv hook fish | source
   end
@@ -27,6 +32,8 @@ if status is-interactive
   function clip
     base64 | tr -d '\n' | xargs -I{} printf '\033Ptmux;\033\033]52;c;{}\007\033\\'
   end
+
+  fish_config prompt choose astronaut
 
   if test -f ~/.local.fish
     source ~/.local.fish
