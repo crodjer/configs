@@ -8,10 +8,12 @@
 """""""""
 " Install plugins
 let s:plugins = [
-      \ 'https://github.com/junegunn/fzf', 'junegunn/fzf.vim',
+      \ 'https://github.com/junegunn/fzf',
+      \ 'https://github.com/junegunn/fzf.vim',
       \ 'https://github.com/neovim/nvim-lspconfig',
       \ 'https://github.com/jiangmiao/auto-pairs',
       \ 'https://github.com/Olical/conjure',
+      \ 'https://github.com/lervag/wiki.vim',
       \ 'https://codeberg.org/ziglang/zig.vim'
       \ ]
 let s:plugins_path = stdpath('data') . '/site/pack/vendor/opt'
@@ -206,6 +208,29 @@ let g:conjure#client#clojure#nrepl#connection#auto_repl#enabled = v:false
 
 " Vim
 autocmd FileType vim let b:AutoPairs = copy(g:AutoPairs)  | call remove(b:AutoPairs, "\"")
+
+" Wiki
+let g:wiki_root = expand('~/documents/notes')
+let g:wiki_global_load = 0
+let g:wiki_select_method = {
+      \ 'pages': function('wiki#fzf#pages'),
+      \ 'tags': function('wiki#fzf#tags'),
+      \ 'toc': function('wiki#fzf#toc'),
+      \ 'links': function('wiki#fzf#links'),
+      \ }
+
+packadd wiki.vim
+
+nnoremap <silent> <leader>wf :WikiPages<CR>
+nnoremap <silent> <leader>wj :WikiJournal<CR>
+nnoremap <silent> <leader>w# :WikiTags<CR>
+
+command! -nargs=* WikiSearch call fzf#vim#grep(
+      \ 'rg --column --line-number --no-heading --color=always'
+      \ . ' --smart-case --glob "*.md" -- ' . shellescape(<q-args>),
+      \ {'dir': g:wiki_root}, 0)
+
+nnoremap <silent> <leader>w/ :WikiSearch<CR>
 
 " Rust
 let g:rustfmt_autosave = 1
