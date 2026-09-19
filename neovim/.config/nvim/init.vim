@@ -10,10 +10,11 @@
 let s:plugins = [
       \ 'https://github.com/junegunn/fzf',
       \ 'https://github.com/junegunn/fzf.vim',
+      \ 'https://github.com/ibhagwan/fzf-lua',
+      \ 'https://github.com/obsidian-nvim/obsidian.nvim',
       \ 'https://github.com/neovim/nvim-lspconfig',
       \ 'https://github.com/jiangmiao/auto-pairs',
       \ 'https://github.com/Olical/conjure',
-      \ 'https://github.com/lervag/wiki.vim',
       \ 'https://codeberg.org/ziglang/zig.vim'
       \ ]
 let s:plugins_path = stdpath('data') . '/site/pack/vendor/opt'
@@ -38,6 +39,8 @@ packadd fzf
 packadd fzf.vim
 packadd auto-pairs
 packadd nvim-lspconfig
+packadd fzf-lua
+packadd obsidian.nvim
 
 " Colors
 """""""""
@@ -110,23 +113,67 @@ inoremap <M-BS> <C-u><C-u>
 " Plugins Configurations
 """""""""""""""""""""""
 
-" Fzf
-let $FZF_DEFAULT_COMMAND = 'fd --type f --no-ignore-vcs --hidden'
-
-nmap <leader>b :Buffers<CR>
-nmap <leader>f :Files<CR>
-nmap <leader>g :GFiles<CR>
-nmap <leader>h :History<CR>
-nmap <leader>m :Marks<CR>
-" Look in the same directory as the current file.
-nmap <leader>F :execute 'Files' expand('%:p:h')<CR>
-" Look in the parent directory of the directory the current file is in.
-nmap <leader>P :execute 'Files' expand('%:p:h:h')<CR>
-nmap <leader>sl :Rg<CR>
-nmap <leader>ss :History/<CR>
-
-" LSP
 lua << END
+-- Fzf
+require("fzf-lua").setup({
+  fzf_opts = {
+    ['--layout'] = 'default',
+  },
+})
+
+-- Obsidian
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = vim.fn.expand("~/documents/notes") .. "/**.md",
+  callback = function()
+    vim.opt_local.conceallevel = 2
+  end,
+})
+
+local obsidian_actions = require("obsidian.actions")
+require("obsidian").setup({
+  legacy_commands = false,
+  workspaces = {
+    { name = "notes", path = "~/documents/notes" },
+  },
+  daily_notes = {
+    enabled = true,
+    folder = "daily",
+    workdays_only = false,
+    date_format = "daily-note-YYYY-MM-DD",
+  },
+  picker = {
+    name = "fzf-lua",
+  },
+  callbacks = {
+    enter_note = function ()
+      -- Disable [ ] auto-pairing in Obsidian notes.
+      if vim.b.AutoPairs then
+        vim.b.AutoPairs["["] = nil
+
+        pcall(vim.keymap.del, "i", "[", { buffer = true })
+        pcall(vim.keymap.del, "i", "]", { buffer = true })
+
+        vim.fn.AutoPairsInit()
+      end
+
+      -- Typing [[ opens the note picker and inserts the selected link.
+      vim.keymap.set(
+        "i",
+        "[[",
+        "<C-o>:lua require('obsidian.actions').insert_link()<CR>",
+        { buffer = true, desc = "Insert Obsidian link" }
+      )
+
+      vim.keymap.set("x", "<leader>ol", obsidian_actions.link, {
+        buffer = true,
+        desc = "Link selected text",
+      })
+    end
+
+  }
+})
+
+-- LSP
 vim.lsp.enable('ansiblels')
 vim.lsp.enable('denols')
 vim.lsp.config('vtsls', {
@@ -169,6 +216,26 @@ vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach" }, {
 })
 END
 
+" Fzf Bindings
+nmap <leader>b :FzfLua buffers<CR>
+nmap <leader>f :FzfLua files<CR>
+nmap <leader>g :FzfLua git_files<CR>
+nmap <leader>h :FzfLua history<CR>
+nmap <leader>m :FzfLua marks<CR>
+
+" Look in the same directory as the current file.
+nmap <leader>F :lua FzfLua.files({
+      \ cwd = vim.fn.expand('%:p:h')
+      \ })<CR>
+
+" Look in the parent directory of the directory the current file is in.
+nmap <leader>P :lua FzfLua.files({
+      \ cwd = vim.fn.expand('%:p:h:h')
+      \ })<CR>
+
+nmap <leader>sl :FzfLua grep_project<CR>
+nmap <leader>ss :FzfLua search_history<CR>
+
 " Autocommands
 """"""""""""""
 
@@ -208,29 +275,6 @@ let g:conjure#client#clojure#nrepl#connection#auto_repl#enabled = v:false
 
 " Vim
 autocmd FileType vim let b:AutoPairs = copy(g:AutoPairs)  | call remove(b:AutoPairs, "\"")
-
-" Wiki
-let g:wiki_root = expand('~/documents/notes')
-let g:wiki_global_load = 0
-let g:wiki_select_method = {
-      \ 'pages': function('wiki#fzf#pages'),
-      \ 'tags': function('wiki#fzf#tags'),
-      \ 'toc': function('wiki#fzf#toc'),
-      \ 'links': function('wiki#fzf#links'),
-      \ }
-
-packadd wiki.vim
-
-nnoremap <silent> <leader>wf :WikiPages<CR>
-nnoremap <silent> <leader>wj :WikiJournal<CR>
-nnoremap <silent> <leader>w# :WikiTags<CR>
-
-command! -nargs=* WikiSearch call fzf#vim#grep(
-      \ 'rg --column --line-number --no-heading --color=always'
-      \ . ' --smart-case --glob "*.md" -- ' . shellescape(<q-args>),
-      \ {'dir': g:wiki_root}, 0)
-
-nnoremap <silent> <leader>w/ :WikiSearch<CR>
 
 " Rust
 let g:rustfmt_autosave = 1
