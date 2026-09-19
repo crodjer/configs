@@ -8,11 +8,11 @@
 """""""""
 " Install plugins
 let s:plugins = [
-      \ 'junegunn/fzf', 'junegunn/fzf.vim',
-      \ 'neovim/nvim-lspconfig',
-      \ 'jiangmiao/auto-pairs',
-      \ 'Olical/conjure',
-      \ 'elixir-editors/vim-elixir'
+      \ 'https://github.com/junegunn/fzf', 'junegunn/fzf.vim',
+      \ 'https://github.com/neovim/nvim-lspconfig',
+      \ 'https://github.com/jiangmiao/auto-pairs',
+      \ 'https://github.com/Olical/conjure',
+      \ 'https://codeberg.org/ziglang/zig.vim'
       \ ]
 let s:plugins_path = stdpath('data') . '/site/pack/vendor/opt'
 
@@ -20,7 +20,7 @@ for s:repo in s:plugins
   let s:name = fnamemodify(s:repo, ':t')
   let s:dest = s:plugins_path . '/' . s:name
   if !isdirectory(s:dest)
-    execute '!git clone --depth 1 https://github.com/' . s:repo . ' ' . s:dest
+    execute '!git clone --depth 1 ' . s:repo . ' ' . s:dest
     silent! execute 'helptags ' . s:dest . '/doc'
   endif
 endfor
@@ -200,12 +200,6 @@ augroup END
 let g:conjure#mapping#doc_word = v:false
 let g:conjure#client#clojure#nrepl#connection#auto_repl#enabled = v:false
 
-" Elixir
-augroup elixir
-  autocmd!
-  autocmd FileType elixir packadd vim-elixir
-augroup END
-
 let g:conjure#mapping#doc_word = v:false
 let g:conjure#client#clojure#nrepl#connection#auto_repl#enabled = v:false
 
@@ -217,4 +211,10 @@ autocmd FileType vim let b:AutoPairs = copy(g:AutoPairs)  | call remove(b:AutoPa
 let g:rustfmt_autosave = 1
 augroup rust
   autocmd FileType rust set tw=80
+augroup END
+
+" Zig
+augroup zig
+  autocmd!
+  autocmd FileType zig packadd zig.vim
 augroup END
